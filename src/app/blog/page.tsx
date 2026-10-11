@@ -48,31 +48,38 @@ export const metadata: Metadata = {
 export const revalidate = 60; // 60s ISR refresh
 
 export default async function BlogArchivePage() {
-  // 1. Fetch published posts ordered by publishedAt desc
-  const rawPosts = await prisma.post.findMany({
-    where: { status: 'PUBLISHED' },
-    include: {
-      category: true,
-      author: true,
-      tags: true,
-    },
-    orderBy: [{ publishedAt: 'desc' }, { createdAt: 'desc' }],
-  });
+  let rawPosts: Array<any> = [];
+  let rawCategories: Array<any> = [];
 
-  // 2. Fetch all content categories with counts
-  const rawCategories = await prisma.contentCategory.findMany({
-    where: { isActive: true },
-    include: {
-      _count: {
-        select: {
-          posts: {
-            where: { status: 'PUBLISHED' },
+  try {
+    // 1. Fetch published posts and categories
+    [rawPosts, rawCategories] = await Promise.all([
+      prisma.post.findMany({
+        where: { status: 'PUBLISHED' },
+        include: {
+          category: true,
+          author: true,
+          tags: true,
+        },
+        orderBy: [{ publishedAt: 'desc' }, { createdAt: 'desc' }],
+      }),
+      prisma.contentCategory.findMany({
+        where: { isActive: true },
+        include: {
+          _count: {
+            select: {
+              posts: {
+                where: { status: 'PUBLISHED' },
+              },
+            },
           },
         },
-      },
-    },
-    orderBy: { displayOrder: 'asc' },
-  });
+        orderBy: { displayOrder: 'asc' },
+      }),
+    ]);
+  } catch (error) {
+    console.warn('[BlogArchivePage] Prisma DB query fallback during build:', (error as Error).message);
+  }
 
   // 3. Serialize posts
   const posts: DirectoryPost[] = rawPosts.map((p) => ({
@@ -94,7 +101,7 @@ export default async function BlogArchivePage() {
           name: p.author.name,
         }
       : null,
-    tags: p.tags.map((tag) => ({
+    tags: p.tags.map((tag: any) => ({
       id: tag.id,
       name: tag.name,
       slug: tag.slug,

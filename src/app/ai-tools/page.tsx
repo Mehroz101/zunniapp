@@ -48,30 +48,37 @@ export const metadata: Metadata = {
 export const revalidate = 60; // 60s ISR refresh
 
 export default async function AIToolsArchivePage() {
-  // 1. Fetch all published tools with relations
-  const rawTools = await prisma.tool.findMany({
-    where: { status: 'PUBLISHED' },
-    include: {
-      category: true,
-      tags: true,
-    },
-    orderBy: [{ isFeatured: 'desc' }, { viewCount: 'desc' }],
-  });
+  let rawTools: Array<any> = [];
+  let rawCategories: Array<any> = [];
 
-  // 2. Fetch all active categories with counts
-  const rawCategories = await prisma.toolCategory.findMany({
-    where: { isActive: true },
-    include: {
-      _count: {
-        select: {
-          tools: {
-            where: { status: 'PUBLISHED' },
+  try {
+    // 1. Fetch all published tools and active categories with counts
+    [rawTools, rawCategories] = await Promise.all([
+      prisma.tool.findMany({
+        where: { status: 'PUBLISHED' },
+        include: {
+          category: true,
+          tags: true,
+        },
+        orderBy: [{ isFeatured: 'desc' }, { viewCount: 'desc' }],
+      }),
+      prisma.toolCategory.findMany({
+        where: { isActive: true },
+        include: {
+          _count: {
+            select: {
+              tools: {
+                where: { status: 'PUBLISHED' },
+              },
+            },
           },
         },
-      },
-    },
-    orderBy: { displayOrder: 'asc' },
-  });
+        orderBy: { displayOrder: 'asc' },
+      }),
+    ]);
+  } catch (error) {
+    console.warn('[AIToolsArchivePage] Prisma DB query fallback during build:', (error as Error).message);
+  }
 
   // 3. Serialize tools for client component
   const tools: DirectoryTool[] = rawTools.map((t) => ({
@@ -92,7 +99,7 @@ export default async function AIToolsArchivePage() {
       slug: t.category.slug,
       icon: t.category.icon,
     },
-    tags: t.tags.map((tag) => ({
+    tags: t.tags.map((tag: any) => ({
       id: tag.id,
       name: tag.name,
       slug: tag.slug,
