@@ -2,8 +2,8 @@
 
 @layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #09090b;
+    --background: #07090e;
+    --foreground: #f8fafc;
     --font-inter: 'Inter', sans-serif;
     --font-geist-mono: 'Geist Mono', monospace;
   }
@@ -16,6 +16,8 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #07090e;
+    color: #f8fafc;
   }
 
   body {
@@ -24,20 +26,20 @@
     font-family: var(--font-inter), system-ui, sans-serif;
   }
 
-  /* Ultra-Clean Modern Scrollbar */
+  /* Ultra-Clean Modern Dark Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #f8fafc;
+    background: #07090e;
   }
   ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: #1e293b;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+    background: #334155;
   }
 
   /* Smooth Dropdown Animation */
@@ -56,7 +58,7 @@
     animation: fadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  /* Prism Syntax Highlighting (Modern Tech Theme) */
+  /* Prism Syntax Highlighting (Dark Tech Theme) */
   .token.comment,
   .token.prolog,
   .token.doctype,
@@ -87,20 +89,20 @@
   .token.operator,
   .token.entity,
   .token.url {
-    color: #0284c7;
+    color: #38bdf8;
   }
   .token.atrule,
   .token.attr-value,
   .token.keyword {
-    color: #8b5cf6;
+    color: #a78bfa;
   }
   .token.function,
   .token.class-name {
-    color: #3b82f6;
+    color: #60a5fa;
   }
   .token.regex,
   .token.important,
   .token.variable {
-    color: #f59e0b;
+    color: #fbbf24;
   }
 }
