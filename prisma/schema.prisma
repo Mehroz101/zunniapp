@@ -1,0 +1,244 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// ── Enums ────────────────────────────────────
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  SCHEDULED
+  ARCHIVED
+}
+
+enum ToolRenderType {
+  CLIENT_SIDE
+  API_POWERED
+  IFRAME_EMBED
+  EXTERNAL_LINK
+}
+
+enum ContentType {
+  BLOG
+  GUIDE
+  GLOSSARY
+  COMPARISON
+  NEWS
+}
+
+// ── Users (Admin Only) ───────────────────────
+
+model User {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  email        String   @unique
+  name         String
+  passwordHash String   @map("password_hash")
+  role         UserRole @default(EDITOR)
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  tools    Tool[]
+  posts    Post[]
+  glossary GlossaryTerm[]
+  media    Media[]
+
+  @@map("users")
+}
+
+// ── Tool Categories ──────────────────────────
+
+model ToolCategory {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  slug         String   @unique
+  description  String?
+  icon         String?
+  displayOrder Int      @default(0) @map("display_order")
+  isActive     Boolean  @default(true) @map("is_active")
+  parentId     String?  @map("parent_id") @db.ObjectId
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  parent   ToolCategory?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  children ToolCategory[] @relation("CategoryHierarchy")
+  tools    Tool[]
+
+  @@map("tool_categories")
+}
+
+// ── Tools ────────────────────────────────────
+
+model Tool {
+  id             String         @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  slug           String         @unique
+  tagline        String
+  description    String
+  ogImage        String?        @map("og_image")
+  categoryId     String         @map("category_id") @db.ObjectId
+  status         ContentStatus  @default(DRAFT)
+  renderType     ToolRenderType @map("render_type")
+  config         Json
+  seoMeta        Json           @map("seo_meta")
+  structuredData Json?          @map("structured_data")
+  viewCount      Int            @default(0) @map("view_count")
+  isFeatured     Boolean        @default(false) @map("is_featured")
+  isFree         Boolean        @default(true) @map("is_free")
+  createdById    String?        @map("created_by") @db.ObjectId
+  publishedAt    DateTime?      @map("published_at")
+  createdAt      DateTime       @default(now()) @map("created_at")
+  updatedAt      DateTime       @updatedAt @map("updated_at")
+
+  category  ToolCategory @relation(fields: [categoryId], references: [id])
+  createdBy User?        @relation(fields: [createdById], references: [id])
+  tagIds    String[]     @map("tag_ids") @db.ObjectId
+  tags      Tag[]        @relation(fields: [tagIds], references: [id])
+
+  @@map("tools")
+}
+
+// ── Content Categories ───────────────────────
+
+model ContentCategory {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  slug         String   @unique
+  description  String?
+  ogImage      String?  @map("og_image")
+  parentId     String?  @map("parent_id") @db.ObjectId
+  isActive     Boolean  @default(true) @map("is_active")
+  displayOrder Int      @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  parent   ContentCategory?  @relation("ContentCategoryHierarchy", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  children ContentCategory[] @relation("ContentCategoryHierarchy")
+  posts    Post[]
+
+  @@map("content_categories")
+}
+
+// ── Posts (Blog / Guides / News) ─────────────
+
+model Post {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  title           String
+  slug            String        @unique
+  excerpt         String
+  contentMd       String        @map("content_md")
+  contentHtml     String?       @map("content_html")
+  ogImage         String?       @map("og_image")
+  categoryId      String        @map("category_id") @db.ObjectId
+  authorId        String?       @map("author_id") @db.ObjectId
+  status          ContentStatus @default(DRAFT)
+  contentType     ContentType   @default(BLOG) @map("content_type")
+  seoMeta         Json          @map("seo_meta")
+  structuredData  Json?         @map("structured_data")
+  canonicalUrl    String?       @map("canonical_url")
+  readingTimeMins Int           @default(0) @map("reading_time_mins")
+  viewCount       Int           @default(0) @map("view_count")
+  publishedAt     DateTime?     @map("published_at")
+  scheduledAt     DateTime?     @map("scheduled_at")
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  category ContentCategory @relation(fields: [categoryId], references: [id])
+  author   User?           @relation(fields: [authorId], references: [id])
+  tagIds   String[]        @map("tag_ids") @db.ObjectId
+  tags     Tag[]           @relation(fields: [tagIds], references: [id])
+
+  @@map("posts")
+}
+
+// ── Tags ─────────────────────────────────────
+
+model Tag {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  postIds String[] @map("post_ids") @db.ObjectId
+  posts   Post[]   @relation(fields: [postIds], references: [id])
+  toolIds String[] @map("tool_ids") @db.ObjectId
+  tools   Tool[]   @relation(fields: [toolIds], references: [id])
+
+  @@map("tags")
+}
+
+// ── Glossary ─────────────────────────────────
+
+model GlossaryTerm {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  term              String   @unique
+  slug              String   @unique
+  definition        String
+  extendedContentMd String?  @map("extended_content_md")
+  relatedTerms      String[] @map("related_terms")
+  seoMeta           Json     @map("seo_meta")
+  structuredData    Json?    @map("structured_data")
+  createdById       String?  @map("created_by") @db.ObjectId
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  createdBy User? @relation(fields: [createdById], references: [id])
+
+  @@map("glossary_terms")
+}
+
+// ── Media ─────────────────────────────────────
+
+model Media {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  filename     String
+  url          String
+  mimeType     String   @map("mime_type")
+  sizeBytes    Int      @map("size_bytes")
+  width        Int?
+  height       Int?
+  altText      String?  @map("alt_text")
+  uploadedById String?  @map("uploaded_by") @db.ObjectId
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  uploadedBy User? @relation(fields: [uploadedById], references: [id])
+
+  @@map("media")
+}
+
+// ── Newsletter Subscribers ────────────────────
+
+model NewsletterSubscriber {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  email          String    @unique
+  isActive       Boolean   @default(true) @map("is_active")
+  subscribedAt   DateTime  @default(now()) @map("subscribed_at")
+  unsubscribedAt DateTime? @map("unsubscribed_at")
+
+  @@map("newsletter_subscribers")
+}
+
+// ── Site Settings ─────────────────────────────
+
+model SiteSetting {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  key         String   @unique
+  value       Json
+  description String?
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("site_settings")
+}
