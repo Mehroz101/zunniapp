@@ -2,8 +2,8 @@
 
 @layer base {
   :root {
-    --background: #07090e;
-    --foreground: #f8fafc;
+    --background: #ffffff;
+    --foreground: #09090b;
     --font-inter: 'Inter', sans-serif;
     --font-geist-mono: 'Geist Mono', monospace;
   }
@@ -16,8 +16,8 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #07090e;
-    color: #f8fafc;
+    background-color: #ffffff;
+    color: #09090b;
   }
 
   body {
@@ -26,20 +26,20 @@
     font-family: var(--font-inter), system-ui, sans-serif;
   }
 
-  /* Ultra-Clean Modern Dark Scrollbar */
+  /* Ultra-Clean Modern Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #07090e;
+    background: #f8fafc;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1e293b;
+    background: #cbd5e1;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #334155;
+    background: #94a3b8;
   }
 
   /* Smooth Dropdown Animation */
@@ -58,7 +58,13 @@
     animation: fadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  /* Prism Syntax Highlighting (Dark Tech Theme) */
+  /* Dot Grid Background Pattern */
+  .bg-dot-pattern {
+    background-image: radial-gradient(circle, #cbd5e1 1.2px, transparent 1.2px);
+    background-size: 28px 28px;
+  }
+
+  /* Prism Syntax Highlighting (Modern Tech Theme) */
   .token.comment,
   .token.prolog,
   .token.doctype,
@@ -76,7 +82,7 @@
   .token.constant,
   .token.symbol,
   .token.deleted {
-    color: #ec4899;
+    color: #e11d48;
   }
   .token.selector,
   .token.attr-name,
@@ -84,25 +90,25 @@
   .token.char,
   .token.builtin,
   .token.inserted {
-    color: #10b981;
+    color: #059669;
   }
   .token.operator,
   .token.entity,
   .token.url {
-    color: #38bdf8;
+    color: #0284c7;
   }
   .token.atrule,
   .token.attr-value,
   .token.keyword {
-    color: #a78bfa;
+    color: #7c3aed;
   }
   .token.function,
   .token.class-name {
-    color: #60a5fa;
+    color: #2563eb;
   }
   .token.regex,
   .token.important,
   .token.variable {
-    color: #fbbf24;
+    color: #d97706;
   }
 }

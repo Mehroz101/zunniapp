@@ -44,21 +44,21 @@ export function FaqSection() {
   };
 
   return (
-    <section className="bg-[#07090e] border-t border-white/[0.06] px-4 sm:px-6 lg:px-10 py-24 sm:py-28" id="faqs">
+    <section className="bg-white bg-dot-pattern border-t border-slate-200/80 px-6 sm:px-8 lg:px-12 py-24 sm:py-28" id="faqs">
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="text-center mb-14">
-          <div className="mb-3.5 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono text-[#00D2FF]">
+          <div className="mb-3.5 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-mono text-[#0092c7] shadow-xs">
             <HelpCircle className="h-3.5 w-3.5" />
             <span>KNOWLEDGE MATRIX</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-950">
             Frequently Asked{' '}
-            <span className="bg-gradient-to-r from-[#00D2FF] via-[#38bdf8] to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-[#0092c7] bg-clip-text text-transparent">
               Questions
             </span>
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-sm sm:text-base text-slate-400">
+          <p className="mx-auto mt-4 max-w-lg text-sm sm:text-base text-slate-600">
             Everything you need to know about our privacy-first local architecture and tooling suite.
           </p>
         </div>
@@ -70,25 +70,25 @@ export function FaqSection() {
             return (
               <div
                 key={faq.question}
-                className="rounded-2xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-md overflow-hidden transition-colors"
+                className="rounded-2xl border border-slate-200/90 bg-white shadow-xs overflow-hidden transition-colors"
               >
                 <button
                   type="button"
                   onClick={() => toggleFaq(idx)}
-                  className="w-full flex items-center justify-between p-5 sm:p-6 text-left cursor-pointer transition hover:bg-white/[0.02]"
+                  className="w-full flex items-center justify-between p-5 sm:p-6 text-left cursor-pointer transition hover:bg-slate-50/60"
                 >
-                  <span className="text-sm sm:text-base font-semibold text-white pr-4">
+                  <span className="text-sm sm:text-base font-bold text-slate-900 pr-4">
                     {faq.question}
                   </span>
                   <ChevronDown
-                    className={`w-4 h-4 text-[#00D2FF] shrink-0 transition-transform duration-300 ${
+                    className={`w-4 h-4 text-[#0092c7] shrink-0 transition-transform duration-300 ${
                       isOpen ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-xs sm:text-sm leading-relaxed text-slate-400 border-t border-white/[0.04] pt-4 animate-fadeIn">
+                  <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-xs sm:text-sm leading-relaxed text-slate-600 border-t border-slate-100 pt-4 animate-fadeIn">
                     {faq.answer}
                   </div>
                 )}

@@ -20,13 +20,13 @@ import {
 } from 'lucide-react';
 
 /* ==============================================================================
-   ULTRA-MINIMALIST DEVELOPER LOGO
+   ULTRA-MINIMALIST DEVELOPER LOGO (LIGHT THEME)
    ============================================================================== */
 export function AiLogo({ className = '' }: { className?: string }) {
   return (
-    <div className={`flex items-center gap-3 select-none group cursor-pointer ${className}`}>
+    <div className={`flex items-center gap-2.5 select-none group cursor-pointer ${className}`}>
       {/* Sleek Minimalist Geometric Syntax/Neural Mark */}
-      <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-white/[0.04] border border-white/10 group-hover:border-[#00D2FF]/50 transition-colors">
+      <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-[#0092c7] transition-colors">
         <svg
           width="18"
           height="18"
@@ -55,24 +55,23 @@ export function AiLogo({ className = '' }: { className?: string }) {
             stroke="#FFFFFF"
             strokeWidth="1.75"
             strokeLinecap="round"
-            strokeOpacity="0.8"
+            strokeOpacity="0.85"
           />
           <circle cx="12" cy="12" r="1.5" fill="#00D2FF" />
         </svg>
-        <div className="absolute inset-0 rounded-lg bg-[#00D2FF]/15 blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
 
       {/* Brand Typography */}
-      <div className="flex items-baseline tracking-[-0.03em] font-bold text-[16px] text-white">
+      <div className="flex items-baseline tracking-[-0.03em] font-extrabold text-[16px] text-slate-950">
         <span>AIIsEverything</span>
-        <span className="text-[#00D2FF] text-xs font-mono ml-0.5 tracking-normal">.com</span>
+        <span className="text-[#0092c7] text-xs font-mono ml-0.5 tracking-normal">.com</span>
       </div>
     </div>
   );
 }
 
 /* ==============================================================================
-   FLOATING HIGH-END DEVELOPER NAVBAR (NO TOP STRIP)
+   FLOATING HIGH-END DEVELOPER NAVBAR (NO TOP STRIP, CLEAN WHITE FROSTED PILL)
    ============================================================================== */
 export function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -116,10 +115,10 @@ export function Navbar() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full px-3 sm:px-6 pt-4 pointer-events-none">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 pt-4 pointer-events-none">
+      <div className="max-w-[1440px] mx-auto flex items-center justify-between">
         {/* Floating Pill Nav Container */}
-        <nav className="w-full bg-[#080b12]/80 backdrop-blur-xl border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.6)] rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between pointer-events-auto transition-all">
+        <nav className="w-full bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_8px_30px_rgba(0,0,0,0.06)] rounded-full px-5 sm:px-7 py-2.5 flex items-center justify-between pointer-events-auto transition-all">
           {/* Left: Minimalist Brand Lockup */}
           <div className="flex items-center flex-shrink-0">
             <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
@@ -128,7 +127,7 @@ export function Navbar() {
           </div>
 
           {/* Center: Developer Navigation Links */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+          <div className="hidden lg:flex items-center gap-1.5 xl:gap-3">
             {/* 1. AI Neural Hub */}
             <div
               className="relative"
@@ -137,12 +136,12 @@ export function Navbar() {
             >
               <button
                 type="button"
-                className={`flex items-center gap-1 text-[13px] font-medium px-3 py-1.5 rounded-full transition-colors ${
-                  activeDropdown === 'neural' ? 'text-white bg-white/[0.06]' : 'text-slate-300 hover:text-white'
+                className={`flex items-center gap-1 text-[13.5px] font-medium px-3.5 py-1.5 rounded-full transition-colors ${
+                  activeDropdown === 'neural' ? 'text-slate-950 bg-slate-100' : 'text-slate-700 hover:text-slate-950'
                 }`}
               >
                 <span>AI Neural Hub</span>
-                <span className="text-[10px] text-slate-500">▾</span>
+                <span className="text-[10px] text-slate-400">▾</span>
               </button>
 
               {activeDropdown === 'neural' && (
@@ -151,8 +150,8 @@ export function Navbar() {
                   onMouseEnter={() => handleMouseEnter('neural')}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <div className="bg-[#0b0f19] rounded-2xl border border-white/10 shadow-2xl p-3.5 grid grid-cols-1 gap-1.5 backdrop-blur-2xl">
-                    <div className="px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider text-[#00D2FF]">
+                  <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl p-3.5 grid grid-cols-1 gap-1.5">
+                    <div className="px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider text-[#0092c7]">
                       Neural Compute & Models
                     </div>
                     {neuralHubItems.map((item) => {
@@ -162,16 +161,16 @@ export function Navbar() {
                           key={item.name}
                           href={item.href}
                           onClick={() => setActiveDropdown(null)}
-                          className="group flex items-start gap-3 p-2 rounded-xl hover:bg-white/[0.04] transition-colors"
+                          className="group flex items-start gap-3 p-2 rounded-xl hover:bg-slate-50 transition-colors"
                         >
-                          <div className="p-2 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[#00D2FF] group-hover:border-[#00D2FF]/40 transition">
+                          <div className="p-2 rounded-lg bg-slate-100 text-[#0092c7] group-hover:bg-[#00D2FF]/10 transition">
                             <Icon className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="text-xs font-semibold text-slate-200 group-hover:text-white transition">
+                            <div className="text-xs font-semibold text-slate-900 group-hover:text-[#0092c7] transition">
                               {item.name}
                             </div>
-                            <div className="text-[11px] text-slate-400 leading-snug mt-0.5">
+                            <div className="text-[11px] text-slate-500 leading-snug mt-0.5">
                               {item.desc}
                             </div>
                           </div>
@@ -191,12 +190,12 @@ export function Navbar() {
             >
               <button
                 type="button"
-                className={`flex items-center gap-1 text-[13px] font-medium px-3 py-1.5 rounded-full transition-colors ${
-                  activeDropdown === 'converters' ? 'text-white bg-white/[0.06]' : 'text-slate-300 hover:text-white'
+                className={`flex items-center gap-1 text-[13.5px] font-medium px-3.5 py-1.5 rounded-full transition-colors ${
+                  activeDropdown === 'converters' ? 'text-slate-950 bg-slate-100' : 'text-slate-700 hover:text-slate-950'
                 }`}
               >
                 <span>Code Converters</span>
-                <span className="text-[10px] text-slate-500">▾</span>
+                <span className="text-[10px] text-slate-400">▾</span>
               </button>
 
               {activeDropdown === 'converters' && (
@@ -205,8 +204,8 @@ export function Navbar() {
                   onMouseEnter={() => handleMouseEnter('converters')}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <div className="bg-[#0b0f19] rounded-2xl border border-white/10 shadow-2xl p-3.5 grid grid-cols-2 gap-2 backdrop-blur-2xl">
-                    <div className="col-span-2 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-[#00D2FF]">
+                  <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl p-3.5 grid grid-cols-2 gap-2">
+                    <div className="col-span-2 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-[#0092c7]">
                       High-Precision Code Transpilers
                     </div>
                     {codeConverterItems.map((item) => (
@@ -214,21 +213,21 @@ export function Navbar() {
                         key={item.name}
                         href={item.href}
                         onClick={() => setActiveDropdown(null)}
-                        className="group p-2 rounded-xl hover:bg-white/[0.04] transition-colors border border-transparent hover:border-white/[0.06]"
+                        className="group p-2 rounded-xl hover:bg-slate-50 transition-colors"
                       >
-                        <div className="text-xs font-semibold text-slate-200 group-hover:text-[#00D2FF] transition flex items-center gap-1.5">
-                          <span>{item.name}</span>
+                        <div className="text-xs font-semibold text-slate-900 group-hover:text-[#0092c7] transition">
+                          {item.name}
                         </div>
-                        <div className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
+                        <div className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">
                           {item.desc}
                         </div>
                       </Link>
                     ))}
-                    <div className="col-span-2 pt-2 border-t border-white/[0.06] flex items-center justify-between px-2">
+                    <div className="col-span-2 pt-2 border-t border-slate-100 flex items-center justify-between px-2">
                       <Link
                         href="/ai-tools/coding"
                         onClick={() => setActiveDropdown(null)}
-                        className="text-[11px] font-mono text-[#00D2FF] hover:underline flex items-center gap-1"
+                        className="text-[11px] font-mono text-[#0092c7] hover:underline flex items-center gap-1"
                       >
                         <span>View all code transcoders</span>
                         <ArrowRight className="w-3 h-3" />
@@ -247,12 +246,12 @@ export function Navbar() {
             >
               <button
                 type="button"
-                className={`flex items-center gap-1 text-[13px] font-medium px-3 py-1.5 rounded-full transition-colors ${
-                  activeDropdown === 'utilities' ? 'text-white bg-white/[0.06]' : 'text-slate-300 hover:text-white'
+                className={`flex items-center gap-1 text-[13.5px] font-medium px-3.5 py-1.5 rounded-full transition-colors ${
+                  activeDropdown === 'utilities' ? 'text-slate-950 bg-slate-100' : 'text-slate-700 hover:text-slate-950'
                 }`}
               >
                 <span>Developer Utilities</span>
-                <span className="text-[10px] text-slate-500">▾</span>
+                <span className="text-[10px] text-slate-400">▾</span>
               </button>
 
               {activeDropdown === 'utilities' && (
@@ -261,8 +260,8 @@ export function Navbar() {
                   onMouseEnter={() => handleMouseEnter('utilities')}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <div className="bg-[#0b0f19] rounded-2xl border border-white/10 shadow-2xl p-3.5 grid grid-cols-2 gap-2 backdrop-blur-2xl">
-                    <div className="col-span-2 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-[#00D2FF]">
+                  <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl p-3.5 grid grid-cols-2 gap-2">
+                    <div className="col-span-2 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-[#0092c7]">
                       Client-Side Engineering Utilities
                     </div>
                     {developerUtilityItems.map((item) => (
@@ -270,12 +269,12 @@ export function Navbar() {
                         key={item.name}
                         href={item.href}
                         onClick={() => setActiveDropdown(null)}
-                        className="group p-2 rounded-xl hover:bg-white/[0.04] transition-colors border border-transparent hover:border-white/[0.06]"
+                        className="group p-2 rounded-xl hover:bg-slate-50 transition-colors"
                       >
-                        <div className="text-xs font-semibold text-slate-200 group-hover:text-white transition">
+                        <div className="text-xs font-semibold text-slate-900 group-hover:text-[#0092c7] transition">
                           {item.name}
                         </div>
-                        <div className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
+                        <div className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">
                           {item.desc}
                         </div>
                       </Link>
@@ -288,7 +287,7 @@ export function Navbar() {
             {/* 4. Resources & Docs */}
             <Link
               href="/glossary"
-              className="text-[13px] font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/[0.04] transition-colors"
+              className="text-[13.5px] font-medium text-slate-700 hover:text-slate-950 px-3.5 py-1.5 rounded-full hover:bg-slate-100 transition-colors"
             >
               Resources & Docs
             </Link>
@@ -296,24 +295,24 @@ export function Navbar() {
             {/* 5. FAQs */}
             <a
               href="#faqs"
-              className="text-[13px] font-medium text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/[0.04] transition-colors"
+              className="text-[13.5px] font-medium text-slate-700 hover:text-slate-950 px-3.5 py-1.5 rounded-full hover:bg-slate-100 transition-colors"
             >
               FAQs
             </a>
           </div>
 
-          {/* Right: Modern Sleek Action CTA */}
+          {/* Right Action CTA */}
           <div className="flex items-center gap-3 flex-shrink-0">
             <Link
               href="/ai-tools"
-              className="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono text-slate-300 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/[0.04] transition"
+              className="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono text-slate-700 hover:text-slate-950 px-3 py-1.5 rounded-full hover:bg-slate-100 transition"
             >
               <span>Directory</span>
             </Link>
 
             <Link
               href="/ai-tools"
-              className="px-4 py-2 rounded-full font-mono text-xs font-semibold text-black bg-[#00D2FF] hover:bg-[#38bdf8] active:scale-95 shadow-[0_0_20px_rgba(0,210,255,0.35)] transition-all flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-2 rounded-full font-mono text-xs font-bold text-black bg-[#00D2FF] hover:bg-[#38bdf8] active:scale-95 shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <Zap className="w-3.5 h-3.5 fill-black" />
               <span>LAUNCH STUDIO</span>
@@ -322,7 +321,7 @@ export function Navbar() {
             {/* Mobile Hamburger Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-full border border-white/10 text-slate-300 hover:text-white hover:bg-white/[0.05]"
+              className="lg:hidden p-2 rounded-full border border-slate-200 text-slate-700 hover:bg-slate-100"
               aria-label="Toggle Navigation Menu"
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -333,46 +332,46 @@ export function Navbar() {
 
       {/* Mobile Navigation Drawer */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden max-w-7xl mx-auto mt-2 p-5 bg-[#0b0f19]/95 backdrop-blur-2xl rounded-3xl border border-white/10 shadow-2xl space-y-3 pointer-events-auto animate-fadeIn">
+        <div className="lg:hidden max-w-[1440px] mx-auto mt-2 p-5 bg-white rounded-3xl border border-slate-200 shadow-2xl space-y-3 pointer-events-auto animate-fadeIn">
           <div className="flex flex-col space-y-1">
             <Link
               href="/ai-tools"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 px-3 text-sm font-semibold text-slate-200 hover:bg-white/[0.05] rounded-xl transition-colors"
+              className="py-2 px-3 text-sm font-semibold text-slate-800 hover:bg-slate-50 rounded-xl transition-colors"
             >
               AI Neural Hub
             </Link>
             <Link
               href="/ai-tools/coding"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 px-3 text-sm font-semibold text-slate-200 hover:bg-white/[0.05] rounded-xl transition-colors"
+              className="py-2 px-3 text-sm font-semibold text-slate-800 hover:bg-slate-50 rounded-xl transition-colors"
             >
               Code Converters
             </Link>
             <Link
               href="/ai-tools"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 px-3 text-sm font-semibold text-slate-200 hover:bg-white/[0.05] rounded-xl transition-colors"
+              className="py-2 px-3 text-sm font-semibold text-slate-800 hover:bg-slate-50 rounded-xl transition-colors"
             >
               Developer Utilities
             </Link>
             <Link
               href="/glossary"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 px-3 text-sm font-semibold text-slate-200 hover:bg-white/[0.05] rounded-xl transition-colors"
+              className="py-2 px-3 text-sm font-semibold text-slate-800 hover:bg-slate-50 rounded-xl transition-colors"
             >
               Resources & Docs
             </Link>
             <a
               href="#faqs"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 px-3 text-sm font-semibold text-slate-200 hover:bg-white/[0.05] rounded-xl transition-colors"
+              className="py-2 px-3 text-sm font-semibold text-slate-800 hover:bg-slate-50 rounded-xl transition-colors"
             >
               FAQs
             </a>
           </div>
 
-          <div className="pt-3 border-t border-white/10">
+          <div className="pt-3 border-t border-slate-100">
             <Link
               href="/ai-tools"
               onClick={() => setIsMobileMenuOpen(false)}

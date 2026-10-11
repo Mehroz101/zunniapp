@@ -52,23 +52,23 @@ export function NewsletterForm() {
             required
             placeholder="developer@domain.com"
             disabled={status === 'loading'}
-            className="w-full rounded-full border border-white/10 bg-white/[0.03] px-5 py-3.5 text-xs sm:text-sm text-white placeholder-slate-500 focus:border-[#00D2FF]/60 focus:outline-none focus:ring-1 focus:ring-[#00D2FF]/40 disabled:opacity-50 transition shadow-sm font-mono"
+            className="w-full rounded-full border border-slate-200 bg-white px-5 py-3.5 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:border-slate-950 focus:outline-none focus:ring-1 focus:ring-slate-950 disabled:opacity-50 transition shadow-xs font-mono"
           />
         </div>
 
         <button
           type="submit"
           disabled={status === 'loading' || !email.trim()}
-          className="flex items-center justify-center gap-2 rounded-full bg-[#00D2FF] px-7 py-3.5 text-xs sm:text-sm font-semibold text-black shadow-[0_0_20px_rgba(0,210,255,0.3)] transition hover:bg-[#38bdf8] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer font-mono"
+          className="flex items-center justify-center gap-2 rounded-full bg-slate-950 px-7 py-3.5 text-xs sm:text-sm font-semibold text-white shadow-xs transition hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer font-mono"
         >
           {status === 'loading' ? (
             <>
-              <Loader2 className="h-4 w-4 animate-spin text-black" />
+              <Loader2 className="h-4 w-4 animate-spin text-white" />
               <span>Transmitting...</span>
             </>
           ) : (
             <>
-              <Send className="h-3.5 w-3.5 text-black" />
+              <Send className="h-3.5 w-3.5 text-[#00D2FF]" />
               <span>SUBSCRIBE FREE</span>
             </>
           )}
@@ -77,16 +77,16 @@ export function NewsletterForm() {
 
       {/* Animated Success Message */}
       {status === 'success' && (
-        <div className="flex items-center gap-2.5 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 text-xs text-emerald-300">
-          <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+        <div className="flex items-center gap-2.5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-xs text-emerald-800">
+          <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
           <span>{message}</span>
         </div>
       )}
 
       {/* Error Message */}
       {status === 'error' && (
-        <div className="flex items-center gap-2.5 rounded-2xl border border-rose-500/20 bg-rose-500/10 px-4 py-3 text-xs text-rose-300">
-          <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
+        <div className="flex items-center gap-2.5 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-xs text-rose-800">
+          <AlertCircle className="h-4 w-4 shrink-0 text-rose-600" />
           <span>{message}</span>
         </div>
       )}

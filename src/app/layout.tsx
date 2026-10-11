@@ -116,7 +116,7 @@ export default function RootLayout({
       className={`${inter.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen bg-[#07090e] text-slate-100 font-sans antialiased selection:bg-[#00D2FF]/30 selection:text-white">
+      <body className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-[#00D2FF]/30 selection:text-slate-950">
         {children}
       </body>
     </html>

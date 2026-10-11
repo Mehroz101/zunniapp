@@ -16,7 +16,6 @@ import {
   Cpu,
   FileText,
   Search,
-  Filter,
 } from 'lucide-react';
 
 type ToolCategory = 'all' | 'converters' | 'ai' | 'web';
@@ -212,22 +211,22 @@ export function DeveloperToolsShowcase() {
   });
 
   return (
-    <section className="bg-[#07090e] border-t border-white/[0.06] px-4 sm:px-6 lg:px-10 py-24 sm:py-28" id="tools">
-      <div className="mx-auto max-w-[1400px]">
+    <section className="bg-white bg-dot-pattern border-t border-slate-200/80 px-6 sm:px-8 lg:px-12 py-24 sm:py-28" id="tools">
+      <div className="mx-auto max-w-[1440px]">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <div className="mb-3.5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono text-[#00D2FF]">
+            <div className="mb-3.5 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-mono text-[#0092c7] shadow-xs">
               <Zap className="h-3 w-3" />
               <span>DEVELOPER UTILITIES SUITE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-950">
               AI Tools for{' '}
-              <span className="bg-gradient-to-r from-[#00D2FF] via-[#38bdf8] to-indigo-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-[#0092c7] bg-clip-text text-transparent">
                 Every Workflow
               </span>
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-slate-400 max-w-xl">
+            <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-xl">
               High-throughput client-side code transducers, formatters, and AI debuggers. Zero cloud telemetry.
             </p>
           </div>
@@ -245,8 +244,8 @@ export function DeveloperToolsShowcase() {
                 onClick={() => setActiveCategory(tab.id as ToolCategory)}
                 className={`px-4 py-2 rounded-full text-xs font-mono transition-all cursor-pointer ${
                   activeCategory === tab.id
-                    ? 'bg-[#00D2FF] text-black font-semibold shadow-[0_0_15px_rgba(0,210,255,0.3)]'
-                    : 'bg-white/[0.03] text-slate-300 hover:text-white border border-white/[0.08] hover:border-white/20'
+                    ? 'bg-slate-950 text-white font-semibold shadow-xs'
+                    : 'bg-white text-slate-700 hover:text-slate-950 border border-slate-200 hover:border-slate-300'
                 }`}
               >
                 {tab.label}
@@ -255,65 +254,65 @@ export function DeveloperToolsShowcase() {
           </div>
         </div>
 
-        {/* Search Bar Bar */}
+        {/* Search Bar */}
         <div className="relative mb-10 max-w-md">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
             placeholder="Search tools by name, AST engine, or keyword..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white/[0.03] border border-white/10 rounded-full pl-11 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#00D2FF]/50 transition-colors font-mono"
+            className="w-full bg-white border border-slate-200 rounded-full pl-11 pr-4 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-950 transition-colors font-mono shadow-xs"
           />
         </div>
 
-        {/* Minimalist Glassmorphic Cards Grid (Eliminating Boxy Design) */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Clean Light Cards Grid */}
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {filteredTools.map((tool) => {
             const Icon = tool.icon;
             return (
               <Link
                 key={tool.id}
                 href={tool.href}
-                className="group relative flex flex-col justify-between rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#00D2FF]/40 hover:bg-white/[0.04] hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+                className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs transition-all duration-300 hover:border-slate-300 hover:shadow-xl hover:-translate-y-0.5"
               >
                 <div>
                   {/* Top Bar with Icon and Badges */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#00D2FF] group-hover:border-[#00D2FF]/50 group-hover:bg-[#00D2FF]/10 transition">
+                      <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-[#0092c7] group-hover:border-[#0092c7]/40 group-hover:bg-[#00D2FF]/10 transition">
                         <Icon className="w-5 h-5" />
                       </div>
                       <div>
-                        <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
                           {tool.badge}
                         </span>
-                        <span className="text-[10px] font-mono text-[#00D2FF]">
+                        <span className="text-[10px] font-mono text-[#0092c7] font-semibold">
                           {tool.engine}
                         </span>
                       </div>
                     </div>
 
-                    <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/20">
+                    <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-medium text-emerald-700 bg-emerald-50 border border-emerald-200">
                       {tool.speed}
                     </span>
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="text-base font-bold text-white transition group-hover:text-[#00D2FF]">
+                  <h3 className="text-base font-bold text-slate-900 transition group-hover:text-indigo-600">
                     {tool.name}
                   </h3>
-                  <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-slate-400 line-clamp-2">
+                  <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-slate-500 line-clamp-2">
                     {tool.tagline}
                   </p>
                 </div>
 
                 {/* Footer Bar */}
-                <div className="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4">
-                  <span className="text-[11px] font-mono text-slate-500">
+                <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
+                  <span className="text-[11px] font-mono text-slate-400">
                     Client Sandbox
                   </span>
-                  <span className="flex items-center gap-1 text-xs font-mono font-semibold text-slate-300 transition group-hover:text-[#00D2FF]">
+                  <span className="flex items-center gap-1 text-xs font-mono font-semibold text-slate-700 transition group-hover:text-indigo-600">
                     Launch Tool <ArrowRight className="w-3.5 h-3.5 transition group-hover:translate-x-1" />
                   </span>
                 </div>

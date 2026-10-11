@@ -28,26 +28,26 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
   const displayList = categories.length > 0 ? categories : DEFAULT_CATEGORY_FALLBACKS;
 
   return (
-    <section className="bg-[#07090e] border-t border-white/[0.06] px-4 sm:px-6 lg:px-10 py-24 sm:py-28" id="categories">
-      <div className="mx-auto max-w-[1400px]">
+    <section className="bg-white bg-dot-pattern border-t border-slate-200/80 px-6 sm:px-8 lg:px-12 py-24 sm:py-28" id="categories">
+      <div className="mx-auto max-w-[1440px]">
         {/* Section Header */}
         <div className="mb-14 text-center">
-          <div className="mb-3.5 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1 text-xs font-mono text-[#00D2FF]">
+          <div className="mb-3.5 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-mono text-[#0092c7] shadow-xs">
             <Layers className="h-3.5 w-3.5" />
             <span>ARCHITECTURAL DOMAINS</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-950">
             Specialized{' '}
-            <span className="bg-gradient-to-r from-[#00D2FF] via-[#38bdf8] to-indigo-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-[#0092c7] bg-clip-text text-transparent">
               Developer Hubs
             </span>
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-slate-400">
+          <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-slate-600">
             Targeted utility matrices built for frontend architects, full-stack engineers, and AI practitioners.
           </p>
         </div>
 
-        {/* Responsive Grid with Clean Borderless Glassmorphism */}
+        {/* Responsive Grid with Clean Light Cards */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {displayList.map((cat) => {
             const Icon = ICON_MAP[cat.slug] ?? Brain;
@@ -56,27 +56,27 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
               <Link
                 key={cat.slug}
                 href={`/ai-tools/${cat.slug}`}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#00D2FF]/40 hover:bg-white/[0.04] hover:shadow-[0_12px_36px_rgba(0,0,0,0.6)]"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl"
               >
                 <div>
-                  <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/[0.04] border border-white/10 text-[#00D2FF] group-hover:border-[#00D2FF]/40 group-hover:bg-[#00D2FF]/10 transition">
+                  <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-50 border border-slate-200 text-[#0092c7] group-hover:border-[#0092c7]/40 group-hover:bg-[#00D2FF]/10 transition">
                     <Icon className="h-5 w-5" />
                   </div>
 
-                  <h3 className="text-lg font-bold text-white transition group-hover:text-[#00D2FF]">
+                  <h3 className="text-lg font-bold text-slate-900 transition group-hover:text-indigo-600">
                     {cat.name}
                   </h3>
 
-                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-400 line-clamp-2">
+                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-500 line-clamp-2">
                     {cat.description ?? `Explore all ${cat.name} utilities and tools.`}
                   </p>
                 </div>
 
-                <div className="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4">
-                  <span className="text-xs font-mono text-slate-500">
+                <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
+                  <span className="text-xs font-mono text-slate-400">
                     {cat.toolCount} {cat.toolCount === 1 ? 'utility' : 'utilities'}
                   </span>
-                  <span className="flex items-center gap-1 text-xs font-mono font-semibold text-slate-300 transition group-hover:text-[#00D2FF]">
+                  <span className="flex items-center gap-1 text-xs font-mono font-semibold text-slate-700 transition group-hover:text-indigo-600">
                     Enter Hub <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
                   </span>
                 </div>
