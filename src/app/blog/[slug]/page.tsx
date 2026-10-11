@@ -56,16 +56,22 @@ function extractHeadings(markdown: string): TocItem[] {
 // ─────────────────────────────────────────────
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  let post: any = null;
 
-  const post = await prisma.post.findUnique({
-    where: { slug },
-    include: { category: true, author: true, tags: true },
-  });
+  try {
+    post = await prisma.post.findUnique({
+      where: { slug },
+      include: { category: true, author: true, tags: true },
+    });
+  } catch (err) {
+    console.warn('[Blog Metadata] DB fallback:', (err as Error).message);
+  }
 
   if (!post || post.status !== 'PUBLISHED') {
+    const fallbackTitle = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
     return {
-      title: 'Article Not Found | AIIsEverything',
-      description: 'The requested AI article could not be found.',
+      title: `${fallbackTitle} | AIIsEverything`,
+      description: `Read technical guides and AI intelligence on AIIsEverything.`,
     };
   }
 
@@ -90,7 +96,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       'AIIsEverything',
       'Artificial Intelligence',
       ...(seoMeta.keywords || []),
-      ...post.tags.map((t) => t.name),
+      ...(post.tags || []).map((t: any) => t.name),
     ],
   });
 
@@ -110,7 +116,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       modifiedTime: post.updatedAt.toISOString(),
       authors: [post.author?.name || 'AIIsEverything Editorial'],
       section: post.category.name,
-      tags: post.tags.map((t) => t.name),
+      tags: (post.tags || []).map((t: any) => t.name),
       images: [
         {
           url: ogImageUrl,
@@ -136,44 +142,53 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = await params;
 
-  // 1. Fetch post from database
-  const post = await prisma.post.findUnique({
-    where: { slug },
-    include: {
-      category: true,
-      author: true,
-      tags: true,
-    },
-  });
+  let post: any = null;
+  let relatedPosts: Array<any> = [];
+
+  try {
+    // 1. Fetch post from database
+    post = await prisma.post.findUnique({
+      where: { slug },
+      include: {
+        category: true,
+        author: true,
+        tags: true,
+      },
+    });
+
+    if (post && post.status === 'PUBLISHED') {
+      // 3. Atomically increment viewCount (fire-and-forget, non-blocking)
+      prisma.post
+        .update({
+          where: { id: post.id },
+          data: { viewCount: { increment: 1 } },
+        })
+        .catch((err) => {
+          console.warn('[Post View Increment Error]:', (err as Error).message);
+        });
+
+      // 4. Fetch 3 related articles from same category
+      relatedPosts = await prisma.post.findMany({
+        where: {
+          categoryId: post.categoryId,
+          id: { not: post.id },
+          status: 'PUBLISHED',
+        },
+        include: {
+          category: true,
+        },
+        orderBy: [{ publishedAt: 'desc' }, { viewCount: 'desc' }],
+        take: 3,
+      });
+    }
+  } catch (err) {
+    console.warn('[Blog Post Page] DB fallback during build:', (err as Error).message);
+  }
 
   // 2. 404 Not Found handling
   if (!post || post.status !== 'PUBLISHED') {
     notFound();
   }
-
-  // 3. Atomically increment viewCount (fire-and-forget, non-blocking)
-  prisma.post
-    .update({
-      where: { id: post.id },
-      data: { viewCount: { increment: 1 } },
-    })
-    .catch((err) => {
-      console.warn('[Post View Increment Error]:', (err as Error).message);
-    });
-
-  // 4. Fetch 3 related articles from same category
-  const relatedPosts = await prisma.post.findMany({
-    where: {
-      categoryId: post.categoryId,
-      id: { not: post.id },
-      status: 'PUBLISHED',
-    },
-    include: {
-      category: true,
-    },
-    orderBy: [{ publishedAt: 'desc' }, { viewCount: 'desc' }],
-    take: 3,
-  });
 
   // 5. Word count & reading time calculation
   const wordCount = post.contentMd.trim().split(/\s+/).filter(Boolean).length;
@@ -202,7 +217,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     modifiedAt: post.updatedAt.toISOString(),
     wordCount,
     articleSection: post.category.name,
-    keywords: post.tags.map((t) => t.name),
+    keywords: (post.tags || []).map((t: any) => t.name),
   });
 
   return (
@@ -330,7 +345,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <span>Topics Covered</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag) => (
+                    {(post.tags || []).map((tag: any) => (
                       <span
                         key={tag.id}
                         className="rounded-lg border border-slate-200 bg-white px-3 py-1 text-xs text-slate-700 font-medium hover:border-slate-300 transition"

@@ -39,16 +39,22 @@ export const revalidate = 60; // ISR 60s background refresh
 // ─────────────────────────────────────────────
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { category, slug } = await params;
+  let tool: any = null;
 
-  const tool = await prisma.tool.findUnique({
-    where: { slug },
-    include: { category: true },
-  });
+  try {
+    tool = await prisma.tool.findUnique({
+      where: { slug },
+      include: { category: true },
+    });
+  } catch (err) {
+    console.warn('[Tool Metadata] DB fallback:', (err as Error).message);
+  }
 
-  if (!tool || tool.status !== 'PUBLISHED' || tool.category.slug !== category) {
+  if (!tool || tool.status !== 'PUBLISHED' || tool.category?.slug !== category) {
+    const fallbackTitle = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
     return {
-      title: 'Tool Not Found | AIIsEverything',
-      description: 'The requested AI tool could not be found.',
+      title: `${fallbackTitle} — Free AI Tool | AIIsEverything`,
+      description: `Run the free ${fallbackTitle} browser tool with instant execution.`,
     };
   }
 
@@ -115,43 +121,52 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ToolExecutionPage({ params }: PageProps) {
   const { category, slug } = await params;
 
-  // 1. Fetch tool from MongoDB via Prisma
-  const tool = await prisma.tool.findUnique({
-    where: { slug },
-    include: {
-      category: true,
-      tags: true,
-    },
-  });
+  let tool: any = null;
+  let relatedTools: Array<any> = [];
 
-  // 2. 404 Fallback
-  if (!tool || tool.status !== 'PUBLISHED' || tool.category.slug !== category) {
-    notFound();
-  }
-
-  // 3. Atomically increment viewCount (fire-and-forget)
-  prisma.tool
-    .update({
-      where: { id: tool.id },
-      data: { viewCount: { increment: 1 } },
-    })
-    .catch((err) => {
-      console.warn('[Tool View Increment Error]:', (err as Error).message);
+  try {
+    // 1. Fetch tool from MongoDB via Prisma
+    tool = await prisma.tool.findUnique({
+      where: { slug },
+      include: {
+        category: true,
+        tags: true,
+      },
     });
 
-  // 4. Fetch related tools from the same category
-  const relatedTools = await prisma.tool.findMany({
-    where: {
-      categoryId: tool.categoryId,
-      id: { not: tool.id },
-      status: 'PUBLISHED',
-    },
-    include: {
-      category: true,
-    },
-    orderBy: [{ isFeatured: 'desc' }, { viewCount: 'desc' }],
-    take: 3,
-  });
+    if (tool && tool.status === 'PUBLISHED') {
+      // 3. Atomically increment viewCount (fire-and-forget)
+      prisma.tool
+        .update({
+          where: { id: tool.id },
+          data: { viewCount: { increment: 1 } },
+        })
+        .catch((err) => {
+          console.warn('[Tool View Increment Error]:', (err as Error).message);
+        });
+
+      // 4. Fetch related tools from the same category
+      relatedTools = await prisma.tool.findMany({
+        where: {
+          categoryId: tool.categoryId,
+          id: { not: tool.id },
+          status: 'PUBLISHED',
+        },
+        include: {
+          category: true,
+        },
+        orderBy: [{ isFeatured: 'desc' }, { viewCount: 'desc' }],
+        take: 3,
+      });
+    }
+  } catch (err) {
+    console.warn('[Tool Detail Page] DB fallback during build:', (err as Error).message);
+  }
+
+  // 2. 404 Fallback
+  if (!tool || tool.status !== 'PUBLISHED' || tool.category?.slug !== category) {
+    notFound();
+  }
 
   // 5. Schema.org JSON-LD Generation
   const canonicalUrl = `https://aiiseverything.com/ai-tools/${tool.category.slug}/${tool.slug}`;
@@ -385,7 +400,7 @@ export default async function ToolExecutionPage({ params }: PageProps) {
                     </span>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {tool.tags.map((t) => (
+                    {(tool.tags || []).map((t: any) => (
                       <span
                         key={t.id}
                         className="rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs text-slate-700 font-medium"
