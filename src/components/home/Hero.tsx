@@ -9,17 +9,11 @@ interface HeroProps {
 
 export function Hero({ stats }: HeroProps) {
   return (
-    <section className="relative min-h-[92vh] flex items-center bg-white bg-dot-pattern pt-36 sm:pt-40 lg:pt-44 pb-20 lg:pb-28 overflow-x-clip">
-      {/* ── Soft Ambient Radial Lights (Crisp Light Theme) ── */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-32 left-1/3 h-[500px] w-[500px] rounded-full bg-cyan-400/[0.08] blur-[140px]" />
-        <div className="absolute top-1/4 right-10 h-[550px] w-[550px] rounded-full bg-indigo-400/[0.06] blur-[150px]" />
-      </div>
-
+    <section className="relative min-h-[92vh] flex items-center bg-white pt-36 sm:pt-40 lg:pt-44 pb-20 lg:pb-28 overflow-x-clip">
       <div className="relative z-10 mx-auto max-w-[1440px] w-full px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-24 justify-between">
           {/* ── Left Column: High-Impact Typography Firmly on Far-Left ── */}
-          <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center pt-2 sm:pt-4">
+          <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-start pt-2 sm:pt-4">
             {/* Top Minimalist Credibility Pill Badge */}
             <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-slate-200/90 bg-white px-4 py-1.5 text-xs font-mono text-slate-700 shadow-xs backdrop-blur-md self-start">
               <span className="relative flex h-2 w-2">
@@ -124,8 +118,8 @@ export function Hero({ stats }: HeroProps) {
             </div>
           </div>
 
-          {/* ── Right Column: 3D Robot Positioned firmly on Far-Right, Level with H1 ── */}
-          <div className="lg:col-span-6 xl:col-span-6 flex items-start justify-end relative overflow-visible">
+          {/* ── Right Column: 3D Robot Positioned firmly on Far-Right, Level with H1 and Status Pill ── */}
+          <div className="lg:col-span-6 xl:col-span-6 flex items-start justify-end relative overflow-visible -mt-4 sm:-mt-8 lg:-mt-14 xl:-mt-20">
             <Robot3DViewer className="overflow-visible" />
           </div>
         </div>

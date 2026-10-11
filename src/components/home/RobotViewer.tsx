@@ -68,11 +68,11 @@ export function Robot3DViewer({ className = '' }: { className?: string }) {
       ref={containerRef}
       className={`relative w-full min-w-[650px] sm:min-w-[700px] xl:min-w-[760px] h-[650px] sm:h-[740px] lg:h-[800px] select-none flex items-start justify-center overflow-visible pointer-events-auto ${className}`}
     >
-      {/* Soft Ambient Radial Light for Pure White Canvas */}
+      {/* Targeted Robot Ambient Falloff strictly behind canvas (Zero Hard Pixels) */}
       <div
-        className="pointer-events-none absolute top-10 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full blur-[130px] opacity-25"
+        className="pointer-events-none absolute top-4 left-1/2 -translate-x-1/2 w-[520px] h-[520px] rounded-full blur-[120px] opacity-20 pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(0, 210, 255, 0.35) 0%, rgba(99, 102, 241, 0.15) 50%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(0, 210, 255, 0.15) 0%, rgba(99, 102, 241, 0.05) 50%, rgba(255, 255, 255, 0) 70%)',
         }}
       />
 

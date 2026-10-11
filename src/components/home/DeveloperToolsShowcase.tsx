@@ -211,7 +211,7 @@ export function DeveloperToolsShowcase() {
   });
 
   return (
-    <section className="bg-white bg-dot-pattern border-t border-slate-200/80 px-6 sm:px-8 lg:px-12 py-24 sm:py-28" id="tools">
+    <section className="bg-white border-t border-slate-200/80 px-6 sm:px-8 lg:px-12 py-24 sm:py-28" id="tools">
       <div className="mx-auto max-w-[1440px]">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">

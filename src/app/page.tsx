@@ -12,19 +12,19 @@ import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
 import { fetchLiveLandingData } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'AIIsEverything — Developer AI Operating System & Code Tools',
+  title: 'AiTools Studio — Developer AI Operating System & Code Tools',
   description:
     'Sleek, zero-latency developer utilities, AST code converters, and AI diagnostics. Client-side WASM execution with zero telemetry logging.',
   openGraph: {
-    title: 'AIIsEverything — Developer AI Operating System & Code Tools',
+    title: 'AiTools Studio — Developer AI Operating System & Code Tools',
     description: 'Zero-latency developer utilities, AST code converters, and AI diagnostics.',
-    url: 'https://aiiseverything.com',
-    siteName: 'AIIsEverything',
+    url: 'https://aiisevery.vercel.app',
+    siteName: 'AiTools Studio',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AIIsEverything — Developer AI Operating System & Code Tools',
+    title: 'AiTools Studio — Developer AI Operating System & Code Tools',
     description: 'Zero-latency developer utilities, AST code converters, and AI diagnostics.',
   },
 };
@@ -56,7 +56,7 @@ export default async function HomePage() {
         <ValueSection />
 
         {/* ── 6. Developer Newsletter Capture Section (Pure White Theme) ── */}
-        <section className="relative overflow-hidden bg-slate-50/60 bg-dot-pattern border-t border-slate-200/80 px-6 sm:px-8 lg:px-12 py-24 sm:py-28">
+        <section className="relative overflow-hidden bg-slate-50/50 border-t border-slate-200/80 px-6 sm:px-8 lg:px-12 py-24 sm:py-28">
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute left-1/2 top-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/[0.06] blur-[140px]" />
           </div>

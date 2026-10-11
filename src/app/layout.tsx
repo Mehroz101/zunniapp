@@ -17,46 +17,47 @@ const geistMono = Geist_Mono({
 
 // ── Site-wide Metadata ───────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aiiseverything.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aiisevery.vercel.app'),
 
   title: {
-    default: 'AIIsEverything — AI For Every Corner of Life',
-    template: '%s | AIIsEverything',
+    default: 'AiTools Studio — Developer AI Operating System & Code Tools',
+    template: '%s | AiTools Studio',
   },
 
   description:
-    'AIIsEverything.com is your definitive guide to artificial intelligence — news, tools, tutorials, and insights for everyone.',
+    'AiTools Studio is the open developer operating system and intelligence suite — curated zero-latency tools, AST code converters, model diagnostics, and technical documentation.',
 
   keywords: [
     'artificial intelligence',
-    'AI tools',
+    'developer tools',
+    'code converters',
+    'AST transpiler',
+    'WASM AI runtime',
+    'prompt optimizer',
+    'AiTools Studio',
     'machine learning',
-    'AI news',
-    'AI tutorials',
-    'generative AI',
-    'ChatGPT',
     'LLM',
   ],
 
-  authors: [{ name: 'AIIsEverything Team', url: 'https://aiiseverything.com' }],
-  creator: 'AIIsEverything',
-  publisher: 'AIIsEverything',
+  authors: [{ name: 'AiTools Studio Team', url: 'https://aiisevery.vercel.app' }],
+  creator: 'AiTools Studio',
+  publisher: 'AiTools Studio',
 
   // ── Open Graph ───────────────────────────────
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://aiiseverything.com',
-    siteName: 'AIIsEverything',
-    title: 'AIIsEverything — AI For Every Corner of Life',
+    url: 'https://aiisevery.vercel.app',
+    siteName: 'AiTools Studio',
+    title: 'AiTools Studio — Developer AI Operating System & Code Tools',
     description:
-      'Your definitive guide to artificial intelligence — news, tools, tutorials, and insights.',
+      'Curated zero-latency developer utilities, AST code converters, model diagnostics, and developer documentation.',
     images: [
       {
         url: '/og-default.png',
         width: 1200,
         height: 630,
-        alt: 'AIIsEverything',
+        alt: 'AiTools Studio',
       },
     ],
   },

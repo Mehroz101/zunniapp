@@ -4,7 +4,7 @@ import { AiLogo } from './Navbar';
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-200/90 bg-white bg-dot-pattern text-slate-600">
+    <footer className="border-t border-slate-200/90 bg-white text-slate-600">
       {/* ── Main Developer Footer Columns ── */}
       <div className="px-6 sm:px-8 lg:px-12 py-16 sm:py-20">
         <div className="mx-auto max-w-[1440px]">
@@ -126,7 +126,7 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="http://localhost:4000/docs"
+                    href="https://aiiseverythingback.vercel.app/docs"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1 text-slate-700 hover:text-slate-950 transition"
@@ -137,7 +137,7 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="http://localhost:4000/health"
+                    href="https://aiiseverythingback.vercel.app/health"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1 text-slate-700 hover:text-slate-950 transition"
@@ -148,7 +148,7 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="http://localhost:3001"
+                    href="https://aiiseverythingdashboard.vercel.app"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1 text-slate-700 hover:text-slate-950 transition"
@@ -173,7 +173,7 @@ export function Footer() {
 
           {/* Bottom Bar */}
           <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 text-xs font-mono text-slate-500 sm:flex-row">
-            <p>© {new Date().getFullYear()} AIIsEverything.com. Open Developer Matrix.</p>
+            <p>© {new Date().getFullYear()} AiTools Studio. Open Developer Platform.</p>
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-emerald-700 font-semibold">All Sandbox Engines Operational</span>

@@ -25,8 +25,8 @@ import {
 export function AiLogo({ className = '' }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2.5 select-none group cursor-pointer ${className}`}>
-      {/* Sleek Minimalist Geometric Syntax/Neural Mark */}
-      <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 group-hover:border-[#0092c7] transition-colors">
+      {/* Bespoke Minimalist Geometric Syntax Bracket Emblem */}
+      <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-slate-950 border border-slate-800 shadow-xs group-hover:border-[#00D2FF] transition-colors">
         <svg
           width="18"
           height="18"
@@ -35,36 +35,37 @@ export function AiLogo({ className = '' }: { className?: string }) {
           xmlns="http://www.w3.org/2000/svg"
           className="transition-transform duration-300 group-hover:scale-105"
         >
-          {/* Subtle cyan hairline code & node lockup */}
+          {/* Crisp Geometric Syntax Brackets & Refined Hairline Neon-Cyan Accent */}
           <path
-            d="M6.5 8L2.5 12L6.5 16"
+            d="M7 8L3 12L7 16"
             stroke="#00D2FF"
-            strokeWidth="1.75"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
-            d="M17.5 8L21.5 12L17.5 16"
+            d="M17 8L21 12L17 16"
             stroke="#00D2FF"
-            strokeWidth="1.75"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
-            d="M13.5 6L10.5 18"
+            d="M14 5L10 19"
             stroke="#FFFFFF"
             strokeWidth="1.75"
             strokeLinecap="round"
-            strokeOpacity="0.85"
+            strokeOpacity="0.9"
           />
           <circle cx="12" cy="12" r="1.5" fill="#00D2FF" />
         </svg>
       </div>
 
-      {/* Brand Typography */}
-      <div className="flex items-baseline tracking-[-0.03em] font-extrabold text-[16px] text-slate-950">
-        <span>AIIsEverything</span>
-        <span className="text-[#0092c7] text-xs font-mono ml-0.5 tracking-normal">.com</span>
+      {/* Brand Typography: Enterprise-Tier Developer Studio */}
+      <div className="flex items-baseline tracking-[-0.03em] font-black text-[16px] text-slate-950">
+        <span>AiTools</span>
+        <span className="text-slate-500 font-semibold ml-1 text-[13px] tracking-normal">Studio</span>
+        <span className="text-[#0092c7] text-[10px] font-mono ml-1.5 px-1.5 py-0.5 rounded bg-cyan-50 border border-cyan-200/60 font-bold uppercase tracking-wider">DEV</span>
       </div>
     </div>
   );

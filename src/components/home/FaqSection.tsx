@@ -44,7 +44,7 @@ export function FaqSection() {
   };
 
   return (
-    <section className="bg-white bg-dot-pattern border-t border-slate-200/80 px-6 sm:px-8 lg:px-12 py-24 sm:py-28" id="faqs">
+    <section className="bg-white border-t border-slate-200/80 px-6 sm:px-8 lg:px-12 py-24 sm:py-28" id="faqs">
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="text-center mb-14">

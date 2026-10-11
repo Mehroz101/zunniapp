@@ -129,7 +129,7 @@ export function OrbitKeywordSystem() {
   }, []);
 
   return (
-    <section className="relative w-full py-28 bg-slate-50/60 bg-dot-pattern border-t border-slate-200/80 overflow-hidden select-none">
+    <section className="relative w-full py-28 bg-slate-50/50 border-t border-slate-200/80 overflow-hidden select-none">
       {/* Background Ambience */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-cyan-400/[0.07] blur-[160px]" />
