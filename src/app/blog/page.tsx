@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ChevronRight, Sparkles, Newspaper } from 'lucide-react';
 import { prisma } from '@/lib/prisma';
+import { slugify } from '@/lib/utils';
 import {
   buildCollectionPageSchema,
   buildBreadcrumbSchema,
@@ -45,21 +46,20 @@ export const metadata: Metadata = {
   }),
 };
 
-export const revalidate = 60; // 60s ISR refresh
+export const revalidate = 60; // 60s ISR refresh for instantaneous CMS publishing
 
 export default async function BlogArchivePage() {
   let rawPosts: Array<any> = [];
   let rawCategories: Array<any> = [];
 
   try {
-    // 1. Fetch published posts and categories
+    // 1. Fetch published posts and active categories directly via Prisma
     [rawPosts, rawCategories] = await Promise.all([
       prisma.post.findMany({
         where: { status: 'PUBLISHED' },
         include: {
-          category: true,
+          contentCategory: true,
           author: true,
-          tags: true,
         },
         orderBy: [{ publishedAt: 'desc' }, { createdAt: 'desc' }],
       }),
@@ -78,45 +78,110 @@ export default async function BlogArchivePage() {
       }),
     ]);
   } catch (error) {
-    console.warn('[BlogArchivePage] Prisma DB query fallback during build:', (error as Error).message);
+    console.warn('[BlogArchivePage] Prisma DB query fallback:', (error as Error).message);
   }
 
-  // 3. Serialize posts
-  const posts: DirectoryPost[] = rawPosts.map((p) => ({
-    id: p.id,
-    title: p.title,
-    slug: p.slug,
-    excerpt: p.excerpt,
-    readingTimeMins: p.readingTimeMins,
-    publishedAt: p.publishedAt ? p.publishedAt.toISOString() : null,
-    viewCount: p.viewCount,
-    category: {
-      id: p.category.id,
-      name: p.category.name,
-      slug: p.category.slug,
-    },
-    author: p.author
-      ? {
-          id: p.author.id,
-          name: p.author.name,
+  // Fallback to backend API if Prisma was empty or offline
+  if (rawPosts.length === 0) {
+    try {
+      const apiUrl =
+        process.env.NEXT_PUBLIC_API_URL || 'https://aiiseverythingback.vercel.app/api';
+      const res = await fetch(`${apiUrl}/posts?status=PUBLISHED`, {
+        next: { revalidate: 60 },
+      });
+      if (res.ok) {
+        const json = await res.json();
+        if (json.success && Array.isArray(json.data)) {
+          rawPosts = json.data;
         }
-      : null,
-    tags: p.tags.map((tag: any) => ({
-      id: tag.id,
-      name: tag.name,
-      slug: tag.slug,
-    })),
-  }));
+      }
+    } catch (e) {
+      console.warn('[BlogArchivePage] Backend API fallback error:', (e as Error).message);
+    }
+  }
 
-  // 4. Serialize categories
-  const categories: DirectoryContentCategory[] = rawCategories.map((c) => ({
-    id: c.id,
-    name: c.name,
-    slug: c.slug,
-    count: c._count.posts,
-  }));
+  // 2. Serialize posts
+  const posts: DirectoryPost[] = rawPosts.map((p) => {
+    const catName =
+      p.category ||
+      p.contentCategory?.name ||
+      (Array.isArray(p.categories) && p.categories.length > 0 ? p.categories[0] : 'AI News');
+    const catSlug = slugify(catName);
 
-  // 5. Schema.org JSON-LD
+    const postTags = Array.isArray(p.tags)
+      ? p.tags.map((t: any) =>
+          typeof t === 'string'
+            ? { id: t, name: t, slug: slugify(t) }
+            : { id: t.id || t.name, name: t.name, slug: t.slug || slugify(t.name) }
+        )
+      : [];
+
+    return {
+      id: p.id,
+      title: p.title,
+      slug: p.slug,
+      excerpt: p.excerpt || '',
+      coverImage: p.coverImage || p.ogImage || null,
+      contentMd: p.content || p.contentMd || '',
+      readingTimeMins: p.readingTimeMins || 3,
+      publishedAt: p.publishedAt
+        ? typeof p.publishedAt === 'string'
+          ? p.publishedAt
+          : p.publishedAt.toISOString()
+        : p.createdAt
+        ? typeof p.createdAt === 'string'
+          ? p.createdAt
+          : p.createdAt.toISOString()
+        : null,
+      viewCount: p.viewCount || 0,
+      category: {
+        id: p.categoryId || catSlug,
+        name: catName,
+        slug: catSlug,
+      },
+      author: p.author
+        ? {
+            id: p.author.id,
+            name: p.author.name,
+          }
+        : {
+            id: 'editorial',
+            name: 'AIIsEverything Editorial',
+          },
+      tags: postTags,
+    };
+  });
+
+  // 3. Serialize categories (derive from DB categories or active posts)
+  const categoryMap = new Map<string, DirectoryContentCategory>();
+
+  rawCategories.forEach((c) => {
+    categoryMap.set(c.slug, {
+      id: c.id,
+      name: c.name,
+      slug: c.slug,
+      count: c._count?.posts || 0,
+    });
+  });
+
+  // Ensure all categories present on published posts exist in filters
+  posts.forEach((p) => {
+    const existing = categoryMap.get(p.category.slug);
+    if (existing) {
+      existing.count = Math.max(existing.count, 1);
+    } else {
+      categoryMap.set(p.category.slug, {
+        id: p.category.id,
+        name: p.category.name,
+        slug: p.category.slug,
+        count: 1,
+      });
+    }
+  });
+
+  const categories: DirectoryContentCategory[] = Array.from(categoryMap.values());
+
+  // 4. Schema.org JSON-LD
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', item: 'https://aiiseverything.com' },
     { name: 'Blog', item: 'https://aiiseverything.com/blog' },
@@ -129,14 +194,14 @@ export default async function BlogArchivePage() {
     url: 'https://aiiseverything.com/blog',
     items: posts.slice(0, 15).map((p) => ({
       name: p.title,
-      description: p.excerpt,
       url: `https://aiiseverything.com/blog/${p.slug}`,
+      description: p.excerpt,
     })),
   });
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 selection:bg-[#00D2FF]/30 selection:text-slate-950 font-sans">
-      {/* ── Schema.org JSON-LD ── */}
+    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-cyan-500/30 selection:text-cyan-900 dark:selection:text-cyan-200">
+      {/* JSON-LD Schemas */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -146,70 +211,72 @@ export default async function BlogArchivePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
 
-      {/* ── Fixed Navigation ── */}
       <Navbar />
 
-      <main className="relative pt-28 pb-20">
-        {/* ── Ambient Background Glows ── */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute left-1/2 -top-20 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-gradient-to-b from-[#00D2FF]/10 to-violet-500/5 blur-[140px]" />
-        </div>
+      <main className="flex-1 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pt-28 pb-20">
+        {/* Breadcrumb Header */}
+        <nav
+          aria-label="Breadcrumb"
+          className="flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-slate-400 mb-6"
+        >
+          <Link href="/" className="hover:text-slate-900 dark:hover:text-white transition">
+            Home
+          </Link>
+          <ChevronRight className="h-3 w-3 text-slate-400 dark:text-slate-600" />
+          <span className="text-slate-900 dark:text-slate-200 font-medium">Blog & Insights</span>
+        </nav>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* ── Breadcrumb Navigation ── */}
-          <nav
-            aria-label="Breadcrumb"
-            className="mb-8 flex items-center gap-2 text-xs font-medium text-slate-500"
-          >
-            <Link href="/" className="hover:text-slate-900 transition">
-              Home
-            </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
-            <span className="text-slate-900 font-semibold">Blog Archive</span>
-          </nav>
-
-          {/* ── Hero Archive Header ── */}
-          <div className="mb-12 max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-violet-200 bg-violet-50 px-3.5 py-1 text-xs font-semibold text-violet-800 shadow-xs">
-              <Newspaper className="h-3.5 w-3.5 text-violet-600" />
-              <span>AI Intelligence & Editorial</span>
+        {/* Hero Section */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-slate-200 dark:border-slate-800">
+          <div className="max-w-2xl space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-xs font-mono text-slate-700 dark:text-slate-300">
+              <Newspaper className="h-3.5 w-3.5 text-[#00D2FF]" />
+              AIIsEverything Intelligence Dispatches
             </div>
-
-            <h1 className="text-3xl font-black tracking-tight sm:text-4xl md:text-5xl text-slate-950">
-              Latest AI{' '}
-              <span className="bg-gradient-to-r from-violet-600 via-indigo-600 to-[#0092c7] bg-clip-text text-transparent">
-                News, Insights & Guides
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-950 dark:text-white">
+              AI News, Guides &{' '}
+              <span className="bg-gradient-to-r from-[#00D2FF] via-indigo-400 to-violet-500 bg-clip-text text-transparent">
+                Technical Insights
               </span>
             </h1>
-
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-              Explore breaking reports, frontier model comparisons, and technical tutorials designed to keep you at the cutting edge of artificial intelligence.
+            <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+              Curated intelligence covering frontier artificial intelligence releases, architectural
+              breakdowns, production prompt engineering, and deep machine learning tutorials.
             </p>
           </div>
 
-          {/* ── Blog Filter, Search & Card Grid ── */}
-          <BlogFilterGrid initialPosts={posts} categories={categories} />
-
-          {/* ── Newsletter Section ── */}
-          <section className="mt-24 rounded-3xl border border-slate-200/80 bg-gradient-to-b from-slate-50 to-white p-8 sm:p-12 text-center shadow-xs">
-            <div className="mx-auto max-w-xl">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-semibold text-slate-700 shadow-xs mb-4">
-                <Sparkles className="h-3.5 w-3.5 text-[#0092c7]" />
-                <span>Stay Ahead in AI</span>
-              </span>
-              <h2 className="text-2xl font-extrabold text-slate-950 sm:text-3xl">
-                Get Weekly AI Intelligence Directly
-              </h2>
-              <p className="mt-2 mb-6 text-xs sm:text-sm text-slate-600">
-                Join our Sunday briefing featuring curated research papers, open-source models, and actionable implementation guides.
-              </p>
-              <NewsletterForm />
+          <div className="flex items-center gap-4">
+            <div className="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 text-xs font-mono text-slate-600 dark:text-slate-400 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>{posts.length} Live Articles</span>
             </div>
-          </section>
+          </div>
         </div>
+
+        {/* Filter and Article Grid */}
+        <section className="pt-10">
+          <BlogFilterGrid initialPosts={posts} categories={categories} />
+        </section>
+
+        {/* Newsletter CTA Section */}
+        <section className="mt-20 rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/40 p-8 sm:p-12 text-center max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-xs font-mono text-indigo-600 dark:text-indigo-400 mb-4">
+            <Sparkles className="h-3.5 w-3.5 text-[#00D2FF]" />
+            Direct To Your Inbox
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3">
+            Stay Ahead of Frontier AI Developments
+          </h2>
+          <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md mx-auto mb-6">
+            Join thousands of developers and AI leaders receiving our weekly deep-dive into models,
+            tools, and production workflows.
+          </p>
+          <div className="max-w-md mx-auto">
+            <NewsletterForm />
+          </div>
+        </section>
       </main>
 
-      {/* ── Footer ── */}
       <Footer />
     </div>
   );

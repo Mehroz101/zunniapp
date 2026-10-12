@@ -76,7 +76,7 @@ export async function fetchLiveLandingData() {
         }),
         prisma.post.findMany({
           where: { status: 'PUBLISHED' },
-          include: { category: true },
+          include: { contentCategory: true },
           orderBy: { publishedAt: 'desc' },
           take: 3,
         }),
@@ -111,19 +111,23 @@ export async function fetchLiveLandingData() {
       toolCount: c._count.tools,
     }));
 
-    const posts: LivePost[] = rawPosts.map((p) => ({
-      id: p.id,
-      title: p.title,
-      slug: p.slug,
-      excerpt: p.excerpt,
-      readingTimeMins: p.readingTimeMins,
-      publishedAt: p.publishedAt,
-      contentType: p.contentType,
-      category: {
-        name: p.category.name,
-        slug: p.category.slug,
-      },
-    }));
+    const posts: LivePost[] = rawPosts.map((p) => {
+      const catName = p.contentCategory?.name || (typeof p.category === 'string' && p.category ? p.category : 'AI News');
+      const catSlug = p.contentCategory?.slug || catName.toLowerCase().replace(/\s+/g, '-');
+      return {
+        id: p.id,
+        title: p.title,
+        slug: p.slug,
+        excerpt: p.excerpt || '',
+        readingTimeMins: p.readingTimeMins,
+        publishedAt: p.publishedAt,
+        contentType: p.contentType,
+        category: {
+          name: catName,
+          slug: catSlug,
+        },
+      };
+    });
 
     const stats: LivePlatformStats = {
       toolsCount: totalTools,

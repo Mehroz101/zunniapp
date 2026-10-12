@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
@@ -137,29 +138,33 @@ model Post {
   id              String        @id @default(auto()) @map("_id") @db.ObjectId
   title           String
   slug            String        @unique
-  excerpt         String
-  contentMd       String        @map("content_md")
+  excerpt         String?
+  content         String?       @map("content")
+  contentMd       String?       @map("content_md")
   contentHtml     String?       @map("content_html")
+  coverImage      String?       @map("cover_image")
   ogImage         String?       @map("og_image")
-  categoryId      String        @map("category_id") @db.ObjectId
+  category        String?       @map("category")
+  categories      String[]      @default([]) @map("categories")
+  categoryId      String?       @map("category_id") @db.ObjectId
   authorId        String?       @map("author_id") @db.ObjectId
+  tags            String[]      @default([]) @map("tags")
   status          ContentStatus @default(DRAFT)
   contentType     ContentType   @default(BLOG) @map("content_type")
-  seoMeta         Json          @map("seo_meta")
+  seoMeta         Json?         @map("seo_meta")
   structuredData  Json?         @map("structured_data")
   canonicalUrl    String?       @map("canonical_url")
   readingTimeMins Int           @default(0) @map("reading_time_mins")
   viewCount       Int           @default(0) @map("view_count")
-  publishedAt     DateTime?     @map("published_at")
+  publishedAt     DateTime?     @default(now()) @map("published_at")
   scheduledAt     DateTime?     @map("scheduled_at")
   createdAt       DateTime      @default(now()) @map("created_at")
   updatedAt       DateTime      @updatedAt @map("updated_at")
 
-  category ContentCategory @relation(fields: [categoryId], references: [id])
-  author   User?           @relation(fields: [authorId], references: [id])
-  tagIds   String[]        @map("tag_ids") @db.ObjectId
-  tags     Tag[]           @relation(fields: [tagIds], references: [id])
+  contentCategory ContentCategory? @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  author          User?            @relation(fields: [authorId], references: [id])
 
+  @@index([title])
   @@map("posts")
 }
 
@@ -172,8 +177,6 @@ model Tag {
   description String?
   createdAt   DateTime @default(now()) @map("created_at")
 
-  postIds String[] @map("post_ids") @db.ObjectId
-  posts   Post[]   @relation(fields: [postIds], references: [id])
   toolIds String[] @map("tool_ids") @db.ObjectId
   tools   Tool[]   @relation(fields: [toolIds], references: [id])
 
