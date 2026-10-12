@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import { ThemeProvider } from '@/components/theme/ThemeProvider';
 
 // ── Fonts ─────────────────────────────────────
 const inter = Inter({
@@ -127,8 +128,10 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-[#00D2FF]/30 selection:text-slate-950">
-        {children}
+      <body className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-[#00D2FF]/30 selection:text-slate-950 transition-colors duration-200">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

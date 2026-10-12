@@ -4,7 +4,7 @@ import { AiLogo } from './Navbar';
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-200/90 bg-white text-slate-600">
+    <footer className="border-t border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#05070c] text-slate-600 dark:text-slate-400 transition-colors duration-200">
       {/* ── Main Developer Footer Columns ── */}
       <div className="px-6 sm:px-8 lg:px-12 py-16 sm:py-20">
         <div className="mx-auto max-w-[1440px]">
@@ -14,22 +14,22 @@ export function Footer() {
               <Link href="/" className="mb-4 inline-flex items-center gap-2">
                 <AiLogo />
               </Link>
-              <p className="max-w-sm text-xs sm:text-sm leading-relaxed text-slate-500 mt-3 font-normal">
+              <p className="max-w-sm text-xs leading-relaxed text-slate-500 dark:text-slate-400 mt-3 font-normal">
                 The open developer operating system and intelligence suite for artificial intelligence — curated zero-latency tools, AST code converters, model diagnostics, and technical documentation.
               </p>
 
               {/* Trust & Engineering Security Badges */}
-              <div className="mt-6 flex flex-wrap items-center gap-2.5 text-[11px] font-mono text-slate-600">
-                <div className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 shadow-2xs">
-                  <Lock className="h-3 w-3 text-emerald-600" />
+              <div className="mt-6 flex flex-wrap items-center gap-2.5 text-[11px] font-mono text-slate-600 dark:text-slate-300">
+                <div className="flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 px-3 py-1 shadow-2xs">
+                  <Lock className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
                   <span>Client-Side Sandbox</span>
                 </div>
-                <div className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 shadow-2xs">
-                  <ShieldCheck className="h-3 w-3 text-[#0092c7]" />
+                <div className="flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 px-3 py-1 shadow-2xs">
+                  <ShieldCheck className="h-3 w-3 text-[#0092c7] dark:text-[#00D2FF]" />
                   <span>Zero Server Logging</span>
                 </div>
-                <div className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 shadow-2xs">
-                  <Cpu className="h-3 w-3 text-indigo-600" />
+                <div className="flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 px-3 py-1 shadow-2xs">
+                  <Cpu className="h-3 w-3 text-indigo-600 dark:text-indigo-400" />
                   <span>Edge WASM</span>
                 </div>
               </div>
@@ -37,37 +37,37 @@ export function Footer() {
 
             {/* Column 1: Code Converters */}
             <div>
-              <h4 className="mb-4 text-xs font-mono font-bold uppercase tracking-wider text-slate-900">
+              <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-100">
                 Code Converters
               </h4>
-              <ul className="space-y-2.5 text-xs font-mono">
+              <ul className="space-y-2.5 text-xs font-sans">
                 <li>
-                  <Link href="/ai-tools/coding" className="transition hover:text-slate-950">
+                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     CSS → HTML Scaffolder
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/coding" className="transition hover:text-slate-950">
+                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     HTML → Python AST
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/coding" className="transition hover:text-slate-950">
+                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     JSON ↔ YAML Stream
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/coding" className="transition hover:text-slate-950">
+                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     JS → TypeScript Strict
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/coding" className="transition hover:text-slate-950">
+                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     SVG → JSX Component
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/coding" className="transition hover:text-slate-950">
+                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     SQL → Schema ORM
                   </Link>
                 </li>
@@ -76,37 +76,37 @@ export function Footer() {
 
             {/* Column 2: AI Studio */}
             <div>
-              <h4 className="mb-4 text-xs font-mono font-bold uppercase tracking-wider text-slate-900">
+              <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-100">
                 AI Studio
               </h4>
-              <ul className="space-y-2.5 text-xs font-mono">
+              <ul className="space-y-2.5 text-xs font-sans">
                 <li>
-                  <Link href="/ai-tools/coding" className="transition hover:text-slate-950">
+                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     AI Syntax Debugger
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/writing" className="transition hover:text-slate-950">
+                  <Link href="/ai-tools/writing" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     Prompt Optimizer Pro
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/coding" className="transition hover:text-slate-950">
+                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     RegEx Neural Generator
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/coding" className="transition hover:text-slate-950">
+                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     Unit Test Synthesizer
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/text" className="transition hover:text-slate-950">
+                  <Link href="/ai-tools/text" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     Markdown Live Canvas
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools" className="font-semibold text-[#0092c7] hover:text-indigo-600 flex items-center gap-1 pt-1">
+                  <Link href="/ai-tools" className="font-semibold text-[#0092c7] dark:text-[#00D2FF] hover:underline flex items-center gap-1 pt-1">
                     All Utilities Suite →
                   </Link>
                 </li>
@@ -115,12 +115,12 @@ export function Footer() {
 
             {/* Column 3: Documentation & APIs */}
             <div>
-              <h4 className="mb-4 text-xs font-mono font-bold uppercase tracking-wider text-slate-900">
+              <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-100">
                 Documentation & APIs
               </h4>
-              <ul className="space-y-2.5 text-xs font-mono">
+              <ul className="space-y-2.5 text-xs font-sans">
                 <li>
-                  <Link href="/glossary" className="transition hover:text-slate-950">
+                  <Link href="/glossary" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     Neural Terms Glossary
                   </Link>
                 </li>
@@ -129,7 +129,7 @@ export function Footer() {
                     href="https://aiiseverythingback.vercel.app/docs"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-slate-700 hover:text-slate-950 transition"
+                    className="flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors"
                   >
                     <span>OpenAPI / Swagger</span>
                     <ArrowUpRight className="h-3 w-3 text-slate-400" />
@@ -140,7 +140,7 @@ export function Footer() {
                     href="https://aiiseverythingback.vercel.app/health"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-slate-700 hover:text-slate-950 transition"
+                    className="flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors"
                   >
                     <span>Health Metrics</span>
                     <ArrowUpRight className="h-3 w-3 text-slate-400" />
@@ -151,19 +151,19 @@ export function Footer() {
                     href="https://aiiseverythingdashboard.vercel.app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-slate-700 hover:text-slate-950 transition"
+                    className="flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors"
                   >
                     <span>Admin Control Center</span>
                     <ArrowUpRight className="h-3 w-3 text-slate-400" />
                   </a>
                 </li>
                 <li>
-                  <Link href="/privacy" className="transition hover:text-slate-950">
+                  <Link href="/privacy" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     Privacy & Legal Policy
                   </Link>
                 </li>
                 <li>
-                  <Link href="/terms" className="transition hover:text-slate-950">
+                  <Link href="/terms" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     Terms of Service
                   </Link>
                 </li>
@@ -171,12 +171,14 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Bottom Bar */}
-          <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 text-xs font-mono text-slate-500 sm:flex-row">
+          {/* Bottom Metadata & Status Bar */}
+          <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-slate-200 dark:border-slate-800 pt-8 text-xs font-mono text-slate-500 dark:text-slate-400 sm:flex-row">
             <p>© {new Date().getFullYear()} AiTools Studio. Open Developer Platform.</p>
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-emerald-700 font-semibold">All Sandbox Engines Operational</span>
+              <span className="text-emerald-700 dark:text-emerald-400 font-semibold font-mono text-[11px]">
+                All Sandbox Engines Operational
+              </span>
             </div>
           </div>
         </div>

@@ -15,20 +15,20 @@ function RobotSkeleton() {
       className="absolute inset-0 w-full h-full flex flex-col items-center justify-center pointer-events-none select-none z-0"
     >
       {/* Blueprint Card Frame with Subtle Neon-Cyan Glow */}
-      <div className="relative w-[340px] sm:w-[420px] md:w-[460px] h-[460px] sm:h-[540px] rounded-3xl border border-slate-200/80 bg-gradient-to-b from-slate-50/70 via-white/40 to-slate-100/60 shadow-xl backdrop-blur-md overflow-hidden flex flex-col items-center justify-between p-6 sm:p-8">
+      <div className="relative w-[340px] sm:w-[420px] md:w-[460px] h-[460px] sm:h-[540px] rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-gradient-to-b from-slate-50/70 via-white/40 to-slate-100/60 dark:from-slate-900/90 dark:via-slate-950/80 dark:to-slate-900/90 shadow-xl backdrop-blur-md overflow-hidden flex flex-col items-center justify-between p-6 sm:p-8">
         {/* Animated Scanner Laser Sweep */}
         <div className="absolute inset-x-0 h-24 bg-gradient-to-b from-transparent via-[#00D2FF]/15 to-transparent pointer-events-none animate-scanner-sweep" />
 
         {/* Top Telemetry Header */}
-        <div className="w-full flex items-center justify-between text-[11px] font-mono text-slate-500 border-b border-slate-200/60 pb-3">
+        <div className="w-full flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400 border-b border-slate-200/60 dark:border-slate-800 pb-3">
           <div className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00D2FF] opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00D2FF]" />
             </span>
-            <span className="font-semibold text-slate-800 tracking-wider">NEURAL_IK // KERNEL 2.4</span>
+            <span className="font-semibold text-slate-800 dark:text-slate-200 tracking-wider">NEURAL_IK // KERNEL 2.4</span>
           </div>
-          <span className="text-[10px] uppercase tracking-widest px-2 py-0.5 rounded bg-cyan-50 text-[#0092c7] border border-cyan-200/70 font-bold">
+          <span className="text-[10px] uppercase tracking-widest px-2 py-0.5 rounded bg-cyan-50 dark:bg-cyan-950/80 text-[#0092c7] dark:text-[#00D2FF] border border-cyan-200/70 dark:border-cyan-800/80 font-bold">
             PRELOADED
           </span>
         </div>
@@ -36,9 +36,9 @@ function RobotSkeleton() {
         {/* Center Geometric Wireframe Robot Silhouette */}
         <div className="relative flex flex-col items-center justify-center my-auto">
           {/* Wireframe Head & Visor Lockup */}
-          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl border-2 border-dashed border-slate-300 flex items-center justify-center bg-slate-900/5">
+          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 flex items-center justify-center bg-slate-900/5 dark:bg-slate-800/40">
             {/* Inner Core Glowing Orb */}
-            <div className="w-16 h-16 rounded-full border border-[#00D2FF]/60 flex items-center justify-center bg-cyan-50/50 shadow-[0_0_25px_rgba(0,210,255,0.25)] animate-pulse">
+            <div className="w-16 h-16 rounded-full border border-[#00D2FF]/60 flex items-center justify-center bg-cyan-50/50 dark:bg-cyan-950/60 shadow-[0_0_25px_rgba(0,210,255,0.25)] animate-pulse">
               <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#00D2FF] to-indigo-600 shadow-md shadow-cyan-500/40" />
             </div>
 
@@ -51,21 +51,21 @@ function RobotSkeleton() {
 
           {/* Wireframe Torso & Arms Horizon Lines */}
           <div className="mt-4 flex items-center gap-3">
-            <span className="w-12 sm:w-16 h-0.5 bg-gradient-to-r from-transparent to-slate-300" />
-            <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
+            <span className="w-12 sm:w-16 h-0.5 bg-gradient-to-r from-transparent to-slate-300 dark:to-slate-700" />
+            <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 dark:text-slate-500">
               SYNAPSE RIG ACTIVE
             </span>
-            <span className="w-12 sm:w-16 h-0.5 bg-gradient-to-l from-transparent to-slate-300" />
+            <span className="w-12 sm:w-16 h-0.5 bg-gradient-to-l from-transparent to-slate-300 dark:to-slate-700" />
           </div>
         </div>
 
         {/* Bottom Loading Telemetry & Frame Indicator */}
-        <div className="w-full text-center border-t border-slate-200/60 pt-3">
-          <div className="flex items-center justify-center gap-2 text-xs font-mono text-slate-600">
-            <div className="w-3.5 h-3.5 rounded-full border-2 border-[#0092c7] border-t-transparent animate-spin" />
+        <div className="w-full text-center border-t border-slate-200/60 dark:border-slate-800 pt-3">
+          <div className="flex items-center justify-center gap-2 text-xs font-mono text-slate-600 dark:text-slate-300">
+            <div className="w-3.5 h-3.5 rounded-full border-2 border-[#0092c7] dark:border-[#00D2FF] border-t-transparent animate-spin" />
             <span>HYDRATING 3D SHADERS · 60 FPS PIPELINE</span>
           </div>
-          <div className="text-[10px] font-mono text-slate-400 mt-1">
+          <div className="text-[10px] font-mono text-slate-400 dark:text-slate-500 mt-1">
             WASM RENDERER // HARDWARE ACCELERATED
           </div>
         </div>

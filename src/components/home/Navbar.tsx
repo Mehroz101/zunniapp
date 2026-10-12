@@ -11,21 +11,21 @@ import {
   ArrowRight,
   Sparkles,
   Zap,
-  HelpCircle,
   FileText,
   Boxes,
   Database,
   Menu,
   X,
 } from 'lucide-react';
+import { ThemeToggle } from '@/components/theme/ThemeToggle';
 
 /* ==============================================================================
-   ULTRA-MINIMALIST DEVELOPER LOGO (LIGHT THEME)
+   ULTRA-MINIMALIST DEVELOPER LOGO (ADAPTS TO BOTH LIGHT AND DARK THEMES)
    ============================================================================== */
 export function AiLogo({ className = '' }: { className?: string }) {
   return (
     <div
-      className={`inline-flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 shadow-xs transition-all duration-200 group-hover:border-cyan-500/50 group-hover:shadow-[0_0_20px_rgba(0,210,255,0.15)] select-none group cursor-pointer ${className}`}
+      className={`inline-flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-slate-950 dark:bg-slate-900/95 border border-slate-800 dark:border-slate-700/80 shadow-xs dark:ring-1 dark:ring-cyan-500/20 transition-all duration-200 group-hover:border-cyan-500/50 group-hover:shadow-[0_0_20px_rgba(0,210,255,0.15)] select-none group cursor-pointer ${className}`}
     >
       {/* Sleek Geometric SVG Syntax / Spark Mark */}
       <div className="relative flex items-center justify-center w-6 h-6 shrink-0">
@@ -69,10 +69,12 @@ export function AiLogo({ className = '' }: { className?: string }) {
         </svg>
       </div>
 
-      {/* High-End Developer Suite Typography Lockup: Pure White & Tight-Tracking */}
+      {/* High-End Developer Suite Typography Lockup */}
       <div className="flex items-baseline tracking-[-0.04em] font-extrabold text-[15px] text-white">
         <span className="text-white">AiTools</span>
-        <span className="text-slate-400 font-semibold ml-1 text-[13px] tracking-normal">Studio</span>
+        <span className="text-slate-400 dark:text-slate-300 font-semibold ml-1 text-[13px] tracking-normal">
+          Studio
+        </span>
         <span className="text-[#00D2FF] text-[9.5px] font-mono ml-2 px-1.5 py-0.5 rounded bg-cyan-950/90 border border-cyan-800/80 font-bold uppercase tracking-wider">
           DEV
         </span>
@@ -82,7 +84,7 @@ export function AiLogo({ className = '' }: { className?: string }) {
 }
 
 /* ==============================================================================
-   FLOATING HIGH-END DEVELOPER NAVBAR (NO TOP STRIP, CLEAN WHITE FROSTED PILL)
+   FLOATING HIGH-END DEVELOPER NAVBAR WITH SUN/MOON THEME CONTROLLER
    ============================================================================== */
 export function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -129,7 +131,7 @@ export function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 pt-4 pointer-events-none">
       <div className="max-w-[1440px] mx-auto flex items-center justify-between">
         {/* Floating Pill Nav Container */}
-        <nav className="w-full bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_8px_30px_rgba(0,0,0,0.06)] rounded-full px-5 sm:px-7 py-2.5 flex items-center justify-between pointer-events-auto transition-all">
+        <nav className="w-full bg-white/95 dark:bg-[#080d1a]/95 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] rounded-full px-5 sm:px-7 py-2.5 flex items-center justify-between pointer-events-auto transition-all">
           {/* Left: Minimalist Brand Lockup */}
           <div className="flex items-center flex-shrink-0">
             <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
@@ -148,7 +150,9 @@ export function Navbar() {
               <button
                 type="button"
                 className={`flex items-center gap-1 text-[13.5px] font-medium px-3.5 py-1.5 rounded-full transition-colors ${
-                  activeDropdown === 'neural' ? 'text-slate-950 bg-slate-100' : 'text-slate-700 hover:text-slate-950'
+                  activeDropdown === 'neural'
+                    ? 'text-slate-950 dark:text-white bg-slate-100 dark:bg-slate-800'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-850'
                 }`}
               >
                 <span>AI Neural Hub</span>
@@ -161,7 +165,7 @@ export function Navbar() {
                   onMouseEnter={() => handleMouseEnter('neural')}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl p-3.5 grid grid-cols-1 gap-1.5">
+                  <div className="bg-white dark:bg-[#0c1220] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl p-3.5 grid grid-cols-1 gap-1.5">
                     <div className="px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider text-[#0092c7]">
                       Neural Compute & Models
                     </div>
@@ -172,16 +176,16 @@ export function Navbar() {
                           key={item.name}
                           href={item.href}
                           onClick={() => setActiveDropdown(null)}
-                          className="group flex items-start gap-3 p-2 rounded-xl hover:bg-slate-50 transition-colors"
+                          className="group flex items-start gap-3 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors"
                         >
-                          <div className="p-2 rounded-lg bg-slate-100 text-[#0092c7] group-hover:bg-[#00D2FF]/10 transition">
+                          <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-[#0092c7] group-hover:bg-[#00D2FF]/10 transition">
                             <Icon className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="text-xs font-semibold text-slate-900 group-hover:text-[#0092c7] transition">
+                            <div className="text-xs font-semibold text-slate-900 dark:text-slate-100 group-hover:text-[#0092c7] transition">
                               {item.name}
                             </div>
-                            <div className="text-[11px] text-slate-500 leading-snug mt-0.5">
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400 leading-snug mt-0.5">
                               {item.desc}
                             </div>
                           </div>
@@ -202,7 +206,9 @@ export function Navbar() {
               <button
                 type="button"
                 className={`flex items-center gap-1 text-[13.5px] font-medium px-3.5 py-1.5 rounded-full transition-colors ${
-                  activeDropdown === 'converters' ? 'text-slate-950 bg-slate-100' : 'text-slate-700 hover:text-slate-950'
+                  activeDropdown === 'converters'
+                    ? 'text-slate-950 dark:text-white bg-slate-100 dark:bg-slate-800'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-850'
                 }`}
               >
                 <span>Code Converters</span>
@@ -215,7 +221,7 @@ export function Navbar() {
                   onMouseEnter={() => handleMouseEnter('converters')}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl p-3.5 grid grid-cols-2 gap-2">
+                  <div className="bg-white dark:bg-[#0c1220] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl p-3.5 grid grid-cols-2 gap-2">
                     <div className="col-span-2 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-[#0092c7]">
                       High-Precision Code Transpilers
                     </div>
@@ -224,17 +230,17 @@ export function Navbar() {
                         key={item.name}
                         href={item.href}
                         onClick={() => setActiveDropdown(null)}
-                        className="group p-2 rounded-xl hover:bg-slate-50 transition-colors"
+                        className="group p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors"
                       >
-                        <div className="text-xs font-semibold text-slate-900 group-hover:text-[#0092c7] transition">
+                        <div className="text-xs font-semibold text-slate-900 dark:text-slate-100 group-hover:text-[#0092c7] transition">
                           {item.name}
                         </div>
-                        <div className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
                           {item.desc}
                         </div>
                       </Link>
                     ))}
-                    <div className="col-span-2 pt-2 border-t border-slate-100 flex items-center justify-between px-2">
+                    <div className="col-span-2 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between px-2">
                       <Link
                         href="/ai-tools/coding"
                         onClick={() => setActiveDropdown(null)}
@@ -258,7 +264,9 @@ export function Navbar() {
               <button
                 type="button"
                 className={`flex items-center gap-1 text-[13.5px] font-medium px-3.5 py-1.5 rounded-full transition-colors ${
-                  activeDropdown === 'utilities' ? 'text-slate-950 bg-slate-100' : 'text-slate-700 hover:text-slate-950'
+                  activeDropdown === 'utilities'
+                    ? 'text-slate-950 dark:text-white bg-slate-100 dark:bg-slate-800'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-850'
                 }`}
               >
                 <span>Developer Utilities</span>
@@ -267,25 +275,25 @@ export function Navbar() {
 
               {activeDropdown === 'utilities' && (
                 <div
-                  className="absolute top-full left-0 -ml-28 w-[480px] pt-3 z-50 animate-fadeIn"
+                  className="absolute top-full -right-10 w-[500px] pt-3 z-50 animate-fadeIn"
                   onMouseEnter={() => handleMouseEnter('utilities')}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl p-3.5 grid grid-cols-2 gap-2">
+                  <div className="bg-white dark:bg-[#0c1220] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl p-3.5 grid grid-cols-2 gap-2">
                     <div className="col-span-2 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-[#0092c7]">
-                      Client-Side Engineering Utilities
+                      AST Debuggers & AST Generators
                     </div>
                     {developerUtilityItems.map((item) => (
                       <Link
                         key={item.name}
                         href={item.href}
                         onClick={() => setActiveDropdown(null)}
-                        className="group p-2 rounded-xl hover:bg-slate-50 transition-colors"
+                        className="group p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors"
                       >
-                        <div className="text-xs font-semibold text-slate-900 group-hover:text-[#0092c7] transition">
+                        <div className="text-xs font-semibold text-slate-900 dark:text-slate-100 group-hover:text-[#0092c7] transition">
                           {item.name}
                         </div>
-                        <div className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">
+                        <div className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
                           {item.desc}
                         </div>
                       </Link>
@@ -298,7 +306,7 @@ export function Navbar() {
             {/* 4. Resources & Docs */}
             <Link
               href="/glossary"
-              className="text-[13.5px] font-medium text-slate-700 hover:text-slate-950 px-3.5 py-1.5 rounded-full hover:bg-slate-100 transition-colors"
+              className="text-[13.5px] font-medium text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white px-3.5 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
             >
               Resources & Docs
             </Link>
@@ -306,17 +314,17 @@ export function Navbar() {
             {/* 5. FAQs */}
             <a
               href="#faqs"
-              className="text-[13.5px] font-medium text-slate-700 hover:text-slate-950 px-3.5 py-1.5 rounded-full hover:bg-slate-100 transition-colors"
+              className="text-[13.5px] font-medium text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white px-3.5 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
             >
               FAQs
             </a>
           </div>
 
-          {/* Right Action CTA */}
-          <div className="flex items-center gap-3 flex-shrink-0">
+          {/* Right Action CTA & Theme Controller */}
+          <div className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0">
             <Link
               href="/ai-tools"
-              className="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono text-slate-700 hover:text-slate-950 px-3 py-1.5 rounded-full hover:bg-slate-100 transition"
+              className="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white px-3 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition"
             >
               <span>Directory</span>
             </Link>
@@ -329,10 +337,13 @@ export function Navbar() {
               <span>LAUNCH STUDIO</span>
             </Link>
 
+            {/* Circular Sun/Moon Icon Theme Toggle Button (Adjacent to Primary CTA) */}
+            <ThemeToggle />
+
             {/* Mobile Hamburger Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-full border border-slate-200 text-slate-700 hover:bg-slate-100"
+              className="lg:hidden p-2 rounded-full border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
               aria-label="Toggle Navigation Menu"
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -343,53 +354,48 @@ export function Navbar() {
 
       {/* Mobile Navigation Drawer */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden max-w-[1440px] mx-auto mt-2 p-5 bg-white rounded-3xl border border-slate-200 shadow-2xl space-y-3 pointer-events-auto animate-fadeIn">
+        <div className="lg:hidden max-w-[1440px] mx-auto mt-2 p-5 bg-white dark:bg-[#0c1220] rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl space-y-3 pointer-events-auto animate-fadeIn">
           <div className="flex flex-col space-y-1">
             <Link
               href="/ai-tools"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 px-3 text-sm font-semibold text-slate-800 hover:bg-slate-50 rounded-xl transition-colors"
+              className="py-2 px-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors"
             >
               AI Neural Hub
             </Link>
             <Link
               href="/ai-tools/coding"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 px-3 text-sm font-semibold text-slate-800 hover:bg-slate-50 rounded-xl transition-colors"
+              className="py-2 px-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors"
             >
               Code Converters
             </Link>
             <Link
-              href="/ai-tools"
+              href="/ai-tools/coding"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 px-3 text-sm font-semibold text-slate-800 hover:bg-slate-50 rounded-xl transition-colors"
+              className="py-2 px-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors"
             >
               Developer Utilities
             </Link>
             <Link
               href="/glossary"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 px-3 text-sm font-semibold text-slate-800 hover:bg-slate-50 rounded-xl transition-colors"
+              className="py-2 px-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors"
             >
               Resources & Docs
             </Link>
             <a
               href="#faqs"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 px-3 text-sm font-semibold text-slate-800 hover:bg-slate-50 rounded-xl transition-colors"
+              className="py-2 px-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors"
             >
               FAQs
             </a>
           </div>
 
-          <div className="pt-3 border-t border-slate-100">
-            <Link
-              href="/ai-tools"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full py-3 rounded-full text-xs font-mono font-bold uppercase tracking-wider text-black bg-[#00D2FF] text-center block"
-            >
-              LAUNCH STUDIO
-            </Link>
+          <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <span className="text-xs font-mono text-slate-500 dark:text-slate-400">Theme</span>
+            <ThemeToggle />
           </div>
         </div>
       )}
