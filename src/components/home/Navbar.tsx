@@ -24,48 +24,58 @@ import {
    ============================================================================== */
 export function AiLogo({ className = '' }: { className?: string }) {
   return (
-    <div className={`flex items-center gap-2.5 select-none group cursor-pointer ${className}`}>
-      {/* Bespoke Minimalist Geometric Syntax Bracket Emblem */}
-      <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-slate-950 border border-slate-800 shadow-xs group-hover:border-[#00D2FF] transition-colors">
+    <div
+      className={`inline-flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 shadow-xs transition-all duration-200 group-hover:border-cyan-500/50 group-hover:shadow-[0_0_20px_rgba(0,210,255,0.15)] select-none group cursor-pointer ${className}`}
+    >
+      {/* Sleek Geometric SVG Syntax / Spark Mark */}
+      <div className="relative flex items-center justify-center w-6 h-6 shrink-0">
         <svg
-          width="18"
-          height="18"
+          width="20"
+          height="20"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="transition-transform duration-300 group-hover:scale-105"
+          className="transition-transform duration-300 group-hover:scale-110"
         >
-          {/* Crisp Geometric Syntax Brackets & Refined Hairline Neon-Cyan Accent */}
+          {/* Hairline Neon-Cyan Syntax Brackets */}
           <path
-            d="M7 8L3 12L7 16"
+            d="M6 8L2 12L6 16"
             stroke="#00D2FF"
-            strokeWidth="2"
+            strokeWidth="1.75"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
-            d="M17 8L21 12L17 16"
+            d="M18 8L22 12L18 16"
             stroke="#00D2FF"
-            strokeWidth="2"
+            strokeWidth="1.75"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
+          {/* Pure White Syntax Transcoder Slash */}
           <path
-            d="M14 5L10 19"
+            d="M14 4.5L10 19.5"
             stroke="#FFFFFF"
             strokeWidth="1.75"
             strokeLinecap="round"
             strokeOpacity="0.9"
           />
-          <circle cx="12" cy="12" r="1.5" fill="#00D2FF" />
+          {/* Central 4-Point Geometric Spark */}
+          <path
+            d="M12 9.5L13.2 12L12 14.5L10.8 12Z"
+            fill="#00D2FF"
+          />
+          <circle cx="12" cy="12" r="1" fill="#FFFFFF" />
         </svg>
       </div>
 
-      {/* Brand Typography: Enterprise-Tier Developer Studio */}
-      <div className="flex items-baseline tracking-[-0.03em] font-black text-[16px] text-slate-950">
-        <span>AiTools</span>
-        <span className="text-slate-500 font-semibold ml-1 text-[13px] tracking-normal">Studio</span>
-        <span className="text-[#0092c7] text-[10px] font-mono ml-1.5 px-1.5 py-0.5 rounded bg-cyan-50 border border-cyan-200/60 font-bold uppercase tracking-wider">DEV</span>
+      {/* High-End Developer Suite Typography Lockup: Pure White & Tight-Tracking */}
+      <div className="flex items-baseline tracking-[-0.04em] font-extrabold text-[15px] text-white">
+        <span className="text-white">AiTools</span>
+        <span className="text-slate-400 font-semibold ml-1 text-[13px] tracking-normal">Studio</span>
+        <span className="text-[#00D2FF] text-[9.5px] font-mono ml-2 px-1.5 py-0.5 rounded bg-cyan-950/90 border border-cyan-800/80 font-bold uppercase tracking-wider">
+          DEV
+        </span>
       </div>
     </div>
   );

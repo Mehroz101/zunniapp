@@ -65,10 +65,10 @@ export const metadata: Metadata = {
   // ── Twitter / X ──────────────────────────────
   twitter: {
     card: 'summary_large_image',
-    title: 'AIIsEverything — AI For Every Corner of Life',
-    description: 'Your definitive guide to artificial intelligence.',
-    site: '@aiiseverything',
-    creator: '@aiiseverything',
+    title: 'AiTools Studio — Developer AI Operating System & Code Tools',
+    description: 'Curated zero-latency developer utilities, AST code converters, model diagnostics, and developer documentation.',
+    site: '@aitoolsstudio',
+    creator: '@aitoolsstudio',
     images: ['/og-default.png'],
   },
 
@@ -117,6 +117,16 @@ export default function RootLayout({
       className={`${inter.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="preconnect" href="https://prod.spline.design" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://prod.spline.design" />
+        <link
+          rel="preload"
+          href="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+          as="fetch"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-[#00D2FF]/30 selection:text-slate-950">
         {children}
       </body>
