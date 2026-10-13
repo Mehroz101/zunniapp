@@ -25,6 +25,8 @@ import { Footer } from '@/components/home/Footer';
 import { ToolRunner } from '@/components/tools/ToolRunner';
 import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
 
+import { getToolBySlug } from '@/lib/tools/registry';
+
 interface PageProps {
   params: Promise<{
     category: string;
@@ -51,6 +53,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   if (!tool || tool.status !== 'PUBLISHED' || tool.category?.slug !== category) {
+    const reg = getToolBySlug(slug);
+    if (reg) {
+      return {
+        title: `${reg.name} — Free Online Tool | AIIsEverything`,
+        description: reg.tagline || reg.description,
+        alternates: {
+          canonical: `https://aiiseverything.com/ai-tools/${category}/${slug}`,
+        },
+      };
+    }
     const fallbackTitle = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
     return {
       title: `${fallbackTitle} — Free AI Tool | AIIsEverything`,
@@ -165,7 +177,33 @@ export default async function ToolExecutionPage({ params }: PageProps) {
 
   // 2. 404 Fallback
   if (!tool || tool.status !== 'PUBLISHED' || tool.category?.slug !== category) {
-    notFound();
+    const reg = getToolBySlug(slug);
+    if (reg) {
+      tool = {
+        id: reg.id,
+        name: reg.name,
+        slug: reg.slug,
+        tagline: reg.tagline,
+        description: reg.description,
+        isFeatured: true,
+        isFree: true,
+        viewCount: 1420,
+        renderType: 'CLIENT_SIDE',
+        status: 'PUBLISHED',
+        config: {
+          component: reg.slug,
+          features: reg.features,
+        },
+        category: {
+          id: `cat-${reg.category}`,
+          name: reg.categoryName,
+          slug: category || reg.categorySlug,
+        },
+        tags: reg.seoKeywords.map((k) => ({ id: k, name: k })),
+      };
+    } else {
+      notFound();
+    }
   }
 
   // 5. Schema.org JSON-LD Generation

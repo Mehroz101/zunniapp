@@ -15,6 +15,7 @@ import {
   AlertCircle,
   Shield,
 } from 'lucide-react';
+import { executeTool } from '@/lib/tools/registry';
 
 interface ToolConfig {
   component?: string;
@@ -116,71 +117,40 @@ function ClientSideRunner({
     setError(null);
   };
 
-  const handleRun = () => {
+  const handleRun = async () => {
     setIsProcessing(true);
     setError(null);
 
-    setTimeout(() => {
-      try {
-        const handler = config.processing?.handler ?? config.component;
-        const newOutputs: Record<string, string> = {};
+    try {
+      const rawInput =
+        inputValues['input'] ||
+        inputValues['html_input'] ||
+        inputValues['text'] ||
+        Object.values(inputValues)[0] ||
+        '';
 
-        // 1. HTML to CSS Generator
-        if (tool.slug.includes('html-to-css') || handler === 'htmlToCss') {
-          const rawHtml = inputValues['html_input'] || Object.values(inputValues)[0] || '';
-          const classMatches = rawHtml.match(/class=["']([^"']+)["']/g) || [];
-          const classes = new Set<string>();
+      const res = await executeTool(tool.slug, rawInput, inputValues);
 
-          for (const match of classMatches) {
-            const val = match.replace(/class=["']|["']/g, '');
-            for (const c of val.split(/\s+/)) {
-              if (c) classes.add(c);
-            }
-          }
-
-          let generatedCss = `/* Scoped CSS generated for ${tool.name} */\n\n`;
-          if (classes.size === 0) {
-            generatedCss += `/* No CSS classes detected in markup. Sample base tags: */\n`;
-            generatedCss += `div {\n  display: block;\n  box-sizing: border-box;\n}\n`;
-          } else {
-            classes.forEach((c) => {
-              generatedCss += `.${c} {\n  /* Styles for .${c} */\n  display: block;\n  transition: all 0.2s ease;\n}\n\n`;
-            });
-          }
-
-          newOutputs['css_output'] = generatedCss.trim();
-        }
-        // 2. JSON Formatter
-        else if (tool.slug.includes('json') || handler === 'jsonFormatter') {
-          const raw = inputValues['input'] || Object.values(inputValues)[0] || '';
-          try {
-            const parsed = JSON.parse(raw);
-            newOutputs['output'] = JSON.stringify(parsed, null, 2);
-          } catch (e) {
-            throw new Error(`Invalid JSON syntax: ${(e as Error).message}`);
-          }
-        }
-        // 3. Meta Tag Generator
-        else if (tool.slug.includes('meta-tag') || handler === 'metaTagGenerator') {
-          const title = inputValues['title'] || 'My Awesome Web Page';
-          const desc = inputValues['desc'] || 'A high-converting web application.';
-          newOutputs['tags'] = `<!-- Primary Meta Tags -->\n<title>${title}</title>\n<meta name="title" content="${title}">\n<meta name="description" content="${desc}">\n\n<!-- Open Graph / Facebook -->\n<meta property="og:type" content="website">\n<meta property="og:title" content="${title}">\n<meta property="og:description" content="${desc}">\n\n<!-- Twitter -->\n<meta property="twitter:card" content="summary_large_image">\n<meta property="twitter:title" content="${title}">\n<meta property="twitter:description" content="${desc}">`;
-        }
-        // 4. Generic Text & Prompt Utilities
-        else {
-          const text = Object.values(inputValues).join(' ');
-          const words = text.trim().split(/\s+/).filter(Boolean);
-          const chars = text.length;
-          newOutputs['result'] = `Analysis Results:\n- Word Count: ${words.length}\n- Character Count: ${chars}\n- Estimated Reading Time: ${Math.ceil(words.length / 200)} min\n- Processed Output:\n${text}`;
-        }
-
+      if (res.success) {
+        const newOutputs: Record<string, string> = {
+          output: res.output,
+          result: res.output,
+          css_output: res.output,
+          tags: res.output,
+          summary: res.output,
+        };
         setOutputValues(newOutputs);
-      } catch (err: unknown) {
-        setError((err as Error).message ?? 'Execution error');
-      } finally {
-        setIsProcessing(false);
+      } else {
+        setError(res.error?.message || 'Execution error');
+        if (res.output) {
+          setOutputValues({ output: res.output, result: res.output });
+        }
       }
-    }, 150);
+    } catch (err: unknown) {
+      setError((err as Error).message ?? 'Execution error');
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const copyToClipboard = (text: string, key: string) => {
