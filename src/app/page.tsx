@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Terminal } from 'lucide-react';
 import { Navbar } from '@/components/home/Navbar';
 import { Hero } from '@/components/home/Hero';
-import { OrbitKeywordSystem } from '@/components/home/OrbitKeywordSystem';
 import { DeveloperToolsShowcase } from '@/components/home/DeveloperToolsShowcase';
 import { CategoryGrid } from '@/components/home/CategoryGrid';
 import { ValueSection } from '@/components/home/ValueSection';
@@ -40,13 +39,10 @@ export default async function HomePage() {
       <Navbar />
 
       <main className="relative">
-        {/* ── 1. Hero Section (Wide Max-W-1440px, Far-Left Typography, Far-Right 3D Robot Aligned with H1) ── */}
+        {/* ── 1. Enterprise Directory Hero Section with Global Search Bench ── */}
         <Hero stats={stats} />
 
-        {/* ── 2. Dedicated Standalone Orbit Section (Half-Screen Off-Screen Clipped) ── */}
-        <OrbitKeywordSystem />
-
-        {/* ── 3. Massive Developer Tools Directory & Showcase (Clean Light Cards) ── */}
+        {/* ── 2. Massive Developer Tools Directory & Showcase (Clean Light Cards) ── */}
         <DeveloperToolsShowcase />
 
         {/* ── 4. Specialized Developer Hub Domains ── */}

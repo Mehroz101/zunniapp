@@ -118,16 +118,6 @@ export default function RootLayout({
       className={`${inter.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
-      <head>
-        <link rel="preconnect" href="https://prod.spline.design" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://prod.spline.design" />
-        <link
-          rel="preload"
-          href="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-          as="fetch"
-          crossOrigin="anonymous"
-        />
-      </head>
       <body className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-[#00D2FF]/30 selection:text-slate-950 transition-colors duration-200">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}

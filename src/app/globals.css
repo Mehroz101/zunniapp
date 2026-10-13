@@ -74,35 +74,6 @@
     animation: fadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  /* Futuristic Skeleton Scanning Beam Animation */
-  @keyframes scannerSweep {
-    0% {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-    30% {
-      opacity: 0.8;
-    }
-    70% {
-      opacity: 0.8;
-    }
-    100% {
-      transform: translateY(260%);
-      opacity: 0;
-    }
-  }
-
-  .animate-scanner-sweep {
-    animation: scannerSweep 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  }
-
-  /* GPU Hardware Acceleration Utility */
-  .gpu-composited {
-    transform: translate3d(0, 0, 0);
-    will-change: transform;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
 
 
   /* Prism Syntax Highlighting (Modern Tech Theme) */
