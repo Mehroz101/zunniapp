@@ -42,32 +42,32 @@ export function Footer() {
               </h4>
               <ul className="space-y-2.5 text-xs font-sans">
                 <li>
-                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
+                  <Link href="/tools/css-to-html" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     CSS → HTML Scaffolder
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
+                  <Link href="/tools/html-to-python-ast" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     HTML → Python AST
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
+                  <Link href="/tools/json-to-yaml" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     JSON ↔ YAML Stream
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
+                  <Link href="/tools/js-to-ts" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     JS → TypeScript Strict
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
+                  <Link href="/tools/svg-to-jsx" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     SVG → JSX Component
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
+                  <Link href="/tools/sql-to-schema-orm" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
                     SQL → Schema ORM
                   </Link>
                 </li>

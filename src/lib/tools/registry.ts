@@ -31,6 +31,14 @@ import {
   runAiSummarizer,
   runReadabilityChecker,
 } from './engines/utilities';
+import {
+  runCssToHtml,
+  runHtmlToPythonAst,
+  runJsonToYaml,
+  runJsToTs,
+  runSvgToJsx,
+  runSqlToSchemaOrm,
+} from './engines/converters';
 
 export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
   // ── SEO TOOLS ──────────────────────────────
@@ -1016,6 +1024,362 @@ For enterprise licensing inquiries, reach out to enterprise-leads@google.com.`,
     ],
     seoKeywords: ['readability checker', 'flesch kincaid grade calculator', 'text reading ease score', 'check content readability online'],
   },
+
+  // ── CORE CONVERTER ENGINES ──────────────────────────────
+  'css-to-html': {
+    id: 'tool-dev-css-to-html',
+    slug: 'css-to-html',
+    name: 'CSS to HTML / JSX Semantic Scaffolder',
+    tagline: 'Reconstruct semantic HTML5 DOM trees and React JSX components directly from raw CSS rulesets and selector chains.',
+    description: 'Parse complex CSS selectors, media queries, and utility hierarchies to automatically scaffold clean, accessible HTML or JSX layouts with nested parent-child structures.',
+    category: 'dev',
+    categoryName: 'Developer Compilers',
+    categorySlug: 'coding',
+    icon: 'Code2',
+    inputLabel: 'Paste CSS Rules or Selectors',
+    inputPlaceholder: '.navbar {\n  display: flex;\n}\n.navbar .brand-logo {\n  font-weight: bold;\n}\n.navbar .nav-menu a.nav-link:hover {\n  color: #0070f3;\n}',
+    outputLabel: 'Generated HTML / JSX Scaffolding',
+    outputLanguage: 'html',
+    sampleInput: `/* Navigation Header */\n.navbar {\n  display: flex;\n  justify-content: space-between;\n  padding: 1rem 2rem;\n}\n\n.navbar .brand-logo {\n  font-weight: bold;\n  font-size: 1.25rem;\n}\n\n.navbar .nav-menu {\n  display: flex;\n  gap: 1.5rem;\n}\n\n.navbar .nav-menu a.nav-link {\n  color: #333;\n  text-decoration: none;\n}\n\n.navbar .cta-button {\n  background: #0070f3;\n  color: #fff;\n  padding: 0.5rem 1rem;\n  border-radius: 4px;\n}\n\n/* Card Showcase Grid */\n.showcase-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 1.5rem;\n}\n\n.showcase-grid .product-card {\n  border: 1px solid #e2e8f0;\n  border-radius: 8px;\n  padding: 1.5rem;\n}\n\n.product-card .card-badge {\n  background: #f1f5f9;\n  font-size: 0.75rem;\n}\n\n.product-card h3.card-title {\n  font-size: 1.125rem;\n}\n\n.product-card p.card-description {\n  color: #64748b;\n}`,
+    options: [
+      { id: 'mode', label: 'Output Syntax', type: 'select', choices: ['html', 'jsx'], defaultValue: 'html' },
+      { id: 'semantic', label: 'Infer Semantic HTML Tags', type: 'boolean', defaultValue: true },
+      { id: 'includeBoilerplate', label: 'Include Full Page Boilerplate', type: 'boolean', defaultValue: false },
+    ],
+    features: [
+      'Parses complex compound selectors (.card > .header.active)',
+      'Intelligently infers semantic HTML5 tags (nav, header, footer, button, a, section)',
+      'Generates clean React JSX with className or standard HTML with class',
+      'Preserves selector nesting depth and compound hierarchy',
+    ],
+    howToSteps: [
+      { title: 'Paste CSS Stylesheet', description: 'Input your CSS stylesheet or selector declarations.' },
+      { title: 'Select Format Mode', description: 'Choose between standard HTML5 markup or React JSX component.' },
+      { title: 'Copy Scaffolding', description: 'Copy the scaffolded markup directly into your frontend view.' },
+    ],
+    faqs: [
+      { question: 'How does the compiler infer HTML tags from CSS?', answer: 'The engine examines class names and selector keywords (e.g. .navbar becomes <nav>, .btn becomes <button>, .title becomes <h2>) to generate semantic HTML5 structure.' },
+      { question: 'Does it strip pseudo-classes like :hover?', answer: 'Yes. Pseudo-classes (:hover, :focus) and pseudo-elements (::before, ::after) are automatically cleaned so they do not produce invalid HTML tags.' },
+    ],
+    seoKeywords: ['css to html', 'css to jsx', 'scaffold html from css', 'css selector to dom tree', 'css to react component'],
+  },
+
+  'html-to-python-ast': {
+    id: 'tool-dev-html-to-python-ast',
+    slug: 'html-to-python-ast',
+    name: 'HTML to Python AST / BeautifulSoup Generator',
+    tagline: 'Generate executable BeautifulSoup4 web scrapers or structural DOM Abstract Syntax Trees from raw HTML.',
+    description: 'Ingest HTML documents and instantly produce production-ready Python scraping scripts with requests and BeautifulSoup, or inspect structural DOM node dictionaries.',
+    category: 'dev',
+    categoryName: 'Developer Compilers',
+    categorySlug: 'coding',
+    icon: 'Binary',
+    inputLabel: 'Paste Raw HTML Markup',
+    inputPlaceholder: '<header id="main-header">\n  <h1>Article Title</h1>\n</header>\n<div class="product-card">\n  <h2>Product Name</h2>\n  <a href="/buy">Buy Now</a>\n</div>',
+    outputLabel: 'Generated Python Script / DOM AST',
+    outputLanguage: 'python',
+    sampleInput: `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Tech Insights Daily</title>\n</head>\n<body>\n  <header id="main-header">\n    <h1>Latest Artificial Intelligence Breakthroughs</h1>\n    <p class="lead-text">Curated daily dispatch on LLMs, neural compute, and robotics.</p>\n  </header>\n\n  <main class="content-container">\n    <div class="articles-grid">\n      <article class="article-card" data-id="101">\n        <h2 class="article-title">OpenAI Releases Next-Gen Reasoning Models</h2>\n        <a class="read-more-link" href="https://example.com/articles/reasoning-models">Read Deep Dive</a>\n        <img class="hero-image" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe" alt="Neural network visualization" />\n      </article>\n\n      <article class="article-card" data-id="102">\n        <h2 class="article-title">Google DeepMind Demonstrates Real-Time Code Synthesis</h2>\n        <a class="read-more-link" href="https://example.com/articles/code-synthesis">Read Deep Dive</a>\n        <img class="hero-image" src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5" alt="Code stream monitor" />\n      </article>\n    </div>\n\n    <table class="benchmark-table">\n      <thead>\n        <tr><th>Model</th><th>MMLU Score</th><th>Latency (ms)</th></tr>\n      </thead>\n      <tbody>\n        <tr><td>Gemini 2.5 Pro</td><td>91.2%</td><td>180ms</td></tr>\n        <tr><td>GPT-4o</td><td>88.7%</td><td>210ms</td></tr>\n      </tbody>\n    </table>\n  </main>\n</body>\n</html>`,
+    options: [
+      { id: 'mode', label: 'Output Mode', type: 'select', choices: ['scraping', 'ast'], defaultValue: 'scraping' },
+      { id: 'parser', label: 'BS4 Parser', type: 'select', choices: ['html.parser', 'lxml'], defaultValue: 'html.parser' },
+      { id: 'url', label: 'Target URL', type: 'text', defaultValue: 'https://example.com/news' },
+    ],
+    features: [
+      'Generates complete, executable Python scraping scripts with requests + bs4',
+      'Auto-detects repeating cards, tables, headings, links, and media elements',
+      'Structural DOM AST mode generates clean Python dictionary representation',
+      'Robust handling of malformed tags, script blocks, and escaped characters',
+    ],
+    howToSteps: [
+      { title: 'Paste HTML Source', description: 'Paste the source HTML or inspected DOM element.' },
+      { title: 'Choose Mode', description: 'Select between Executable Scraper Script or Structural DOM AST.' },
+      { title: 'Run Python Script', description: 'Execute the generated script with Python 3 to scrape live web endpoints.' },
+    ],
+    faqs: [
+      { question: 'What dependencies are needed to run the generated script?', answer: 'The script uses requests and beautifulsoup4 (pip install requests beautifulsoup4).' },
+      { question: 'Does it support scraping repeating list items?', answer: 'Yes! The compiler scans repeating class structures (e.g., .article-card) and writes clean loops over soup.find_all().' },
+    ],
+    seoKeywords: ['html to python ast', 'beautifulsoup generator', 'html to bs4 scraper', 'python web scraping boilerplate', 'html dom to python'],
+  },
+
+  'json-to-yaml': {
+    id: 'tool-dev-json-to-yaml',
+    slug: 'json-to-yaml',
+    name: 'JSON to YAML / YAML to JSON Stream Engine',
+    tagline: 'High-speed bi-directional JSON and YAML schema converter with multi-document stream support.',
+    description: 'Convert complex JSON configurations to clean YAML manifests and vice versa with safe schema parsing, key sorting, and custom indentation.',
+    category: 'dev',
+    categoryName: 'Developer Compilers',
+    categorySlug: 'coding',
+    icon: 'FileText',
+    inputLabel: 'Input JSON or YAML Payload',
+    inputPlaceholder: '{\n  "apiVersion": "v1",\n  "kind": "Pod"\n}',
+    outputLabel: 'Converted Output (YAML / JSON)',
+    outputLanguage: 'yaml',
+    sampleInput: `{\n  "apiVersion": "apps/v1",\n  "kind": "Deployment",\n  "metadata": {\n    "name": "ai-neural-api",\n    "namespace": "production",\n    "labels": {\n      "app": "aiiseverything-api",\n      "tier": "backend",\n      "environment": "production"\n    }\n  },\n  "spec": {\n    "replicas": 5,\n    "strategy": {\n      "type": "RollingUpdate",\n      "rollingUpdate": {\n        "maxSurge": 1,\n        "maxUnavailable": 0\n      }\n    },\n    "template": {\n      "spec": {\n        "containers": [\n          {\n            "name": "api-service",\n            "image": "registry.aiiseverything.com/api:v2.4.0",\n            "ports": [\n              { "containerPort": 4000, "name": "http" }\n            ],\n            "resources": {\n              "limits": { "cpu": "2000m", "memory": "4Gi" },\n              "requests": { "cpu": "500m", "memory": "1Gi" }\n            },\n            "readinessProbe": {\n              "httpGet": { "path": "/health", "port": 4000 },\n              "initialDelaySeconds": 5,\n              "periodSeconds": 10\n            }\n          }\n        ]\n      }\n    }\n  }\n}`,
+    options: [
+      { id: 'mode', label: 'Conversion Direction', type: 'select', choices: ['auto', 'json-to-yaml', 'yaml-to-json'], defaultValue: 'auto' },
+      { id: 'indent', label: 'Indentation Spaces', type: 'select', choices: ['2', '4'], defaultValue: '2' },
+      { id: 'sortKeys', label: 'Sort Keys Alphabetically', type: 'boolean', defaultValue: false },
+      { id: 'multiDocument', label: 'Multi-Document (---) Support', type: 'boolean', defaultValue: true },
+    ],
+    features: [
+      'Bi-directional auto-detecting conversion between JSON and YAML',
+      'Multi-document stream handling (Kubernetes manifests, CI/CD pipelines)',
+      'Safe parsing enforcing strict schema isolation to prevent prototype pollution',
+      'Supports multiline strings, arrays, dates, booleans, and null primitives',
+    ],
+    howToSteps: [
+      { title: 'Paste Configuration', description: 'Paste any JSON payload or YAML manifest.' },
+      { title: 'Adjust Formatting', description: 'Toggle indentation (2 or 4 spaces) or alphabetical key sorting.' },
+      { title: 'Export File', description: 'Copy or download the clean converted manifest.' },
+    ],
+    faqs: [
+      { question: 'Does this handle Kubernetes multi-document YAMLs?', answer: 'Yes, multi-document files separated by --- are fully supported.' },
+      { question: 'Is the conversion safe against code injection?', answer: 'Yes, js-yaml DEFAULT_SCHEMA is enforced to prevent execution of arbitrary tags or prototype pollution.' },
+    ],
+    seoKeywords: ['json to yaml', 'yaml to json', 'convert json to yaml online', 'k8s yaml generator', 'json to yaml stream'],
+  },
+
+  'js-to-ts': {
+    id: 'tool-dev-js-to-ts',
+    slug: 'js-to-ts',
+    name: 'JavaScript to TypeScript Strict Inferencer',
+    tagline: 'Transpile ES6+ JavaScript into strongly typed TypeScript with automatic interface extraction and type inference.',
+    description: 'Ingest plain JavaScript functions, objects, and async methods and infer compile-safe TypeScript interfaces, typed parameter signatures, and return values.',
+    category: 'dev',
+    categoryName: 'Developer Compilers',
+    categorySlug: 'coding',
+    icon: 'Terminal',
+    inputLabel: 'Input JavaScript Code (ES6+)',
+    inputPlaceholder: 'const user = { name: "Alice", age: 30 };\nfunction getUser(id) { ... }',
+    outputLabel: 'Inferred TypeScript Definitions & Implementation',
+    outputLanguage: 'typescript',
+    sampleInput: `// User Profile Configuration\nconst userProfile = {\n  id: "usr_99214a",\n  username: "alex_coder",\n  email: "alex@aiiseverything.com",\n  reputation: 1450,\n  isVerified: true,\n  roles: ["admin", "developer"],\n  preferences: {\n    theme: "dark",\n    notificationsEnabled: true,\n    timezone: "UTC"\n  }\n};\n\n// Database Query Function\nasync function fetchUserById(userId, includeProfile = false) {\n  const query = { id: userId };\n  if (includeProfile) {\n    query.populate = "profile";\n  }\n  const result = await db.collection("users").findOne(query);\n  return result;\n}\n\n// Math Utility Function\nfunction calculateTax(amount, taxRate = 0.08, currency = "USD") {\n  const tax = amount * taxRate;\n  const total = amount + tax;\n  return {\n    subtotal: amount,\n    tax,\n    total,\n    currency\n  };\n}`,
+    options: [
+      { id: 'strict', label: 'Strict Mode (unknown instead of any)', type: 'boolean', defaultValue: true },
+      { id: 'target', label: 'Type Declaration Style', type: 'select', choices: ['interfaces', 'types'], defaultValue: 'interfaces' },
+      { id: 'exportInterfaces', label: 'Export Interface Declarations', type: 'boolean', defaultValue: true },
+    ],
+    features: [
+      'Extracts inline object literals into named interfaces and types',
+      'Infers function parameters from default values and usage',
+      'Supports async/await with Promise<unknown> return type inference',
+      'Strict mode replaces ambiguous implicit any with safe unknown guards',
+    ],
+    howToSteps: [
+      { title: 'Paste ES6+ JavaScript', description: 'Input your JavaScript methods, objects, or modules.' },
+      { title: 'Select Type Preference', description: 'Choose between interface or type declaration syntax.' },
+      { title: 'Adopt Strict Types', description: 'Copy the strongly typed code into your TypeScript project.' },
+    ],
+    faqs: [
+      { question: 'How are object types named?', answer: 'The engine capitalizes the variable name (e.g., userProfile becomes UserProfile interface) and extracts all nested fields.' },
+      { question: 'Does this handle async functions?', answer: 'Yes, async functions are automatically typed with Promise return signatures.' },
+    ],
+    seoKeywords: ['js to ts converter', 'javascript to typescript', 'infer typescript types online', 'generate typescript interface from js', 'js to ts compiler'],
+  },
+
+  'svg-to-jsx': {
+    id: 'tool-dev-svg-to-jsx',
+    slug: 'svg-to-jsx',
+    name: 'SVG to Production JSX / TSX Component Engine',
+    tagline: 'Sanitize and transform raw SVG markup into production-ready React JSX/TSX icon components.',
+    description: 'Strip Illustrator/Figma bloat, convert hyphenated attributes to camelCase, normalize viewBox, and generate typed React SVG components with Tailwind support.',
+    category: 'dev',
+    categoryName: 'Developer Compilers',
+    categorySlug: 'coding',
+    icon: 'Boxes',
+    inputLabel: 'Paste Raw SVG Markup',
+    inputPlaceholder: '<svg width="24" height="24" viewBox="0 0 24 24">...</svg>',
+    outputLabel: 'Generated React JSX/TSX Component',
+    outputLanguage: 'typescript',
+    sampleInput: `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\n  <!-- Generator: Adobe Illustrator 28.0, SVG Export Plug-In -->\n  <defs>\n    <linearGradient id="gradient-mark" x1="0%" y1="0%" x2="100%" y2="100%">\n      <stop offset="0%" stop-color="#00D2FF" stop-opacity="1" />\n      <stop offset="100%" stop-color="#3B82F6" stop-opacity="1" />\n    </linearGradient>\n  </defs>\n  <rect x="4" y="4" width="40" height="40" rx="8" fill="url(#gradient-mark)" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />\n  <path d="M16 24L22 30L32 18" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />\n  <circle cx="24" cy="24" r="16" stroke="#000000" stroke-width="1.5" stroke-dasharray="4 2" />\n</svg>`,
+    options: [
+      { id: 'componentName', label: 'Component Name', type: 'text', defaultValue: 'CheckmarkIcon' },
+      { id: 'typescript', label: 'Generate TypeScript Props (TSX)', type: 'boolean', defaultValue: true },
+      { id: 'currentColor', label: 'Use currentColor for Dynamic Colors', type: 'boolean', defaultValue: true },
+      { id: 'expandProps', label: 'Spread Props ({...props})', type: 'boolean', defaultValue: true },
+    ],
+    features: [
+      'Converts all hyphenated SVG attributes (stroke-width -> strokeWidth) to React camelCase',
+      'Transforms inline style strings into valid JSX style objects',
+      'Strips redundant Illustrator/Figma metadata and unneeded XML wrappers',
+      'Provides dynamic size and currentColor support for seamless Tailwind integration',
+    ],
+    howToSteps: [
+      { title: 'Paste SVG Code', description: 'Paste your raw SVG code exported from Figma, Illustrator, or icon sets.' },
+      { title: 'Name Your Component', description: 'Specify the PascalCase component name (e.g. CheckmarkIcon).' },
+      { title: 'Import into React', description: 'Copy the ready-to-use component into your React or Next.js app.' },
+    ],
+    faqs: [
+      { question: 'Why does it replace fill/stroke with currentColor?', answer: 'Using currentColor allows the icon to automatically match parent text colors and respond to Tailwind CSS color utilities like text-blue-500 or text-slate-400.' },
+      { question: 'Are gradient defs and clipPaths preserved?', answer: 'Yes! Gradient defs, mask IDs, and clipPaths are preserved while ensuring valid JSX syntax.' },
+    ],
+    seoKeywords: ['svg to jsx', 'svg to react component', 'svg to tsx', 'svgr online', 'convert svg to react icon'],
+  },
+
+  'sql-to-schema-orm': {
+    id: 'tool-dev-sql-to-schema-orm',
+    slug: 'sql-to-schema-orm',
+    name: 'SQL to Schema ORM Generator (Prisma, Drizzle & TypeORM)',
+    tagline: 'Transpile raw SQL DDL CREATE TABLE statements into type-safe Prisma Schema, Drizzle ORM, or TypeORM entities.',
+    description: 'Extract tables, columns, primary keys, foreign keys, enums, and indexes from SQL schemas and convert them into production-ready ORM models.',
+    category: 'dev',
+    categoryName: 'Developer Compilers',
+    categorySlug: 'coding',
+    icon: 'Database',
+    inputLabel: 'Paste SQL DDL (CREATE TABLE Statements)',
+    inputPlaceholder: 'CREATE TABLE users (\n  id UUID PRIMARY KEY,\n  email VARCHAR(255) NOT NULL UNIQUE\n);',
+    outputLabel: 'Generated ORM Schema / Entity Models',
+    outputLanguage: 'typescript',
+    sampleInput: `-- ── Database Schema: E-Commerce & Users ──\n\nCREATE TYPE user_role AS ENUM ('super_admin', 'admin', 'customer', 'guest');\n\nCREATE TABLE users (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  email VARCHAR(255) NOT NULL UNIQUE,\n  password_hash VARCHAR(255) NOT NULL,\n  full_name VARCHAR(150),\n  role user_role DEFAULT 'customer',\n  is_active BOOLEAN NOT NULL DEFAULT true,\n  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP\n);\n\nCREATE TABLE categories (\n  id SERIAL PRIMARY KEY,\n  name VARCHAR(100) NOT NULL UNIQUE,\n  slug VARCHAR(120) NOT NULL UNIQUE,\n  description TEXT\n);\n\nCREATE TABLE products (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  title VARCHAR(200) NOT NULL,\n  slug VARCHAR(220) NOT NULL UNIQUE,\n  description TEXT,\n  price DECIMAL(10, 2) NOT NULL,\n  stock_quantity INT NOT NULL DEFAULT 0,\n  category_id INT NOT NULL REFERENCES categories(id) ON DELETE CASCADE,\n  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP\n);\n\nCREATE TABLE orders (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n  total_amount DECIMAL(10, 2) NOT NULL,\n  status VARCHAR(50) NOT NULL DEFAULT 'pending',\n  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP\n);`,
+    options: [
+      { id: 'target', label: 'Target ORM Framework', type: 'select', choices: ['prisma', 'drizzle', 'typeorm'], defaultValue: 'prisma' },
+      { id: 'casing', label: 'Field Casing Convention', type: 'select', choices: ['camelCase', 'snake_case'], defaultValue: 'camelCase' },
+      { id: 'includeRelations', label: 'Generate Foreign Key Relations', type: 'boolean', defaultValue: true },
+    ],
+    features: [
+      'Parses PostgreSQL, MySQL, and SQLite CREATE TABLE and ENUM statements',
+      'Generates production Prisma schemas with @id, @relation, and @map directives',
+      'Generates Drizzle ORM pgTable declarations with type builders',
+      'Generates TypeORM Entity classes with decorators and relations',
+    ],
+    howToSteps: [
+      { title: 'Paste SQL DDL', description: 'Paste your SQL CREATE TABLE and CREATE TYPE statements.' },
+      { title: 'Select Target ORM', description: 'Choose Prisma Schema, Drizzle ORM, or TypeORM Entity.' },
+      { title: 'Export Models', description: 'Copy the generated model definitions into your backend codebase.' },
+    ],
+    faqs: [
+      { question: 'How are SQL data types mapped?', answer: 'Types are mapped accurately: UUID -> String/uuid(), INT/SERIAL -> Int/integer(), TIMESTAMP -> DateTime/timestamp(), DECIMAL -> Decimal/decimal(), JSONB -> Json/jsonb().' },
+      { question: 'Does it support composite primary keys and foreign keys?', answer: 'Yes! Both table-level and column-level primary and foreign keys are parsed and mapped to the target ORM relations.' },
+    ],
+    seoKeywords: ['sql to prisma', 'sql to drizzle', 'sql to typeorm', 'convert sql to orm schema', 'create table to prisma schema'],
+  },
+
+  // ── ROUTING ALIASES FOR SEAMLESS ACCESS ──
+  'css-to-html-scaffolder': {
+    id: 'tool-alias-css-to-html',
+    slug: 'css-to-html-scaffolder',
+    name: 'CSS to HTML / JSX Semantic Scaffolder',
+    tagline: 'Reconstruct semantic HTML5 DOM trees and React JSX components directly from raw CSS rulesets.',
+    description: 'Alias for CSS to HTML / JSX Scaffolder.',
+    category: 'dev',
+    categoryName: 'Developer Compilers',
+    categorySlug: 'coding',
+    icon: 'Code2',
+    inputLabel: 'Paste CSS Rules',
+    inputPlaceholder: '.navbar { ... }',
+    outputLabel: 'Generated HTML / JSX Scaffolding',
+    outputLanguage: 'html',
+    sampleInput: `.navbar {\n  display: flex;\n}\n.navbar .brand { font-weight: bold; }`,
+    options: [
+      { id: 'mode', label: 'Output Syntax', type: 'select', choices: ['html', 'jsx'], defaultValue: 'html' },
+      { id: 'semantic', label: 'Infer Semantic HTML Tags', type: 'boolean', defaultValue: true },
+    ],
+    features: ['Compound selector parsing', 'Semantic tag deduction'],
+    howToSteps: [{ title: 'Paste CSS', description: 'Input CSS declarations.' }],
+    faqs: [{ question: 'Is this an alias?', answer: 'Yes, this maps to the css-to-html compiler engine.' }],
+    seoKeywords: ['css to html scaffolder'],
+  },
+
+  'yaml-to-json': {
+    id: 'tool-alias-yaml-to-json',
+    slug: 'yaml-to-json',
+    name: 'YAML to JSON / JSON to YAML Converter',
+    tagline: 'High-speed bi-directional YAML and JSON converter.',
+    description: 'Alias for JSON to YAML / YAML to JSON converter.',
+    category: 'dev',
+    categoryName: 'Developer Compilers',
+    categorySlug: 'coding',
+    icon: 'FileText',
+    inputLabel: 'Input YAML or JSON Payload',
+    inputPlaceholder: 'name: John\nage: 30',
+    outputLabel: 'Converted Output',
+    outputLanguage: 'json',
+    sampleInput: `name: AIIsEverything\nversion: 2.0\nenabled: true`,
+    options: [
+      { id: 'mode', label: 'Conversion Direction', type: 'select', choices: ['auto', 'yaml-to-json', 'json-to-yaml'], defaultValue: 'yaml-to-json' },
+      { id: 'indent', label: 'Indentation Spaces', type: 'select', choices: ['2', '4'], defaultValue: '2' },
+    ],
+    features: ['Bi-directional YAML and JSON streaming'],
+    howToSteps: [{ title: 'Paste Content', description: 'Input YAML or JSON.' }],
+    faqs: [{ question: 'Does it support multi-document YAML?', answer: 'Yes, documents separated by --- are parsed.' }],
+    seoKeywords: ['yaml to json', 'convert yaml to json'],
+  },
+
+  'javascript-to-typescript': {
+    id: 'tool-alias-js-to-ts',
+    slug: 'javascript-to-typescript',
+    name: 'JavaScript to TypeScript Strict Transpiler',
+    tagline: 'Transpile ES6+ JavaScript into strongly typed TypeScript.',
+    description: 'Alias for JavaScript to TypeScript compiler.',
+    category: 'dev',
+    categoryName: 'Developer Compilers',
+    categorySlug: 'coding',
+    icon: 'Terminal',
+    inputLabel: 'JavaScript Source Code',
+    inputPlaceholder: 'function add(a, b) { return a + b; }',
+    outputLabel: 'TypeScript Code',
+    outputLanguage: 'typescript',
+    sampleInput: `function add(a = 0, b = 0) {\n  return a + b;\n}`,
+    options: [
+      { id: 'strict', label: 'Strict Mode', type: 'boolean', defaultValue: true },
+    ],
+    features: ['Parameter inference', 'Interface extraction'],
+    howToSteps: [{ title: 'Paste JS', description: 'Input JavaScript.' }],
+    faqs: [{ question: 'Is this an alias?', answer: 'Yes, maps to js-to-ts engine.' }],
+    seoKeywords: ['javascript to typescript'],
+  },
+
+  'svg-to-react': {
+    id: 'tool-alias-svg-to-react',
+    slug: 'svg-to-react',
+    name: 'SVG to React JSX / TSX Component Generator',
+    tagline: 'Sanitize and convert raw SVG markup into React JSX/TSX.',
+    description: 'Alias for SVG to JSX component generator.',
+    category: 'dev',
+    categoryName: 'Developer Compilers',
+    categorySlug: 'coding',
+    icon: 'Boxes',
+    inputLabel: 'SVG Code',
+    inputPlaceholder: '<svg>...</svg>',
+    outputLabel: 'React Component',
+    outputLanguage: 'typescript',
+    sampleInput: `<svg viewBox="0 0 24 24"><path d="M5 12h14" /></svg>`,
+    options: [
+      { id: 'componentName', label: 'Component Name', type: 'text', defaultValue: 'Icon' },
+      { id: 'typescript', label: 'TypeScript TSX', type: 'boolean', defaultValue: true },
+    ],
+    features: ['Clean SVG to React', 'camelCase attributes'],
+    howToSteps: [{ title: 'Paste SVG', description: 'Input raw SVG.' }],
+    faqs: [{ question: 'Is this an alias?', answer: 'Yes, maps to svg-to-jsx engine.' }],
+    seoKeywords: ['svg to react'],
+  },
+
+  'sql-to-prisma': {
+    id: 'tool-alias-sql-to-prisma',
+    slug: 'sql-to-prisma',
+    name: 'SQL to Prisma Schema Generator',
+    tagline: 'Extract SQL CREATE TABLE DDL statements into Prisma Schema models.',
+    description: 'Alias for SQL to Schema ORM Generator (pre-configured for Prisma).',
+    category: 'dev',
+    categoryName: 'Developer Compilers',
+    categorySlug: 'coding',
+    icon: 'Database',
+    inputLabel: 'SQL DDL Statements',
+    inputPlaceholder: 'CREATE TABLE users ( id SERIAL PRIMARY KEY );',
+    outputLabel: 'Prisma Schema Output',
+    outputLanguage: 'typescript',
+    sampleInput: `CREATE TABLE users (\n  id SERIAL PRIMARY KEY,\n  name VARCHAR(100) NOT NULL\n);`,
+    options: [
+      { id: 'target', label: 'Target ORM', type: 'select', choices: ['prisma', 'drizzle', 'typeorm'], defaultValue: 'prisma' },
+    ],
+    features: ['Prisma model generation', 'Field type mapping'],
+    howToSteps: [{ title: 'Paste SQL', description: 'Input SQL statements.' }],
+    faqs: [{ question: 'Is this an alias?', answer: 'Yes, maps to sql-to-schema-orm with Prisma target.' }],
+    seoKeywords: ['sql to prisma'],
+  },
+
 };
 
 // ── Master Execution Dispatcher ──
@@ -1083,6 +1447,27 @@ export async function executeTool(
       return runAiSummarizer(input, options);
     case 'readability-checker':
       return runReadabilityChecker(input);
+
+    // CORE COMPILER CONVERTERS
+    case 'css-to-html':
+    case 'css-to-html-scaffolder':
+      return runCssToHtml(input, options);
+    case 'html-to-python-ast':
+      return runHtmlToPythonAst(input, options);
+    case 'json-to-yaml':
+    case 'yaml-to-json':
+      return runJsonToYaml(input, options);
+    case 'js-to-ts':
+    case 'javascript-to-typescript':
+      return runJsToTs(input, options);
+    case 'svg-to-jsx':
+    case 'svg-to-react':
+      return runSvgToJsx(input, options);
+    case 'sql-to-schema-orm':
+    case 'sql-to-prisma':
+    case 'sql-to-drizzle':
+    case 'sql-to-typeorm':
+      return runSqlToSchemaOrm(input, options);
 
     default:
       // Fallback

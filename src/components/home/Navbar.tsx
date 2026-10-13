@@ -110,12 +110,12 @@ export function Navbar() {
   ];
 
   const codeConverterItems = [
-    { name: 'CSS → HTML Scaffolder', desc: 'Convert CSS styling into semantic HTML structure', icon: Code2, href: '/ai-tools/coding' },
-    { name: 'HTML → Python AST', desc: 'Generate BeautifulSoup & scraper parsers', icon: Binary, href: '/ai-tools/coding' },
-    { name: 'JSON → YAML Stream', desc: 'Bi-directional zero-loss configuration schema parser', icon: FileText, href: '/ai-tools/coding' },
-    { name: 'JS → TypeScript Strict', desc: 'Automatic interface generation & strict typing', icon: Terminal, href: '/ai-tools/coding' },
-    { name: 'SVG → JSX Component', desc: 'Clean React SVG components with Tailwind support', icon: Boxes, href: '/ai-tools/coding' },
-    { name: 'SQL → Prisma Schema', desc: 'Extract SQL DDL into type-safe ORM models', icon: Database, href: '/ai-tools/coding' },
+    { name: 'CSS → HTML Scaffolder', desc: 'Convert CSS styling into semantic HTML structure', icon: Code2, href: '/tools/css-to-html' },
+    { name: 'HTML → Python AST', desc: 'Generate BeautifulSoup & scraper parsers', icon: Binary, href: '/tools/html-to-python-ast' },
+    { name: 'JSON → YAML Stream', desc: 'Bi-directional zero-loss configuration schema parser', icon: FileText, href: '/tools/json-to-yaml' },
+    { name: 'JS → TypeScript Strict', desc: 'Automatic interface generation & strict typing', icon: Terminal, href: '/tools/js-to-ts' },
+    { name: 'SVG → JSX Component', desc: 'Clean React SVG components with Tailwind support', icon: Boxes, href: '/tools/svg-to-jsx' },
+    { name: 'SQL → Schema ORM', desc: 'Extract SQL DDL into Prisma, Drizzle & TypeORM models', icon: Database, href: '/tools/sql-to-schema-orm' },
   ];
 
   const developerUtilityItems = [

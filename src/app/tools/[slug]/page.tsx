@@ -28,6 +28,11 @@ interface PageProps {
 
 export const revalidate = 3600; // 1hr ISR
 
+export async function generateStaticParams() {
+  const tools = getAllTools();
+  return tools.map((t) => ({ slug: t.slug }));
+}
+
 // ─────────────────────────────────────────────
 // Dynamic SEO & OpenGraph Generation
 // ─────────────────────────────────────────────

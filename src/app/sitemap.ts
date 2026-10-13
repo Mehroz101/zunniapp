@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { prisma } from '@/lib/prisma';
 import { CALCULATORS_REGISTRY } from '@/lib/config/calculators';
+import { getAllTools } from '@/lib/tools/registry';
 
 export const revalidate = 3600; // Dynamic ISR revalidation every hour
 
@@ -24,6 +25,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1.0,
     },
     {
+      url: `${baseUrl}/tools`,
+      lastModified: now,
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/calculators`,
       lastModified: now,
       changeFrequency: 'daily',
@@ -40,6 +47,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Dynamic Calculators: /calculators/${calc.slug} (Priority: 0.8)
   const calculatorRoutes: MetadataRoute.Sitemap = Object.values(CALCULATORS_REGISTRY).map((calc) => ({
     url: `${baseUrl}/calculators/${calc.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }));
+
+  // Dynamic Developer & Compiler Tools: /tools/${tool.slug} (Priority: 0.8)
+  const registryToolRoutes: MetadataRoute.Sitemap = getAllTools().map((tool) => ({
+    url: `${baseUrl}/tools/${tool.slug}`,
     lastModified: now,
     changeFrequency: 'weekly',
     priority: 0.8,
@@ -109,9 +124,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
       }));
 
-    return [...staticRoutes, ...calculatorRoutes, ...toolRoutes, ...categoryRoutes, ...postRoutes];
+    return [...staticRoutes, ...registryToolRoutes, ...calculatorRoutes, ...toolRoutes, ...categoryRoutes, ...postRoutes];
   } catch (error) {
     console.warn('[Sitemap] Database fetch failed or offline, returning fallback static routes:', error);
-    return [...staticRoutes, ...calculatorRoutes];
+    return [...staticRoutes, ...registryToolRoutes, ...calculatorRoutes];
   }
 }
