@@ -95,6 +95,7 @@ model Tool {
   config         Json
   seoMeta        Json           @map("seo_meta")
   structuredData Json?          @map("structured_data")
+  seoContent     String?        @map("seo_content")
   viewCount      Int            @default(0) @map("view_count")
   isFeatured     Boolean        @default(false) @map("is_featured")
   isFree         Boolean        @default(true) @map("is_free")
