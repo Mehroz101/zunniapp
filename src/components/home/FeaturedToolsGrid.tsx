@@ -13,12 +13,12 @@ export function FeaturedToolsGrid({ tools }: FeaturedToolsGridProps) {
         {/* Section Header */}
         <div className="mb-14 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3.5 py-1 text-xs font-semibold text-amber-800 shadow-xs">
-              <Star className="h-3.5 w-3.5 text-amber-600 fill-amber-500" /> Curated Collection
+            <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3.5 py-1 text-xs font-semibold text-cyan-700 dark:text-[#00D2FF] shadow-xs">
+              <Star className="h-3.5 w-3.5 text-[#00D2FF] fill-[#00D2FF]" /> Curated Collection
             </div>
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl md:text-5xl">
+            <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl md:text-5xl">
               Featured{' '}
-              <span className="bg-gradient-to-r from-amber-600 via-orange-500 to-indigo-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#00D2FF] via-cyan-400 to-indigo-500 bg-clip-text text-transparent">
                 AI Utilities
               </span>
             </h2>

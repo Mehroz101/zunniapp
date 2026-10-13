@@ -5,11 +5,8 @@ import Link from 'next/link';
 import {
   Code2,
   Terminal,
-  Cpu,
   Binary,
-  Layers,
   ArrowRight,
-  Sparkles,
   Zap,
   FileText,
   Boxes,
@@ -102,13 +99,6 @@ export function Navbar() {
     }, 150);
   };
 
-  const neuralHubItems = [
-    { name: 'LLM Optimization Suite', desc: 'Context compression & prompt token analyzers', icon: Cpu, href: '/ai-tools/text' },
-    { name: 'Neural Code Engine', desc: 'High-speed AST code generators & transducers', icon: Terminal, href: '/ai-tools/coding' },
-    { name: 'Vector & Embeddings Hub', desc: 'Vector space diagnostics & cosine similarity', icon: Database, href: '/ai-tools/data' },
-    { name: 'Vision AI Transcoder', desc: 'Neural upscaling, SVG synthesis & OCR parsing', icon: Layers, href: '/ai-tools/image' },
-  ];
-
   const codeConverterItems = [
     { name: 'CSS → HTML Scaffolder', desc: 'Convert CSS styling into semantic HTML structure', icon: Code2, href: '/tools/css-to-html' },
     { name: 'HTML → Python AST', desc: 'Generate BeautifulSoup & scraper parsers', icon: Binary, href: '/tools/html-to-python-ast' },
@@ -116,15 +106,6 @@ export function Navbar() {
     { name: 'JS → TypeScript Strict', desc: 'Automatic interface generation & strict typing', icon: Terminal, href: '/tools/js-to-ts' },
     { name: 'SVG → JSX Component', desc: 'Clean React SVG components with Tailwind support', icon: Boxes, href: '/tools/svg-to-jsx' },
     { name: 'SQL → Schema ORM', desc: 'Extract SQL DDL into Prisma, Drizzle & TypeORM models', icon: Database, href: '/tools/sql-to-schema-orm' },
-  ];
-
-  const developerUtilityItems = [
-    { name: 'AI Syntax Debugger', desc: 'Static code diagnostics with AST tree review', icon: Terminal, href: '/ai-tools/coding' },
-    { name: 'Prompt Optimizer Pro', desc: 'System prompt latency & token compression', icon: Sparkles, href: '/ai-tools/writing' },
-    { name: 'RegEx Neural Generator', desc: 'Natural language to zero-backtracking regex', icon: Code2, href: '/ai-tools/coding' },
-    { name: 'Unit Test Builder', desc: 'Generate Vitest & Jest suites instantly', icon: Binary, href: '/ai-tools/coding' },
-    { name: 'Markdown Live Editor', desc: 'Real-time GFM preview with KaTeX & mermaid', icon: FileText, href: '/ai-tools/text' },
-    { name: 'Tailwind Class Converter', desc: 'Arbitrary CSS to modern Tailwind utility classes', icon: Layers, href: '/ai-tools/coding' },
   ];
 
   return (
@@ -139,114 +120,90 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Center: Developer Navigation Links */}
-          <div className="hidden lg:flex items-center gap-1.5 xl:gap-3">
-            {/* 1. AI Neural Hub */}
+          {/* Center: Exactly 5 Desktop Category Taxonomy Links */}
+          <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+            {/* 1. Finance */}
+            <Link
+              href="/calculators?tab=financial"
+              className="text-[13.5px] font-medium text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white px-3.5 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors"
+            >
+              Finance
+            </Link>
+
+            {/* 2. Calculators */}
+            <Link
+              href="/calculators"
+              className="text-[13.5px] font-medium text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white px-3.5 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors"
+            >
+              Calculators
+            </Link>
+
+            {/* 3. Dev & Web */}
+            <Link
+              href="/tools?category=dev"
+              className="text-[13.5px] font-medium text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white px-3.5 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors"
+            >
+              Dev & Web
+            </Link>
+
+            {/* 4. Code Converters (With Interactive Compiler Flyout) */}
             <div
               className="relative"
-              onMouseEnter={() => handleMouseEnter('neural')}
+              onMouseEnter={() => handleMouseEnter('converters')}
               onMouseLeave={handleMouseLeave}
             >
-              <button
-                type="button"
-                className={`flex items-center gap-1 text-[13.5px] font-medium px-3.5 py-1.5 rounded-full transition-colors ${
-                  activeDropdown === 'neural'
+              <Link
+                href="/tools"
+                className={`inline-flex items-center gap-1 text-[13.5px] font-medium px-3.5 py-1.5 rounded-full transition-colors ${
+                  activeDropdown === 'converters'
                     ? 'text-slate-950 dark:text-white bg-slate-100 dark:bg-slate-800'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-850'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80'
                 }`}
               >
-                <span>AI Neural Hub</span>
+                <span>Code Converters</span>
                 <span className="text-[10px] text-slate-400">▾</span>
-              </button>
+              </Link>
 
-              {activeDropdown === 'neural' && (
+              {activeDropdown === 'converters' && (
                 <div
-                  className="absolute top-full left-0 w-[420px] pt-3 z-50 animate-fadeIn"
-                  onMouseEnter={() => handleMouseEnter('neural')}
+                  className="absolute top-full left-1/2 -translate-x-1/2 w-[520px] pt-3 z-50 animate-fadeIn"
+                  onMouseEnter={() => handleMouseEnter('converters')}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <div className="bg-white dark:bg-[#0c1220] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl p-3.5 grid grid-cols-1 gap-1.5">
-                    <div className="px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider text-[#0092c7]">
-                      Neural Compute & Models
+                  <div className="bg-white dark:bg-[#0c1220] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl p-4 grid grid-cols-2 gap-2">
+                    <div className="col-span-2 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-[#00D2FF]">
+                      Production AST Compilers & Transpilers
                     </div>
-                    {neuralHubItems.map((item) => {
+                    {codeConverterItems.map((item) => {
                       const Icon = item.icon;
                       return (
                         <Link
                           key={item.name}
                           href={item.href}
                           onClick={() => setActiveDropdown(null)}
-                          className="group flex items-start gap-3 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors"
+                          className="group flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors"
                         >
-                          <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-[#0092c7] group-hover:bg-[#00D2FF]/10 transition">
+                          <div className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-[#00D2FF] group-hover:bg-[#00D2FF]/10 transition">
                             <Icon className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="text-xs font-semibold text-slate-900 dark:text-slate-100 group-hover:text-[#0092c7] transition">
+                            <div className="text-xs font-semibold text-slate-900 dark:text-slate-100 group-hover:text-[#00D2FF] transition">
                               {item.name}
                             </div>
-                            <div className="text-[11px] text-slate-500 dark:text-slate-400 leading-snug mt-0.5">
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
                               {item.desc}
                             </div>
                           </div>
                         </Link>
                       );
                     })}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* 2. Code Converters */}
-            <div
-              className="relative"
-              onMouseEnter={() => handleMouseEnter('converters')}
-              onMouseLeave={handleMouseLeave}
-            >
-              <button
-                type="button"
-                className={`flex items-center gap-1 text-[13.5px] font-medium px-3.5 py-1.5 rounded-full transition-colors ${
-                  activeDropdown === 'converters'
-                    ? 'text-slate-950 dark:text-white bg-slate-100 dark:bg-slate-800'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-850'
-                }`}
-              >
-                <span>Code Converters</span>
-                <span className="text-[10px] text-slate-400">▾</span>
-              </button>
-
-              {activeDropdown === 'converters' && (
-                <div
-                  className="absolute top-full left-0 -ml-16 w-[500px] pt-3 z-50 animate-fadeIn"
-                  onMouseEnter={() => handleMouseEnter('converters')}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <div className="bg-white dark:bg-[#0c1220] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl p-3.5 grid grid-cols-2 gap-2">
-                    <div className="col-span-2 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-[#0092c7]">
-                      High-Precision Code Transpilers
-                    </div>
-                    {codeConverterItems.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        onClick={() => setActiveDropdown(null)}
-                        className="group p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors"
-                      >
-                        <div className="text-xs font-semibold text-slate-900 dark:text-slate-100 group-hover:text-[#0092c7] transition">
-                          {item.name}
-                        </div>
-                        <div className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
-                          {item.desc}
-                        </div>
-                      </Link>
-                    ))}
                     <div className="col-span-2 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between px-2">
                       <Link
-                        href="/ai-tools/coding"
+                        href="/tools"
                         onClick={() => setActiveDropdown(null)}
-                        className="text-[11px] font-mono text-[#0092c7] hover:underline flex items-center gap-1"
+                        className="text-[11px] font-mono text-[#00D2FF] hover:underline flex items-center gap-1"
                       >
-                        <span>View all code transcoders</span>
+                        <span>View all code conversion engines</span>
                         <ArrowRight className="w-3 h-3" />
                       </Link>
                     </div>
@@ -255,94 +212,24 @@ export function Navbar() {
               )}
             </div>
 
-            {/* 3. Developer Utilities */}
-            <div
-              className="relative"
-              onMouseEnter={() => handleMouseEnter('utilities')}
-              onMouseLeave={handleMouseLeave}
-            >
-              <button
-                type="button"
-                className={`flex items-center gap-1 text-[13.5px] font-medium px-3.5 py-1.5 rounded-full transition-colors ${
-                  activeDropdown === 'utilities'
-                    ? 'text-slate-950 dark:text-white bg-slate-100 dark:bg-slate-800'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-850'
-                }`}
-              >
-                <span>Developer Utilities</span>
-                <span className="text-[10px] text-slate-400">▾</span>
-              </button>
-
-              {activeDropdown === 'utilities' && (
-                <div
-                  className="absolute top-full -right-10 w-[500px] pt-3 z-50 animate-fadeIn"
-                  onMouseEnter={() => handleMouseEnter('utilities')}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <div className="bg-white dark:bg-[#0c1220] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl p-3.5 grid grid-cols-2 gap-2">
-                    <div className="col-span-2 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-[#0092c7]">
-                      AST Debuggers & AST Generators
-                    </div>
-                    {developerUtilityItems.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        onClick={() => setActiveDropdown(null)}
-                        className="group p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors"
-                      >
-                        <div className="text-xs font-semibold text-slate-900 dark:text-slate-100 group-hover:text-[#0092c7] transition">
-                          {item.name}
-                        </div>
-                        <div className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
-                          {item.desc}
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* 4. Calculators */}
+            {/* 5. Text & Utilities */}
             <Link
-              href="/calculators"
-              className="text-[13.5px] font-medium text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white px-3.5 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              href="/tools?category=text"
+              className="text-[13.5px] font-medium text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white px-3.5 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors"
             >
-              Calculators
+              Text & Utilities
             </Link>
-
-            {/* 5. Resources & Docs */}
-            <Link
-              href="/glossary"
-              className="text-[13.5px] font-medium text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white px-3.5 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-            >
-              Resources & Docs
-            </Link>
-
-            {/* 6. FAQs */}
-            <a
-              href="#faqs"
-              className="text-[13.5px] font-medium text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white px-3.5 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-            >
-              FAQs
-            </a>
           </div>
 
-          {/* Right Action CTA & Theme Controller */}
+          {/* Right Action: Single-click Theme Toggle + Primary CTA Button */}
           <div className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0">
+            {/* Primary CTA button: "Explore All Tools" */}
             <Link
-              href="/ai-tools"
-              className="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white px-3 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              href="/tools"
+              className="px-4 py-2 rounded-full font-mono text-xs font-bold text-slate-950 bg-[#00D2FF] hover:bg-[#38bdf8] active:scale-95 shadow-[0_0_15px_rgba(0,210,255,0.25)] transition-all flex items-center gap-1.5 cursor-pointer"
             >
-              <span>Directory</span>
-            </Link>
-
-            <Link
-              href="/ai-tools"
-              className="px-4 py-2 rounded-full font-mono text-xs font-bold text-black bg-[#00D2FF] hover:bg-[#38bdf8] active:scale-95 shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
-            >
-              <Zap className="w-3.5 h-3.5 fill-black" />
-              <span>LAUNCH STUDIO</span>
+              <Zap className="w-3.5 h-3.5 fill-slate-950 text-slate-950" />
+              <span>Explore All Tools</span>
             </Link>
 
             {/* Circular Sun/Moon Icon Theme Toggle Button (Adjacent to Primary CTA) */}
@@ -365,25 +252,11 @@ export function Navbar() {
         <div className="lg:hidden max-w-[1440px] mx-auto mt-2 p-5 bg-white dark:bg-[#0c1220] rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl space-y-3 pointer-events-auto animate-fadeIn">
           <div className="flex flex-col space-y-1">
             <Link
-              href="/ai-tools"
+              href="/calculators?tab=financial"
               onClick={() => setIsMobileMenuOpen(false)}
               className="py-2 px-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors"
             >
-              AI Neural Hub
-            </Link>
-            <Link
-              href="/ai-tools/coding"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 px-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors"
-            >
-              Code Converters
-            </Link>
-            <Link
-              href="/ai-tools/coding"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="py-2 px-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors"
-            >
-              Developer Utilities
+              Finance
             </Link>
             <Link
               href="/calculators"
@@ -393,23 +266,37 @@ export function Navbar() {
               Calculators
             </Link>
             <Link
-              href="/glossary"
+              href="/tools?category=dev"
               onClick={() => setIsMobileMenuOpen(false)}
               className="py-2 px-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors"
             >
-              Resources & Docs
+              Dev & Web
             </Link>
-            <a
-              href="#faqs"
+            <Link
+              href="/tools"
               onClick={() => setIsMobileMenuOpen(false)}
               className="py-2 px-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors"
             >
-              FAQs
-            </a>
+              Code Converters
+            </Link>
+            <Link
+              href="/tools?category=text"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="py-2 px-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors"
+            >
+              Text & Utilities
+            </Link>
           </div>
 
           <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-            <span className="text-xs font-mono text-slate-500 dark:text-slate-400">Theme</span>
+            <Link
+              href="/tools"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-4 py-2 rounded-full font-mono text-xs font-bold text-slate-950 bg-[#00D2FF] hover:bg-[#38bdf8] flex items-center gap-1.5"
+            >
+              <Zap className="w-3.5 h-3.5 fill-slate-950" />
+              <span>Explore All Tools</span>
+            </Link>
             <ThemeToggle />
           </div>
         </div>
