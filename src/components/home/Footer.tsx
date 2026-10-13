@@ -106,6 +106,11 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/calculators" className="text-slate-500 dark:text-slate-400 hover:text-[#00D2FF] dark:hover:text-[#00D2FF] transition-colors">
+                    19+ Calculators Suite
+                  </Link>
+                </li>
+                <li>
                   <Link href="/ai-tools" className="font-semibold text-[#0092c7] dark:text-[#00D2FF] hover:underline flex items-center gap-1 pt-1">
                     All Utilities Suite →
                   </Link>

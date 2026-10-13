@@ -303,7 +303,15 @@ export function Navbar() {
               )}
             </div>
 
-            {/* 4. Resources & Docs */}
+            {/* 4. Calculators */}
+            <Link
+              href="/calculators"
+              className="text-[13.5px] font-medium text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white px-3.5 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            >
+              Calculators
+            </Link>
+
+            {/* 5. Resources & Docs */}
             <Link
               href="/glossary"
               className="text-[13.5px] font-medium text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white px-3.5 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
@@ -311,7 +319,7 @@ export function Navbar() {
               Resources & Docs
             </Link>
 
-            {/* 5. FAQs */}
+            {/* 6. FAQs */}
             <a
               href="#faqs"
               className="text-[13.5px] font-medium text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white px-3.5 py-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
@@ -376,6 +384,13 @@ export function Navbar() {
               className="py-2 px-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors"
             >
               Developer Utilities
+            </Link>
+            <Link
+              href="/calculators"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="py-2 px-3 text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors"
+            >
+              Calculators
             </Link>
             <Link
               href="/glossary"
