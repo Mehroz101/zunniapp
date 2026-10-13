@@ -2,8 +2,10 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllCalculators, getCalculatorBySlug } from '@/lib/config/calculators';
 import { CalculatorWorkbench } from '@/components/calculators/CalculatorWorkbench';
+import { AutoLoanTradeInWorkbench, type CmsCalculatorData } from '@/components/calculators/AutoLoanTradeInWorkbench';
 import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
+import { prisma } from '@/lib/prisma';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -29,19 +31,34 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aiisevery.vercel.app';
 
+  // Attempt dynamic CMS metadata overrides if available
+  let cmsTitle = calc.title;
+  let cmsDescription = calc.description;
+  let cmsCanonical = `${siteUrl}/calculators/${calc.slug}`;
+
+  try {
+    const cmsItem = await prisma.calculator.findUnique({
+      where: { slug: calc.slug },
+      select: { seoTitle: true, seoDescription: true, canonicalUrl: true },
+    });
+    if (cmsItem?.seoTitle) cmsTitle = cmsItem.seoTitle;
+    if (cmsItem?.seoDescription) cmsDescription = cmsItem.seoDescription;
+    if (cmsItem?.canonicalUrl) cmsCanonical = cmsItem.canonicalUrl;
+  } catch {}
+
   return {
-    title: `${calc.title} — Free Online Tool | AiTools Studio`,
-    description: calc.description,
+    title: `${cmsTitle} — Free Online Tool | AiTools Studio`,
+    description: cmsDescription,
     keywords: [...calc.tags, 'calculator', 'online tool', 'free calculator', calc.category],
     openGraph: {
-      title: `${calc.title} — Free Online Tool`,
-      description: calc.description,
+      title: `${cmsTitle} — Free Online Tool`,
+      description: cmsDescription,
       url: `${siteUrl}/calculators/${calc.slug}`,
       siteName: 'AiTools Studio',
       type: 'website',
     },
     alternates: {
-      canonical: `${siteUrl}/calculators/${calc.slug}`,
+      canonical: cmsCanonical,
     },
   };
 }
@@ -58,6 +75,30 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aiisevery.vercel.app';
 
+  // Fetch dynamic CMS editorial record from MongoDB via Prisma
+  let cmsData: CmsCalculatorData | null = null;
+  try {
+    const record = await prisma.calculator.findUnique({
+      where: { slug: calc.slug },
+      select: {
+        title: true,
+        description: true,
+        articleContent: true,
+        faqItems: true,
+      },
+    });
+    if (record) {
+      cmsData = {
+        title: record.title,
+        description: record.description,
+        articleContent: record.articleContent,
+        faqItems: record.faqItems as Array<{ question: string; answer: string }> | undefined,
+      };
+    }
+  } catch {}
+
+  const isAutoLoanTradeIn = calc.slug === 'auto-loan-trade-in-equity-calculator';
+
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -71,8 +112,8 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
       {
         '@type': 'ListItem',
         position: 2,
-        name: 'Calculators',
-        item: `${siteUrl}/calculators`,
+        name: isAutoLoanTradeIn ? 'Loans' : 'Calculators',
+        item: isAutoLoanTradeIn ? `${siteUrl}/calculators?tab=financial` : `${siteUrl}/calculators`,
       },
       {
         '@type': 'ListItem',
@@ -88,7 +129,7 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
     '@type': 'SoftwareApplication',
     name: calc.title,
     description: calc.description,
-    applicationCategory: 'UtilityApplication',
+    applicationCategory: 'FinanceApplication',
     operatingSystem: 'All',
     url: `${siteUrl}/calculators/${calc.slug}`,
     offers: {
@@ -98,10 +139,12 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
     },
   };
 
+  const activeFaqs = cmsData?.faqItems && cmsData.faqItems.length > 0 ? cmsData.faqItems : calc.faqs;
+
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: calc.faqs.map((faq) => ({
+    mainEntity: activeFaqs.map((faq) => ({
       '@type': 'Question',
       name: faq.question,
       acceptedAnswer: {
@@ -129,7 +172,11 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
       <Navbar />
 
       <main className="relative pt-32 sm:pt-36 pb-24 px-6 sm:px-8 lg:px-12 max-w-[1440px] mx-auto">
-        <CalculatorWorkbench slug={calc.slug} />
+        {isAutoLoanTradeIn ? (
+          <AutoLoanTradeInWorkbench cmsData={cmsData} />
+        ) : (
+          <CalculatorWorkbench slug={calc.slug} />
+        )}
       </main>
 
       <Footer />

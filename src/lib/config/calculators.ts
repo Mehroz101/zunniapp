@@ -53,6 +53,85 @@ export interface CalculatorDefinition {
 }
 
 export const CALCULATORS_REGISTRY: Record<string, CalculatorDefinition> = {
+  // ── AUTO LOAN TRADE-IN EQUITY CALCULATOR ──
+  'auto-loan-trade-in-equity-calculator': {
+    slug: 'auto-loan-trade-in-equity-calculator',
+    title: 'Auto Loan Trade–In Equity Calculator',
+    tagline: 'Determines auto loan trade-in equity from relevant inputs and returns a dedicated result for borrowing and repayment planning.',
+    category: 'financial',
+    categoryLabel: 'Financial Calculators',
+    description: 'Determines auto loan trade-in equity from relevant inputs and returns a dedicated result for borrowing and repayment planning.',
+    icon: 'Car',
+    badge: 'Trade-In Equity Engine',
+    tags: ['auto loan', 'trade-in', 'car equity', 'negative equity', 'underwater loan', 'sales tax credit', 'car payment'],
+    status: 'ready',
+    primaryUnit: '$',
+    fields: [
+      { id: 'tradeValue', label: 'Dealer Trade–In Market Value ($) *', type: 'number', defaultValue: 15000, min: 0, max: 500000, step: 500, unit: '$' },
+      { id: 'loanPayoff', label: 'Current Auto Loan Payoff Balance ($) *', type: 'number', defaultValue: 11000, min: 0, max: 500000, step: 500, unit: '$' },
+      { id: 'newPrice', label: 'New Vehicle Purchase Price ($) *', type: 'number', defaultValue: 32000, min: 500, max: 1000000, step: 500, unit: '$' },
+      { id: 'taxRate', label: 'State Sales Tax Rate (%) *', type: 'number', defaultValue: 6, min: 0, max: 20, step: 0.1, unit: '%' },
+      { id: 'downPayment', label: 'Additional Cash Down Payment ($) *', type: 'number', defaultValue: 1000, min: 0, max: 500000, step: 100, unit: '$' },
+    ],
+    formulaSteps: [
+      { step: 1, title: 'Net Trade-In Equity (E_net)', formula: 'E_net = V_trade - B_loan', description: 'Difference between dealer trade-in market value and current loan payoff balance. Positive reduces loan; negative rolls debt.' },
+      { step: 2, title: 'Taxable Base Price (P_taxable)', formula: 'P_taxable = max(0, P_new - V_trade)', description: 'In most states, sales tax is assessed solely on difference between new vehicle purchase price and trade value.' },
+      { step: 3, title: 'Net Sales Tax Liability (T_net)', formula: 'T_net = P_taxable * (Tax_rate / 100)', description: 'Actual state sales tax owed after applying dealer trade-in tax credit.' },
+      { step: 4, title: 'Tax Dollars Saved via Credit (T_saved)', formula: 'T_saved = min(P_new, V_trade) * (Tax_rate / 100)', description: 'Direct sales tax dollars saved compared to purchasing without a trade-in credit.' },
+      { step: 5, title: 'Final Net Financed Principal (P_financed)', formula: 'P_financed = (P_new + T_net) - E_net - D_cash', description: 'Total loan principal required to finance the purchase after factoring net equity, taxes, and down payment.' },
+    ],
+    usageGuide: [
+      { step: 1, title: 'Enter Dealer Trade-In Market Value', text: 'Obtain current wholesale trade appraisal or fair market trade value quote.' },
+      { step: 2, title: 'Input Exact Auto Loan Payoff', text: 'Obtain official 10-day payoff balance from current auto lender.' },
+      { step: 3, title: 'Specify New Vehicle MSRP / Price', text: 'Input negotiated out-the-door vehicle price before local government taxes.' },
+      { step: 4, title: 'Apply Sales Tax & Cash Down', text: 'Set state tax rate and cash down payment to view exact financed principal.' },
+    ],
+    faqs: [
+      { question: 'What is positive vs negative auto trade-in equity?', answer: 'Positive equity occurs when your car is worth more than the remaining balance on your auto loan (Trade Value > Loan Balance). Negative equity (being "underwater" or "upside-down") occurs when you owe more than the dealer trade appraisal. Negative equity is rolled into the new loan, increasing monthly payments.' },
+      { question: 'How does a trade-in save money on state sales tax?', answer: 'Most US states provide a trade-in sales tax credit, where sales tax is only levied on the difference between the new car purchase price and your trade-in allowance (P_new - V_trade). For example, at a 6% tax rate, a $15,000 trade-in saves $900 in state sales taxes.' },
+      { question: 'Can I trade in a financed vehicle with negative equity?', answer: 'Yes. Lenders allow negative equity to be rolled over into the new loan up to certain Loan-to-Value (LTV) limits (typically 120%-140%). However, rolling negative equity increases borrowing costs, total interest, and leaves you immediately underwater on the new vehicle.' },
+      { question: 'Is dealer trade-in better than a private party sale?', answer: 'Private party sales usually command 10% to 20% higher purchase prices, but require advertising, safety inspections, title transfers, and dealing with buyers. A dealer trade-in offers instant convenience, eliminates lien payoff paperwork, and provides instant sales tax credits that often offset the lower trade value.' },
+    ],
+    calculate: (inputs) => {
+      const vTrade = Number(inputs.tradeValue ?? 15000);
+      const bLoan = Number(inputs.loanPayoff ?? 11000);
+      const pNew = Number(inputs.newPrice ?? 32000);
+      const taxRate = Number(inputs.taxRate ?? 6);
+      const dCash = Number(inputs.downPayment ?? 1000);
+
+      const eNet = vTrade - bLoan;
+      const pTaxable = Math.max(0, pNew - vTrade);
+      const tNet = pTaxable * (taxRate / 100);
+      const tSaved = Math.min(pNew, vTrade) * (taxRate / 100);
+      const pFinanced = (pNew + tNet) - eNet - dCash;
+
+      const formattedFinanced = `$${Math.max(0, pFinanced).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      const formattedEquity = eNet >= 0
+        ? `+$${eNet.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} (Positive Equity)`
+        : `-$${Math.abs(eNet).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} (Underwater Rollover)`;
+
+      return {
+        primaryValue: formattedFinanced,
+        primaryLabel: 'Final Net Amount to Finance',
+        primarySubtext: eNet >= 0
+          ? `Includes $${eNet.toLocaleString('en-US', { minimumFractionDigits: 2 })} positive equity applied`
+          : `Includes $${Math.abs(eNet).toLocaleString('en-US', { minimumFractionDigits: 2 })} negative equity rolled over`,
+        summary: [
+          { label: 'Net Trade-In Equity', value: formattedEquity },
+          { label: 'Sales Tax Saved', value: `$${tSaved.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Saved` },
+          { label: 'Net Sales Tax Owed', value: `$${tNet.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` },
+          { label: 'Taxable Base Price', value: `$${pTaxable.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` },
+          { label: 'Additional Cash Down Payment', value: `-$${dCash.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` },
+        ],
+        breakdown: [
+          { label: 'New Vehicle Base', percentage: pFinanced > 0 ? Math.min(100, Math.round((pNew / pFinanced) * 100)) : 100, amount: `$${pNew.toLocaleString()}` },
+          { label: 'Net Sales Tax', percentage: pFinanced > 0 ? Math.round((tNet / pFinanced) * 100) : 0, amount: `$${tNet.toLocaleString()}` },
+          { label: 'Net Equity Effect', percentage: pFinanced > 0 ? Math.round((Math.abs(eNet) / pFinanced) * 100) : 0, amount: formattedEquity },
+        ],
+      };
+    },
+  },
+
   // ── 1. LOAN CALCULATOR ──
   'loan-calculator': {
     slug: 'loan-calculator',

@@ -245,3 +245,28 @@ model SiteSetting {
 
   @@map("site_settings")
 }
+
+// ── Calculators (Dynamic CMS Workbench) ───────
+
+model Calculator {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  slug            String   @unique
+  title           String
+  category        String   @default("financial")
+  description     String
+  status          String   @default("PUBLISHED")
+
+  // Dynamic SEO & Metadata
+  seoTitle        String?  @map("seo_title")
+  seoDescription  String?  @map("seo_description")
+  canonicalUrl    String?  @map("canonical_url")
+
+  // Dynamic CMS Editorial Body (Managed via Dashboard)
+  articleContent  String   @map("article_content")
+  faqItems        Json?    @map("faq_items")
+
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@map("calculators")
+}
