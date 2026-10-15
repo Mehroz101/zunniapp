@@ -7,7 +7,7 @@ import {
   buildCollectionPageSchema,
   buildBreadcrumbSchema,
   buildGeoMetaTags,
-} from '@aiiseverything/seo';
+} from '@/lib/seo';
 import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
 import {
