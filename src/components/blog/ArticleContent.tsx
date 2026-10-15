@@ -2,7 +2,7 @@
 
 import { useMemo, useEffect, useRef } from 'react';
 import { Marked, type Tokens } from 'marked';
-import { slugify } from '@/lib/utils';
+import { slugify } from '@aiiseverything/utils';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-typescript';

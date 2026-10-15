@@ -14,7 +14,8 @@ import {
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
-import { formatDate, formatNumber } from '@/lib/utils';
+import { formatDate } from '@aiiseverything/utils';
+import { formatNumber } from '@/lib/utils';
 
 export interface DirectoryPost {
   id: string;

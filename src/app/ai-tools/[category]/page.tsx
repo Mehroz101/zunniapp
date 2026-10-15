@@ -7,7 +7,7 @@ import {
   buildCollectionPageSchema,
   buildBreadcrumbSchema,
   buildGeoMetaTags,
-} from '@/lib/seo';
+} from '@aiiseverything/seo';
 import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
 import {
@@ -16,6 +16,8 @@ import {
   type DirectoryCategory,
 } from '@/components/tools/ToolsFilterGrid';
 import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
+import { getToolBySlug, getAllTools } from '@/lib/tools/registry';
+import { ToolView } from '@/components/tools/ToolView';
 
 interface PageProps {
   params: Promise<{
@@ -27,21 +29,45 @@ export const revalidate = 60; // 60s ISR refresh
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { category: slug } = await params;
-  let category: any = null;
 
-  try {
-    category = await prisma.toolCategory.findUnique({
-      where: { slug },
-    });
-  } catch (err) {
-    console.warn('[Category Metadata] DB fallback:', (err as Error).message);
+  // 1. Check if slug matches a tool directly
+  const tool = getToolBySlug(slug);
+  if (tool) {
+    const title = `${tool.name} — Free Online Tool | AIIsEverything`;
+    const description = tool.tagline || tool.description;
+    const canonicalUrl = `https://aiiseverything.com/ai-tools/${tool.slug}`;
+    return {
+      title,
+      description,
+      alternates: { canonical: canonicalUrl },
+      openGraph: {
+        title,
+        description,
+        url: canonicalUrl,
+        siteName: 'AIIsEverything',
+        images: [{ url: '/og-default.png', width: 1200, height: 630 }],
+        type: 'website',
+      },
+      twitter: { card: 'summary_large_image', title, description, images: ['/og-default.png'] },
+    };
   }
 
-  const categoryName = category?.name || slug.charAt(0).toUpperCase() + slug.slice(1);
-  const title = `${categoryName} AI Tools — Free & Interactive Directory | AIIsEverything`;
+  // 2. Otherwise check category
+  const category = await prisma.toolCategory.findUnique({
+    where: { slug },
+  });
+
+  if (!category || !category.isActive) {
+    return {
+      title: 'Category Not Found | AIIsEverything',
+      description: 'The requested AI tools category could not be found.',
+    };
+  }
+
+  const title = `${category.name} AI Tools — Free & Interactive Directory | AIIsEverything`;
   const description =
-    category?.description ||
-    `Browse our complete collection of ${categoryName} AI tools and utilities. Interactive, free, and updated daily.`;
+    category.description ||
+    `Browse our complete collection of ${category.name} AI tools and utilities. Interactive, free, and updated daily.`;
 
   return {
     title,
@@ -64,8 +90,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       images: ['/og-default.png'],
     },
     other: buildGeoMetaTags({
-      summary: `${categoryName} AI tools directory on AIIsEverything. ${description}`,
-      entities: [categoryName, 'AI Tools', 'AIIsEverything', 'Artificial Intelligence'],
+      summary: `${category.name} AI tools directory on AIIsEverything. ${description}`,
+      entities: [category.name, 'AI Tools', 'AIIsEverything', 'Artificial Intelligence'],
     }),
   };
 }
@@ -73,53 +99,81 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function CategoryToolsPage({ params }: PageProps) {
   const { category: categorySlug } = await params;
 
-  let currentCategory: any = null;
-  let rawTools: Array<any> = [];
-  let rawCategories: Array<any> = [];
+  // 1. Check if param is an individual tool slug
+  const matchedTool = getToolBySlug(categorySlug);
+  if (matchedTool) {
+    let dbTool: any = null;
+    try {
+      dbTool = await prisma.tool.findUnique({
+        where: { slug: matchedTool.slug },
+        include: { category: true },
+      });
+    } catch {}
 
-  try {
-    // 1. Fetch current category
-    currentCategory = await prisma.toolCategory.findUnique({
-      where: { slug: categorySlug },
-    });
+    const allTools = getAllTools();
+    const relatedTools = allTools
+      .filter((t) => t.slug !== matchedTool.slug)
+      .slice(0, 3);
 
-    // 2. Fetch all published tools
-    rawTools = await prisma.tool.findMany({
-      where: { status: 'PUBLISHED' },
-      include: {
-        category: true,
-        tags: true,
-      },
-      orderBy: [{ isFeatured: 'desc' }, { viewCount: 'desc' }],
-    });
+    return (
+      <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-cyan-500/30 selection:text-cyan-900 dark:selection:text-cyan-200">
+        <Navbar />
+        <main className="flex-1 pt-28 pb-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ToolView
+              tool={matchedTool}
+              seoContent={dbTool?.seoContent}
+              relatedTools={relatedTools}
+            />
+            <div className="mt-20 text-center max-w-xl mx-auto">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">Stay Updated</h3>
+              <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                Subscribe to get notifications when new developer compilers and SEO diagnostic engines go live.
+              </p>
+              <div className="mt-6">
+                <NewsletterForm />
+              </div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
-    // 3. Fetch all active categories with counts
-    rawCategories = await prisma.toolCategory.findMany({
-      where: { isActive: true },
-      include: {
-        _count: {
-          select: {
-            tools: {
-              where: { status: 'PUBLISHED' },
-            },
+  // 2. Fetch current category
+  const currentCategory = await prisma.toolCategory.findUnique({
+    where: { slug: categorySlug },
+  });
+
+  if (!currentCategory || !currentCategory.isActive) {
+    notFound();
+  }
+
+  // 2. Fetch all published tools
+  const rawTools = await prisma.tool.findMany({
+    where: { status: 'PUBLISHED' },
+    include: {
+      category: true,
+      tags: true,
+    },
+    orderBy: [{ isFeatured: 'desc' }, { viewCount: 'desc' }],
+  });
+
+  // 3. Fetch all active categories with counts
+  const rawCategories = await prisma.toolCategory.findMany({
+    where: { isActive: true },
+    include: {
+      _count: {
+        select: {
+          tools: {
+            where: { status: 'PUBLISHED' },
           },
         },
       },
-      orderBy: { displayOrder: 'asc' },
-    });
-  } catch (err) {
-    console.warn('[Category Page] DB fallback during build:', (err as Error).message);
-  }
-
-  if (!currentCategory) {
-    currentCategory = {
-      id: categorySlug,
-      name: categorySlug.charAt(0).toUpperCase() + categorySlug.slice(1),
-      slug: categorySlug,
-      description: `Explore top ${categorySlug} artificial intelligence tools.`,
-      isActive: true,
-    };
-  }
+    },
+    orderBy: { displayOrder: 'asc' },
+  });
 
   // 4. Serialize tools for client component
   const tools: DirectoryTool[] = rawTools.map((t) => ({
@@ -140,7 +194,7 @@ export default async function CategoryToolsPage({ params }: PageProps) {
       slug: t.category.slug,
       icon: t.category.icon,
     },
-    tags: (t.tags || []).map((tag: any) => ({
+    tags: t.tags.map((tag) => ({
       id: tag.id,
       name: tag.name,
       slug: tag.slug,

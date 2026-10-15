@@ -73,19 +73,19 @@ export default function ToolsHubPage() {
       <main className="flex-1 pt-28 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header Banner */}
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3.5 py-1 text-xs font-mono font-medium text-cyan-600 dark:text-cyan-400 mb-6">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-50 dark:bg-blue-950/40 px-3.5 py-1 text-[11px] font-mono font-semibold tracking-wider text-blue-600 dark:text-[#00D2FF] mb-5">
               <Zap className="h-3.5 w-3.5" />
-              <span>26+ Operational Developer & SEO Engines</span>
+              <span>DEVELOPER UTILITIES SUITE</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-              Developer & Technical SEO{' '}
-              <span className="bg-gradient-to-r from-cyan-500 via-teal-400 to-indigo-500 bg-clip-text text-transparent">
-                Workbench
+            <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
+              AI Tools for{' '}
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
+                Every Workflow
               </span>
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-              Deterministic AST parsers, bidirectional format serializes, and technical SEO audit suites. 100% free, browser-native, with zero rate limits or paywalls.
+            <p className="mt-3.5 text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+              High-throughput client-side code transducers, formatters, and AI debuggers. Zero cloud telemetry.
             </p>
           </div>
 

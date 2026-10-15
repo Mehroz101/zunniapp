@@ -24,6 +24,21 @@ import {
   Key,
   FileCode,
   Layers,
+  Car,
+  Home,
+  Briefcase,
+  Receipt,
+  Globe,
+  Atom,
+  Box,
+  FlaskConical,
+  Activity,
+  Clock,
+  Dumbbell,
+  BarChart2,
+  PiggyBank,
+  Percent,
+  DollarSign,
 } from 'lucide-react';
 import { getAllTools } from '@/lib/tools/registry';
 import type { ToolDefinition } from '@/lib/tools/types';
@@ -48,133 +63,138 @@ const POPULAR_CHIPS = [
   { label: 'Code Converters', query: 'converter', href: '/tools' },
   { label: 'SEO Diagnostics', query: 'seo', href: '/tools?category=seo' },
   { label: 'AST Parsers', query: 'ast', href: '/tools?category=dev' },
-  { label: 'Financial Calculators', query: 'calculator', href: '/calculators?category=financial' },
-  { label: 'Regex', query: 'regex', href: '/tools/regex-tester' },
+  { label: 'Financial Calculators', query: 'calculator', href: '/calculators/finance' },
+  { label: 'Scientific Math', query: 'math', href: '/calculators/scientific' },
+  { label: 'Regex Studio', query: 'regex', href: '/tools/regex-tester' },
 ];
 
-// 12 Native Platform Tools for Ambient Tool Wall Grid
-const CATALOG_WALL_CARDS = [
+/* ==============================================================================
+   6 DISTINCT SKELETON CARD CATALOGS FOR AMBIENT INFINITE SCROLL COLUMNS
+   ============================================================================== */
+interface AmbientCard {
+  name: string;
+  cat: string;
+  badge: string;
+  runs: string;
+  rating: string;
+  icon: React.ElementType;
+  color: string;
+  bg: string;
+}
+
+const AMBIENT_COLUMNS: { duration: number; cards: AmbientCard[] }[] = [
+  // Column 1 (Odd: Scrolls UPWARDS - 72s cycle) - Code Compilers
   {
-    name: 'JSON ➔ YAML',
-    cat: 'Code Converter',
-    badge: 'STABLE',
-    rating: '4.9',
-    runs: '28.4k',
-    icon: FileText,
-    color: 'text-[#00D2FF]',
-    bg: 'bg-cyan-500/10 dark:bg-cyan-500/10',
+    duration: 72,
+    cards: [
+      { name: 'JSON ➔ YAML Stream', cat: 'Converter', badge: 'STABLE', runs: '28.4k', rating: '4.9', icon: FileText, color: 'text-[#00D2FF]', bg: 'bg-cyan-500/10' },
+      { name: 'HTML ➔ Python AST', cat: 'Scraper', badge: 'v2.4', runs: '16.2k', rating: '4.8', icon: Binary, color: 'text-sky-500 dark:text-sky-400', bg: 'bg-sky-500/10' },
+      { name: 'CSS ➔ HTML Scaffolder', cat: 'Scaffolder', badge: 'FAST', runs: '34.1k', rating: '4.9', icon: Code2, color: 'text-indigo-500 dark:text-indigo-400', bg: 'bg-indigo-500/10' },
+      { name: 'SVG ➔ JSX React', cat: 'React', badge: 'POPULAR', runs: '42.8k', rating: '4.9', icon: Boxes, color: 'text-[#00D2FF]', bg: 'bg-cyan-500/10' },
+      { name: 'JS ➔ TypeScript Strict', cat: 'Typing', badge: 'STRICT', runs: '31.5k', rating: '4.9', icon: Terminal, color: 'text-blue-500 dark:text-blue-400', bg: 'bg-blue-500/10' },
+      { name: 'SQL ➔ Prisma Schema', cat: 'ORM', badge: 'PRO', runs: '19.7k', rating: '4.8', icon: Database, color: 'text-violet-500 dark:text-violet-400', bg: 'bg-violet-500/10' },
+    ],
   },
+  // Column 2 (Even: Scrolls DOWNWARDS - 84s cycle) - Financial Engines
   {
-    name: 'HTML ➔ Python AST',
-    cat: 'AST Transpiler',
-    badge: 'v2.4',
-    rating: '4.8',
-    runs: '16.2k',
-    icon: Binary,
-    color: 'text-sky-500 dark:text-sky-400',
-    bg: 'bg-sky-500/10 dark:bg-sky-500/10',
+    duration: 84,
+    cards: [
+      { name: 'Auto Loan Trade-In', cat: 'Finance', badge: 'HOT', runs: '74.2k', rating: '4.9', icon: Car, color: 'text-[#00D2FF]', bg: 'bg-cyan-500/10' },
+      { name: 'Compound Interest ROI', cat: 'Wealth', badge: 'LIVE', runs: '39.5k', rating: '4.8', icon: TrendingUp, color: 'text-emerald-500 dark:text-emerald-400', bg: 'bg-emerald-500/10' },
+      { name: 'Loan EMI Amortization', cat: 'Lending', badge: 'ACCURATE', runs: '63.0k', rating: '4.9', icon: Calculator, color: 'text-sky-500 dark:text-sky-400', bg: 'bg-sky-500/10' },
+      { name: 'Mortgage Refinance', cat: 'Real Estate', badge: '30-YR', runs: '27.9k', rating: '4.9', icon: Home, color: 'text-amber-500 dark:text-amber-400', bg: 'bg-amber-500/10' },
+      { name: 'Business Margin & Markup', cat: 'Enterprise', badge: 'B2B', runs: '21.4k', rating: '4.7', icon: Briefcase, color: 'text-purple-500 dark:text-purple-400', bg: 'bg-purple-500/10' },
+      { name: 'Federal Tax Bracket', cat: 'IRS 2026', badge: 'TAX', runs: '45.1k', rating: '4.9', icon: Receipt, color: 'text-rose-500 dark:text-rose-400', bg: 'bg-rose-500/10' },
+    ],
   },
+  // Column 3 (Odd: Scrolls UPWARDS - 66s cycle) - SEO & Crawl Diagnostics
   {
-    name: 'CSS ➔ HTML',
-    cat: 'Code Scaffolder',
-    badge: 'FAST',
-    rating: '4.9',
-    runs: '34.1k',
-    icon: Code2,
-    color: 'text-indigo-500 dark:text-indigo-400',
-    bg: 'bg-indigo-500/10 dark:bg-indigo-500/10',
+    duration: 66,
+    cards: [
+      { name: 'Robots.txt Validator', cat: 'SEO', badge: 'VERIFIED', runs: '51.3k', rating: '4.9', icon: ShieldCheck, color: 'text-emerald-500 dark:text-emerald-400', bg: 'bg-emerald-500/10' },
+      { name: 'OpenGraph Meta Tag', cat: 'Social', badge: 'INSTANT', runs: '33.2k', rating: '4.8', icon: Globe, color: 'text-[#00D2FF]', bg: 'bg-cyan-500/10' },
+      { name: 'XML Sitemap Auditor', cat: 'Crawl', badge: 'FAST', runs: '29.7k', rating: '4.9', icon: Layers, color: 'text-indigo-500 dark:text-indigo-400', bg: 'bg-indigo-500/10' },
+      { name: 'JSON-LD Schema Builder', cat: 'Rich Snippet', badge: 'SEO', runs: '36.8k', rating: '4.9', icon: Code2, color: 'text-sky-500 dark:text-sky-400', bg: 'bg-sky-500/10' },
+      { name: 'SERP Title Simulator', cat: 'CTR Tool', badge: 'PIXEL', runs: '18.4k', rating: '4.7', icon: Search, color: 'text-amber-500 dark:text-amber-400', bg: 'bg-amber-500/10' },
+      { name: 'Headings Hierarchy H1-H6', cat: 'Audit', badge: 'CLEAN', runs: '22.1k', rating: '4.8', icon: FileText, color: 'text-blue-500 dark:text-blue-400', bg: 'bg-blue-500/10' },
+    ],
   },
+  // Column 4 (Even: Scrolls DOWNWARDS - 90s cycle) - Scientific & Physics
   {
-    name: 'SVG ➔ JSX',
-    cat: 'React Engine',
-    badge: 'POPULAR',
-    rating: '4.9',
-    runs: '42.8k',
-    icon: Boxes,
-    color: 'text-[#00D2FF]',
-    bg: 'bg-cyan-500/10 dark:bg-cyan-500/10',
+    duration: 90,
+    cards: [
+      { name: 'Scientific Notation', cat: 'Math', badge: 'FLOAT', runs: '19.4k', rating: '4.8', icon: Atom, color: 'text-[#00D2FF]', bg: 'bg-cyan-500/10' },
+      { name: 'Projectile Kinematics', cat: 'Physics', badge: '2D/3D', runs: '15.6k', rating: '4.9', icon: Zap, color: 'text-amber-500 dark:text-amber-400', bg: 'bg-amber-500/10' },
+      { name: "Ohm's Law & Resistance", cat: 'Electronics', badge: 'DC/AC', runs: '24.8k', rating: '4.8', icon: SlidersHorizontal, color: 'text-emerald-500 dark:text-emerald-400', bg: 'bg-emerald-500/10' },
+      { name: 'Cylinder & 3D Geometry', cat: 'Geometry', badge: 'CALC', runs: '17.2k', rating: '4.7', icon: Box, color: 'text-sky-500 dark:text-sky-400', bg: 'bg-sky-500/10' },
+      { name: 'Chemical Molar Mass', cat: 'Chemistry', badge: 'P-TABLE', runs: '14.3k', rating: '4.9', icon: FlaskConical, color: 'text-violet-500 dark:text-violet-400', bg: 'bg-violet-500/10' },
+      { name: 'Velocity SI Unit Transcoder', cat: 'Units', badge: 'SI', runs: '20.5k', rating: '4.8', icon: Activity, color: 'text-rose-500 dark:text-rose-400', bg: 'bg-rose-500/10' },
+    ],
   },
+  // Column 5 (Odd: Scrolls UPWARDS - 76s cycle) - Security & Utilities
   {
-    name: 'SQL ➔ Prisma',
-    cat: 'ORM Generator',
-    badge: 'PRO',
-    rating: '4.8',
-    runs: '19.7k',
-    icon: Database,
-    color: 'text-blue-500 dark:text-blue-400',
-    bg: 'bg-blue-500/10 dark:bg-blue-500/10',
+    duration: 76,
+    cards: [
+      { name: 'JWT Secret Inspector', cat: 'Security', badge: 'CLIENT', runs: '38.2k', rating: '4.9', icon: Key, color: 'text-sky-500 dark:text-sky-400', bg: 'bg-sky-500/10' },
+      { name: 'Regex Pattern Tester', cat: 'Developer', badge: 'PCRE', runs: '47.1k', rating: '4.9', icon: Terminal, color: 'text-purple-500 dark:text-purple-400', bg: 'bg-purple-500/10' },
+      { name: 'Base64 Studio WASM', cat: 'Transcoder', badge: 'WASM', runs: '29.4k', rating: '4.8', icon: FileCode, color: 'text-indigo-500 dark:text-indigo-400', bg: 'bg-indigo-500/10' },
+      { name: 'UUID v4 Generator', cat: 'Generator', badge: 'RFC4122', runs: '56.3k', rating: '4.9', icon: Binary, color: 'text-[#00D2FF]', bg: 'bg-cyan-500/10' },
+      { name: 'SHA-256 Hash Digest', cat: 'Crypto', badge: 'ZERO-LOG', runs: '31.1k', rating: '4.9', icon: ShieldCheck, color: 'text-emerald-500 dark:text-emerald-400', bg: 'bg-emerald-500/10' },
+      { name: 'Cron Schedule Parser', cat: 'Unix', badge: 'POSIX', runs: '26.8k', rating: '4.8', icon: Clock, color: 'text-amber-500 dark:text-amber-400', bg: 'bg-amber-500/10' },
+    ],
   },
+  // Column 6 (Even: Scrolls DOWNWARDS - 82s cycle) - Health & Business
   {
-    name: 'Robots.txt Validator',
-    cat: 'SEO Diagnostic',
-    badge: 'VERIFIED',
-    rating: '4.9',
-    runs: '51.3k',
-    icon: ShieldCheck,
-    color: 'text-emerald-500 dark:text-emerald-400',
-    bg: 'bg-emerald-500/10 dark:bg-emerald-500/10',
-  },
-  {
-    name: 'Loan Calculator',
-    cat: 'Financial Engine',
-    badge: 'ACCURATE',
-    rating: '4.9',
-    runs: '63.0k',
-    icon: Calculator,
-    color: 'text-[#00D2FF]',
-    bg: 'bg-cyan-500/10 dark:bg-cyan-500/10',
-  },
-  {
-    name: 'Investment Calculator',
-    cat: 'Compound ROI',
-    badge: 'LIVE',
-    rating: '4.8',
-    runs: '39.5k',
-    icon: TrendingUp,
-    color: 'text-emerald-500 dark:text-emerald-400',
-    bg: 'bg-emerald-500/10 dark:bg-emerald-500/10',
-  },
-  {
-    name: 'Regex Tester',
-    cat: 'Developer Utility',
-    badge: 'FAST',
-    rating: '4.9',
-    runs: '47.1k',
-    icon: Terminal,
-    color: 'text-purple-500 dark:text-purple-400',
-    bg: 'bg-purple-500/10 dark:bg-purple-500/10',
-  },
-  {
-    name: 'JWT Inspector',
-    cat: 'Security Diagnostic',
-    badge: 'CLIENT-SIDE',
-    rating: '4.9',
-    runs: '38.2k',
-    icon: Key,
-    color: 'text-sky-500 dark:text-sky-400',
-    bg: 'bg-sky-500/10 dark:bg-sky-500/10',
-  },
-  {
-    name: 'Base64 Studio',
-    cat: 'Transcoder',
-    badge: 'WASM',
-    rating: '4.8',
-    runs: '29.4k',
-    icon: FileCode,
-    color: 'text-indigo-500 dark:text-indigo-400',
-    bg: 'bg-indigo-500/10 dark:bg-indigo-500/10',
-  },
-  {
-    name: 'XML ➔ JSON',
-    cat: 'Data Parser',
-    badge: 'INSTANT',
-    rating: '4.7',
-    runs: '22.6k',
-    icon: Layers,
-    color: 'text-[#00D2FF]',
-    bg: 'bg-cyan-500/10 dark:bg-cyan-500/10',
+    duration: 82,
+    cards: [
+      { name: 'BMI Health Calculator', cat: 'Health', badge: 'WHO STD', runs: '48.9k', rating: '4.9', icon: Dumbbell, color: 'text-rose-500 dark:text-rose-400', bg: 'bg-rose-500/10' },
+      { name: 'Daily TDEE Calorie Calc', cat: 'Nutrition', badge: 'KCAL', runs: '35.4k', rating: '4.8', icon: Activity, color: 'text-amber-500 dark:text-amber-400', bg: 'bg-amber-500/10' },
+      { name: 'Break-Even Sales Analyzer', cat: 'Business', badge: 'MARGIN', runs: '18.7k', rating: '4.7', icon: BarChart2, color: 'text-emerald-500 dark:text-emerald-400', bg: 'bg-emerald-500/10' },
+      { name: 'High-Yield APY Savings', cat: 'Banking', badge: 'COMPOUND', runs: '29.1k', rating: '4.9', icon: PiggyBank, color: 'text-[#00D2FF]', bg: 'bg-cyan-500/10' },
+      { name: 'Inflation Purchasing Power', cat: 'Macro', badge: 'CPI', runs: '22.3k', rating: '4.8', icon: Percent, color: 'text-sky-500 dark:text-sky-400', bg: 'bg-sky-500/10' },
+      { name: 'Discount & Sale Savings', cat: 'Retail', badge: 'OFF', runs: '19.8k', rating: '4.7', icon: DollarSign, color: 'text-indigo-500 dark:text-indigo-400', bg: 'bg-indigo-500/10' },
+    ],
   },
 ];
+
+/* Single ambient skeleton tool card */
+function AmbientToolCardItem({ card }: { card: AmbientCard }) {
+  const Icon = card.icon;
+  return (
+    <div className="w-full min-h-[96px] rounded-2xl border border-slate-200/90 dark:border-slate-800/90 bg-white/85 dark:bg-[#0a101d]/90 p-3 shadow-xs flex flex-col justify-between mb-3.5 backdrop-blur-[2px] transition-colors">
+      <div className="flex items-center justify-between text-xs gap-1.5">
+        <span className="font-mono text-[9px] text-slate-500 dark:text-slate-400 uppercase tracking-wider truncate font-semibold">
+          {card.cat}
+        </span>
+        <span className="shrink-0 text-[8.5px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-slate-700/80">
+          {card.badge}
+        </span>
+      </div>
+
+      <div className="flex items-center gap-2 my-1.5">
+        <div className={`p-1.5 rounded-lg ${card.bg} ${card.color} shadow-xs shrink-0`}>
+          <Icon className="h-3.5 w-3.5" />
+        </div>
+        <div className="min-w-0">
+          <span className="font-bold text-[11.5px] text-slate-800 dark:text-slate-100 truncate block">
+            {card.name}
+          </span>
+          <span className="text-[9.5px] text-slate-400 dark:text-slate-500 font-mono">
+            {card.runs} runs/mo
+          </span>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between pt-1.5 border-t border-slate-200/60 dark:border-slate-800/70 text-[9.5px] text-slate-500 dark:text-slate-400">
+        <span className="flex items-center gap-1 font-bold text-slate-700 dark:text-slate-300">
+          <Star className="h-2.5 w-2.5 fill-amber-400 text-amber-400" />
+          <span>{card.rating}</span>
+        </span>
+        <span className="font-mono text-[8.5px] text-[#00D2FF] font-semibold">Client WASM</span>
+      </div>
+    </div>
+  );
+}
 
 export function Hero({ stats: _stats }: HeroProps) {
   const router = useRouter();
@@ -263,74 +283,68 @@ export function Hero({ stats: _stats }: HeroProps) {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center bg-white dark:bg-[#05070c] pt-32 sm:pt-36 lg:pt-40 pb-20 lg:pb-24 overflow-hidden transition-colors duration-200">
-      {/* ── Ambient Tool Wall Background (Multi-Column Staggered Grid) ── */}
+    <section className="relative min-h-[92vh] flex items-center justify-center bg-white dark:bg-[#05070c] pt-32 sm:pt-36 lg:pt-40 pb-20 lg:pb-24 overflow-hidden transition-colors duration-200">
+      {/* ── 1. AMBIENT BACKGROUND INFINITE SCROLL SYSTEM (Pure CSS Hardware Accelerated) ── */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none opacity-85 dark:opacity-75"
+        style={{
+          maskImage: 'radial-gradient(ellipse 85% 75% at 50% 48%, transparent 22%, black 75%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 85% 75% at 50% 48%, transparent 22%, black 75%)',
+        }}
       >
-        {/* Multi-column grid across background */}
-        <div className="absolute -inset-x-8 -top-12 bottom-0 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3.5 sm:gap-4 p-4 transform -skew-y-2 scale-[1.03] opacity-25 dark:opacity-20 blur-[0.5px]">
-          {CATALOG_WALL_CARDS.map((card, idx) => {
-            const Icon = card.icon;
+        {/* 6 Opposing Columns Grid (1, 3, 5 scroll UPWARDS; 2, 4, 6 scroll DOWNWARDS) */}
+        <div className="absolute -inset-x-8 -top-32 -bottom-32 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 sm:gap-4 p-4 transform -skew-y-2 scale-[1.02]">
+          {AMBIENT_COLUMNS.map((colConfig, colIdx) => {
+            const isOdd = colIdx % 2 === 0; // 0, 2, 4 in 0-indexed = columns 1, 3, 5
+            const animationClass = isOdd ? 'animate-scroll-up' : 'animate-scroll-down';
+            // Quad-duplicate cards to form seamless infinite loop across all resolutions
+            const duplicatedCards = [
+              ...colConfig.cards,
+              ...colConfig.cards,
+              ...colConfig.cards,
+              ...colConfig.cards,
+            ];
+
             return (
               <div
-                key={card.name}
-                className={`rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md p-3.5 sm:p-4 shadow-xs flex flex-col justify-between transition-transform ${
-                  idx % 2 === 1 ? 'translate-y-4 sm:translate-y-6' : ''
-                }`}
+                key={`ambient-col-${colIdx}`}
+                className="relative overflow-hidden h-full flex flex-col"
               >
-                <div className="flex items-center justify-between text-xs gap-1.5">
-                  <span className="font-mono text-[9.5px] text-slate-500 dark:text-slate-400 uppercase tracking-wider truncate">
-                    {card.cat}
-                  </span>
-                  <span className="shrink-0 text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
-                    {card.badge}
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2.5 my-3">
-                  <div className={`p-2 rounded-xl ${card.bg} ${card.color} shadow-xs shrink-0`}>
-                    <Icon className="h-4 w-4" />
-                  </div>
-                  <div className="min-w-0">
-                    <span className="font-semibold text-xs text-slate-900 dark:text-slate-100 truncate block">
-                      {card.name}
-                    </span>
-                    <span className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">
-                      {card.runs} runs/mo
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800/60 text-[10px] text-slate-500 dark:text-slate-400">
-                  <span className="flex items-center gap-1 font-bold text-slate-700 dark:text-slate-300">
-                    <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-                    <span>{card.rating}</span>
-                  </span>
-                  <span className="font-mono text-[9px] text-[#00D2FF]">Client WASM</span>
+                <div
+                  className={`flex flex-col ${animationClass}`}
+                  style={{ '--scroll-duration': `${colConfig.duration}s` } as React.CSSProperties}
+                >
+                  {duplicatedCards.map((card, cardIdx) => (
+                    <AmbientToolCardItem
+                      key={`card-${colIdx}-${card.name}-${cardIdx}`}
+                      card={card}
+                    />
+                  ))}
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Center Radial Mask with opacity falloff ensuring 100% legibility */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#ffffff_75%)] dark:bg-[radial-gradient(ellipse_at_center,transparent_20%,#05070c_75%)]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-transparent to-white dark:from-[#05070c]/70 dark:via-transparent dark:to-[#05070c]" />
+        {/* Soft Center Vignette Overlay for Search Console & Text Legibility */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_48%,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.5)_60%,transparent_100%)] dark:bg-[radial-gradient(ellipse_60%_50%_at_50%_48%,rgba(5,7,12,0.92)_0%,rgba(5,7,12,0.5)_60%,transparent_100%)] pointer-events-none" />
+
+        {/* Top & Bottom Linear Edge Fades */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-transparent to-white dark:from-[#05070c]/95 dark:via-transparent dark:to-[#05070c]" />
       </div>
 
-      {/* ── Centered Enterprise Hero Content ── */}
+      {/* ── 2. CENTERED ENTERPRISE HERO CONTENT (100% UNCLUTTERED OVER RADIAL MASK) ── */}
       <div className="relative z-10 mx-auto max-w-5xl w-full px-6 sm:px-8 lg:px-12 text-center flex flex-col items-center">
-        {/* 1. Top Modern Kicker Badge */}
-        <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md transition-all hover:border-slate-300 dark:hover:border-slate-700">
+        {/* Top Modern Kicker Badge */}
+        <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md transition-all hover:border-slate-300 dark:hover:border-slate-700">
           <span className="flex h-2 w-2 rounded-full bg-[#00D2FF] shadow-[0_0_8px_#00D2FF] animate-pulse" />
           <span className="tracking-wide">
-            ⚡ The Ultimate Directory for Modern Developers & Builders
+            ⚡ The Ultimate Directory for Modern Developers &amp; Builders
           </span>
         </div>
 
-        {/* 2. Primary Headline (H1) with Signature Electric-Cyan Accent */}
+        {/* Primary Headline (H1) with Signature Electric-Cyan Accent */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-[1.1] max-w-4xl">
           Best Way to Find the Right{' '}
           <span className="inline-block mt-1 sm:mt-0">
@@ -345,12 +359,12 @@ export function Hero({ stats: _stats }: HeroProps) {
           </span>
         </h1>
 
-        {/* 3. Authoritative Value Proposition Sub-Headline */}
+        {/* Value Proposition Sub-Headline */}
         <p className="mt-6 text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl font-normal leading-relaxed">
           AiTools Studio is the premier discovery directory and utility workbench helping developers, engineers, and creators explore, test, and adopt production-ready AI tools, code compilers, and developer utilities.
         </p>
 
-        {/* 4. Advanced Global Search Console Container */}
+        {/* Global Search Console Container */}
         <div className="mt-9 w-full max-w-2xl mx-auto relative z-30">
           <form
             onSubmit={handleSearchSubmit}
@@ -381,181 +395,114 @@ export function Hero({ stats: _stats }: HeroProps) {
                 } else if (e.key === 'ArrowUp') {
                   e.preventDefault();
                   setSelectedIndex((prev) => Math.max(prev - 1, -1));
+                } else if (e.key === 'Enter') {
+                  if (selectedIndex >= 0 && selectedIndex < filteredTools.length) {
+                    e.preventDefault();
+                    router.push(`/tools/${filteredTools[selectedIndex].slug}`);
+                    setIsFocused(false);
+                  }
                 }
               }}
-              placeholder="I need a tool to convert CSS, parse AST, calculate finance..."
-              className="w-full py-4 pl-3.5 pr-28 text-sm sm:text-base font-medium text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 bg-transparent outline-none focus:ring-0"
+              placeholder="Search 50+ tools, compilers, calculators (e.g. 'css to html', 'loan', 'ast')..."
+              className="w-full py-4 pl-3.5 pr-28 text-sm sm:text-base text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 bg-transparent outline-none focus:ring-0"
             />
 
-            <div className="absolute right-3 flex items-center gap-2">
-              <Link
-                href="/tools"
-                className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition"
-              >
-                <SlidersHorizontal className="h-3 w-3" />
-                <span>Filters</span>
-              </Link>
-              <kbd className="hidden md:inline-flex items-center gap-0.5 rounded border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[11px] font-mono font-medium text-slate-500 dark:text-slate-400 shadow-2xs">
-                <Command className="h-3 w-3" />
-                <span>K</span>
+            <div className="absolute right-3.5 flex items-center gap-1.5">
+              <kbd className="hidden sm:inline-flex items-center gap-0.5 rounded-md border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[11px] font-mono text-slate-500 dark:text-slate-400 shadow-2xs">
+                <Command className="h-3 w-3" />K
               </kbd>
+              <button
+                type="submit"
+                className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-[#00D2FF] hover:bg-[#38bdf8] text-slate-950 font-bold text-xs transition active:scale-95 shadow-xs cursor-pointer flex items-center gap-1"
+                aria-label="Submit search"
+              >
+                <ArrowRight className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">Go</span>
+              </button>
             </div>
           </form>
 
-          {/* Autocomplete Dropdown Panel */}
-          {isFocused && searchQuery.trim() && (
-            <div className="absolute left-0 right-0 top-full mt-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xl p-2 z-50 text-left overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150">
-              {filteredTools.length > 0 ? (
-                <div className="space-y-1">
-                  <div className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500 flex justify-between">
-                    <span>Matching Diagnostic Engines</span>
-                    <span>{filteredTools.length} found</span>
-                  </div>
-                  {filteredTools.map((tool, idx) => (
-                    <button
-                      key={tool.slug}
-                      type="button"
-                      onMouseDown={() => {
-                        router.push(`/tools/${tool.slug}`);
-                        setIsFocused(false);
-                      }}
-                      className={`w-full flex items-center justify-between p-2.5 rounded-xl text-left transition ${
-                        selectedIndex === idx
-                          ? 'bg-cyan-50 dark:bg-cyan-950/40 text-cyan-950 dark:text-[#00D2FF]'
-                          : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200'
-                      }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-cyan-500/10 text-[#00D2FF] font-mono text-xs font-bold">
-                          &gt;_
-                        </div>
-                        <div>
-                          <div className="font-semibold text-xs sm:text-sm text-slate-950 dark:text-white">
-                            {tool.name}
-                          </div>
-                          <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate max-w-sm sm:max-w-md">
-                            {tool.tagline}
-                          </div>
-                        </div>
-                      </div>
-                      <span className="shrink-0 text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
-                        {tool.categoryName}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                <div className="p-4 text-center text-xs text-slate-500 dark:text-slate-400">
-                  No exact engine match for &quot;{searchQuery}&quot;. Press Enter to browse directory.
-                </div>
-              )}
+          {/* Instant Autocomplete Flyout */}
+          {isFocused && filteredTools.length > 0 && (
+            <div className="absolute left-0 right-0 top-full mt-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c1220] shadow-2xl p-2 z-50 text-left animate-fadeIn">
+              <div className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Matching Tools ({filteredTools.length})
+              </div>
+              <div className="space-y-1">
+                {filteredTools.map((t, idx) => (
+                  <Link
+                    key={t.slug}
+                    href={`/tools/${t.slug}`}
+                    onMouseDown={() => router.push(`/tools/${t.slug}`)}
+                    className={`flex items-center justify-between p-2.5 rounded-xl transition ${
+                      selectedIndex === idx
+                        ? 'bg-slate-100 dark:bg-slate-800 text-slate-950 dark:text-white'
+                        : 'hover:bg-slate-50 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-200'
+                    }`}
+                  >
+                    <div>
+                      <div className="text-xs font-bold">{t.name}</div>
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1">{t.tagline}</div>
+                    </div>
+                    <span className="text-[10px] font-mono text-[#00D2FF] bg-cyan-950/60 border border-cyan-800/80 px-2 py-0.5 rounded">
+                      {t.categoryName}
+                    </span>
+                  </Link>
+                ))}
+              </div>
             </div>
           )}
-
-          {/* 5. Trending / Quick-Filter Chips */}
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs">
-            <span className="text-slate-400 dark:text-slate-500 font-medium">Quick Filters:</span>
-            {POPULAR_CHIPS.map((chip) => (
-              <Link
-                key={chip.label}
-                href={chip.href}
-                className="rounded-full border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 px-3 py-1 font-medium text-slate-700 dark:text-slate-300 hover:border-cyan-500/60 dark:hover:border-[#00D2FF]/60 hover:text-cyan-600 dark:hover:text-[#00D2FF] hover:bg-slate-50 dark:hover:bg-slate-800 transition shadow-2xs"
-              >
-                {chip.label}
-              </Link>
-            ))}
-          </div>
         </div>
 
-        {/* 6. High-Conversion Tip & Verification Strip */}
-        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-medium">
-          <div className="flex items-center gap-1.5 bg-cyan-50/70 dark:bg-cyan-950/30 border border-cyan-200/60 dark:border-cyan-800/40 text-cyan-900 dark:text-cyan-300 px-3.5 py-1 rounded-full">
-            <Sparkles className="h-3.5 w-3.5 text-[#00D2FF]" />
-            <span>TIP: Filter as you type, or press <kbd className="font-mono bg-white dark:bg-slate-900 px-1 py-0.5 rounded border border-cyan-200 dark:border-cyan-800 text-[10px]">⌘K</kbd> anywhere</span>
-          </div>
+        {/* Quick Filter Chips */}
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs">
+          <span className="text-slate-400 dark:text-slate-500 text-[11px] font-mono mr-1">
+            Popular:
+          </span>
+          {POPULAR_CHIPS.map((chip) => (
+            <Link
+              key={chip.label}
+              href={chip.href}
+              className="rounded-full border border-slate-200 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/90 px-3 py-1 text-slate-700 dark:text-slate-300 transition hover:border-cyan-500/50 hover:text-slate-950 dark:hover:text-white hover:bg-white dark:hover:bg-slate-800 shadow-2xs font-medium"
+            >
+              {chip.label}
+            </Link>
+          ))}
         </div>
 
-        {/* 7. Trust Checkpoints Row */}
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-4 text-xs text-slate-600 dark:text-slate-400">
-          <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-            <span>100% Client-Side WASM</span>
-          </span>
-          <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
-          <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-            <span>Zero Telemetry Retention</span>
-          </span>
-          <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
-          <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-            <span>26 Production Compilers</span>
-          </span>
-        </div>
-
-        {/* 8. Primary Directory CTA Buttons */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+        {/* Dual Primary Call-to-Actions */}
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-3.5">
           <Link
             href="/tools"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#00D2FF] hover:bg-[#38bdf8] text-slate-950 font-bold px-8 py-3.5 text-sm shadow-[0_0_20px_rgba(0,210,255,0.25)] transition-all duration-200 active:scale-[0.98]"
+            className="rounded-full bg-[#00D2FF] hover:bg-[#38bdf8] text-slate-950 px-6 sm:px-7 py-3 text-xs sm:text-sm font-bold shadow-[0_0_20px_rgba(0,210,255,0.3)] transition active:scale-95 flex items-center gap-2 cursor-pointer"
           >
-            <span>Browse 500+ Tools</span>
+            <Zap className="h-4 w-4 fill-slate-950 text-slate-950" />
+            <span>Explore All 50+ Tools</span>
             <ArrowRight className="h-4 w-4" />
           </Link>
+
           <Link
-            href="/calculators"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800 px-7 py-3.5 text-sm font-semibold text-slate-800 dark:text-slate-200 shadow-xs transition-all duration-200 active:scale-[0.98]"
+            href="/calculators/finance"
+            className="rounded-full border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 px-5 sm:px-6 py-3 text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-850 shadow-xs transition active:scale-95 flex items-center gap-2"
           >
-            <SlidersHorizontal className="h-4 w-4 text-slate-500" />
-            <span>Explore Workbenches</span>
+            <Calculator className="h-4 w-4 text-[#00D2FF]" />
+            <span>19+ Universal Calculators</span>
           </Link>
         </div>
 
-        {/* ── 9. Realistic Developer Social Proof Ribbon ── */}
-        <div className="mt-14 pt-10 border-t border-slate-200/80 dark:border-slate-800/80 w-full max-w-4xl flex flex-col items-center">
-          <p className="text-[11px] font-mono font-semibold tracking-widest text-slate-400 dark:text-slate-500 uppercase mb-6">
-            TRUSTED &amp; USED BY BUILDERS FROM
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-slate-500 dark:text-slate-400">
-            {/* Product Hunt */}
-            <div className="flex items-center gap-2 hover:text-slate-900 dark:hover:text-slate-200 transition-colors">
-              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm1.2 13.8H9.6v3.6H7.2V6.6h5.88c2.4 0 4.08 1.56 4.08 3.6 0 2.04-1.68 3.6-3.96 3.6zm-.24-4.8H9.6v2.4h2.16c1.08 0 1.8-.72 1.8-1.2 0-.48-.72-1.2-1.8-1.2z" />
-              </svg>
-              <span className="text-xs font-semibold tracking-tight">Product Hunt</span>
-            </div>
-
-            {/* Indie Hackers */}
-            <div className="flex items-center gap-2 hover:text-slate-900 dark:hover:text-slate-200 transition-colors">
-              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                <path d="M0 0h24v24H0V0zm3.6 4.8h3.6v14.4H3.6V4.8zm6 0h3.6v6h4.8v-6h3.6v14.4H18v-6h-4.8v6H9.6V4.8z" />
-              </svg>
-              <span className="text-xs font-semibold tracking-tight">Indie Hackers</span>
-            </div>
-
-            {/* GitHub Trending */}
-            <div className="flex items-center gap-2 hover:text-slate-900 dark:hover:text-slate-200 transition-colors">
-              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-              </svg>
-              <span className="text-xs font-semibold tracking-tight">GitHub Trending</span>
-            </div>
-
-            {/* Dev.to */}
-            <div className="flex items-center gap-2 hover:text-slate-900 dark:hover:text-slate-200 transition-colors">
-              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                <path d="M7.42 10.05c-.18-.1-.44-.16-.76-.16h-.99v4.22h.98c.34 0 .61-.06.79-.17.19-.12.33-.29.41-.53.08-.24.12-.57.12-.98 0-.42-.04-.76-.12-1-.07-.24-.22-.41-.43-.53v.15zm8.56 0c-.23-.11-.53-.16-.91-.16h-.97v4.22h.96c.39 0 .69-.05.92-.16.23-.11.39-.28.48-.52.09-.23.14-.56.14-.98 0-.42-.05-.75-.14-.99-.09-.23-.25-.4-.48-.51v.1zm6.02-8.05H2c-.55 0-1 .45-1 1v18c0 .55.45 1 1 1h20c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-13.4 13.91H6.18V8.09h2.42c.86 0 1.54.14 2.05.42.5.28.87.69 1.1 1.24.23.54.34 1.21.34 2 0 .8-.11 1.48-.34 2.03-.23.55-.6 1-.1.1.28-.51.57-1.19.86-2.05.86zm6.36 0h-2.18V8.09h2.18v7.82zm5.42 0h-2.42V8.09h2.42c.86 0 1.54.14 2.05.42.5.28.87.69 1.1 1.24.23.54.34 1.21.34 2 0 .8-.11 1.48-.34 2.03-.23.55-.6.96-1.1 1.24-.51.28-1.19.42-2.05.42z" />
-              </svg>
-              <span className="text-xs font-semibold tracking-tight">Dev.to</span>
-            </div>
-
-            {/* Hacker News */}
-            <div className="flex items-center gap-2 hover:text-slate-900 dark:hover:text-slate-200 transition-colors">
-              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                <path d="M0 0h24v24H0V0zm12.3 12.8L16.4 5h-2.4l-2.6 5.4L8.8 5H6.4l4.1 7.8V19h1.8v-6.2z" />
-              </svg>
-              <span className="text-xs font-semibold tracking-tight">Hacker News</span>
-            </div>
+        {/* Live Directory Metrics Badges */}
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-slate-500 dark:text-slate-400 font-medium">
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+            <span>100% Client-Side Execution</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Sparkles className="h-4 w-4 text-[#00D2FF]" />
+            <span>Zero Sign-up Required</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Terminal className="h-4 w-4 text-sky-500" />
+            <span>Deterministic AST Output</span>
           </div>
         </div>
       </div>

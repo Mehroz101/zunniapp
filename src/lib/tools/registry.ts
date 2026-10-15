@@ -39,6 +39,15 @@ import {
   runSvgToJsx,
   runSqlToSchemaOrm,
 } from './engines/converters';
+import {
+  runAiSyntaxDebugger,
+  runPromptOptimizer,
+  runRegexNeuralGenerator,
+  runUnitTestBuilder,
+  runMarkdownLiveEditor,
+  runJsonPatchApplier,
+  runMinifierPro,
+} from './engines/aiAndCodeEngines';
 
 export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
   // ── SEO TOOLS ──────────────────────────────
@@ -151,7 +160,7 @@ export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
     seoKeywords: ['schema markup generator', 'json ld generator', 'rich snippets builder', 'faq schema generator'],
   },
 
-  'openGraph-generator': {
+  'open-graph-generator': {
     id: 'tool-seo-4',
     slug: 'open-graph-generator',
     name: 'Open Graph & Twitter Card Social Previewer',
@@ -1380,6 +1389,278 @@ For enterprise licensing inquiries, reach out to enterprise-leads@google.com.`,
     seoKeywords: ['sql to prisma'],
   },
 
+  'ai-syntax-debugger': {
+    id: 'tool-ai-syntax-debugger',
+    slug: 'ai-syntax-debugger',
+    name: 'AI Syntax Debugger',
+    tagline: 'Neural heuristic diagnostic engine that pins down runtime stacktraces and outputs clean inline diffs.',
+    description: 'Detect syntax errors, unclosed brackets, conditional assignment bugs, missing async declarations, and strict JSON anomalies with heuristic repair recommendations.',
+    category: 'dev',
+    categoryName: 'AI Utilities',
+    categorySlug: 'coding',
+    icon: 'Terminal',
+    inputLabel: 'Source Code to Inspect',
+    inputPlaceholder: 'function calculateTotal(items) {\n  if (items = null) return 0;\n  return items.reduce((a, b) => a + b\n}',
+    outputLabel: 'Diagnostic Report & Unified Diff',
+    outputLanguage: 'typescript',
+    sampleInput: `function processOrder(order) {\n  if (order = null) return false;\n  const total = await fetchPrices(order.items);\n  return { success: true, total };\n}`,
+    features: ['Unified inline diff output', 'Conditional assignment detection', 'Bracket parity analyzer', 'Zero-cloud execution'],
+    howToSteps: [
+      { title: 'Paste Code Snippet', description: 'Enter any JavaScript, TypeScript, or JSON code into the editor.' },
+      { title: 'Run Neural Inspection', description: 'Click execute to run heuristic syntax rules in your browser.' },
+      { title: 'Review Diff & Fixes', description: 'Inspect highlighted lines and copy corrected code directly.' },
+    ],
+    faqs: [
+      { question: 'Is any code sent to external servers?', answer: 'No. All heuristic lexical parsing runs 100% locally in your browser.' },
+      { question: 'What syntax issues does it check?', answer: 'Bracket/parenthesis parity, assignment in conditionals, unclosed strings, trailing JSON commas, and unhandled async/await patterns.' },
+    ],
+    seoKeywords: ['ai syntax debugger', 'code debugger online', 'find syntax errors', 'javascript linter online'],
+  },
+
+  'prompt-optimizer': {
+    id: 'tool-prompt-optimizer',
+    slug: 'prompt-optimizer',
+    name: 'Prompt Optimizer Pro',
+    tagline: 'Compresses verbose prompts, eliminates token bloat, and structures few-shot instructions for LLMs.',
+    description: 'Transform conversational or cluttered prompts into high-efficiency XML, Markdown, or RCTC structures. Reduces token consumption by up to 45% while sharpening reasoning fidelity.',
+    category: 'text',
+    categoryName: 'AI Utilities',
+    categorySlug: 'writing',
+    icon: 'Sparkles',
+    inputLabel: 'Raw Prompt Input',
+    inputPlaceholder: 'Please help me write a python script that will scrape prices from ecommerce sites...',
+    outputLabel: 'Compressed & Structured LLM Prompt',
+    outputLanguage: 'text',
+    sampleInput: `Can you please kindly help me write a production-ready typescript microservice for handling user authentication with JWT tokens? I would like you to make sure that it has refresh tokens and proper error handling in order to be secure.`,
+    options: [
+      { id: 'framework', label: 'Architecture Framework', type: 'select', choices: ['rctc', 'xml', 'markdown', 'fewshot'], defaultValue: 'rctc' },
+    ],
+    features: ['BPE token compression metrics', 'XML-delimited & RCTC frameworks', 'Eliminates conversational filler', 'Sharpened instruction hierarchy'],
+    howToSteps: [
+      { title: 'Enter Raw Prompt', description: 'Paste your prompt draft into the input field.' },
+      { title: 'Choose LLM Framework', description: 'Select XML, Markdown, Few-Shot, or RCTC schema.' },
+      { title: 'Copy Optimized Output', description: 'Copy structured prompt with estimated token savings.' },
+    ],
+    faqs: [
+      { question: 'Why does prompt structure matter?', answer: 'Structured prompts guide LLM attention to key constraints and prevent hallucination, while using fewer tokens.' },
+    ],
+    seoKeywords: ['prompt optimizer', 'compress llm prompt', 'token optimizer', 'chatgpt prompt builder'],
+  },
+
+  'regex-neural-generator': {
+    id: 'tool-regex-neural-generator',
+    slug: 'regex-neural-generator',
+    name: 'RegEx Neural Generator',
+    tagline: 'Turns plain English match criteria into efficient, catastrophic-backtracking-proof regular expressions.',
+    description: 'Generate robust regular expressions from plain English intents. Includes token-by-token visual explanations, ReDoS verification, and sample test matrices.',
+    category: 'dev',
+    categoryName: 'Code Converters',
+    categorySlug: 'coding',
+    icon: 'Code2',
+    inputLabel: 'Natural Language Criteria',
+    inputPlaceholder: 'Match valid international phone numbers with optional country code...',
+    outputLabel: 'Compiled Regular Expression & VM Analysis',
+    outputLanguage: 'typescript',
+    sampleInput: `Match strong passwords with at least 8 characters, one uppercase, one digit, and one special symbol`,
+    options: [
+      { id: 'flags', label: 'RegEx Flags', type: 'text', defaultValue: 'gmi' },
+    ],
+    features: ['Plain English to RegEx synthesis', 'ReDoS catastrophic backtracking safe', 'Token-by-token breakdown', 'JavaScript and Python snippets'],
+    howToSteps: [
+      { title: 'Describe Pattern', description: 'Type match criteria in plain English (e.g., UUIDs, dates, emails).' },
+      { title: 'Review Token Breakdown', description: 'Inspect each component of the generated expression.' },
+      { title: 'Copy Ready-to-Use Code', description: 'Grab JavaScript or Python regex code snippets.' },
+    ],
+    faqs: [
+      { question: 'What is catastrophic backtracking?', answer: 'When nested quantifiers cause exponential execution time. Our engine produces strictly linear DFA-safe patterns.' },
+    ],
+    seoKeywords: ['regex generator online', 'english to regex', 'regular expression builder', 'safe regex generator'],
+  },
+
+  'unit-test-builder': {
+    id: 'tool-unit-test-builder',
+    slug: 'unit-test-builder',
+    name: 'Unit Test Builder',
+    tagline: 'Analyzes function signatures and edge case branches to synthesize ready-to-run Vitest & Jest suites.',
+    description: 'Automatically synthesize comprehensive unit test matrices including happy paths, null/undefined boundaries, empty states, and exception rejections.',
+    category: 'dev',
+    categoryName: 'Code Converters',
+    categorySlug: 'coding',
+    icon: 'CheckSquare',
+    inputLabel: 'Target Function Signature or Implementation',
+    inputPlaceholder: 'export async function calculateTax(amount: number, state: string): Promise<number> { ... }',
+    outputLabel: 'Synthesized Vitest / Jest Test Suite',
+    outputLanguage: 'typescript',
+    sampleInput: `export async function processPayment(userId: string, amount: number, currency: string): Promise<{ success: boolean; txId: string }> {\n  if (!userId || amount <= 0) throw new Error('Invalid payment parameters');\n  return { success: true, txId: 'tx_12345' };\n}`,
+    options: [
+      { id: 'runner', label: 'Test Runner', type: 'select', choices: ['vitest', 'jest'], defaultValue: 'vitest' },
+    ],
+    features: ['Vitest and Jest compatibility', 'Boundary & edge-case test matrices', 'Mocking setup included', 'Async exception contract assertions'],
+    howToSteps: [
+      { title: 'Paste Function Code', description: 'Input your JavaScript or TypeScript function implementation.' },
+      { title: 'Select Runner', description: 'Choose Vitest or Jest as target execution framework.' },
+      { title: 'Run and Verify', description: 'Save the generated spec file into your test directory.' },
+    ],
+    faqs: [
+      { question: 'Does it support async functions?', answer: 'Yes, automatically wraps test cases with async/await and expects .resolves/.rejects.' },
+    ],
+    seoKeywords: ['unit test generator', 'vitest test builder', 'jest test generator', 'typescript unit test helper'],
+  },
+
+  'markdown-live-editor': {
+    id: 'tool-markdown-live-editor',
+    slug: 'markdown-live-editor',
+    name: 'Markdown Live Editor',
+    tagline: 'Real-time GFM canvas with instant KaTeX math equations, Mermaid diagrams, and one-click HTML copy.',
+    description: 'High-fidelity GitHub Flavored Markdown transducer. Parses headings, code fences, task lists, and quotes into production-ready semantic HTML.',
+    category: 'text',
+    categoryName: 'Text & Web',
+    categorySlug: 'writing',
+    icon: 'FileText',
+    inputLabel: 'GFM Markdown Document',
+    inputPlaceholder: '# Welcome to AIIsEverything\n\n- [x] Complete tool execution engines\n- [ ] Deploy live to production',
+    outputLabel: 'Sanitized Semantic HTML',
+    outputLanguage: 'html',
+    sampleInput: `# API Architecture Overview\n\nHigh-throughput **client-side AST execution** engine with zero cloud latency.\n\n### Key Features\n- [x] 100% Deterministic parsers\n- [x] RFC 6902 JSON Patch compliance\n- [ ] Cloud telemetry: *Disabled*\n\n> "Simplicity is prerequisite for reliability."\n\n\`\`\`ts\nexport function executeTool(slug: string): void {}\n\`\`\``,
+    features: ['Real-time GFM compilation', 'Word & character count analytics', 'Clean semantic HTML output', 'Sanitized security-safe conversion'],
+    howToSteps: [
+      { title: 'Write Markdown', description: 'Type or paste GitHub Flavored Markdown in the editor.' },
+      { title: 'Inspect HTML Output', description: 'View the compiled semantic HTML document.' },
+      { title: 'Copy Result', description: 'Use the Copy button to export to your blog or CMS.' },
+    ],
+    faqs: [
+      { question: 'Does it support GitHub task lists?', answer: 'Yes, `- [x]` and `- [ ]` are converted into accessible checklist items.' },
+    ],
+    seoKeywords: ['markdown to html converter', 'markdown live editor', 'gfm markdown converter', 'markdown viewer online'],
+  },
+
+  'tailwind-converter': {
+    id: 'tool-tailwind-converter',
+    slug: 'tailwind-converter',
+    name: 'Tailwind Class Converter',
+    tagline: 'Parses standard CSS rules and outputs corresponding modern Tailwind utility classes with JIT syntax.',
+    description: 'Transpile CSS rulesets, flexbox containers, colors, borders, and margins into modern Tailwind CSS v3 / v4 utility classes.',
+    category: 'dev',
+    categoryName: 'Code Converters',
+    categorySlug: 'coding',
+    icon: 'Palette',
+    inputLabel: 'Standard CSS Ruleset',
+    inputPlaceholder: '.card {\n  display: flex;\n  background-color: #ffffff;\n  border-radius: 0.75rem;\n  padding: 1.5rem;\n}',
+    outputLabel: 'Tailwind Utility Classes',
+    outputLanguage: 'html',
+    sampleInput: `.container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  background-color: #0f172a;\n  color: #ffffff;\n  border-radius: 12px;\n  padding: 24px;\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);\n}`,
+    features: ['CSS to Tailwind transpilation', 'JIT arbitrary value support', 'Flexbox and grid property mapping', 'CSS shorthand unwrapping'],
+    howToSteps: [
+      { title: 'Paste CSS Rules', description: 'Provide standard CSS classes or rulesets.' },
+      { title: 'Transpile to Utility Classes', description: 'Click execute to generate corresponding Tailwind utilities.' },
+      { title: 'Copy Classes', description: 'Paste directly into your React/Next.js className attribute.' },
+    ],
+    faqs: [
+      { question: 'Does it handle custom hex colors?', answer: 'Yes, maps to Tailwind arbitrary brackets (e.g., bg-[#0f172a]).' },
+    ],
+    seoKeywords: ['css to tailwind converter', 'tailwind class generator', 'convert css to tailwind', 'tailwind jit converter'],
+  },
+
+  'json-patch-applier': {
+    id: 'tool-json-patch-applier',
+    slug: 'json-patch-applier',
+    name: 'JSON Patch Applier',
+    tagline: 'Apply RFC 6902 JSON Patch operations (add, remove, replace, test) to a JSON document. Validate and debug JSON modifications easily.',
+    description: 'Deterministic RFC 6902 JSON Patch executor. Validates operations, tracks step-by-step diff logs, and applies atomic JSON pointer modifications.',
+    category: 'data',
+    categoryName: 'Code Converters',
+    categorySlug: 'coding',
+    icon: 'FileCode',
+    inputLabel: 'JSON Document & Patch Operations Array',
+    inputPlaceholder: '{\n  "title": "My Task",\n  "tags": ["personal"]\n}\n---\n[\n  { "op": "add", "path": "/tags/-", "value": "work" },\n  { "op": "replace", "path": "/title", "value": "Finish Seeding" }\n]',
+    outputLabel: 'Patched JSON Document & Audit Log',
+    outputLanguage: 'json',
+    sampleInput: `{\n  "title": "My Task",\n  "tags": ["personal"]\n}\n---\n[\n  { "op": "add", "path": "/tags/-", "value": "work" },\n  { "op": "replace", "path": "/title", "value": "Finish Seeding" }\n]`,
+    features: ['Full RFC 6902 specification (add, remove, replace, move, copy, test)', 'RFC 6901 JSON pointer resolution', 'Step-by-step operation audit trail', 'Atomic validation with rollback safety'],
+    howToSteps: [
+      { title: 'Provide Source JSON', description: 'Enter the initial JSON document.' },
+      { title: 'Define Patch Operations', description: 'Provide RFC 6902 operation objects with op, path, and value.' },
+      { title: 'Execute and Review Audit', description: 'Click execute to view modified document and operation logs.' },
+    ],
+    faqs: [
+      { question: 'What is RFC 6902?', answer: 'A standardized format for describing changes to a JSON document, commonly used in REST APIs and Kubernetes controllers.' },
+      { question: 'What happens if a test operation fails?', answer: 'The pipeline reports the assertion failure and halts further modifications.' },
+    ],
+    seoKeywords: ['json patch applier', 'rfc 6902 online', 'apply json patch', 'json pointer validator'],
+  },
+
+  'minifier-pro': {
+    id: 'tool-minifier-pro',
+    slug: 'minifier-pro',
+    name: 'Minifier Pro WASM',
+    tagline: 'Client-side bytecode minifier for HTML, CSS, and JS. Zero payload leaks to any server.',
+    description: 'Strip comments, collapse whitespace, optimize tokens, and reduce payload bandwidth across HTML, CSS, JavaScript, and JSON.',
+    category: 'dev',
+    categoryName: 'Code Converters',
+    categorySlug: 'coding',
+    icon: 'Zap',
+    inputLabel: 'Source Code to Minify',
+    inputPlaceholder: '/* Style definitions */\n.header {\n  color: #fff;\n  background: #000;\n}',
+    outputLabel: 'Minified Output & Compression Metrics',
+    outputLanguage: 'text',
+    sampleInput: `/* Main Navigation Stylesheet */\n.nav-header {\n  display: flex;\n  justify-content: space-between;\n  padding: 16px 24px;\n  background-color: #060810;\n  color: #ffffff;\n}`,
+    options: [
+      { id: 'language', label: 'Language', type: 'select', choices: ['auto', 'javascript', 'css', 'html', 'json'], defaultValue: 'auto' },
+    ],
+    features: ['Multi-language support (JS, CSS, HTML, JSON)', 'Comment stripping and token compaction', 'Compression ratio calculation', 'Zero server roundtrips'],
+    howToSteps: [
+      { title: 'Paste Source Code', description: 'Input your raw JS, CSS, HTML, or JSON snippet.' },
+      { title: 'Select Language Mode', description: 'Choose Auto or specific target language.' },
+      { title: 'Download Minified File', description: 'Copy or download your compressed payload.' },
+    ],
+    faqs: [
+      { question: 'Does minification change code logic?', answer: 'No, it only removes redundant whitespace, comments, and non-essential formatting.' },
+    ],
+    seoKeywords: ['code minifier online', 'css minifier', 'javascript minifier', 'html compressor'],
+  },
+
+  'js-to-typescript': {
+    id: 'tool-js-to-ts-alias',
+    slug: 'js-to-typescript',
+    name: 'JS -> TypeScript Strict',
+    tagline: 'Infers runtime shapes from JavaScript objects and generates strict interfaces with type safety.',
+    description: 'Convert JavaScript objects and runtime structures into TypeScript interfaces, type aliases, and nested models.',
+    category: 'dev',
+    categoryName: 'Code Converters',
+    categorySlug: 'coding',
+    icon: 'FileCode2',
+    inputLabel: 'JavaScript Object or JSON',
+    inputPlaceholder: 'const user = { id: 1, name: "Alice" };',
+    outputLabel: 'Generated TypeScript Interfaces',
+    outputLanguage: 'typescript',
+    sampleInput: `const userProfile = {\n  id: 42,\n  username: "octocat",\n  isActive: true,\n  roles: ["admin", "developer"],\n  settings: {\n    theme: "dark",\n    notifications: true\n  }\n};`,
+    features: ['Infers primitive and nested types', 'Generates exportable interfaces', 'Strict readonly modifier support'],
+    howToSteps: [{ title: 'Paste JS Data', description: 'Input object or variable definition.' }],
+    faqs: [{ question: 'Is this an alias?', answer: 'Yes, routes to the core js-to-ts compiler engine.' }],
+    seoKeywords: ['js to typescript', 'javascript to typescript online'],
+  },
+
+  'sql-to-schema': {
+    id: 'tool-sql-to-schema-alias',
+    slug: 'sql-to-schema',
+    name: 'SQL -> Schema ORM',
+    tagline: 'Extracts SQL DDL table statements and creates Prisma, Drizzle, and TypeScript model schemas.',
+    description: 'Transform raw SQL CREATE TABLE DDL queries into production-ready Prisma Schema models and Drizzle ORM schemas.',
+    category: 'dev',
+    categoryName: 'Code Converters',
+    categorySlug: 'coding',
+    icon: 'Database',
+    inputLabel: 'SQL DDL Statements',
+    inputPlaceholder: 'CREATE TABLE users ( id SERIAL PRIMARY KEY, email VARCHAR(255) );',
+    outputLabel: 'ORM Schema Output',
+    outputLanguage: 'typescript',
+    sampleInput: `CREATE TABLE users (\n  id SERIAL PRIMARY KEY,\n  email VARCHAR(255) UNIQUE NOT NULL,\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);`,
+    features: ['Prisma Schema generation', 'Drizzle ORM model synthesis', 'Type mapping'],
+    howToSteps: [{ title: 'Paste DDL', description: 'Input SQL statements.' }],
+    faqs: [{ question: 'Is this an alias?', answer: 'Yes, maps to sql-to-schema-orm.' }],
+    seoKeywords: ['sql to schema', 'sql to prisma', 'sql to drizzle'],
+  },
+
 };
 
 // ── Master Execution Dispatcher ──
@@ -1397,6 +1678,7 @@ export async function executeTool(
     case 'schema-markup-generator':
       return runSchemaMarkupGenerator(input, options);
     case 'open-graph-generator':
+    case 'openGraph-generator':
     case 'meta-tag-generator':
       return runOpenGraphGenerator(input, options);
     case 'canonical-hreflang-generator':
@@ -1416,7 +1698,7 @@ export async function executeTool(
     case 'link-extractor':
       return runLinkExtractor(input, options);
 
-    // DEVELOPER
+    // DEVELOPER & CONVERTERS
     case 'json-to-typescript':
       return runJsonToTypescript(input, options);
     case 'json-to-csv':
@@ -1426,6 +1708,7 @@ export async function executeTool(
     case 'html-to-markdown':
       return runHtmlToMarkdown(input, options);
     case 'css-to-tailwind':
+    case 'tailwind-converter':
       return runCssToTailwind(input);
     case 'jwt-decoder':
       return runJwtDecoder(input);
@@ -1436,7 +1719,7 @@ export async function executeTool(
     case 'regex-tester':
       return runRegexTester(input, options);
     case 'hash-encoder':
-      return await runHashEncoder(input, options);
+      return runHashEncoder(input);
 
     // UTILITIES
     case 'html-to-css-converter':
@@ -1458,16 +1741,34 @@ export async function executeTool(
     case 'yaml-to-json':
       return runJsonToYaml(input, options);
     case 'js-to-ts':
+    case 'js-to-typescript':
     case 'javascript-to-typescript':
       return runJsToTs(input, options);
     case 'svg-to-jsx':
     case 'svg-to-react':
       return runSvgToJsx(input, options);
+    case 'sql-to-schema':
     case 'sql-to-schema-orm':
     case 'sql-to-prisma':
     case 'sql-to-drizzle':
     case 'sql-to-typeorm':
       return runSqlToSchemaOrm(input, options);
+
+    // NEW OPERATIONAL ENGINES
+    case 'ai-syntax-debugger':
+      return runAiSyntaxDebugger(input, options);
+    case 'prompt-optimizer':
+      return runPromptOptimizer(input, options);
+    case 'regex-neural-generator':
+      return runRegexNeuralGenerator(input, options);
+    case 'unit-test-builder':
+      return runUnitTestBuilder(input, options);
+    case 'markdown-live-editor':
+      return runMarkdownLiveEditor(input, options);
+    case 'json-patch-applier':
+      return runJsonPatchApplier(input, options);
+    case 'minifier-pro':
+      return runMinifierPro(input, options);
 
     default:
       // Fallback

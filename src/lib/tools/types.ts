@@ -28,6 +28,12 @@ export interface ToolDefinition {
   howToSteps: Array<{ title: string; description: string }>;
   faqs: Array<{ question: string; answer: string }>;
   seoKeywords: string[];
+
+  // Directory Hero & Card Styling Tokens (HeyGen Design Parity)
+  categoryTag?: string;
+  engineSubBadge?: string;
+  speedBadge?: string;
+  primaryGroup?: 'code-converters' | 'ai-utilities' | 'text-web';
 }
 
 export interface ToolExecutionResult {

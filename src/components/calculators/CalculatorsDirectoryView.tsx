@@ -55,12 +55,24 @@ const ICON_MAP: Record<string, React.ElementType> = {
 
 interface CalculatorsDirectoryViewProps {
   calculators?: CalculatorDefinition[];
+  initialCategory?: 'all' | CalculatorCategory;
+  badgeText?: string;
+  headingTitle?: string;
+  headingAccent?: string;
+  headingSubtitle?: string;
 }
 
-export function CalculatorsDirectoryView({ calculators: propCalculators }: CalculatorsDirectoryViewProps = {}) {
+export function CalculatorsDirectoryView({
+  calculators: propCalculators,
+  initialCategory = 'all',
+  badgeText = 'UNIVERSAL 19+ CALCULATION SUITE',
+  headingTitle = 'Precision Calculators for',
+  headingAccent = 'Finance & Science',
+  headingSubtitle = 'Explore our collection of 19 high-precision financial, mathematical, engineering, and scientific calculation engines. Zero telemetry logging, 100% free and client-side.',
+}: CalculatorsDirectoryViewProps = {}) {
   const calculators = useMemo(() => propCalculators || getAllCalculators(), [propCalculators]);
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const [activeTab, setActiveTab] = useState<'all' | CalculatorCategory>('all');
+  const [activeTab, setActiveTab] = useState<'all' | CalculatorCategory>(initialCategory);
   const [searchQuery, setSearchQuery] = useState('');
 
   // Keyboard shortcut listener (Cmd+K / Ctrl+K)
@@ -104,19 +116,19 @@ export function CalculatorsDirectoryView({ calculators: propCalculators }: Calcu
       {/* ── Directory Header / Kicker & Search ── */}
       <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 px-3.5 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md">
-          <Calculator className="h-3.5 w-3.5 text-amber-500" />
-          <span>UNIVERSAL 19+ CALCULATION SUITE</span>
+          <Calculator className="h-3.5 w-3.5 text-[#00D2FF]" />
+          <span>{badgeText}</span>
         </div>
 
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.1]">
-          Precision Calculators for{' '}
-          <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 dark:from-amber-400 dark:via-orange-400 dark:to-amber-500 bg-clip-text text-transparent">
-            Finance & Science
+          {headingTitle}{' '}
+          <span className="bg-gradient-to-r from-[#00D2FF] via-cyan-400 to-sky-400 dark:from-[#00D2FF] dark:via-cyan-400 dark:to-sky-500 bg-clip-text text-transparent">
+            {headingAccent}
           </span>
         </h1>
 
         <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          Explore our collection of 19 high-precision financial, mathematical, engineering, and scientific calculation engines. Zero telemetry logging, 100% free and client-side.
+          {headingSubtitle}
         </p>
 
         {/* Global Instant Search Bar */}

@@ -32,95 +32,167 @@
     color: var(--foreground);
     font-family: var(--font-inter), system-ui, sans-serif;
   }
+}
 
-  /* Ultra-Clean Modern Scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #f8fafc;
-  }
-  .dark ::-webkit-scrollbar-track {
-    background: #05070c;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 9999px;
-  }
-  .dark ::-webkit-scrollbar-thumb {
-    background: #1e293b;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-  }
-  .dark ::-webkit-scrollbar-thumb:hover {
-    background: #334155;
-  }
+/* Ultra-Clean Modern Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #05070c;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #1e293b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
 
-  /* Smooth Dropdown Animation */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* Smooth Dropdown Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-  .animate-fadeIn {
-    animation: fadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
+.animate-fadeIn {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 
+/* Hardware-Accelerated Ambient Infinite Scroll System (translate3d GPU Compositor) */
+@keyframes scrollUpTrack {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, -50%, 0);
+  }
+}
 
+@keyframes scrollDownTrack {
+  0% {
+    transform: translate3d(0, -50%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
 
-  /* Prism Syntax Highlighting (Modern Tech Theme) */
-  .token.comment,
-  .token.prolog,
-  .token.doctype,
-  .token.cdata {
-    color: #64748b;
-    font-style: italic;
+@keyframes scrollLeftTrack {
+  0% {
+    transform: translate3d(0, 0, 0);
   }
-  .token.punctuation {
-    color: #94a3b8;
+  100% {
+    transform: translate3d(-50%, 0, 0);
   }
-  .token.property,
-  .token.tag,
-  .token.boolean,
-  .token.number,
-  .token.constant,
-  .token.symbol,
-  .token.deleted {
-    color: #e11d48;
+}
+
+@keyframes scrollRightTrack {
+  0% {
+    transform: translate3d(-50%, 0, 0);
   }
-  .token.selector,
-  .token.attr-name,
-  .token.string,
-  .token.char,
-  .token.builtin,
-  .token.inserted {
-    color: #059669;
+  100% {
+    transform: translate3d(0, 0, 0);
   }
-  .token.operator,
-  .token.entity,
-  .token.url {
-    color: #0284c7;
+}
+
+.animate-scroll-up {
+  animation: scrollUpTrack var(--scroll-duration, 60s) linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.animate-scroll-down {
+  animation: scrollDownTrack var(--scroll-duration, 60s) linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.animate-scroll-left {
+  animation: scrollLeftTrack var(--scroll-duration, 50s) linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.animate-scroll-right {
+  animation: scrollRightTrack var(--scroll-duration, 50s) linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-up,
+  .animate-scroll-down,
+  .animate-scroll-left,
+  .animate-scroll-right {
+    animation-play-state: paused !important;
   }
-  .token.atrule,
-  .token.attr-value,
-  .token.keyword {
-    color: #7c3aed;
-  }
-  .token.function,
-  .token.class-name {
-    color: #2563eb;
-  }
-  .token.regex,
-  .token.important,
-  .token.variable {
-    color: #d97706;
-  }
+}
+
+/* Prism Syntax Highlighting (Modern Tech Theme) */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #64748b;
+  font-style: italic;
+}
+.token.punctuation {
+  color: #94a3b8;
+}
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #e11d48;
+}
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #059669;
+}
+.token.operator,
+.token.entity,
+.token.url {
+  color: #0284c7;
+}
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #7c3aed;
+}
+.token.function,
+.token.class-name {
+  color: #2563eb;
+}
+.token.regex,
+.token.important,
+.token.variable {
+  color: #d97706;
 }

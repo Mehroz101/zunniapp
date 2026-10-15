@@ -13,9 +13,10 @@ import {
   Code2,
   FileText,
   Sliders,
-  Maximize2,
+  Trash2,
+  Zap,
   Eye,
-  CheckCircle2,
+  GripVertical,
 } from 'lucide-react';
 import { ToolDefinition, ToolExecutionResult } from '@/lib/tools/types';
 import { executeTool } from '@/lib/tools/registry';
@@ -25,8 +26,18 @@ interface WorkbenchProps {
 }
 
 export function Workbench({ tool }: WorkbenchProps) {
-  const [input, setInput] = useState<string>(tool.sampleInput || '');
+  // Support for dual-input tools like JSON Patch Applier
+  const isDualInput = tool.slug === 'json-patch-applier';
+
+  const defaultSampleParts = tool.sampleInput.split(/\n---\n/);
+  const initialInput1 = defaultSampleParts[0] || '';
+  const initialInput2 = defaultSampleParts[1] || '';
+
+  const [input1, setInput1] = useState<string>(initialInput1);
+  const [input2, setInput2] = useState<string>(initialInput2);
+  const [singleInput, setSingleInput] = useState<string>(tool.sampleInput || '');
   const [output, setOutput] = useState<string>('');
+
   const [options, setOptions] = useState<Record<string, any>>(() => {
     const initial: Record<string, any> = {};
     tool.options?.forEach((opt) => {
@@ -34,32 +45,41 @@ export function Workbench({ tool }: WorkbenchProps) {
     });
     return initial;
   });
+
   const [copied, setCopied] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [telemetry, setTelemetry] = useState<ToolExecutionResult['telemetry'] | null>(null);
   const [error, setError] = useState<{ message: string; line?: number; column?: number } | null>(null);
   const [meta, setMeta] = useState<Record<string, any> | null>(null);
-  const [rawView, setRawView] = useState(false);
 
-  // Auto-run with sample input on first mount
+  // Auto-run on first mount
   useEffect(() => {
     if (tool.sampleInput) {
-      handleExecute(tool.sampleInput, options);
+      handleRun();
     }
   }, [tool.slug]);
 
-  const handleExecute = (currentInput = input, currentOptions = options) => {
+  const getCombinedInput = (): string => {
+    if (isDualInput) {
+      return `${input1.trim()}\n---\n${input2.trim()}`;
+    }
+    return singleInput;
+  };
+
+  const handleRun = (customInput?: string, customOptions = options) => {
+    const rawPayload = customInput !== undefined ? customInput : getCombinedInput();
+
     startTransition(async () => {
       try {
         setError(null);
-        const res = await executeTool(tool.slug, currentInput, currentOptions);
+        const res = await executeTool(tool.slug, rawPayload, customOptions);
         if (res.success) {
           setOutput(res.output);
           setTelemetry(res.telemetry);
           setMeta(res.meta || null);
           setError(null);
         } else {
-          setError(res.error || { message: 'Conversion failed' });
+          setError(res.error || { message: 'Conversion or validation failed' });
           if (res.output) setOutput(res.output);
         }
       } catch (err: any) {
@@ -73,7 +93,17 @@ export function Workbench({ tool }: WorkbenchProps) {
   const handleOptionChange = (id: string, value: any) => {
     const updated = { ...options, [id]: value };
     setOptions(updated);
-    handleExecute(input, updated);
+    handleRun(undefined, updated);
+  };
+
+  const handleClear = () => {
+    setInput1('');
+    setInput2('');
+    setSingleInput('');
+    setOutput('');
+    setError(null);
+    setTelemetry(null);
+    setMeta(null);
   };
 
   const handleCopy = () => {
@@ -94,32 +124,19 @@ export function Workbench({ tool }: WorkbenchProps) {
                 tool.outputLanguage === 'html' ? 'html' :
                 tool.outputLanguage === 'css' ? 'css' :
                 tool.outputLanguage === 'typescript' ? 'ts' : 'txt';
-    a.download = `${tool.slug}-output.${ext}`;
+    a.download = `${tool.slug}-result.${ext}`;
     a.click();
     URL.revokeObjectURL(url);
   };
 
-  const handleLoadSample = () => {
-    setInput(tool.sampleInput);
-    handleExecute(tool.sampleInput, options);
-  };
-
-  const handleClear = () => {
-    setInput('');
-    setOutput('');
-    setError(null);
-    setTelemetry(null);
-    setMeta(null);
-  };
-
   return (
     <div className="w-full space-y-6">
-      {/* ── Dynamic Tool Options Ribbon ── */}
+      {/* ── Optional Parameter Ribbon ── */}
       {tool.options && tool.options.length > 0 && (
-        <div className="flex flex-wrap items-center gap-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0a0d16] p-4 text-xs">
+        <div className="flex flex-wrap items-center gap-4 rounded-xl border border-neutral-200/80 dark:border-slate-800 bg-white dark:bg-[#07090f] p-4 text-xs shadow-xs">
           <div className="flex items-center gap-1.5 font-semibold text-slate-700 dark:text-slate-300">
-            <Sliders className="h-3.5 w-3.5 text-cyan-500" />
-            <span>Execution Parameters:</span>
+            <Sliders className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
+            <span>Options:</span>
           </div>
           {tool.options.map((opt) => (
             <div key={opt.id} className="flex items-center gap-2">
@@ -130,7 +147,7 @@ export function Workbench({ tool }: WorkbenchProps) {
                 <select
                   value={options[opt.id] ?? opt.defaultValue}
                   onChange={(e) => handleOptionChange(opt.id, e.target.value)}
-                  className="rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#121624] px-2.5 py-1 text-slate-800 dark:text-slate-200 outline-none focus:border-cyan-500"
+                  className="rounded-lg border border-neutral-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 px-2.5 py-1 text-slate-900 dark:text-slate-100 outline-none focus:border-cyan-500"
                 >
                   {opt.choices?.map((choice) => (
                     <option key={choice} value={choice}>
@@ -144,7 +161,7 @@ export function Workbench({ tool }: WorkbenchProps) {
                   type="checkbox"
                   checked={Boolean(options[opt.id] ?? opt.defaultValue)}
                   onChange={(e) => handleOptionChange(opt.id, e.target.checked)}
-                  className="h-4 w-4 rounded border-slate-300 text-cyan-600 focus:ring-cyan-500"
+                  className="h-4 w-4 rounded border-neutral-300 text-cyan-600 focus:ring-cyan-500"
                 />
               )}
               {opt.type === 'text' && (
@@ -152,7 +169,7 @@ export function Workbench({ tool }: WorkbenchProps) {
                   type="text"
                   value={options[opt.id] ?? opt.defaultValue}
                   onChange={(e) => handleOptionChange(opt.id, e.target.value)}
-                  className="rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#121624] px-2.5 py-1 text-slate-800 dark:text-slate-200 outline-none focus:border-cyan-500"
+                  className="rounded-lg border border-neutral-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 px-2.5 py-1 text-slate-900 dark:text-slate-100 outline-none focus:border-cyan-500"
                 />
               )}
             </div>
@@ -160,220 +177,200 @@ export function Workbench({ tool }: WorkbenchProps) {
         </div>
       )}
 
-      {/* ── Dual-Pane Workbench Grid ── */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-        {/* ── Left Editor: Input Source ── */}
-        <div className="flex flex-col rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#07090f] shadow-sm overflow-hidden">
-          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-4 py-3 bg-slate-50 dark:bg-[#0a0d16]">
-            <div className="flex items-center gap-2">
-              <Code2 className="h-4 w-4 text-cyan-500" />
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">
-                {tool.inputLabel}
-              </span>
+      {/* ── Two-Pane Tool Canvas (HeyGen Light-Mode Aesthetics) ── */}
+      <div className="rounded-2xl border border-neutral-200/80 dark:border-slate-800/80 bg-white dark:bg-[#07090f] p-5 sm:p-7 shadow-xs">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-6 items-stretch">
+          
+          {/* ── Left Pane: Input ── */}
+          <div className="flex flex-col space-y-4">
+            <div className="flex items-center justify-between pb-1 flex-wrap gap-2">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                Input
+              </h3>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (isDualInput) {
+                      const parts = tool.sampleInput.split(/\n---\n/);
+                      setInput1(parts[0] || '');
+                      setInput2(parts[1] || '');
+                    } else {
+                      setSingleInput(tool.sampleInput);
+                    }
+                    handleRun(tool.sampleInput);
+                  }}
+                  title="Load pre-configured sample payload"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 px-2.5 py-1 text-xs font-semibold text-slate-700 dark:text-slate-200 transition cursor-pointer shadow-2xs"
+                >
+                  <Sparkles className="h-3 w-3 text-[#00D2FF]" />
+                  <span>Load Sample</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleClear}
+                  title="Clear input payload"
+                  className="inline-flex items-center gap-1 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:text-rose-600 dark:hover:text-rose-400 px-2.5 py-1 text-xs font-semibold text-slate-500 dark:text-slate-400 transition cursor-pointer shadow-2xs"
+                >
+                  <Trash2 className="h-3 w-3" />
+                  <span>Clear</span>
+                </button>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-xs">
-              <button
-                type="button"
-                onClick={handleLoadSample}
-                className="inline-flex items-center gap-1 text-slate-500 hover:text-cyan-500 dark:text-slate-400 dark:hover:text-cyan-400 transition"
-              >
-                <Sparkles className="h-3 w-3" />
-                Sample
-              </button>
-              <span className="text-slate-300 dark:text-slate-700">|</span>
-              <button
-                type="button"
-                onClick={handleClear}
-                className="inline-flex items-center gap-1 text-slate-500 hover:text-rose-500 dark:text-slate-400 dark:hover:text-rose-400 transition"
-              >
-                <RotateCcw className="h-3 w-3" />
-                Clear
-              </button>
+
+            {isDualInput ? (
+              // Dual-Card Inputs for tools like JSON Patch Applier
+              <div className="space-y-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider mb-1.5">
+                    Original JSON Document
+                  </div>
+                  <textarea
+                    value={input1}
+                    onChange={(e) => {
+                      setInput1(e.target.value);
+                      setError(null);
+                    }}
+                    placeholder={`{\n  "title": "My Task",\n  "tags": ["personal"]\n}`}
+                    rows={8}
+                    spellCheck={false}
+                    className="w-full rounded-xl border border-neutral-200 dark:border-slate-800 bg-slate-50/50 dark:bg-[#0a0f1d] p-4 font-mono text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:border-cyan-500 focus:outline-none transition leading-relaxed"
+                  />
+                </div>
+
+                <div>
+                  <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider mb-1.5">
+                    RFC 6902 Patch Operations (Array)
+                  </div>
+                  <textarea
+                    value={input2}
+                    onChange={(e) => {
+                      setInput2(e.target.value);
+                      setError(null);
+                    }}
+                    placeholder={`[\n  { "op": "add", "path": "/tags/-", "value": "work" },\n  { "op": "replace", "path": "/title", "value": "Finish Seeding" }\n]`}
+                    rows={8}
+                    spellCheck={false}
+                    className="w-full rounded-xl border border-neutral-200 dark:border-slate-800 bg-slate-50/50 dark:bg-[#0a0f1d] p-4 font-mono text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:border-cyan-500 focus:outline-none transition leading-relaxed"
+                  />
+                </div>
+              </div>
+            ) : (
+              // Single Input Tool
+              <div className="flex-1 flex flex-col">
+                <textarea
+                  value={singleInput}
+                  onChange={(e) => {
+                    setSingleInput(e.target.value);
+                    setError(null);
+                  }}
+                  placeholder={tool.inputPlaceholder}
+                  rows={18}
+                  spellCheck={false}
+                  className="w-full flex-1 rounded-xl border border-neutral-200 dark:border-slate-800 bg-slate-50/50 dark:bg-[#0a0f1d] p-4 font-mono text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:border-cyan-500 focus:outline-none transition leading-relaxed min-h-[360px]"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* ── Middle Separator (Dotted Split Drag Grip) ── */}
+          <div className="hidden lg:flex items-center justify-center px-1">
+            <div className="flex flex-col items-center gap-1.5 text-neutral-300 dark:text-slate-700 py-6">
+              <div className="w-1.5 h-1.5 rounded-full bg-neutral-300 dark:bg-slate-700" />
+              <div className="w-1.5 h-1.5 rounded-full bg-neutral-300 dark:bg-slate-700" />
+              <div className="w-1.5 h-1.5 rounded-full bg-neutral-300 dark:bg-slate-700" />
             </div>
           </div>
 
-          <div className="relative">
-            <textarea
-              value={input}
-              onChange={(e) => {
-                setInput(e.target.value);
-                setError(null);
-              }}
-              placeholder={tool.inputPlaceholder}
-              rows={16}
-              className="w-full resize-y bg-transparent p-4 font-mono text-xs leading-relaxed text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none"
-            />
-          </div>
+          {/* ── Right Pane: Result ── */}
+          <div className="flex flex-col space-y-4">
+            <div className="flex items-center justify-between pb-1 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                  Result
+                </h3>
+                {telemetry && (
+                  <span className="inline-flex items-center gap-1 font-mono text-[10.5px] font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/20 px-2 py-0.5 rounded-full shadow-2xs">
+                    <Clock className="h-2.5 w-2.5" />
+                    Executed in {telemetry.executionTimeMs}ms (Client-Side)
+                  </span>
+                )}
+              </div>
 
-          <div className="flex items-center justify-between border-t border-slate-200 dark:border-slate-800 px-4 py-2.5 bg-slate-50 dark:bg-[#0a0d16] text-[11px] text-slate-500 dark:text-slate-400 font-mono">
-            <span>Chars: {input.length}</span>
-            <button
-              type="button"
-              onClick={() => handleExecute(input, options)}
-              disabled={isPending}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 px-4 py-1.5 text-xs font-semibold text-white shadow-sm transition active:scale-95 disabled:opacity-50"
-            >
-              <Play className="h-3 w-3 fill-current" />
-              {isPending ? 'Processing...' : 'Run Tool'}
-            </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleDownload}
+                  disabled={!output}
+                  title="Download Output"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 px-2.5 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 shadow-2xs transition active:scale-95 disabled:opacity-40 cursor-pointer"
+                >
+                  <Download className="h-3.5 w-3.5 text-cyan-600 dark:text-[#00D2FF]" />
+                  <span className="hidden sm:inline">Download</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  disabled={!output}
+                  className="rounded-lg bg-[#0c1222] hover:bg-slate-800 text-white dark:bg-slate-100 dark:text-slate-950 px-3 py-1.5 text-xs font-semibold shadow-xs transition active:scale-95 disabled:opacity-40 cursor-pointer flex items-center gap-1.5"
+                >
+                  {copied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
+                  <span>{copied ? 'Copied' : 'Copy to Clipboard'}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Error Notification Alert */}
+            {error && (
+              <div className="flex items-start gap-3 rounded-xl border border-rose-500/20 bg-rose-50 dark:bg-rose-950/20 p-3.5 text-xs text-rose-700 dark:text-rose-300">
+                <AlertCircle className="h-4 w-4 shrink-0 text-rose-500 mt-0.5" />
+                <div>
+                  <p className="font-semibold">Execution Notice</p>
+                  <p className="mt-0.5">{error.message}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Read-Only Monospace Result Box */}
+            <div className="flex-1 flex flex-col">
+              <textarea
+                readOnly
+                value={output}
+                placeholder="Execution result will appear here..."
+                rows={18}
+                spellCheck={false}
+                className="w-full flex-1 rounded-xl border border-neutral-200 dark:border-slate-800 bg-white dark:bg-[#060811] p-4 font-mono text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none leading-relaxed min-h-[360px]"
+              />
+            </div>
           </div>
         </div>
 
-        {/* ── Right Editor: Formatted Result ── */}
-        <div className="flex flex-col rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#07090f] shadow-sm overflow-hidden">
-          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-4 py-3 bg-slate-50 dark:bg-[#0a0d16]">
-            <div className="flex items-center gap-2">
-              <FileText className="h-4 w-4 text-emerald-500" />
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">
-                {tool.outputLabel}
+        {/* ── Sticky Bottom Action Bar ── */}
+        <div className="mt-8 pt-6 border-t border-neutral-200/80 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+            <Zap className="h-4 w-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
+            <span>No additional configuration needed. Just hit run!</span>
+            {telemetry && (
+              <span className="hidden md:inline-flex items-center gap-1 ml-2 font-mono text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold bg-emerald-50 dark:bg-emerald-950/30 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                <Clock className="h-3 w-3" />
+                {telemetry.executionTimeMs} ms
               </span>
-            </div>
-            <div className="flex items-center gap-2 text-xs">
-              <button
-                type="button"
-                onClick={handleCopy}
-                disabled={!output}
-                className="inline-flex items-center gap-1 text-slate-600 hover:text-cyan-500 dark:text-slate-300 dark:hover:text-cyan-400 transition disabled:opacity-40"
-              >
-                {copied ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}
-                {copied ? 'Copied' : 'Copy'}
-              </button>
-              <span className="text-slate-300 dark:text-slate-700">|</span>
-              <button
-                type="button"
-                onClick={handleDownload}
-                disabled={!output}
-                className="inline-flex items-center gap-1 text-slate-600 hover:text-cyan-500 dark:text-slate-300 dark:hover:text-cyan-400 transition disabled:opacity-40"
-              >
-                <Download className="h-3.5 w-3.5" />
-                Download
-              </button>
-            </div>
+            )}
           </div>
 
-          {/* Inline Error Boundary Alert */}
-          {error && (
-            <div className="m-4 flex items-start gap-3 rounded-xl border border-rose-500/20 bg-rose-500/10 p-3.5 text-xs text-rose-700 dark:text-rose-300">
-              <AlertCircle className="h-4 w-4 shrink-0 text-rose-500 mt-0.5" />
-              <div>
-                <p className="font-semibold">Syntax / Evaluation Notice</p>
-                <p className="mt-0.5 text-rose-600 dark:text-rose-400">{error.message}</p>
-                {(error.line !== undefined || error.column !== undefined) && (
-                  <p className="mt-1 font-mono text-[11px] opacity-80">
-                    Location: Line {error.line ?? '?'}, Column {error.column ?? '?'}
-                  </p>
-                )}
-              </div>
-            </div>
-          )}
-
-          <div className="relative min-h-[320px]">
-            <textarea
-              readOnly
-              value={output}
-              placeholder="Output will appear here upon execution..."
-              rows={16}
-              className="w-full resize-y bg-transparent p-4 font-mono text-xs leading-relaxed text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none"
-            />
-          </div>
-
-          <div className="flex items-center justify-between border-t border-slate-200 dark:border-slate-800 px-4 py-2.5 bg-slate-50 dark:bg-[#0a0d16] text-[11px] text-slate-500 dark:text-slate-400 font-mono">
-            <div className="flex items-center gap-3">
-              {telemetry && (
-                <>
-                  <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold">
-                    <Clock className="h-3 w-3" />
-                    {telemetry.executionTimeMs} ms
-                  </span>
-                  <span>Out: {output.length} chars</span>
-                </>
-              )}
-            </div>
-            <span className="text-[10px] uppercase text-slate-400">Deterministic Engine</span>
-          </div>
+          <button
+            type="button"
+            onClick={() => handleRun()}
+            disabled={isPending}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0c1222] hover:bg-slate-800 text-white dark:bg-slate-100 dark:text-slate-950 px-6 py-2.5 text-xs font-bold transition active:scale-95 disabled:opacity-50 cursor-pointer shadow-sm"
+          >
+            <Play className="h-3.5 w-3.5 fill-current" />
+            <span>{isPending ? 'Executing...' : `Execute ${tool.name}`}</span>
+          </button>
         </div>
       </div>
-
-      {/* ── Specialized Live Interactive Visual Previews ── */}
-      {meta && (
-        <div className="space-y-4">
-          {/* SERP Preview Card */}
-          {tool.slug === 'serp-simulator' && meta.title && (
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#07090f] p-6 shadow-sm">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-1.5">
-                <Eye className="h-3.5 w-3.5 text-cyan-500" />
-                Live Google SERP Card Preview
-              </h4>
-              <div className="max-w-2xl rounded-xl border border-slate-200 dark:border-slate-800/80 bg-white dark:bg-[#121624] p-4 font-sans">
-                <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400 mb-1">
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-[10px]">🌐</div>
-                  <span className="truncate">{meta.url}</span>
-                </div>
-                <h3 className="text-lg font-medium text-[#1a0dab] dark:text-[#8ab4f8] hover:underline cursor-pointer leading-snug">
-                  {meta.title}
-                </h3>
-                <p className="mt-1 text-xs leading-relaxed text-slate-700 dark:text-slate-300">
-                  {meta.description}
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* Open Graph Social Card Preview */}
-          {tool.slug === 'open-graph-generator' && meta.title && (
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#07090f] p-6 shadow-sm">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-1.5">
-                <Eye className="h-3.5 w-3.5 text-cyan-500" />
-                Live Social Share Preview (Twitter / Facebook / LinkedIn)
-              </h4>
-              <div className="max-w-md rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#121624]">
-                {meta.imageUrl && (
-                  <img
-                    src={meta.imageUrl}
-                    alt={meta.title}
-                    className="w-full h-48 object-cover border-b border-slate-200 dark:border-slate-800"
-                  />
-                )}
-                <div className="p-4">
-                  <p className="text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
-                    {meta.siteName || 'aiiseverything.com'}
-                  </p>
-                  <h3 className="mt-1 text-sm font-bold text-slate-900 dark:text-white line-clamp-2">
-                    {meta.title}
-                  </h3>
-                  <p className="mt-1 text-xs text-slate-600 dark:text-slate-400 line-clamp-2">
-                    {meta.description}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Heading Hierarchy Node Tree Preview */}
-          {tool.slug === 'heading-structure-analyzer' && Array.isArray(meta.headings) && (
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#07090f] p-6 shadow-sm">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-1.5">
-                <Code2 className="h-3.5 w-3.5 text-cyan-500" />
-                Visual Heading Document Outline
-              </h4>
-              <div className="space-y-2 font-mono text-xs">
-                {meta.headings.map((h: any, idx: number) => (
-                  <div
-                    key={idx}
-                    style={{ paddingLeft: `${(h.level - 1) * 20}px` }}
-                    className="flex items-center gap-2 py-1"
-                  >
-                    <span className="rounded bg-cyan-500/10 px-2 py-0.5 text-[10px] font-bold text-cyan-600 dark:text-cyan-400">
-                      H{h.level}
-                    </span>
-                    <span className="text-slate-800 dark:text-slate-200">{h.text || '(Empty Node)'}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 }
