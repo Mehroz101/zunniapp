@@ -48,16 +48,6 @@ interface HeroProps {
   stats?: LivePlatformStats;
 }
 
-// Dynamic rotating niches matching the enterprise directory aesthetic
-const ROTATING_NICHES = [
-  'AI & Developer Tools',
-  'Code Converters',
-  'Financial Calculators',
-  'SEO Diagnostics',
-  'AST Transpilers',
-  'Developer Utilities',
-];
-
 // Quick filter chips as specified in system directive
 const POPULAR_CHIPS = [
   { label: 'Code Converters', query: 'converter', href: '/tools' },
@@ -69,7 +59,7 @@ const POPULAR_CHIPS = [
 ];
 
 /* ==============================================================================
-   6 DISTINCT SKELETON CARD CATALOGS FOR AMBIENT INFINITE SCROLL COLUMNS
+   7 DISTINCT SKELETON CARD CATALOGS FOR AMBIENT INFINITE SCROLL COLUMNS (AI CHIEF STYLE)
    ============================================================================== */
 interface AmbientCard {
   name: string;
@@ -83,7 +73,7 @@ interface AmbientCard {
 }
 
 const AMBIENT_COLUMNS: { duration: number; cards: AmbientCard[] }[] = [
-  // Column 1 (Odd: Scrolls UPWARDS - 72s cycle) - Code Compilers
+  // Column 1 (Odd: Scrolls UPWARDS - 72s cycle) - Code Compilers & AST
   {
     duration: 72,
     cards: [
@@ -155,42 +145,44 @@ const AMBIENT_COLUMNS: { duration: number; cards: AmbientCard[] }[] = [
       { name: 'Discount & Sale Savings', cat: 'Retail', badge: 'OFF', runs: '19.8k', rating: '4.7', icon: DollarSign, color: 'text-indigo-500 dark:text-indigo-400', bg: 'bg-indigo-500/10' },
     ],
   },
+  // Column 7 (Odd: Scrolls UPWARDS - 74s cycle) - AI Toolkits & Web Utilities
+  {
+    duration: 74,
+    cards: [
+      { name: 'AI Text Summarizer', cat: 'NLP', badge: 'AI', runs: '52.1k', rating: '4.9', icon: Sparkles, color: 'text-[#00D2FF]', bg: 'bg-cyan-500/10' },
+      { name: 'Markdown to HTML Live', cat: 'Markup', badge: 'FAST', runs: '33.8k', rating: '4.8', icon: FileText, color: 'text-indigo-500 dark:text-indigo-400', bg: 'bg-indigo-500/10' },
+      { name: 'CSS Flexbox Generator', cat: 'Layout', badge: 'VISUAL', runs: '41.2k', rating: '4.9', icon: Layers, color: 'text-sky-500 dark:text-sky-400', bg: 'bg-sky-500/10' },
+      { name: 'Color Palette & Contrast', cat: 'Design', badge: 'WCAG', runs: '27.6k', rating: '4.8', icon: Activity, color: 'text-emerald-500 dark:text-emerald-400', bg: 'bg-emerald-500/10' },
+      { name: 'Timestamp Epoch Tool', cat: 'Time', badge: 'UNIX', runs: '38.9k', rating: '4.9', icon: Clock, color: 'text-amber-500 dark:text-amber-400', bg: 'bg-amber-500/10' },
+      { name: 'URL Slug & URI Encoder', cat: 'SEO', badge: 'CLEAN', runs: '24.5k', rating: '4.7', icon: Globe, color: 'text-violet-500 dark:text-violet-400', bg: 'bg-violet-500/10' },
+    ],
+  },
 ];
 
-/* Single ambient skeleton tool card */
+/* Single ambient tool card matching AI Chief's clean aesthetic */
 function AmbientToolCardItem({ card }: { card: AmbientCard }) {
   const Icon = card.icon;
   return (
-    <div className="w-full min-h-[96px] rounded-2xl border border-slate-200/90 dark:border-slate-800/90 bg-white/85 dark:bg-[#0a101d]/90 p-3 shadow-xs flex flex-col justify-between mb-3.5 backdrop-blur-[2px] transition-colors">
-      <div className="flex items-center justify-between text-xs gap-1.5">
-        <span className="font-mono text-[9px] text-slate-500 dark:text-slate-400 uppercase tracking-wider truncate font-semibold">
-          {card.cat}
+    <div className="w-full h-[62px] rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-[#0c1220]/90 p-2.5 shadow-xs flex items-center justify-between gap-2.5 mb-3 backdrop-blur-xs transition-colors hover:border-slate-300 dark:hover:border-slate-700">
+      {/* Left Icon */}
+      <div className={`w-9 h-9 rounded-xl ${card.bg} ${card.color} flex items-center justify-center shrink-0 shadow-2xs`}>
+        <Icon className="h-4 w-4" />
+      </div>
+
+      {/* Center Details */}
+      <div className="min-w-0 flex-1">
+        <span className="font-bold text-xs text-slate-900 dark:text-slate-100 truncate block">
+          {card.name}
         </span>
-        <span className="shrink-0 text-[8.5px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-slate-700/80">
-          {card.badge}
+        <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium truncate block mt-0.5">
+          {card.cat} · <span className="font-mono">{card.runs} runs/mo</span>
         </span>
       </div>
 
-      <div className="flex items-center gap-2 my-1.5">
-        <div className={`p-1.5 rounded-lg ${card.bg} ${card.color} shadow-xs shrink-0`}>
-          <Icon className="h-3.5 w-3.5" />
-        </div>
-        <div className="min-w-0">
-          <span className="font-bold text-[11.5px] text-slate-800 dark:text-slate-100 truncate block">
-            {card.name}
-          </span>
-          <span className="text-[9.5px] text-slate-400 dark:text-slate-500 font-mono">
-            {card.runs} runs/mo
-          </span>
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between pt-1.5 border-t border-slate-200/60 dark:border-slate-800/70 text-[9.5px] text-slate-500 dark:text-slate-400">
-        <span className="flex items-center gap-1 font-bold text-slate-700 dark:text-slate-300">
-          <Star className="h-2.5 w-2.5 fill-amber-400 text-amber-400" />
-          <span>{card.rating}</span>
-        </span>
-        <span className="font-mono text-[8.5px] text-[#00D2FF] font-semibold">Client WASM</span>
+      {/* Right Badge / Rating */}
+      <div className="shrink-0 flex items-center gap-1 text-[10.5px] font-bold text-slate-700 dark:text-slate-300">
+        <Star className="h-2.5 w-2.5 fill-amber-400 text-amber-400" />
+        <span>{card.rating}</span>
       </div>
     </div>
   );
@@ -199,10 +191,6 @@ function AmbientToolCardItem({ card }: { card: AmbientCard }) {
 export function Hero({ stats: _stats }: HeroProps) {
   const router = useRouter();
   const searchInputRef = useRef<HTMLInputElement>(null);
-
-  // Rotating keyword index
-  const [nicheIndex, setNicheIndex] = useState(0);
-  const [fadeState, setFadeState] = useState<'in' | 'out'>('in');
 
   // Search input and state
   const [searchQuery, setSearchQuery] = useState('');
@@ -232,18 +220,6 @@ export function Hero({ stats: _stats }: HeroProps) {
       )
       .slice(0, 6);
   }, [searchQuery, allTools]);
-
-  // Rotate headline niche every 3 seconds with smooth fade
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFadeState('out');
-      setTimeout(() => {
-        setNicheIndex((prev) => (prev + 1) % ROTATING_NICHES.length);
-        setFadeState('in');
-      }, 250);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
   // Keyboard shortcut listener (Cmd+K / Ctrl+K)
   useEffect(() => {
@@ -284,19 +260,15 @@ export function Hero({ stats: _stats }: HeroProps) {
 
   return (
     <section className="relative min-h-[92vh] flex items-center justify-center bg-white dark:bg-[#05070c] pt-32 sm:pt-36 lg:pt-40 pb-20 lg:pb-24 overflow-hidden transition-colors duration-200">
-      {/* ── 1. AMBIENT BACKGROUND INFINITE SCROLL SYSTEM (Pure CSS Hardware Accelerated) ── */}
+      {/* ── 1. AMBIENT BACKGROUND INFINITE SCROLL SYSTEM (Pure CSS Hardware Accelerated - AI Chief Style) ── */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none opacity-85 dark:opacity-75"
-        style={{
-          maskImage: 'radial-gradient(ellipse 85% 75% at 50% 48%, transparent 22%, black 75%)',
-          WebkitMaskImage: 'radial-gradient(ellipse 85% 75% at 50% 48%, transparent 22%, black 75%)',
-        }}
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
       >
-        {/* 6 Opposing Columns Grid (1, 3, 5 scroll UPWARDS; 2, 4, 6 scroll DOWNWARDS) */}
-        <div className="absolute -inset-x-8 -top-32 -bottom-32 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5 sm:gap-4 p-4 transform -skew-y-2 scale-[1.02]">
+        {/* 7 Vertical Columns Grid (Straight vertical matching AI Chief, NO skew) */}
+        <div className="absolute -inset-x-4 -top-28 -bottom-28 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-3 sm:gap-3.5 p-4 opacity-75 dark:opacity-65">
           {AMBIENT_COLUMNS.map((colConfig, colIdx) => {
-            const isOdd = colIdx % 2 === 0; // 0, 2, 4 in 0-indexed = columns 1, 3, 5
+            const isOdd = colIdx % 2 === 0;
             const animationClass = isOdd ? 'animate-scroll-up' : 'animate-scroll-down';
             // Quad-duplicate cards to form seamless infinite loop across all resolutions
             const duplicatedCards = [
@@ -328,34 +300,27 @@ export function Hero({ stats: _stats }: HeroProps) {
         </div>
 
         {/* Soft Center Vignette Overlay for Search Console & Text Legibility */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_48%,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.5)_60%,transparent_100%)] dark:bg-[radial-gradient(ellipse_60%_50%_at_50%_48%,rgba(5,7,12,0.92)_0%,rgba(5,7,12,0.5)_60%,transparent_100%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_48%,rgba(255,255,255,0.96)_0%,rgba(255,255,255,0.75)_55%,rgba(255,255,255,0.2)_85%,transparent_100%)] dark:bg-[radial-gradient(ellipse_70%_60%_at_50%_48%,rgba(5,7,12,0.96)_0%,rgba(5,7,12,0.78)_55%,rgba(5,7,12,0.25)_85%,transparent_100%)] pointer-events-none" />
 
         {/* Top & Bottom Linear Edge Fades */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-transparent to-white dark:from-[#05070c]/95 dark:via-transparent dark:to-[#05070c]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white dark:from-[#05070c] dark:via-transparent dark:to-[#05070c] pointer-events-none" />
       </div>
 
       {/* ── 2. CENTERED ENTERPRISE HERO CONTENT (100% UNCLUTTERED OVER RADIAL MASK) ── */}
       <div className="relative z-10 mx-auto max-w-5xl w-full px-6 sm:px-8 lg:px-12 text-center flex flex-col items-center">
         {/* Top Modern Kicker Badge */}
         <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md transition-all hover:border-slate-300 dark:hover:border-slate-700">
-          <span className="flex h-2 w-2 rounded-full bg-[#00D2FF] shadow-[0_0_8px_#00D2FF] animate-pulse" />
+          <span className="flex h-2 w-2 rounded-full bg-[#00D2FF] shadow-[0_0_8px_#00D2FF]" />
           <span className="tracking-wide">
             ⚡ The Ultimate Directory for Modern Developers &amp; Builders
           </span>
         </div>
 
-        {/* Primary Headline (H1) with Signature Electric-Cyan Accent */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-[1.1] max-w-4xl">
+        {/* Primary Headline (H1) with Signature Electric-Cyan Accent — Rock-Solid, ZERO BLINKING */}
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-[1.08] max-w-4xl">
           Best Way to Find the Right{' '}
-          <span className="inline-block mt-1 sm:mt-0">
-            <span
-              className={`bg-gradient-to-r from-[#00D2FF] via-cyan-400 to-sky-400 bg-clip-text text-transparent transition-opacity duration-200 ${
-                fadeState === 'in' ? 'opacity-100' : 'opacity-0'
-              }`}
-            >
-              {ROTATING_NICHES[nicheIndex]}
-            </span>
-            <span className="inline-block w-[3px] h-9 sm:h-12 ml-1 bg-[#00D2FF] animate-pulse align-middle" />
+          <span className="block sm:inline bg-gradient-to-r from-[#00D2FF] via-cyan-400 to-sky-400 bg-clip-text text-transparent">
+            AI Tools &amp; Utilities
           </span>
         </h1>
 
