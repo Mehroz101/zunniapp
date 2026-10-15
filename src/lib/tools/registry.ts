@@ -1663,13 +1663,33 @@ For enterprise licensing inquiries, reach out to enterprise-leads@google.com.`,
 
 };
 
+const SLUG_ALIASES: Record<string, string> = {
+  'robots-txt-validator': 'robots-txt-generator',
+  'xml-sitemap-builder': 'xml-sitemap-generator',
+  'json-ld-schema-markup': 'schema-markup-generator',
+  'schema-markup-builder': 'schema-markup-generator',
+  'markdown-editor': 'markdown-live-editor',
+  'tailwind-class-converter': 'tailwind-converter',
+  'minifier-pro-wasm': 'minifier-pro',
+  'regex-generator': 'regex-neural-generator',
+  'html-to-python': 'html-to-python-ast',
+  'json-to-yaml-stream': 'json-to-yaml',
+  'svg-to-jsx-component': 'svg-to-jsx',
+  'sql-to-schema': 'sql-to-schema-orm',
+  'js-to-typescript': 'js-to-ts',
+  'javascript-to-typescript': 'js-to-ts',
+  'html-to-python-ast-generator': 'html-to-python-ast',
+  'css-to-html-scaffolder': 'css-to-html',
+};
+
 // ── Master Execution Dispatcher ──
 export async function executeTool(
   slug: string,
   input: string,
   options?: Record<string, any>
 ): Promise<ToolExecutionResult> {
-  switch (slug) {
+  const resolvedSlug = SLUG_ALIASES[slug] || slug;
+  switch (resolvedSlug) {
     // SEO
     case 'robots-txt-generator':
       return runRobotsTxtGenerator(input, options);
@@ -1786,5 +1806,6 @@ export function getAllTools(): ToolDefinition[] {
 }
 
 export function getToolBySlug(slug: string): ToolDefinition | undefined {
-  return TOOLS_REGISTRY[slug];
+  const resolved = SLUG_ALIASES[slug] || slug;
+  return TOOLS_REGISTRY[resolved];
 }

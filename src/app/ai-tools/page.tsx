@@ -1,32 +1,28 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Sparkles, ChevronRight, Zap } from 'lucide-react';
-import { prisma } from '@/lib/prisma';
+import { ChevronRight, Sparkles } from 'lucide-react';
+import { Navbar } from '@/components/home/Navbar';
+import { Footer } from '@/components/home/Footer';
+import { ToolsDirectoryView } from '@/components/tools/ToolsDirectoryView';
+import { getAllTools } from '@/lib/tools/registry';
+import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
 import {
   buildCollectionPageSchema,
   buildBreadcrumbSchema,
   buildGeoMetaTags,
 } from '@/lib/seo';
-import { Navbar } from '@/components/home/Navbar';
-import { Footer } from '@/components/home/Footer';
-import {
-  ToolsFilterGrid,
-  type DirectoryTool,
-  type DirectoryCategory,
-} from '@/components/tools/ToolsFilterGrid';
-import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
 
 export const metadata: Metadata = {
-  title: 'Explore Best Free & AI Tools Directory | AIIsEverything',
+  title: 'AI Tools Directory — Developer Utilities Suite | AIIsEverything',
   description:
-    'Browse our comprehensive directory of free AI-powered tools for writing, coding, image generation, text analysis, and SEO. Verified, interactive, and zero paywalls.',
+    'High-throughput client-side code transducers, formatters, and AI debuggers. 100% free, browser-native execution with zero cloud telemetry.',
   alternates: {
     canonical: 'https://aiiseverything.com/ai-tools',
   },
   openGraph: {
-    title: 'Explore Best Free & AI Tools Directory | AIIsEverything',
+    title: 'AI Tools Directory — Developer Utilities Suite | AIIsEverything',
     description:
-      'Browse our complete directory of free and interactive AI-powered tools.',
+      'High-throughput client-side code transducers, formatters, and AI debuggers. Zero cloud telemetry.',
     url: 'https://aiiseverything.com/ai-tools',
     siteName: 'AIIsEverything',
     images: [{ url: '/og-default.png', width: 1200, height: 630 }],
@@ -34,94 +30,37 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Explore Best Free & AI Tools Directory | AIIsEverything',
-    description: 'Explore the definitive directory of free AI tools and utilities.',
+    title: 'AI Tools Directory — Developer Utilities Suite | AIIsEverything',
+    description:
+      'High-throughput client-side code transducers, formatters, and AI debuggers. Zero cloud telemetry.',
     images: ['/og-default.png'],
   },
   other: buildGeoMetaTags({
     summary:
       'A curated, searchable directory of high-utility artificial intelligence applications and browser-native tools.',
-    entities: ['AIIsEverything', 'AI Directory', 'AI Tools', 'Artificial Intelligence'],
+    entities: ['AIIsEverything', 'AI Directory', 'AI Tools', 'Artificial Intelligence', 'Developer Utilities'],
   }),
 };
 
 export const revalidate = 60; // 60s ISR refresh
 
-export default async function AIToolsArchivePage() {
-  // 1. Fetch all published tools with relations
-  const rawTools = await prisma.tool.findMany({
-    where: { status: 'PUBLISHED' },
-    include: {
-      category: true,
-      tags: true,
-    },
-    orderBy: [{ isFeatured: 'desc' }, { viewCount: 'desc' }],
-  });
+export default function AIToolsArchivePage() {
+  const tools = getAllTools();
 
-  // 2. Fetch all active categories with counts
-  const rawCategories = await prisma.toolCategory.findMany({
-    where: { isActive: true },
-    include: {
-      _count: {
-        select: {
-          tools: {
-            where: { status: 'PUBLISHED' },
-          },
-        },
-      },
-    },
-    orderBy: { displayOrder: 'asc' },
-  });
-
-  // 3. Serialize tools for client component
-  const tools: DirectoryTool[] = rawTools.map((t) => ({
-    id: t.id,
-    name: t.name,
-    slug: t.slug,
-    tagline: t.tagline,
-    description: t.description,
-    renderType: t.renderType,
-    isFeatured: t.isFeatured,
-    isFree: t.isFree,
-    viewCount: t.viewCount,
-    publishedAt: t.publishedAt ? t.publishedAt.toISOString() : null,
-    config: (t.config as Record<string, unknown>) || {},
-    category: {
-      id: t.category.id,
-      name: t.category.name,
-      slug: t.category.slug,
-      icon: t.category.icon,
-    },
-    tags: t.tags.map((tag) => ({
-      id: tag.id,
-      name: tag.name,
-      slug: tag.slug,
-    })),
-  }));
-
-  // 4. Serialize categories
-  const categories: DirectoryCategory[] = rawCategories.map((c) => ({
-    id: c.id,
-    name: c.name,
-    slug: c.slug,
-    count: c._count.tools,
-  }));
-
-  // 5. Schema.org JSON-LD
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', item: 'https://aiiseverything.com' },
     { name: 'AI Tools', item: 'https://aiiseverything.com/ai-tools' },
   ]);
 
   const collectionSchema = buildCollectionPageSchema({
-    name: 'Explore Best Free & AI Tools Directory',
+    name: 'AI Tools Directory — Developer Utilities Suite',
     description:
-      'Curated index of artificial intelligence tools, utilities, code formatters, and generative models.',
+      'High-throughput client-side code transducers, formatters, and AI debuggers. Zero cloud telemetry.',
     url: 'https://aiiseverything.com/ai-tools',
-    items: tools.slice(0, 20).map((t) => ({
+    items: tools.map((t) => ({
       name: t.name,
       description: t.tagline,
-      url: `https://aiiseverything.com/ai-tools/${t.category.slug}/${t.slug}`,
+      url: `https://aiiseverything.com/tools/${t.slug}`,
     })),
   });
 
@@ -137,7 +76,7 @@ export default async function AIToolsArchivePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
 
-      {/* ── Navigation ── */}
+      {/* ── Global Navigation ── */}
       <Navbar />
 
       <main className="relative pt-28 pb-20">
@@ -159,27 +98,8 @@ export default async function AIToolsArchivePage() {
             <span className="text-slate-900 dark:text-white font-semibold">AI Tools Directory</span>
           </nav>
 
-          {/* ── Hero Directory Header ── */}
-          <div className="mb-12 max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 px-3.5 py-1 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-xs">
-              <Zap className="h-3.5 w-3.5 text-[#00D2FF]" />
-              <span>Real-Time AI Tool Hub</span>
-            </div>
-
-            <h1 className="text-3xl font-black tracking-tight sm:text-4xl md:text-5xl text-slate-950 dark:text-white">
-              Explore Best Free &{' '}
-              <span className="bg-gradient-to-r from-indigo-500 via-[#00D2FF] to-cyan-400 bg-clip-text text-transparent">
-                AI Tools Directory
-              </span>
-            </h1>
-
-            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-              Explore our verified collection of AI-powered utilities, code helpers, writing assistants, and neural models. Filter instantly by capability or pricing.
-            </p>
-          </div>
-
-          {/* ── Interactive Client-Side Filter & Search Grid ── */}
-          <ToolsFilterGrid initialTools={tools} categories={categories} />
+          {/* ── Interactive Developer Utilities Suite (Matches Reference Image Exactly) ── */}
+          <ToolsDirectoryView tools={tools} />
 
           {/* ── Newsletter Section ── */}
           <section className="mt-24 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-gradient-to-b from-slate-50 to-white dark:from-[#0a101d] dark:to-[#060911] p-8 sm:p-12 text-center shadow-xs">

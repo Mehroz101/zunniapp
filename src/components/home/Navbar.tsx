@@ -38,6 +38,7 @@ import {
   Hammer,
   Wheat,
   FileCode,
+  Sparkles,
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 
@@ -580,8 +581,17 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Center: 5 Desktop Mega-Menu Category Trigger Links */}
+          {/* Center: Desktop Mega-Menu Category Trigger Links & Dedicated AI Tools */}
           <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+            <Link
+              href="/ai-tools"
+              onClick={() => setActiveDropdown(null)}
+              className="inline-flex items-center gap-1.5 text-[13px] font-bold px-3 py-1.5 rounded-full text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100/90 dark:hover:bg-slate-800/80 transition-all duration-200 cursor-pointer"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#00D2FF]" />
+              <span>AI Tools</span>
+            </Link>
+
             {MEGA_MENUS.map((menu) => {
               const isOpen = activeDropdown === menu.key;
               return (
@@ -750,8 +760,21 @@ export function Navbar() {
           <div className="bg-white/98 dark:bg-[#080d1a]/98 backdrop-blur-2xl border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-2xl space-y-4 max-h-[80vh] overflow-y-auto">
             <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#00D2FF] pb-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
               <span>Directory Navigation &amp; Toolkits</span>
-              <span className="text-[10px] text-slate-400">5 Categories</span>
+              <span className="text-[10px] text-slate-400">Live Suite</span>
             </div>
+
+            {/* Dedicated Primary AI Tools Mobile Link */}
+            <Link
+              href="/ai-tools"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between p-3.5 rounded-2xl bg-[#00D2FF]/10 border border-[#00D2FF]/20 text-slate-950 dark:text-white font-bold text-sm transition hover:bg-[#00D2FF]/20 cursor-pointer"
+            >
+              <span className="flex items-center gap-2.5">
+                <Sparkles className="w-4 h-4 text-[#00D2FF]" />
+                <span>AI Tools Directory</span>
+              </span>
+              <ArrowRight className="w-4 h-4 text-[#00D2FF]" />
+            </Link>
 
             {MEGA_MENUS.map((menu) => {
               const isExpanded = mobileExpandedSection === menu.key;
