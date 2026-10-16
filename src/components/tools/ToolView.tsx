@@ -39,7 +39,7 @@ export function ToolView({ tool, seoContent, relatedTools = [] }: ToolViewProps)
 
       {/* ── Section 1: The Interactive Tool Canvas (HeyGen Light-Mode Aesthetics) ── */}
       <div className="mb-16">
-        <Workbench tool={tool} />
+        <Workbench key={tool.slug} tool={tool} />
       </div>
 
       {/* ── Section 2: Below-Canvas SEO Content Block (CMS / Database Markdown) ── */}
