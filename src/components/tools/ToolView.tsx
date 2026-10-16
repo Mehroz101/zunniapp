@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import { ChevronRight, CheckCircle2, Zap, HelpCircle } from 'lucide-react';
 import { ToolDefinition } from '@/lib/tools/types';
