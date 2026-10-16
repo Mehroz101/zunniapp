@@ -19,7 +19,8 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 3600; // 1h background ISR
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default function FinanceCalculatorsPage() {
   const financialCalculators = getAllCalculators().filter((c) => c.category === 'financial');

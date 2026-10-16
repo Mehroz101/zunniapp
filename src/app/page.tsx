@@ -28,7 +28,8 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 60; // On-demand ISR + 60s background refresh
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function HomePage() {
   const { categories, stats } = await fetchLiveLandingData();

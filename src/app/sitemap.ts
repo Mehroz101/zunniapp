@@ -3,7 +3,8 @@ import { prisma } from '@/lib/prisma';
 import { CALCULATORS_REGISTRY } from '@/lib/config/calculators';
 import { getAllTools } from '@/lib/tools/registry';
 
-export const revalidate = 3600; // Dynamic ISR revalidation every hour
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const rawBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://aiiseverything.com';

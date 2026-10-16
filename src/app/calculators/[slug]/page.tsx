@@ -9,12 +9,8 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams() {
-  const calculators = getAllCalculators();
-  return calculators.map((c) => ({
-    slug: c.slug,
-  }));
-}
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
@@ -45,8 +41,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
   };
 }
-
-export const revalidate = 3600; // 1h ISR
 
 export default async function CalculatorDetailPage({ params }: PageProps) {
   const { slug } = await params;

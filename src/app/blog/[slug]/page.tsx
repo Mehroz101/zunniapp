@@ -32,7 +32,8 @@ interface PageProps {
   }>;
 }
 
-export const revalidate = 60; // 60s ISR refresh for instantaneous publishing
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 // Helper to fetch post by slug via Prisma with backend API fallback
 async function fetchPostBySlug(slug: string) {

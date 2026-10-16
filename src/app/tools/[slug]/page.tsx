@@ -27,21 +27,30 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export const revalidate = 3600; // 1hr ISR
-
-export async function generateStaticParams() {
-  const tools = getAllTools();
-  return tools.map((t) => ({ slug: t.slug }));
-}
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 // ─────────────────────────────────────────────
 // Dynamic SEO & OpenGraph Generation
 // ─────────────────────────────────────────────
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const tool = getToolBySlug(slug);
+  let dbTool: any = null;
+  try {
+    dbTool = await prisma.tool.findUnique({
+      where: { slug },
+      include: { category: true },
+    });
+  } catch (e) {
+    // Graceful fallback
+  }
 
-  if (!tool) {
+  const tool = getToolBySlug(slug);
+  const name = dbTool?.name || tool?.name;
+  const tagline = dbTool?.tagline || tool?.tagline;
+  const description = dbTool?.description || tool?.description;
+
+  if (!name) {
     const formatted = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
     return {
       title: `${formatted} — Free Tool | AIIsEverything`,
@@ -49,19 +58,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const title = `${tool.name} — Free Online Tool | AIIsEverything`;
-  const description = tool.tagline || tool.description;
-  const canonicalUrl = `https://aiiseverything.com/tools/${tool.slug}`;
+  const title = `${name} — Free Online Tool | AIIsEverything`;
+  const desc = tagline || description || `Free ${name} online utility.`;
+  const canonicalUrl = `https://aiiseverything.com/tools/${slug}`;
 
   return {
     title,
-    description,
+    description: desc,
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
       title,
-      description,
+      description: desc,
       url: canonicalUrl,
       siteName: 'AIIsEverything',
       images: [{ url: '/og-default.png', width: 1200, height: 630 }],
@@ -70,7 +79,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: 'summary_large_image',
       title,
-      description,
+      description: desc,
       images: ['/og-default.png'],
     },
   };
@@ -78,7 +87,48 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ToolDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const tool = getToolBySlug(slug);
+
+  // 1. Fetch from Database first
+  let dbTool: any = null;
+  try {
+    dbTool = await prisma.tool.findUnique({
+      where: { slug },
+      include: { category: true },
+    });
+  } catch (e) {
+    // Graceful fallback
+  }
+
+  // 2. Fetch from static registry if available
+  let tool = getToolBySlug(slug);
+
+  // If tool exists in DB but not static registry, synthesize a ToolDefinition
+  if (!tool && dbTool) {
+    tool = {
+      id: dbTool.id,
+      slug: dbTool.slug,
+      name: dbTool.name,
+      tagline: dbTool.tagline,
+      description: dbTool.description,
+      category: (dbTool.category?.slug as any) || 'dev',
+      categoryName: dbTool.category?.name || 'Developer Tools',
+      categorySlug: dbTool.category?.slug || 'dev',
+      icon: 'Terminal',
+      inputLabel: 'Input Data',
+      inputPlaceholder: 'Paste your input here...',
+      outputLabel: 'Processed Output',
+      sampleInput: '',
+      features: (dbTool.config as any)?.features || ['Zero-latency execution', 'Browser sandbox security'],
+      howToSteps: [
+        { title: 'Input data', description: 'Paste or upload content to process.' },
+        { title: 'Execute', description: 'Click run or press Ctrl+Enter to process.' },
+      ],
+      faqs: [
+        { question: `What is ${dbTool.name}?`, answer: dbTool.description },
+      ],
+      seoKeywords: [dbTool.name, 'developer tool', 'online tool'],
+    };
+  }
 
   if (!tool) {
     notFound();
@@ -88,17 +138,6 @@ export default async function ToolDetailPage({ params }: PageProps) {
   const relatedTools = allTools
     .filter((t) => t.slug !== tool.slug && (t.category === tool.category || true))
     .slice(0, 3);
-
-  // Fetch CMS SEO content from Database if present
-  let dbTool: any = null;
-  try {
-    dbTool = await prisma.tool.findUnique({
-      where: { slug: tool.slug },
-      include: { category: true },
-    });
-  } catch (e) {
-    // Graceful fallback to static definitions
-  }
 
   // Schema.org Structured Data
   const canonicalUrl = `https://aiiseverything.com/tools/${tool.slug}`;

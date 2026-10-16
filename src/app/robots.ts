@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 export default function robots(): MetadataRoute.Robots {
   const rawBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://aiiseverything.com';
   const baseUrl = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;

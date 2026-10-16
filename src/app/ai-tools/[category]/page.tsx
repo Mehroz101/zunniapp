@@ -25,7 +25,8 @@ interface PageProps {
   }>;
 }
 
-export const revalidate = 60; // 60s ISR refresh
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { category: slug } = await params;

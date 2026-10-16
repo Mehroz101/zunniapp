@@ -5,6 +5,8 @@ import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
 import { ToolsDirectoryView } from '@/components/tools/ToolsDirectoryView';
 import { getAllTools } from '@/lib/tools/registry';
+import { prisma } from '@/lib/prisma';
+import { ToolDefinition } from '@/lib/tools/types';
 import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
 import {
   buildCollectionPageSchema,
@@ -42,10 +44,49 @@ export const metadata: Metadata = {
   }),
 };
 
-export const revalidate = 60; // 60s ISR refresh
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
-export default function AIToolsArchivePage() {
-  const tools = getAllTools();
+export default async function AIToolsArchivePage() {
+  const registryTools = getAllTools();
+  let dbTools: any[] = [];
+  try {
+    dbTools = await prisma.tool.findMany({
+      where: { status: 'PUBLISHED' },
+      include: { category: true },
+    });
+  } catch (e) {
+    // DB fallback
+  }
+
+  const registrySlugs = new Set(registryTools.map((t) => t.slug));
+  const mappedDbTools: ToolDefinition[] = dbTools
+    .filter((t) => !registrySlugs.has(t.slug))
+    .map((t) => ({
+      id: t.id,
+      slug: t.slug,
+      name: t.name,
+      tagline: t.tagline,
+      description: t.description,
+      category: (t.category?.slug as any) || 'dev',
+      categoryName: t.category?.name || 'Developer Tools',
+      categorySlug: t.category?.slug || 'dev',
+      icon: 'Terminal',
+      inputLabel: 'Input Data',
+      inputPlaceholder: 'Enter input...',
+      outputLabel: 'Output',
+      sampleInput: '',
+      features: (t.config as any)?.features || ['Live execution', 'Zero telemetry'],
+      howToSteps: [
+        { title: 'Input your data', description: 'Paste or upload content.' },
+        { title: 'Run tool', description: 'Process your data instantly.' },
+      ],
+      faqs: [{ question: `What is ${t.name}?`, answer: t.description }],
+      seoKeywords: [t.name, 'ai tool', 'developer tool'],
+      primaryGroup: 'ai-utilities',
+    }));
+
+  const tools = [...registryTools, ...mappedDbTools];
 
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', item: 'https://aiiseverything.com' },

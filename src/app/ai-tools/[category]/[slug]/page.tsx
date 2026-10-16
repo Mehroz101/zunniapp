@@ -26,7 +26,8 @@ interface PageProps {
   }>;
 }
 
-export const revalidate = 60; // ISR 60s background refresh
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 // ─────────────────────────────────────────────
 // Dynamic SEO, AEO & OpenGraph Generation

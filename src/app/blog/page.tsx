@@ -46,7 +46,8 @@ export const metadata: Metadata = {
   }),
 };
 
-export const revalidate = 60; // 60s ISR refresh for instantaneous CMS publishing
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function BlogArchivePage() {
   let rawPosts: Array<any> = [];
