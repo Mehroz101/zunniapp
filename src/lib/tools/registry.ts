@@ -48,6 +48,12 @@ import {
   runJsonPatchApplier,
   runMinifierPro,
 } from './engines/aiAndCodeEngines';
+import {
+  runAsciiToHex,
+  runBase64ToText,
+  runHexToPantone,
+  runDecimalToAscii,
+} from './engines/utilityConverters';
 
 export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
   // ── SEO TOOLS ──────────────────────────────
@@ -1618,6 +1624,228 @@ For enterprise licensing inquiries, reach out to enterprise-leads@google.com.`,
     ],
     seoKeywords: ['code minifier online', 'css minifier', 'javascript minifier', 'html compressor'],
   },
+
+  // ── HIGH-TRAFFIC UTILITY CONVERTERS ──
+  'ascii-to-hex': {
+    id: 'tool-util-1',
+    slug: 'ascii-to-hex',
+    name: 'ASCII to Hex Converter',
+    tagline: 'Convert ASCII and UTF-8 text characters into clean hexadecimal representations.',
+    description: 'Deterministic binary character encoder supporting custom delimiters (spaces, commas, 0x, \\x), uppercase/lowercase toggles, and instant two-way Hex to ASCII decoding.',
+    category: 'dev',
+    categoryName: 'Developer Tools',
+    categorySlug: 'dev',
+    icon: 'Binary',
+    inputLabel: 'Text / ASCII Input',
+    inputPlaceholder: 'Enter plain text or ASCII string...',
+    outputLabel: 'Hexadecimal Output',
+    outputLanguage: 'plaintext',
+    sampleInput: 'Hello, World! 🚀',
+    options: [
+      {
+        id: 'delimiter',
+        label: 'Delimiter',
+        type: 'select',
+        choices: ['space', 'none', 'comma', 'prefix-0x', 'prefix-slash-x'],
+        defaultValue: 'space',
+      },
+      {
+        id: 'letterCase',
+        label: 'Case',
+        type: 'select',
+        choices: ['lowercase', 'uppercase'],
+        defaultValue: 'lowercase',
+      },
+      {
+        id: 'direction',
+        label: 'Direction',
+        type: 'select',
+        choices: ['ascii-to-hex', 'hex-to-ascii'],
+        defaultValue: 'ascii-to-hex',
+      },
+    ],
+    features: [
+      'Multi-byte UTF-8 character encoding with emoji support',
+      'Configurable delimiters (space, none, comma, 0x, \\x)',
+      'Uppercase and lowercase hex options',
+      'Instant two-way Hex to ASCII decoding',
+      '100% browser-native client-side execution',
+    ],
+    howToSteps: [
+      { title: 'Enter Text', description: 'Paste or type ASCII/UTF-8 characters in the input pane.' },
+      { title: 'Select Options', description: 'Choose your preferred delimiter and letter casing.' },
+      { title: 'Copy Output', description: 'Copy the formatted hexadecimal byte stream.' },
+    ],
+    faqs: [
+      { question: 'How does ASCII to Hex conversion work?', answer: 'Each character is converted to its numerical byte value and represented in base-16.' },
+      { question: 'Can I decode Hex back to text?', answer: 'Yes, change the direction option to "Hex to ASCII" to decode.' },
+    ],
+    seoKeywords: ['ascii to hex', 'ascii to hex converter', 'text to hex', 'hex converter', 'hex to ascii'],
+    categoryTag: 'Encoding',
+    engineSubBadge: 'UTF-8 Binary Engine',
+    speedBadge: '0.1ms',
+    primaryGroup: 'code-converters',
+  },
+
+  'base64-to-text': {
+    id: 'tool-util-2',
+    slug: 'base64-to-text',
+    name: 'Base64 to Text Converter',
+    tagline: 'Decode Base64 strings to plain text and encode text to Base64 in real time.',
+    description: 'Robust RFC 4648 decoder with native UTF-8 Unicode decoding, URL-safe Base64 support, automatic padding correction, and clean error handling.',
+    category: 'dev',
+    categoryName: 'Developer Tools',
+    categorySlug: 'dev',
+    icon: 'FileCode',
+    inputLabel: 'Base64 Input',
+    inputPlaceholder: 'Paste Base64 encoded string...',
+    outputLabel: 'Decoded Plain Text',
+    outputLanguage: 'plaintext',
+    sampleInput: 'SGVsbG8sIFdvcmxkISBXZWxjb21lIHRvIEFpVG9vbHMgU3R1ZGlvLg==',
+    options: [
+      {
+        id: 'direction',
+        label: 'Mode',
+        type: 'select',
+        choices: ['base64-to-text', 'text-to-base64'],
+        defaultValue: 'base64-to-text',
+      },
+      {
+        id: 'urlSafe',
+        label: 'URL-Safe Format',
+        type: 'boolean',
+        defaultValue: false,
+      },
+      {
+        id: 'wrapLines',
+        label: 'Wrap Lines (76 chars)',
+        type: 'boolean',
+        defaultValue: false,
+      },
+    ],
+    features: [
+      'Full UTF-8 Unicode decoding (avoids atob Latin-1 errors)',
+      'URL-Safe Base64 encoding and decoding (- and _)',
+      'Automatic padding healing for truncated strings',
+      'Two-way encoding and decoding',
+      'Zero server transmission with browser-native speed',
+    ],
+    howToSteps: [
+      { title: 'Paste Base64', description: 'Paste your Base64 encoded payload into the input pane.' },
+      { title: 'Automatic Decode', description: 'The text decodes into plain UTF-8 text immediately.' },
+      { title: 'Copy Text', description: 'Click copy to paste the result into your application.' },
+    ],
+    faqs: [
+      { question: 'Why does this tool handle emojis when other decoders fail?', answer: 'We use TextDecoder with UTF-8 byte streams instead of standard Latin-1 atob.' },
+      { question: 'Is my encoded data secure?', answer: 'Yes, all processing occurs 100% client-side in your local browser.' },
+    ],
+    seoKeywords: ['base64 to text', 'base64 decoder', 'decode base64', 'base64 to string', 'text to base64'],
+    categoryTag: 'Encoding',
+    engineSubBadge: 'RFC 4648 Engine',
+    speedBadge: '0.1ms',
+    primaryGroup: 'code-converters',
+  },
+
+  'hex-to-pantone': {
+    id: 'tool-util-3',
+    slug: 'hex-to-pantone',
+    name: 'Hex Code to Pantone Converter',
+    tagline: 'Match web Hex and RGB colors to the closest official Pantone (PMS) shade.',
+    description: 'Precision color matcher utilizing weighted perceptual Euclidean distance (redmean formula) against the standard Pantone Matching System coated formula guide with live side-by-side swatches.',
+    category: 'dev',
+    categoryName: 'Design & Code Utilities',
+    categorySlug: 'dev',
+    icon: 'Layers',
+    inputLabel: 'Hex Color Code',
+    inputPlaceholder: '#00D2FF or FF8A00...',
+    outputLabel: 'Pantone (PMS) Match Report',
+    outputLanguage: 'markdown',
+    sampleInput: '#00D2FF',
+    options: [
+      {
+        id: 'maxMatches',
+        label: 'Top Alternatives to Show',
+        type: 'select',
+        choices: ['3', '5', '8'],
+        defaultValue: '5',
+      },
+    ],
+    features: [
+      'Perceptual Euclidean Delta-E color distance matching',
+      'Side-by-side visual color swatch comparison',
+      'CMYK and RGB print formula approximations',
+      'Top 4 alternative closest Pantone shades',
+      'Zero-latency browser calculation',
+    ],
+    howToSteps: [
+      { title: 'Enter Hex Color', description: 'Type or paste any 3 or 6-digit hex code.' },
+      { title: 'Inspect Matched Swatch', description: 'View the closest official Pantone PMS code and similarity percentage.' },
+      { title: 'Copy Color Codes', description: 'Copy the PMS code, hex, or CMYK formula for print production.' },
+    ],
+    faqs: [
+      { question: 'What is Delta-E in color matching?', answer: 'Delta-E measures the perceptual difference between colors as observed by the human eye.' },
+      { question: 'Are these matches based on Coated or Uncoated Pantone?', answer: 'Our standard reference palette matches against the Pantone Formula Guide Coated (C) standard.' },
+    ],
+    seoKeywords: ['hex code to pantone', 'hex to pantone', 'hex to pantone converter', 'convert hex to pantone', 'hex to pms'],
+    categoryTag: 'Design & Color',
+    engineSubBadge: 'Perceptual ΔE Engine',
+    speedBadge: '0.2ms',
+    primaryGroup: 'ai-utilities',
+  },
+
+  'decimal-to-ascii': {
+    id: 'tool-util-4',
+    slug: 'decimal-to-ascii',
+    name: 'Decimal to ASCII Converter',
+    tagline: 'Translate decimal character codes (base-10 integers) to readable ASCII and UTF-8 text.',
+    description: 'Versatile decimal character code translator supporting spaces, commas, newlines, and HTML numeric entities with complete Unicode codepoint safety up to 0x10FFFF.',
+    category: 'dev',
+    categoryName: 'Developer Tools',
+    categorySlug: 'dev',
+    icon: 'Binary',
+    inputLabel: 'Decimal Character Codes',
+    inputPlaceholder: 'Enter decimal integers (e.g. 72 101 108 108 111)...',
+    outputLabel: 'Converted ASCII / Text',
+    outputLanguage: 'plaintext',
+    sampleInput: '72 101 108 108 111 44 32 87 111 114 108 100 33',
+    options: [
+      {
+        id: 'direction',
+        label: 'Conversion Direction',
+        type: 'select',
+        choices: ['decimal-to-ascii', 'ascii-to-decimal'],
+        defaultValue: 'decimal-to-ascii',
+      },
+      {
+        id: 'delimiter',
+        label: 'Output Delimiter (for text to decimal)',
+        type: 'select',
+        choices: ['space', 'comma', 'newline'],
+        defaultValue: 'space',
+      },
+    ],
+    features: [
+      'Universal delimiter parsing (spaces, commas, newlines, HTML entities)',
+      'Full Unicode code point support up to 0x10FFFF',
+      'Two-way Decimal to ASCII and ASCII to Decimal conversion',
+      'Inline error handling for out-of-range values',
+      '100% private browser execution',
+    ],
+    howToSteps: [
+      { title: 'Input Numbers', description: 'Paste decimal integers separated by spaces or commas.' },
+      { title: 'Translate Instantly', description: 'The text string renders in real time via native Unicode parsing.' },
+      { title: 'Copy Result', description: 'Copy your decoded ASCII/UTF-8 string.' },
+    ],
+    faqs: [
+      { question: 'What range of decimal numbers is supported?', answer: 'We support all standard ASCII (0-127) and extended Unicode code points up to 1,114,111.' },
+      { question: 'Can I separate numbers with commas or newlines?', answer: 'Yes, any whitespace, comma, or semicolon delimiter is automatically accepted.' },
+    ],
+    seoKeywords: ['decimal to ascii', 'decimal to ascii converter', 'convert decimal to ascii', 'ascii decimal code', 'char code to ascii'],
+    categoryTag: 'Encoding',
+    engineSubBadge: 'Base-10 Unicode Engine',
+    speedBadge: '0.1ms',
+    primaryGroup: 'code-converters',
+  },
 };
 
 const SLUG_ALIASES: Record<string, string> = {
@@ -1642,6 +1870,16 @@ const SLUG_ALIASES: Record<string, string> = {
   'js-to-typescript': 'js-to-ts',
   'javascript-to-typescript': 'js-to-ts',
   'css-to-html-scaffolder': 'css-to-html',
+  'ascii-to-hex-converter': 'ascii-to-hex',
+  'text-to-hex': 'ascii-to-hex',
+  'base64-to-text-converter': 'base64-to-text',
+  'text-to-base64': 'base64-to-text',
+  'base64-decoder': 'base64-to-text',
+  'hex-to-pantone-converter': 'hex-to-pantone',
+  'hex-code-to-pantone': 'hex-to-pantone',
+  'pantone-converter': 'hex-to-pantone',
+  'decimal-to-ascii-converter': 'decimal-to-ascii',
+  'ascii-to-decimal': 'decimal-to-ascii',
 };
 
 // ── Master Execution Dispatcher ──
@@ -1751,6 +1989,29 @@ export async function executeTool(
       return runJsonPatchApplier(input, options);
     case 'minifier-pro':
       return runMinifierPro(input, options);
+
+    // HIGH-TRAFFIC UTILITY CONVERTERS
+    case 'ascii-to-hex':
+    case 'ascii-to-hex-converter':
+    case 'text-to-hex':
+      return runAsciiToHex(input, options);
+
+    case 'base64-to-text':
+    case 'base64-to-text-converter':
+    case 'text-to-base64':
+    case 'base64-decoder':
+      return runBase64ToText(input, options);
+
+    case 'hex-to-pantone':
+    case 'hex-to-pantone-converter':
+    case 'hex-code-to-pantone':
+    case 'pantone-converter':
+      return runHexToPantone(input, options);
+
+    case 'decimal-to-ascii':
+    case 'decimal-to-ascii-converter':
+    case 'ascii-to-decimal':
+      return runDecimalToAscii(input, options);
 
     default:
       // Fallback

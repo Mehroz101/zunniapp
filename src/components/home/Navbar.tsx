@@ -430,6 +430,35 @@ const MEGA_MENUS: MegaMenuConfig[] = [
     footerHref: '/tools',
     categories: [
       {
+        title: 'High-Traffic Utility Converters',
+        items: [
+          {
+            name: 'ASCII ➔ Hexadecimal Converter',
+            desc: 'UTF-8 binary character encoder & hex decoder.',
+            icon: Binary,
+            href: '/tools/ascii-to-hex',
+          },
+          {
+            name: 'Base64 ➔ Plain Text Decoder',
+            desc: 'RFC 4648 decoder with UTF-8 & URL-safe modes.',
+            icon: FileCode,
+            href: '/tools/base64-to-text',
+          },
+          {
+            name: 'Hex Code ➔ Pantone PMS Matcher',
+            desc: 'Perceptual Delta-E color distance & swatches.',
+            icon: Layers,
+            href: '/tools/hex-to-pantone',
+          },
+          {
+            name: 'Decimal ➔ ASCII Translator',
+            desc: 'Base-10 character code point translator.',
+            icon: Terminal,
+            href: '/tools/decimal-to-ascii',
+          },
+        ],
+      },
+      {
         title: 'Crypto, Tokens & Schedules',
         items: [
           {

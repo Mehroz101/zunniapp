@@ -26,6 +26,26 @@ export function Footer() {
               </h4>
               <ul className="space-y-2.5 text-xs font-sans">
                 <li>
+                  <Link href="/tools/ascii-to-hex" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
+                    ASCII ↔ Hex Converter
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/tools/base64-to-text" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
+                    Base64 ↔ Text Decoder
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/tools/hex-to-pantone" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
+                    Hex Code ↔ Pantone (PMS)
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/tools/decimal-to-ascii" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
+                    Decimal ↔ ASCII Translator
+                  </Link>
+                </li>
+                <li>
                   <Link href="/tools/css-to-html" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
                     CSS → HTML Scaffolder
                   </Link>
