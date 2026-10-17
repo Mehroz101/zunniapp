@@ -1,0 +1,3000 @@
+[
+  {
+    "id": "CALC-001",
+    "slug": "auto-loan-trade-in-equity-calculator",
+    "title": "Auto Loan Trade–In Equity Calculator",
+    "category": "Financial Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "tradeValue": 15000,
+        "loanPayoff": 11000,
+        "newPrice": 32000,
+        "taxRate": 6,
+        "downPayment": 1000
+      },
+      "output": {
+        "primaryValue": "$28,020.00",
+        "primaryLabel": "Final Net Amount to Finance",
+        "primarySubtext": "Includes $4,000.00 positive equity applied",
+        "summary": [
+          {
+            "label": "Net Trade-In Equity",
+            "value": "+$4,000.00 (Positive Equity)"
+          },
+          {
+            "label": "Sales Tax Saved",
+            "value": "$900.00 Saved"
+          },
+          {
+            "label": "Net Sales Tax Owed",
+            "value": "$1,020.00"
+          },
+          {
+            "label": "Taxable Base Price",
+            "value": "$17,000.00"
+          },
+          {
+            "label": "Additional Cash Down Payment",
+            "value": "-$1,000.00"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "New Vehicle Base",
+            "percentage": 100,
+            "amount": "$32,000"
+          },
+          {
+            "label": "Net Sales Tax",
+            "percentage": 4,
+            "amount": "$1,020"
+          },
+          {
+            "label": "Net Equity Effect",
+            "percentage": 14,
+            "amount": "+$4,000.00 (Positive Equity)"
+          }
+        ]
+      },
+      "notes": "Primary: $28,020.00 (Final Net Amount to Finance)"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "tradeValue": 500000,
+        "loanPayoff": 500000,
+        "newPrice": 1000000,
+        "taxRate": 20,
+        "downPayment": 500000
+      },
+      "output": {
+        "primaryValue": "$600,000.00",
+        "primaryLabel": "Final Net Amount to Finance",
+        "primarySubtext": "Includes $0.00 positive equity applied",
+        "summary": [
+          {
+            "label": "Net Trade-In Equity",
+            "value": "+$0.00 (Positive Equity)"
+          },
+          {
+            "label": "Sales Tax Saved",
+            "value": "$100,000.00 Saved"
+          },
+          {
+            "label": "Net Sales Tax Owed",
+            "value": "$100,000.00"
+          },
+          {
+            "label": "Taxable Base Price",
+            "value": "$500,000.00"
+          },
+          {
+            "label": "Additional Cash Down Payment",
+            "value": "-$500,000.00"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "New Vehicle Base",
+            "percentage": 100,
+            "amount": "$1,000,000"
+          },
+          {
+            "label": "Net Sales Tax",
+            "percentage": 17,
+            "amount": "$100,000"
+          },
+          {
+            "label": "Net Equity Effect",
+            "percentage": 0,
+            "amount": "+$0.00 (Positive Equity)"
+          }
+        ]
+      },
+      "notes": "Max Boundary: $600,000.00"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "tradeValue": 0,
+        "loanPayoff": 0,
+        "newPrice": 500,
+        "taxRate": 0,
+        "downPayment": 0
+      },
+      "output": {
+        "primaryValue": "$500.00",
+        "primaryLabel": "Final Net Amount to Finance",
+        "primarySubtext": "Includes $0.00 positive equity applied",
+        "summary": [
+          {
+            "label": "Net Trade-In Equity",
+            "value": "+$0.00 (Positive Equity)"
+          },
+          {
+            "label": "Sales Tax Saved",
+            "value": "$0.00 Saved"
+          },
+          {
+            "label": "Net Sales Tax Owed",
+            "value": "$0.00"
+          },
+          {
+            "label": "Taxable Base Price",
+            "value": "$500.00"
+          },
+          {
+            "label": "Additional Cash Down Payment",
+            "value": "-$0.00"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "New Vehicle Base",
+            "percentage": 100,
+            "amount": "$500"
+          },
+          {
+            "label": "Net Sales Tax",
+            "percentage": 0,
+            "amount": "$0"
+          },
+          {
+            "label": "Net Equity Effect",
+            "percentage": 0,
+            "amount": "+$0.00 (Positive Equity)"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: $500.00 (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 25.25
+  },
+  {
+    "id": "CALC-002",
+    "slug": "loan-calculator",
+    "title": "Loan & EMI Amortization Calculator",
+    "category": "Financial Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "principal": 250000,
+        "rate": 6.5,
+        "years": "30"
+      },
+      "output": {
+        "primaryValue": "$1,580.17",
+        "primaryLabel": "Monthly Payment (EMI)",
+        "primarySubtext": "Based on 30 years at 6.5% APR",
+        "summary": [
+          {
+            "label": "Principal Borrowed",
+            "value": "$250,000"
+          },
+          {
+            "label": "Total Interest Payable",
+            "value": "$318,861.22"
+          },
+          {
+            "label": "Total Repayment Cost",
+            "value": "$568,861.22"
+          },
+          {
+            "label": "Payment Cycles",
+            "value": "360 Monthly Payments"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Principal",
+            "percentage": 44,
+            "amount": "$250,000",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Total Interest",
+            "percentage": 56,
+            "amount": "$318,861",
+            "color": "bg-amber-500"
+          }
+        ]
+      },
+      "notes": "Primary: $1,580.17 (Monthly Payment (EMI))"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "principal": 10000000,
+        "rate": 6.5,
+        "years": "30"
+      },
+      "output": {
+        "primaryValue": "$63,206.80",
+        "primaryLabel": "Monthly Payment (EMI)",
+        "primarySubtext": "Based on 30 years at 6.5% APR",
+        "summary": [
+          {
+            "label": "Principal Borrowed",
+            "value": "$10,000,000"
+          },
+          {
+            "label": "Total Interest Payable",
+            "value": "$12,754,448.85"
+          },
+          {
+            "label": "Total Repayment Cost",
+            "value": "$22,754,448.85"
+          },
+          {
+            "label": "Payment Cycles",
+            "value": "360 Monthly Payments"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Principal",
+            "percentage": 44,
+            "amount": "$10,000,000",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Total Interest",
+            "percentage": 56,
+            "amount": "$12,754,449",
+            "color": "bg-amber-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: $63,206.80"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "principal": 1000,
+        "rate": 6.5,
+        "years": "30"
+      },
+      "output": {
+        "primaryValue": "$6.32",
+        "primaryLabel": "Monthly Payment (EMI)",
+        "primarySubtext": "Based on 30 years at 6.5% APR",
+        "summary": [
+          {
+            "label": "Principal Borrowed",
+            "value": "$1,000"
+          },
+          {
+            "label": "Total Interest Payable",
+            "value": "$1,275.44"
+          },
+          {
+            "label": "Total Repayment Cost",
+            "value": "$2,275.44"
+          },
+          {
+            "label": "Payment Cycles",
+            "value": "360 Monthly Payments"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Principal",
+            "percentage": 44,
+            "amount": "$1,000",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Total Interest",
+            "percentage": 56,
+            "amount": "$1,275",
+            "color": "bg-amber-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: $6.32 (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.73
+  },
+  {
+    "id": "CALC-003",
+    "slug": "investment-calculator",
+    "title": "Investment Compound Interest & ROI Calculator",
+    "category": "Financial Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "initialDeposit": 10000,
+        "monthlyContribution": 500,
+        "returnRate": 8,
+        "years": 20
+      },
+      "output": {
+        "primaryValue": "$343,778",
+        "primaryLabel": "Future Portfolio Value",
+        "primarySubtext": "Growth over 20 years at 8% return",
+        "summary": [
+          {
+            "label": "Total Invested Capital",
+            "value": "$130,000"
+          },
+          {
+            "label": "Total Compound Growth",
+            "value": "$213,778"
+          },
+          {
+            "label": "Initial Deposit",
+            "value": "$10,000"
+          },
+          {
+            "label": "Periodic Contributions",
+            "value": "$120,000"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Total Contributions",
+            "percentage": 38,
+            "amount": "$130,000",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Compound Returns",
+            "percentage": 62,
+            "amount": "$213,778",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Primary: $343,778 (Future Portfolio Value)"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "initialDeposit": 10000000,
+        "monthlyContribution": 100000,
+        "returnRate": 8,
+        "years": 20
+      },
+      "output": {
+        "primaryValue": "$108,170,069",
+        "primaryLabel": "Future Portfolio Value",
+        "primarySubtext": "Growth over 20 years at 8% return",
+        "summary": [
+          {
+            "label": "Total Invested Capital",
+            "value": "$34,000,000"
+          },
+          {
+            "label": "Total Compound Growth",
+            "value": "$74,170,069"
+          },
+          {
+            "label": "Initial Deposit",
+            "value": "$10,000,000"
+          },
+          {
+            "label": "Periodic Contributions",
+            "value": "$24,000,000"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Total Contributions",
+            "percentage": 31,
+            "amount": "$34,000,000",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Compound Returns",
+            "percentage": 69,
+            "amount": "$74,170,069",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: $108,170,069"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "initialDeposit": 0,
+        "monthlyContribution": 0,
+        "returnRate": 8,
+        "years": 20
+      },
+      "output": {
+        "primaryValue": "$0",
+        "primaryLabel": "Future Portfolio Value",
+        "primarySubtext": "Growth over 20 years at 8% return",
+        "summary": [
+          {
+            "label": "Total Invested Capital",
+            "value": "$0"
+          },
+          {
+            "label": "Total Compound Growth",
+            "value": "$0"
+          },
+          {
+            "label": "Initial Deposit",
+            "value": "$0"
+          },
+          {
+            "label": "Periodic Contributions",
+            "value": "$0"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Total Contributions",
+            "percentage": 50,
+            "amount": "$0",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Compound Returns",
+            "percentage": 50,
+            "amount": "$0",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: $0 (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.21
+  },
+  {
+    "id": "CALC-004",
+    "slug": "tax-calculator",
+    "title": "Income Tax & Net Paycheck Calculator",
+    "category": "Financial Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "grossIncome": 95000,
+        "filingStatus": "single",
+        "deductions": 6000
+      },
+      "output": {
+        "primaryValue": "$70,312",
+        "primaryLabel": "Estimated Net Take-Home Pay",
+        "primarySubtext": "Effective Tax Rate: 19.7% (5,859/mo)",
+        "summary": [
+          {
+            "label": "Gross Annual Salary",
+            "value": "$95,000"
+          },
+          {
+            "label": "Federal Income Tax",
+            "value": "$11,421"
+          },
+          {
+            "label": "FICA Payroll Taxes",
+            "value": "$7,268"
+          },
+          {
+            "label": "Monthly Net Pay",
+            "value": "$5,859"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Take-Home Net",
+            "percentage": 74,
+            "amount": "$70,312",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Taxes & Deductions",
+            "percentage": 26,
+            "amount": "$24,689",
+            "color": "bg-rose-500"
+          }
+        ]
+      },
+      "notes": "Primary: $70,312 (Estimated Net Take-Home Pay)"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "grossIncome": 2000000,
+        "filingStatus": "single",
+        "deductions": 50000
+      },
+      "output": {
+        "primaryValue": "$1,199,986",
+        "primaryLabel": "Estimated Net Take-Home Pay",
+        "primarySubtext": "Effective Tax Rate: 37.5% (99,999/mo)",
+        "summary": [
+          {
+            "label": "Gross Annual Salary",
+            "value": "$2,000,000"
+          },
+          {
+            "label": "Federal Income Tax",
+            "value": "$597,015"
+          },
+          {
+            "label": "FICA Payroll Taxes",
+            "value": "$153,000"
+          },
+          {
+            "label": "Monthly Net Pay",
+            "value": "$99,999"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Take-Home Net",
+            "percentage": 60,
+            "amount": "$1,199,986",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Taxes & Deductions",
+            "percentage": 40,
+            "amount": "$800,015",
+            "color": "bg-rose-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: $1,199,986"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "grossIncome": 0,
+        "filingStatus": "single",
+        "deductions": 0
+      },
+      "output": {
+        "primaryValue": "$0",
+        "primaryLabel": "Estimated Net Take-Home Pay",
+        "primarySubtext": "Effective Tax Rate: 0% (0/mo)",
+        "summary": [
+          {
+            "label": "Gross Annual Salary",
+            "value": "$0"
+          },
+          {
+            "label": "Federal Income Tax",
+            "value": "$0"
+          },
+          {
+            "label": "FICA Payroll Taxes",
+            "value": "$0"
+          },
+          {
+            "label": "Monthly Net Pay",
+            "value": "$0"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Take-Home Net",
+            "percentage": 70,
+            "amount": "$0",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Taxes & Deductions",
+            "percentage": 30,
+            "amount": "$0",
+            "color": "bg-rose-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: $0 (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.18
+  },
+  {
+    "id": "CALC-005",
+    "slug": "marketing-calculator",
+    "title": "Marketing ROI, CAC & ROAS Calculator",
+    "category": "Financial Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "adSpend": 15000,
+        "conversions": 250,
+        "ltv": 450,
+        "revenueGenerated": 48000
+      },
+      "output": {
+        "primaryValue": "3.20x",
+        "primaryLabel": "Return on Ad Spend (ROAS)",
+        "primarySubtext": "CAC: $60.00 | LTV:CAC: 7.50x",
+        "summary": [
+          {
+            "label": "Customer Acquisition Cost (CAC)",
+            "value": "$60.00"
+          },
+          {
+            "label": "LTV to CAC Ratio",
+            "value": "7.50:1"
+          },
+          {
+            "label": "Net Campaign Profit",
+            "value": "$33,000"
+          },
+          {
+            "label": "Profit Margin",
+            "value": "69%"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Net Profit Margin",
+            "percentage": 69,
+            "amount": "$33,000",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Ad Spend Allocation",
+            "percentage": 31,
+            "amount": "$15,000",
+            "color": "bg-amber-500"
+          }
+        ]
+      },
+      "notes": "Primary: 3.20x (Return on Ad Spend (ROAS))"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "adSpend": 10000000,
+        "conversions": 100000,
+        "ltv": 50000,
+        "revenueGenerated": 50000000
+      },
+      "output": {
+        "primaryValue": "5.00x",
+        "primaryLabel": "Return on Ad Spend (ROAS)",
+        "primarySubtext": "CAC: $100.00 | LTV:CAC: 500.00x",
+        "summary": [
+          {
+            "label": "Customer Acquisition Cost (CAC)",
+            "value": "$100.00"
+          },
+          {
+            "label": "LTV to CAC Ratio",
+            "value": "500.00:1"
+          },
+          {
+            "label": "Net Campaign Profit",
+            "value": "$40,000,000"
+          },
+          {
+            "label": "Profit Margin",
+            "value": "80%"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Net Profit Margin",
+            "percentage": 80,
+            "amount": "$40,000,000",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Ad Spend Allocation",
+            "percentage": 20,
+            "amount": "$10,000,000",
+            "color": "bg-amber-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: 5.00x"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "adSpend": 100,
+        "conversions": 1,
+        "ltv": 1,
+        "revenueGenerated": 100
+      },
+      "output": {
+        "primaryValue": "1.00x",
+        "primaryLabel": "Return on Ad Spend (ROAS)",
+        "primarySubtext": "CAC: $100.00 | LTV:CAC: 0.01x",
+        "summary": [
+          {
+            "label": "Customer Acquisition Cost (CAC)",
+            "value": "$100.00"
+          },
+          {
+            "label": "LTV to CAC Ratio",
+            "value": "0.01:1"
+          },
+          {
+            "label": "Net Campaign Profit",
+            "value": "$0"
+          },
+          {
+            "label": "Profit Margin",
+            "value": "0%"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Net Profit Margin",
+            "percentage": 0,
+            "amount": "$0",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Ad Spend Allocation",
+            "percentage": 100,
+            "amount": "$100",
+            "color": "bg-amber-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: 1.00x (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.14
+  },
+  {
+    "id": "CALC-006",
+    "slug": "personal-finance-calculator",
+    "title": "50/30/20 Budget & Emergency Fund Calculator",
+    "category": "Financial Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "monthlyIncome": 6500,
+        "emergencyMonths": "6"
+      },
+      "output": {
+        "primaryValue": "$1,300/mo",
+        "primaryLabel": "Recommended Monthly Savings (20%)",
+        "primarySubtext": "Target Emergency Reserve: $19,500 (6 Months Needs)",
+        "summary": [
+          {
+            "label": "Needs Allocation (50%)",
+            "value": "$3,250/mo"
+          },
+          {
+            "label": "Wants Allocation (30%)",
+            "value": "$1,950/mo"
+          },
+          {
+            "label": "Emergency Fund Goal",
+            "value": "$19,500"
+          },
+          {
+            "label": "Annual Savings Capacity",
+            "value": "$15,600"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "50% Needs",
+            "percentage": 50,
+            "amount": "$3,250",
+            "color": "bg-[#FF8A00]"
+          },
+          {
+            "label": "30% Wants",
+            "percentage": 30,
+            "amount": "$1,950",
+            "color": "bg-purple-500"
+          },
+          {
+            "label": "20% Savings",
+            "percentage": 20,
+            "amount": "$1,300",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Primary: $1,300/mo (Recommended Monthly Savings (20%))"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "monthlyIncome": 200000,
+        "emergencyMonths": "6"
+      },
+      "output": {
+        "primaryValue": "$40,000/mo",
+        "primaryLabel": "Recommended Monthly Savings (20%)",
+        "primarySubtext": "Target Emergency Reserve: $600,000 (6 Months Needs)",
+        "summary": [
+          {
+            "label": "Needs Allocation (50%)",
+            "value": "$100,000/mo"
+          },
+          {
+            "label": "Wants Allocation (30%)",
+            "value": "$60,000/mo"
+          },
+          {
+            "label": "Emergency Fund Goal",
+            "value": "$600,000"
+          },
+          {
+            "label": "Annual Savings Capacity",
+            "value": "$480,000"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "50% Needs",
+            "percentage": 50,
+            "amount": "$100,000",
+            "color": "bg-[#FF8A00]"
+          },
+          {
+            "label": "30% Wants",
+            "percentage": 30,
+            "amount": "$60,000",
+            "color": "bg-purple-500"
+          },
+          {
+            "label": "20% Savings",
+            "percentage": 20,
+            "amount": "$40,000",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: $40,000/mo"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "monthlyIncome": 500,
+        "emergencyMonths": "6"
+      },
+      "output": {
+        "primaryValue": "$100/mo",
+        "primaryLabel": "Recommended Monthly Savings (20%)",
+        "primarySubtext": "Target Emergency Reserve: $1,500 (6 Months Needs)",
+        "summary": [
+          {
+            "label": "Needs Allocation (50%)",
+            "value": "$250/mo"
+          },
+          {
+            "label": "Wants Allocation (30%)",
+            "value": "$150/mo"
+          },
+          {
+            "label": "Emergency Fund Goal",
+            "value": "$1,500"
+          },
+          {
+            "label": "Annual Savings Capacity",
+            "value": "$1,200"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "50% Needs",
+            "percentage": 50,
+            "amount": "$250",
+            "color": "bg-[#FF8A00]"
+          },
+          {
+            "label": "30% Wants",
+            "percentage": 30,
+            "amount": "$150",
+            "color": "bg-purple-500"
+          },
+          {
+            "label": "20% Savings",
+            "percentage": 20,
+            "amount": "$100",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: $100/mo (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.12
+  },
+  {
+    "id": "CALC-007",
+    "slug": "business-calculator",
+    "title": "Business Break-Even & Profit Margin Calculator",
+    "category": "Financial Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "fixedCosts": 18000,
+        "unitPrice": 85,
+        "variableCost": 35,
+        "estimatedSales": 600
+      },
+      "output": {
+        "primaryValue": "360 Units",
+        "primaryLabel": "Monthly Break-Even Volume",
+        "primarySubtext": "Break-Even Sales: $30,600 | Margin: 59%",
+        "summary": [
+          {
+            "label": "Contribution Margin per Unit",
+            "value": "$50.00"
+          },
+          {
+            "label": "Projected Net Profit",
+            "value": "$12,000"
+          },
+          {
+            "label": "Total Projected Revenue",
+            "value": "$51,000"
+          },
+          {
+            "label": "Contribution Margin Ratio",
+            "value": "59%"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Fixed Costs Covered",
+            "percentage": 35,
+            "amount": "$18,000",
+            "color": "bg-rose-500"
+          },
+          {
+            "label": "Net Profit Margin",
+            "percentage": 24,
+            "amount": "$12,000",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Primary: 360 Units (Monthly Break-Even Volume)"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "fixedCosts": 5000000,
+        "unitPrice": 100000,
+        "variableCost": 100000,
+        "estimatedSales": 500000
+      },
+      "output": {
+        "primaryValue": "0 Units",
+        "primaryLabel": "Monthly Break-Even Volume",
+        "primarySubtext": "Break-Even Sales: $0 | Margin: 0%",
+        "summary": [
+          {
+            "label": "Contribution Margin per Unit",
+            "value": "$0.00"
+          },
+          {
+            "label": "Projected Net Profit",
+            "value": "$-5,000,000"
+          },
+          {
+            "label": "Total Projected Revenue",
+            "value": "$50,000,000,000"
+          },
+          {
+            "label": "Contribution Margin Ratio",
+            "value": "0%"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Fixed Costs Covered",
+            "percentage": 0,
+            "amount": "$5,000,000",
+            "color": "bg-rose-500"
+          },
+          {
+            "label": "Net Profit Margin",
+            "percentage": 0,
+            "amount": "$0",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: 0 Units"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "fixedCosts": 100,
+        "unitPrice": 1,
+        "variableCost": 0,
+        "estimatedSales": 1
+      },
+      "output": {
+        "primaryValue": "100 Units",
+        "primaryLabel": "Monthly Break-Even Volume",
+        "primarySubtext": "Break-Even Sales: $100 | Margin: 100%",
+        "summary": [
+          {
+            "label": "Contribution Margin per Unit",
+            "value": "$1.00"
+          },
+          {
+            "label": "Projected Net Profit",
+            "value": "$-99"
+          },
+          {
+            "label": "Total Projected Revenue",
+            "value": "$1"
+          },
+          {
+            "label": "Contribution Margin Ratio",
+            "value": "100%"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Fixed Costs Covered",
+            "percentage": 100,
+            "amount": "$100",
+            "color": "bg-rose-500"
+          },
+          {
+            "label": "Net Profit Margin",
+            "percentage": 0,
+            "amount": "$0",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: 100 Units (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.73
+  },
+  {
+    "id": "CALC-008",
+    "slug": "real-estate-calculator",
+    "title": "Real Estate Cap Rate & Rental Yield Calculator",
+    "category": "Financial Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "purchasePrice": 420000,
+        "monthlyRent": 3200,
+        "annualExpenses": 8400,
+        "monthlyMortgage": 1950
+      },
+      "output": {
+        "primaryValue": "7.14%",
+        "primaryLabel": "Property Cap Rate",
+        "primarySubtext": "Monthly Cash Flow: $550/mo",
+        "summary": [
+          {
+            "label": "Net Operating Income (NOI)",
+            "value": "$30,000/yr"
+          },
+          {
+            "label": "Gross Rental Yield",
+            "value": "9.14%"
+          },
+          {
+            "label": "Monthly Net Cash Flow",
+            "value": "$550"
+          },
+          {
+            "label": "Annual Operating Expenses",
+            "value": "$8,400"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Mortgage Debt Service",
+            "percentage": 61,
+            "amount": "$1,950/mo",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Operating Expenses",
+            "percentage": 22,
+            "amount": "$700/mo",
+            "color": "bg-amber-500"
+          },
+          {
+            "label": "Net Discretionary Cash Flow",
+            "percentage": 17,
+            "amount": "$550/mo",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Primary: 7.14% (Property Cap Rate)"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "purchasePrice": 20000000,
+        "monthlyRent": 100000,
+        "annualExpenses": 500000,
+        "monthlyMortgage": 50000
+      },
+      "output": {
+        "primaryValue": "3.50%",
+        "primaryLabel": "Property Cap Rate",
+        "primarySubtext": "Monthly Cash Flow: $8,333/mo",
+        "summary": [
+          {
+            "label": "Net Operating Income (NOI)",
+            "value": "$700,000/yr"
+          },
+          {
+            "label": "Gross Rental Yield",
+            "value": "6.00%"
+          },
+          {
+            "label": "Monthly Net Cash Flow",
+            "value": "$8,333"
+          },
+          {
+            "label": "Annual Operating Expenses",
+            "value": "$500,000"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Mortgage Debt Service",
+            "percentage": 50,
+            "amount": "$50,000/mo",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Operating Expenses",
+            "percentage": 42,
+            "amount": "$41,667/mo",
+            "color": "bg-amber-500"
+          },
+          {
+            "label": "Net Discretionary Cash Flow",
+            "percentage": 8,
+            "amount": "$8,333/mo",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: 3.50%"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "purchasePrice": 20000,
+        "monthlyRent": 100,
+        "annualExpenses": 0,
+        "monthlyMortgage": 0
+      },
+      "output": {
+        "primaryValue": "6.00%",
+        "primaryLabel": "Property Cap Rate",
+        "primarySubtext": "Monthly Cash Flow: $100/mo",
+        "summary": [
+          {
+            "label": "Net Operating Income (NOI)",
+            "value": "$1,200/yr"
+          },
+          {
+            "label": "Gross Rental Yield",
+            "value": "6.00%"
+          },
+          {
+            "label": "Monthly Net Cash Flow",
+            "value": "$100"
+          },
+          {
+            "label": "Annual Operating Expenses",
+            "value": "$0"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Mortgage Debt Service",
+            "percentage": 0,
+            "amount": "$0/mo",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Operating Expenses",
+            "percentage": 0,
+            "amount": "$0/mo",
+            "color": "bg-amber-500"
+          },
+          {
+            "label": "Net Discretionary Cash Flow",
+            "percentage": 100,
+            "amount": "$100/mo",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: 6.00% (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.18
+  },
+  {
+    "id": "CALC-009",
+    "slug": "construction-calculator",
+    "title": "Construction & Concrete Volume Estimator",
+    "category": "General & Scientific Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "length": 24,
+        "width": 16,
+        "thickness": "4",
+        "waste": 10
+      },
+      "output": {
+        "primaryValue": "5.21 yd³",
+        "primaryLabel": "Required Concrete Volume",
+        "primarySubtext": "Includes 10% waste buffer (384 sq ft surface)",
+        "summary": [
+          {
+            "label": "Total Surface Area",
+            "value": "384 sq ft"
+          },
+          {
+            "label": "80lb Pre-Mix Bags",
+            "value": "235 bags"
+          },
+          {
+            "label": "60lb Pre-Mix Bags",
+            "value": "313 bags"
+          },
+          {
+            "label": "Net Volume (Without Buffer)",
+            "value": "4.74 yd³"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Base Concrete Volume",
+            "percentage": 91,
+            "amount": "4.74 yd³",
+            "color": "bg-slate-500"
+          },
+          {
+            "label": "Waste Buffer",
+            "percentage": 9,
+            "amount": "0.47 yd³",
+            "color": "bg-amber-500"
+          }
+        ]
+      },
+      "notes": "Primary: 5.21 yd³ (Required Concrete Volume)"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "length": 1000,
+        "width": 1000,
+        "thickness": "4",
+        "waste": 10
+      },
+      "output": {
+        "primaryValue": "13580.25 yd³",
+        "primaryLabel": "Required Concrete Volume",
+        "primarySubtext": "Includes 10% waste buffer (1000000 sq ft surface)",
+        "summary": [
+          {
+            "label": "Total Surface Area",
+            "value": "1000000 sq ft"
+          },
+          {
+            "label": "80lb Pre-Mix Bags",
+            "value": "611112 bags"
+          },
+          {
+            "label": "60lb Pre-Mix Bags",
+            "value": "814815 bags"
+          },
+          {
+            "label": "Net Volume (Without Buffer)",
+            "value": "12345.68 yd³"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Base Concrete Volume",
+            "percentage": 91,
+            "amount": "12345.68 yd³",
+            "color": "bg-slate-500"
+          },
+          {
+            "label": "Waste Buffer",
+            "percentage": 9,
+            "amount": "1234.57 yd³",
+            "color": "bg-amber-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: 13580.25 yd³"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "length": 1,
+        "width": 1,
+        "thickness": "4",
+        "waste": 10
+      },
+      "output": {
+        "primaryValue": "0.01 yd³",
+        "primaryLabel": "Required Concrete Volume",
+        "primarySubtext": "Includes 10% waste buffer (1 sq ft surface)",
+        "summary": [
+          {
+            "label": "Total Surface Area",
+            "value": "1 sq ft"
+          },
+          {
+            "label": "80lb Pre-Mix Bags",
+            "value": "1 bags"
+          },
+          {
+            "label": "60lb Pre-Mix Bags",
+            "value": "1 bags"
+          },
+          {
+            "label": "Net Volume (Without Buffer)",
+            "value": "0.01 yd³"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Base Concrete Volume",
+            "percentage": 91,
+            "amount": "0.01 yd³",
+            "color": "bg-slate-500"
+          },
+          {
+            "label": "Waste Buffer",
+            "percentage": 9,
+            "amount": "0.00 yd³",
+            "color": "bg-amber-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: 0.01 yd³ (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.12
+  },
+  {
+    "id": "CALC-010",
+    "slug": "health-calculator",
+    "title": "BMR, TDEE & Daily Caloric Deficit Calculator",
+    "category": "General & Scientific Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "gender": "male",
+        "age": 28,
+        "weightKg": 78,
+        "heightCm": 178,
+        "activity": "moderate"
+      },
+      "output": {
+        "primaryValue": "2724 kcal",
+        "primaryLabel": "Daily Maintenance Calories (TDEE)",
+        "primarySubtext": "Basal Metabolic Rate (BMR): 1758 kcal/day",
+        "summary": [
+          {
+            "label": "Weight Loss Target (-500 kcal)",
+            "value": "2224 kcal/day"
+          },
+          {
+            "label": "Lean Bulking Target (+300 kcal)",
+            "value": "3024 kcal/day"
+          },
+          {
+            "label": "Base BMR Resting Burn",
+            "value": "1758 kcal"
+          },
+          {
+            "label": "Exercise & Activity Burn",
+            "value": "967 kcal"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Basal Metabolism",
+            "percentage": 65,
+            "amount": "1758 kcal",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Activity & Movement",
+            "percentage": 35,
+            "amount": "967 kcal",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Primary: 2724 kcal (Daily Maintenance Calories (TDEE))"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "gender": "male",
+        "age": 100,
+        "weightKg": 300,
+        "heightCm": 240,
+        "activity": "moderate"
+      },
+      "output": {
+        "primaryValue": "6208 kcal",
+        "primaryLabel": "Daily Maintenance Calories (TDEE)",
+        "primarySubtext": "Basal Metabolic Rate (BMR): 4005 kcal/day",
+        "summary": [
+          {
+            "label": "Weight Loss Target (-500 kcal)",
+            "value": "5708 kcal/day"
+          },
+          {
+            "label": "Lean Bulking Target (+300 kcal)",
+            "value": "6508 kcal/day"
+          },
+          {
+            "label": "Base BMR Resting Burn",
+            "value": "4005 kcal"
+          },
+          {
+            "label": "Exercise & Activity Burn",
+            "value": "2203 kcal"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Basal Metabolism",
+            "percentage": 65,
+            "amount": "4005 kcal",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Activity & Movement",
+            "percentage": 35,
+            "amount": "2203 kcal",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: 6208 kcal"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "gender": "male",
+        "age": 14,
+        "weightKg": 30,
+        "heightCm": 100,
+        "activity": "moderate"
+      },
+      "output": {
+        "primaryValue": "1333 kcal",
+        "primaryLabel": "Daily Maintenance Calories (TDEE)",
+        "primarySubtext": "Basal Metabolic Rate (BMR): 860 kcal/day",
+        "summary": [
+          {
+            "label": "Weight Loss Target (-500 kcal)",
+            "value": "1200 kcal/day"
+          },
+          {
+            "label": "Lean Bulking Target (+300 kcal)",
+            "value": "1633 kcal/day"
+          },
+          {
+            "label": "Base BMR Resting Burn",
+            "value": "860 kcal"
+          },
+          {
+            "label": "Exercise & Activity Burn",
+            "value": "473 kcal"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Basal Metabolism",
+            "percentage": 65,
+            "amount": "860 kcal",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Activity & Movement",
+            "percentage": 35,
+            "amount": "473 kcal",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: 1333 kcal (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.13
+  },
+  {
+    "id": "CALC-011",
+    "slug": "fitness-calculator",
+    "title": "One-Rep Max (1RM) & Strength Zones Calculator",
+    "category": "General & Scientific Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "weightLifted": 225,
+        "reps": 5,
+        "formula": "brzycki"
+      },
+      "output": {
+        "primaryValue": "253 lbs",
+        "primaryLabel": "Estimated One-Rep Max (1RM)",
+        "primarySubtext": "Calculated from 225 lbs x 5 reps",
+        "summary": [
+          {
+            "label": "90% Strength Peaking",
+            "value": "228 lbs (3-4 reps)"
+          },
+          {
+            "label": "80% Hypertrophy Work",
+            "value": "203 lbs (7-8 reps)"
+          },
+          {
+            "label": "70% Volume Endurance",
+            "value": "177 lbs (10-12 reps)"
+          },
+          {
+            "label": "Baseline Performed Set",
+            "value": "225 lbs x 5 reps"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Max Effort (90-100%)",
+            "percentage": 90,
+            "amount": "228 lbs",
+            "color": "bg-rose-500"
+          },
+          {
+            "label": "Hypertrophy (75-85%)",
+            "percentage": 80,
+            "amount": "203 lbs",
+            "color": "bg-amber-500"
+          },
+          {
+            "label": "Speed & Volume (60-70%)",
+            "percentage": 70,
+            "amount": "177 lbs",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Primary: 253 lbs (Estimated One-Rep Max (1RM))"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "weightLifted": 1500,
+        "reps": 5,
+        "formula": "brzycki"
+      },
+      "output": {
+        "primaryValue": "1688 lbs",
+        "primaryLabel": "Estimated One-Rep Max (1RM)",
+        "primarySubtext": "Calculated from 1500 lbs x 5 reps",
+        "summary": [
+          {
+            "label": "90% Strength Peaking",
+            "value": "1519 lbs (3-4 reps)"
+          },
+          {
+            "label": "80% Hypertrophy Work",
+            "value": "1350 lbs (7-8 reps)"
+          },
+          {
+            "label": "70% Volume Endurance",
+            "value": "1181 lbs (10-12 reps)"
+          },
+          {
+            "label": "Baseline Performed Set",
+            "value": "1500 lbs x 5 reps"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Max Effort (90-100%)",
+            "percentage": 90,
+            "amount": "1519 lbs",
+            "color": "bg-rose-500"
+          },
+          {
+            "label": "Hypertrophy (75-85%)",
+            "percentage": 80,
+            "amount": "1350 lbs",
+            "color": "bg-amber-500"
+          },
+          {
+            "label": "Speed & Volume (60-70%)",
+            "percentage": 70,
+            "amount": "1181 lbs",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: 1688 lbs"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "weightLifted": 20,
+        "reps": 5,
+        "formula": "brzycki"
+      },
+      "output": {
+        "primaryValue": "23 lbs",
+        "primaryLabel": "Estimated One-Rep Max (1RM)",
+        "primarySubtext": "Calculated from 20 lbs x 5 reps",
+        "summary": [
+          {
+            "label": "90% Strength Peaking",
+            "value": "20 lbs (3-4 reps)"
+          },
+          {
+            "label": "80% Hypertrophy Work",
+            "value": "18 lbs (7-8 reps)"
+          },
+          {
+            "label": "70% Volume Endurance",
+            "value": "16 lbs (10-12 reps)"
+          },
+          {
+            "label": "Baseline Performed Set",
+            "value": "20 lbs x 5 reps"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Max Effort (90-100%)",
+            "percentage": 90,
+            "amount": "20 lbs",
+            "color": "bg-rose-500"
+          },
+          {
+            "label": "Hypertrophy (75-85%)",
+            "percentage": 80,
+            "amount": "18 lbs",
+            "color": "bg-amber-500"
+          },
+          {
+            "label": "Speed & Volume (60-70%)",
+            "percentage": 70,
+            "amount": "16 lbs",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: 23 lbs (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.1
+  },
+  {
+    "id": "CALC-012",
+    "slug": "educational-calculator",
+    "title": "GPA & Target Exam Grade Calculator",
+    "category": "General & Scientific Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "currentGrade": 86.5,
+        "targetGrade": 90,
+        "finalExamWeight": 30
+      },
+      "output": {
+        "primaryValue": "98.2%",
+        "primaryLabel": "Required Final Exam Score",
+        "primarySubtext": "Achievable to secure a 90% final grade",
+        "summary": [
+          {
+            "label": "Current Standing",
+            "value": "86.5% (70% of grade)"
+          },
+          {
+            "label": "Target Final Grade",
+            "value": "90%"
+          },
+          {
+            "label": "Exam Syllabus Weight",
+            "value": "30% of total course"
+          },
+          {
+            "label": "Feasibility Status",
+            "value": "Mathematically Feasible"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Completed Coursework",
+            "percentage": 70,
+            "amount": "86.5% current",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Final Exam Weight",
+            "percentage": 30,
+            "amount": "98.2% target",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Primary: 98.2% (Required Final Exam Score)"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "currentGrade": 100,
+        "targetGrade": 100,
+        "finalExamWeight": 30
+      },
+      "output": {
+        "primaryValue": "100.0%",
+        "primaryLabel": "Required Final Exam Score",
+        "primarySubtext": "Achievable to secure a 100% final grade",
+        "summary": [
+          {
+            "label": "Current Standing",
+            "value": "100% (70% of grade)"
+          },
+          {
+            "label": "Target Final Grade",
+            "value": "100%"
+          },
+          {
+            "label": "Exam Syllabus Weight",
+            "value": "30% of total course"
+          },
+          {
+            "label": "Feasibility Status",
+            "value": "Mathematically Feasible"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Completed Coursework",
+            "percentage": 70,
+            "amount": "100% current",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Final Exam Weight",
+            "percentage": 30,
+            "amount": "100.0% target",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: 100.0%"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "currentGrade": 0,
+        "targetGrade": 50,
+        "finalExamWeight": 30
+      },
+      "output": {
+        "primaryValue": "-31.7%",
+        "primaryLabel": "Required Final Exam Score",
+        "primarySubtext": "Achievable to secure a 50% final grade",
+        "summary": [
+          {
+            "label": "Current Standing",
+            "value": "85% (70% of grade)"
+          },
+          {
+            "label": "Target Final Grade",
+            "value": "50%"
+          },
+          {
+            "label": "Exam Syllabus Weight",
+            "value": "30% of total course"
+          },
+          {
+            "label": "Feasibility Status",
+            "value": "Mathematically Feasible"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Completed Coursework",
+            "percentage": 70,
+            "amount": "85% current",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Final Exam Weight",
+            "percentage": 30,
+            "amount": "-31.7% target",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: -31.7% (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.12
+  },
+  {
+    "id": "CALC-013",
+    "slug": "geometry-calculator",
+    "title": "Geometry 2D/3D Area & Volume Calculator",
+    "category": "General & Scientific Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "shape": "cylinder",
+        "dimensionA": 5,
+        "dimensionB": 12
+      },
+      "output": {
+        "primaryValue": "942.48 units³",
+        "primaryLabel": "Total Computed Volume",
+        "primarySubtext": "Surface Area: 534.07 units²",
+        "summary": [
+          {
+            "label": "Primary Dimension",
+            "value": "5 units"
+          },
+          {
+            "label": "Secondary Dimension",
+            "value": "12 units"
+          },
+          {
+            "label": "Surface Area / Perimeter",
+            "value": "534.07 units²"
+          },
+          {
+            "label": "Volumetric Metric",
+            "value": "942.48 units³"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Volumetric Capacity",
+            "percentage": 65,
+            "amount": "942.5 u³",
+            "color": "bg-[#FF8A00]"
+          },
+          {
+            "label": "Surface Area Enclosure",
+            "percentage": 35,
+            "amount": "534.1 u²",
+            "color": "bg-indigo-500"
+          }
+        ]
+      },
+      "notes": "Primary: 942.48 units³ (Total Computed Volume)"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "shape": "cylinder",
+        "dimensionA": 10000,
+        "dimensionB": 10000
+      },
+      "output": {
+        "primaryValue": "3141592653589.79 units³",
+        "primaryLabel": "Total Computed Volume",
+        "primarySubtext": "Surface Area: 1256637061.44 units²",
+        "summary": [
+          {
+            "label": "Primary Dimension",
+            "value": "10000 units"
+          },
+          {
+            "label": "Secondary Dimension",
+            "value": "10000 units"
+          },
+          {
+            "label": "Surface Area / Perimeter",
+            "value": "1256637061.44 units²"
+          },
+          {
+            "label": "Volumetric Metric",
+            "value": "3141592653589.79 units³"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Volumetric Capacity",
+            "percentage": 65,
+            "amount": "3141592653589.8 u³",
+            "color": "bg-[#FF8A00]"
+          },
+          {
+            "label": "Surface Area Enclosure",
+            "percentage": 35,
+            "amount": "1256637061.4 u²",
+            "color": "bg-indigo-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: 3141592653589.79 units³"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "shape": "cylinder",
+        "dimensionA": 0.1,
+        "dimensionB": 0.1
+      },
+      "output": {
+        "primaryValue": "0.00 units³",
+        "primaryLabel": "Total Computed Volume",
+        "primarySubtext": "Surface Area: 0.13 units²",
+        "summary": [
+          {
+            "label": "Primary Dimension",
+            "value": "0.1 units"
+          },
+          {
+            "label": "Secondary Dimension",
+            "value": "0.1 units"
+          },
+          {
+            "label": "Surface Area / Perimeter",
+            "value": "0.13 units²"
+          },
+          {
+            "label": "Volumetric Metric",
+            "value": "0.00 units³"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Volumetric Capacity",
+            "percentage": 65,
+            "amount": "0.0 u³",
+            "color": "bg-[#FF8A00]"
+          },
+          {
+            "label": "Surface Area Enclosure",
+            "percentage": 35,
+            "amount": "0.1 u²",
+            "color": "bg-indigo-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: 0.00 units³ (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.13
+  },
+  {
+    "id": "CALC-014",
+    "slug": "mathematics-calculator",
+    "title": "Scientific Mathematics & Percentage Calculator",
+    "category": "General & Scientific Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "operation": "pct_of",
+        "valX": 15,
+        "valY": 250
+      },
+      "output": {
+        "primaryValue": "37.5",
+        "primaryLabel": "15% of 250",
+        "primarySubtext": "15% multiplied by 250",
+        "summary": [
+          {
+            "label": "Operand X",
+            "value": "15"
+          },
+          {
+            "label": "Operand Y",
+            "value": "250"
+          },
+          {
+            "label": "Reciprocal (1/X)",
+            "value": "0.0667"
+          },
+          {
+            "label": "Difference (Y - X)",
+            "value": "235.00"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Calculated Value",
+            "percentage": 70,
+            "amount": "37.5",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Base Component",
+            "percentage": 30,
+            "amount": "15",
+            "color": "bg-indigo-500"
+          }
+        ]
+      },
+      "notes": "Primary: 37.5 (15% of 250)"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "operation": "pct_of",
+        "valX": 1000000,
+        "valY": 1000000
+      },
+      "output": {
+        "primaryValue": "10,000,000,000",
+        "primaryLabel": "1000000% of 1000000",
+        "primarySubtext": "1000000% multiplied by 1000000",
+        "summary": [
+          {
+            "label": "Operand X",
+            "value": "1000000"
+          },
+          {
+            "label": "Operand Y",
+            "value": "1000000"
+          },
+          {
+            "label": "Reciprocal (1/X)",
+            "value": "0.0000"
+          },
+          {
+            "label": "Difference (Y - X)",
+            "value": "0.00"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Calculated Value",
+            "percentage": 70,
+            "amount": "10000000000.0",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Base Component",
+            "percentage": 30,
+            "amount": "1000000",
+            "color": "bg-indigo-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: 10,000,000,000"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "operation": "pct_of",
+        "valX": 0,
+        "valY": 0.0001
+      },
+      "output": {
+        "primaryValue": "0",
+        "primaryLabel": "0% of 0.0001",
+        "primarySubtext": "0% multiplied by 0.0001",
+        "summary": [
+          {
+            "label": "Operand X",
+            "value": "0"
+          },
+          {
+            "label": "Operand Y",
+            "value": "0.0001"
+          },
+          {
+            "label": "Reciprocal (1/X)",
+            "value": "Undefined"
+          },
+          {
+            "label": "Difference (Y - X)",
+            "value": "0.00"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Calculated Value",
+            "percentage": 70,
+            "amount": "0.0",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Base Component",
+            "percentage": 30,
+            "amount": "0",
+            "color": "bg-indigo-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: 0 (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.31
+  },
+  {
+    "id": "CALC-015",
+    "slug": "statistics-calculator",
+    "title": "Statistics Mean, Variance & Standard Deviation Calculator",
+    "category": "General & Scientific Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "dataset": "12, 18, 22, 25, 29, 34, 38, 42, 50"
+      },
+      "output": {
+        "primaryValue": "±12.16",
+        "primaryLabel": "Sample Standard Deviation (s)",
+        "primarySubtext": "Mean: 30.00 across 9 samples",
+        "summary": [
+          {
+            "label": "Sample Mean (Average)",
+            "value": "30.00"
+          },
+          {
+            "label": "Sample Median",
+            "value": "29"
+          },
+          {
+            "label": "Sample Variance (s²)",
+            "value": "147.75"
+          },
+          {
+            "label": "Dataset Range (Max - Min)",
+            "value": "12 to 50 (38)"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Mean Value",
+            "percentage": 50,
+            "amount": "30.0",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Standard Deviation Spread",
+            "percentage": 20,
+            "amount": "±12.2",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Primary: ±12.16 (Sample Standard Deviation (s))"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "dataset": 100000
+      },
+      "output": {
+        "primaryValue": "±0.00",
+        "primaryLabel": "Sample Standard Deviation (s)",
+        "primarySubtext": "Mean: 100000.00 across 1 samples",
+        "summary": [
+          {
+            "label": "Sample Mean (Average)",
+            "value": "100000.00"
+          },
+          {
+            "label": "Sample Median",
+            "value": "100000"
+          },
+          {
+            "label": "Sample Variance (s²)",
+            "value": "0.00"
+          },
+          {
+            "label": "Dataset Range (Max - Min)",
+            "value": "100000 to 100000 (0)"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Mean Value",
+            "percentage": 50,
+            "amount": "100000.0",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Standard Deviation Spread",
+            "percentage": 0,
+            "amount": "±0.0",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: ±0.00"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "dataset": 0
+      },
+      "output": {
+        "primaryValue": "±15.81",
+        "primaryLabel": "Sample Standard Deviation (s)",
+        "primarySubtext": "Mean: 30.00 across 5 samples",
+        "summary": [
+          {
+            "label": "Sample Mean (Average)",
+            "value": "30.00"
+          },
+          {
+            "label": "Sample Median",
+            "value": "30"
+          },
+          {
+            "label": "Sample Variance (s²)",
+            "value": "250.00"
+          },
+          {
+            "label": "Dataset Range (Max - Min)",
+            "value": "10 to 50 (40)"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Mean Value",
+            "percentage": 50,
+            "amount": "30.0",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Standard Deviation Spread",
+            "percentage": 26,
+            "amount": "±15.8",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: ±15.81 (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.26
+  },
+  {
+    "id": "CALC-016",
+    "slug": "physics-calculator",
+    "title": "Classical Kinematics & Kinetic Energy Calculator",
+    "category": "General & Scientific Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "v0": 0,
+        "acceleration": 9.81,
+        "time": 5,
+        "mass": 75
+      },
+      "output": {
+        "primaryValue": "49.05 m/s",
+        "primaryLabel": "Final Velocity (v)",
+        "primarySubtext": "Displacement: 122.63 meters in 5s",
+        "summary": [
+          {
+            "label": "Linear Distance Traveled",
+            "value": "122.63 m"
+          },
+          {
+            "label": "Kinetic Energy Generated",
+            "value": "90,221 Joules"
+          },
+          {
+            "label": "Net Force Applied (F = ma)",
+            "value": "735.75 N"
+          },
+          {
+            "label": "Terminal Speed in km/h",
+            "value": "176.58 km/h"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Initial Velocity Component",
+            "percentage": 0,
+            "amount": "0 m/s",
+            "color": "bg-[#FF8A00]"
+          },
+          {
+            "label": "Acceleration Contribution",
+            "percentage": 100,
+            "amount": "49.1 m/s",
+            "color": "bg-amber-500"
+          }
+        ]
+      },
+      "notes": "Primary: 49.05 m/s (Final Velocity (v))"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "v0": 100000,
+        "acceleration": 1000,
+        "time": 1000,
+        "mass": 100000
+      },
+      "output": {
+        "primaryValue": "1100000.00 m/s",
+        "primaryLabel": "Final Velocity (v)",
+        "primarySubtext": "Displacement: 600000000.00 meters in 1000s",
+        "summary": [
+          {
+            "label": "Linear Distance Traveled",
+            "value": "600000000.00 m"
+          },
+          {
+            "label": "Kinetic Energy Generated",
+            "value": "60,500,000,000,000,000 Joules"
+          },
+          {
+            "label": "Net Force Applied (F = ma)",
+            "value": "100000000.00 N"
+          },
+          {
+            "label": "Terminal Speed in km/h",
+            "value": "3960000.00 km/h"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Initial Velocity Component",
+            "percentage": 9,
+            "amount": "100000 m/s",
+            "color": "bg-[#FF8A00]"
+          },
+          {
+            "label": "Acceleration Contribution",
+            "percentage": 91,
+            "amount": "1000000.0 m/s",
+            "color": "bg-amber-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: 1100000.00 m/s"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "v0": 0,
+        "acceleration": 0,
+        "time": 0.1,
+        "mass": 0.1
+      },
+      "output": {
+        "primaryValue": "0.00 m/s",
+        "primaryLabel": "Final Velocity (v)",
+        "primarySubtext": "Displacement: 0.00 meters in 0.1s",
+        "summary": [
+          {
+            "label": "Linear Distance Traveled",
+            "value": "0.00 m"
+          },
+          {
+            "label": "Kinetic Energy Generated",
+            "value": "0 Joules"
+          },
+          {
+            "label": "Net Force Applied (F = ma)",
+            "value": "0.00 N"
+          },
+          {
+            "label": "Terminal Speed in km/h",
+            "value": "0.00 km/h"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Initial Velocity Component",
+            "percentage": 0,
+            "amount": "0 m/s",
+            "color": "bg-[#FF8A00]"
+          },
+          {
+            "label": "Acceleration Contribution",
+            "percentage": 100,
+            "amount": "0.0 m/s",
+            "color": "bg-amber-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: 0.00 m/s (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.12
+  },
+  {
+    "id": "CALC-017",
+    "slug": "electronics-calculator",
+    "title": "Electronics Voltage Divider & Ohm’s Law Calculator",
+    "category": "General & Scientific Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "vin": 12,
+        "r1": 10000,
+        "r2": 4700
+      },
+      "output": {
+        "primaryValue": "3.84 V",
+        "primaryLabel": "Output Voltage (V_out)",
+        "primarySubtext": "Divider Ratio: 0.320 | Current: 0.82 mA",
+        "summary": [
+          {
+            "label": "Total Series Resistance",
+            "value": "14.70 kΩ"
+          },
+          {
+            "label": "Quiescent Loop Current",
+            "value": "0.816 mA"
+          },
+          {
+            "label": "R1 Power Dissipation",
+            "value": "6.7 mW"
+          },
+          {
+            "label": "R2 Power Dissipation",
+            "value": "3.1 mW"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Voltage Drop Across R1",
+            "percentage": 68,
+            "amount": "8.16 V",
+            "color": "bg-amber-500"
+          },
+          {
+            "label": "Output Voltage across R2",
+            "percentage": 32,
+            "amount": "3.84 V",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Primary: 3.84 V (Output Voltage (V_out))"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "vin": 1000,
+        "r1": 10000000,
+        "r2": 10000000
+      },
+      "output": {
+        "primaryValue": "500.00 V",
+        "primaryLabel": "Output Voltage (V_out)",
+        "primarySubtext": "Divider Ratio: 0.500 | Current: 0.05 mA",
+        "summary": [
+          {
+            "label": "Total Series Resistance",
+            "value": "20000.00 kΩ"
+          },
+          {
+            "label": "Quiescent Loop Current",
+            "value": "0.050 mA"
+          },
+          {
+            "label": "R1 Power Dissipation",
+            "value": "25.0 mW"
+          },
+          {
+            "label": "R2 Power Dissipation",
+            "value": "25.0 mW"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Voltage Drop Across R1",
+            "percentage": 50,
+            "amount": "500.00 V",
+            "color": "bg-amber-500"
+          },
+          {
+            "label": "Output Voltage across R2",
+            "percentage": 50,
+            "amount": "500.00 V",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: 500.00 V"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "vin": 0.1,
+        "r1": 1,
+        "r2": 1
+      },
+      "output": {
+        "primaryValue": "0.05 V",
+        "primaryLabel": "Output Voltage (V_out)",
+        "primarySubtext": "Divider Ratio: 0.500 | Current: 50.00 mA",
+        "summary": [
+          {
+            "label": "Total Series Resistance",
+            "value": "0.00 kΩ"
+          },
+          {
+            "label": "Quiescent Loop Current",
+            "value": "50.000 mA"
+          },
+          {
+            "label": "R1 Power Dissipation",
+            "value": "2.5 mW"
+          },
+          {
+            "label": "R2 Power Dissipation",
+            "value": "2.5 mW"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Voltage Drop Across R1",
+            "percentage": 50,
+            "amount": "0.05 V",
+            "color": "bg-amber-500"
+          },
+          {
+            "label": "Output Voltage across R2",
+            "percentage": 50,
+            "amount": "0.05 V",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: 0.05 V (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.11
+  },
+  {
+    "id": "CALC-018",
+    "slug": "chemistry-calculator",
+    "title": "Chemistry Solution Dilution (M1V1 = M2V2) Calculator",
+    "category": "General & Scientific Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "m1": 5,
+        "m2": 0.5,
+        "v2": 500
+      },
+      "output": {
+        "primaryValue": "50.00 mL",
+        "primaryLabel": "Required Stock Solution (V1)",
+        "primarySubtext": "Add 450.00 mL of solvent to reach 500 mL total",
+        "summary": [
+          {
+            "label": "Stock Aliquot (V1)",
+            "value": "50.00 mL"
+          },
+          {
+            "label": "Solvent to Add (H₂O)",
+            "value": "450.00 mL"
+          },
+          {
+            "label": "Total Solution Volume (V2)",
+            "value": "500 mL"
+          },
+          {
+            "label": "Dilution Factor",
+            "value": "10.0x"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Stock Solution (V1)",
+            "percentage": 10,
+            "amount": "50.0 mL",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Solvent (Diluent)",
+            "percentage": 90,
+            "amount": "450.0 mL",
+            "color": "bg-[#FF8A00]"
+          }
+        ]
+      },
+      "notes": "Primary: 50.00 mL (Required Stock Solution (V1))"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "m1": 100,
+        "m2": 100,
+        "v2": 50000
+      },
+      "output": {
+        "primaryValue": "50000.00 mL",
+        "primaryLabel": "Required Stock Solution (V1)",
+        "primarySubtext": "Add 0.00 mL of solvent to reach 50000 mL total",
+        "summary": [
+          {
+            "label": "Stock Aliquot (V1)",
+            "value": "50000.00 mL"
+          },
+          {
+            "label": "Solvent to Add (H₂O)",
+            "value": "0.00 mL"
+          },
+          {
+            "label": "Total Solution Volume (V2)",
+            "value": "50000 mL"
+          },
+          {
+            "label": "Dilution Factor",
+            "value": "1.0x"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Stock Solution (V1)",
+            "percentage": 100,
+            "amount": "50000.0 mL",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Solvent (Diluent)",
+            "percentage": 0,
+            "amount": "0.0 mL",
+            "color": "bg-[#FF8A00]"
+          }
+        ]
+      },
+      "notes": "Max Boundary: 50000.00 mL"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "m1": 0.001,
+        "m2": 0.001,
+        "v2": 1
+      },
+      "output": {
+        "primaryValue": "1.00 mL",
+        "primaryLabel": "Required Stock Solution (V1)",
+        "primarySubtext": "Add 0.00 mL of solvent to reach 1 mL total",
+        "summary": [
+          {
+            "label": "Stock Aliquot (V1)",
+            "value": "1.00 mL"
+          },
+          {
+            "label": "Solvent to Add (H₂O)",
+            "value": "0.00 mL"
+          },
+          {
+            "label": "Total Solution Volume (V2)",
+            "value": "1 mL"
+          },
+          {
+            "label": "Dilution Factor",
+            "value": "1.0x"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Stock Solution (V1)",
+            "percentage": 100,
+            "amount": "1.0 mL",
+            "color": "bg-indigo-500"
+          },
+          {
+            "label": "Solvent (Diluent)",
+            "percentage": 0,
+            "amount": "0.0 mL",
+            "color": "bg-[#FF8A00]"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: 1.00 mL (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.11
+  },
+  {
+    "id": "CALC-019",
+    "slug": "automotive-calculator",
+    "title": "Automotive Fuel Economy & Trip Cost Calculator",
+    "category": "General & Scientific Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "distance": 350,
+        "fuelUsed": 12.5,
+        "pricePerGallon": 3.65
+      },
+      "output": {
+        "primaryValue": "28.0 MPG",
+        "primaryLabel": "Vehicle Fuel Economy",
+        "primarySubtext": "Metric: 8.40 L/100km | Cost: $0.13/mile",
+        "summary": [
+          {
+            "label": "Total Trip Fuel Cost",
+            "value": "$45.63"
+          },
+          {
+            "label": "Cost Per Mile Driven",
+            "value": "$0.130/mi"
+          },
+          {
+            "label": "Metric Fuel Efficiency",
+            "value": "8.40 L/100km"
+          },
+          {
+            "label": "Fuel Consumed",
+            "value": "12.5 Gallons (47.3 Liters)"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Fuel Expense",
+            "percentage": 100,
+            "amount": "$45.63",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Primary: 28.0 MPG (Vehicle Fuel Economy)"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "distance": 20000,
+        "fuelUsed": 2000,
+        "pricePerGallon": 20
+      },
+      "output": {
+        "primaryValue": "10.0 MPG",
+        "primaryLabel": "Vehicle Fuel Economy",
+        "primarySubtext": "Metric: 23.52 L/100km | Cost: $2.00/mile",
+        "summary": [
+          {
+            "label": "Total Trip Fuel Cost",
+            "value": "$40000.00"
+          },
+          {
+            "label": "Cost Per Mile Driven",
+            "value": "$2.000/mi"
+          },
+          {
+            "label": "Metric Fuel Efficiency",
+            "value": "23.52 L/100km"
+          },
+          {
+            "label": "Fuel Consumed",
+            "value": "2000 Gallons (7570.0 Liters)"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Fuel Expense",
+            "percentage": 100,
+            "amount": "$40000.00",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Max Boundary: 10.0 MPG"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "distance": 1,
+        "fuelUsed": 0.1,
+        "pricePerGallon": 0.5
+      },
+      "output": {
+        "primaryValue": "10.0 MPG",
+        "primaryLabel": "Vehicle Fuel Economy",
+        "primarySubtext": "Metric: 23.52 L/100km | Cost: $0.05/mile",
+        "summary": [
+          {
+            "label": "Total Trip Fuel Cost",
+            "value": "$0.05"
+          },
+          {
+            "label": "Cost Per Mile Driven",
+            "value": "$0.050/mi"
+          },
+          {
+            "label": "Metric Fuel Efficiency",
+            "value": "23.52 L/100km"
+          },
+          {
+            "label": "Fuel Consumed",
+            "value": "0.1 Gallons (0.4 Liters)"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Fuel Expense",
+            "percentage": 100,
+            "amount": "$0.05",
+            "color": "bg-emerald-500"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: 10.0 MPG (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.1
+  },
+  {
+    "id": "CALC-020",
+    "slug": "agriculture-calculator",
+    "title": "Agriculture Fertilizer & Crop Seeding Rate Calculator",
+    "category": "General & Scientific Calculators",
+    "normalTest": {
+      "passed": true,
+      "input": {
+        "fieldAcres": 40,
+        "targetNitrogen": 120,
+        "fertilizerType": "urea"
+      },
+      "output": {
+        "primaryValue": "10,435 lbs",
+        "primaryLabel": "Total Commercial Fertilizer Required",
+        "primarySubtext": "261 lbs/acre across 40 acres (209 x 50lb bags)",
+        "summary": [
+          {
+            "label": "Product Rate per Acre",
+            "value": "261 lbs/acre"
+          },
+          {
+            "label": "50lb Bags Required",
+            "value": "209 bags"
+          },
+          {
+            "label": "Total Elemental N Delivered",
+            "value": "4,800 lbs N"
+          },
+          {
+            "label": "Field Surface Area",
+            "value": "1,742,400 sq ft"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Elemental Nitrogen (N)",
+            "percentage": 46,
+            "amount": "4,800 lbs",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Carrier & Conditioner Matrix",
+            "percentage": 54,
+            "amount": "5,635 lbs",
+            "color": "bg-slate-400"
+          }
+        ]
+      },
+      "notes": "Primary: 10,435 lbs (Total Commercial Fertilizer Required)"
+    },
+    "boundaryTest": {
+      "passed": true,
+      "input": {
+        "fieldAcres": 100000,
+        "targetNitrogen": 500,
+        "fertilizerType": "urea"
+      },
+      "output": {
+        "primaryValue": "108,695,652 lbs",
+        "primaryLabel": "Total Commercial Fertilizer Required",
+        "primarySubtext": "1087 lbs/acre across 100000 acres (2,173,914 x 50lb bags)",
+        "summary": [
+          {
+            "label": "Product Rate per Acre",
+            "value": "1087 lbs/acre"
+          },
+          {
+            "label": "50lb Bags Required",
+            "value": "2,173,914 bags"
+          },
+          {
+            "label": "Total Elemental N Delivered",
+            "value": "50,000,000 lbs N"
+          },
+          {
+            "label": "Field Surface Area",
+            "value": "4,356,000,000 sq ft"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Elemental Nitrogen (N)",
+            "percentage": 46,
+            "amount": "50,000,000 lbs",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Carrier & Conditioner Matrix",
+            "percentage": 54,
+            "amount": "58,695,652 lbs",
+            "color": "bg-slate-400"
+          }
+        ]
+      },
+      "notes": "Max Boundary: 108,695,652 lbs"
+    },
+    "edgeCaseTest": {
+      "passed": true,
+      "input": {
+        "fieldAcres": 0.1,
+        "targetNitrogen": 1,
+        "fertilizerType": "urea"
+      },
+      "output": {
+        "primaryValue": "0 lbs",
+        "primaryLabel": "Total Commercial Fertilizer Required",
+        "primarySubtext": "2 lbs/acre across 0.1 acres (1 x 50lb bags)",
+        "summary": [
+          {
+            "label": "Product Rate per Acre",
+            "value": "2 lbs/acre"
+          },
+          {
+            "label": "50lb Bags Required",
+            "value": "1 bags"
+          },
+          {
+            "label": "Total Elemental N Delivered",
+            "value": "0.1 lbs N"
+          },
+          {
+            "label": "Field Surface Area",
+            "value": "4,356 sq ft"
+          }
+        ],
+        "breakdown": [
+          {
+            "label": "Elemental Nitrogen (N)",
+            "percentage": 46,
+            "amount": "0 lbs",
+            "color": "bg-emerald-500"
+          },
+          {
+            "label": "Carrier & Conditioner Matrix",
+            "percentage": 54,
+            "amount": "0 lbs",
+            "color": "bg-slate-400"
+          }
+        ]
+      },
+      "notes": "Zero/Min Boundary: 0 lbs (No division-by-zero crash)"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.19
+  }
+]

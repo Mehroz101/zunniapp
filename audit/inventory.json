@@ -1,0 +1,2750 @@
+{
+  "timestamp": "2026-10-17T07:17:44.416Z",
+  "summary": {
+    "totalCalculators": 20,
+    "totalTools": 49,
+    "totalUtilities": 69
+  },
+  "calculators": [
+    {
+      "id": "CALC-001",
+      "slug": "auto-loan-trade-in-equity-calculator",
+      "name": "Auto Loan Trade–In Equity Calculator",
+      "category": "financial",
+      "categoryLabel": "Financial Calculators",
+      "route": "/calculators/auto-loan-trade-in-equity-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "tradeValue",
+          "label": "Dealer Trade–In Market Value ($) *",
+          "type": "number",
+          "defaultValue": 15000,
+          "min": 0,
+          "max": 500000,
+          "step": 500,
+          "unit": "$"
+        },
+        {
+          "id": "loanPayoff",
+          "label": "Current Auto Loan Payoff Balance ($) *",
+          "type": "number",
+          "defaultValue": 11000,
+          "min": 0,
+          "max": 500000,
+          "step": 500,
+          "unit": "$"
+        },
+        {
+          "id": "newPrice",
+          "label": "New Vehicle Purchase Price ($) *",
+          "type": "number",
+          "defaultValue": 32000,
+          "min": 500,
+          "max": 1000000,
+          "step": 500,
+          "unit": "$"
+        },
+        {
+          "id": "taxRate",
+          "label": "State Sales Tax Rate (%) *",
+          "type": "number",
+          "defaultValue": 6,
+          "min": 0,
+          "max": 20,
+          "step": 0.1,
+          "unit": "%"
+        },
+        {
+          "id": "downPayment",
+          "label": "Additional Cash Down Payment ($) *",
+          "type": "number",
+          "defaultValue": 1000,
+          "min": 0,
+          "max": 500000,
+          "step": 100,
+          "unit": "$"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "auto loan",
+        "trade-in",
+        "car equity",
+        "negative equity",
+        "underwater loan",
+        "sales tax credit",
+        "car payment"
+      ],
+      "badge": "Trade-In Equity Engine",
+      "faqsCount": 4,
+      "formulaStepsCount": 5
+    },
+    {
+      "id": "CALC-002",
+      "slug": "loan-calculator",
+      "name": "Loan & EMI Amortization Calculator",
+      "category": "financial",
+      "categoryLabel": "Financial Calculators",
+      "route": "/calculators/loan-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "principal",
+          "label": "Loan Amount",
+          "type": "number",
+          "defaultValue": 250000,
+          "min": 1000,
+          "max": 10000000,
+          "step": 1000,
+          "unit": "$"
+        },
+        {
+          "id": "rate",
+          "label": "Annual Interest Rate (%)",
+          "type": "slider",
+          "defaultValue": 6.5,
+          "min": 0.1,
+          "max": 30,
+          "step": 0.1,
+          "unit": "%"
+        },
+        {
+          "id": "years",
+          "label": "Loan Term (Years)",
+          "type": "select",
+          "defaultValue": "30"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "loan",
+        "emi",
+        "mortgage",
+        "interest",
+        "amortization",
+        "finance",
+        "debt"
+      ],
+      "badge": "Amortization Engine",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-003",
+      "slug": "investment-calculator",
+      "name": "Investment Compound Interest & ROI Calculator",
+      "category": "financial",
+      "categoryLabel": "Financial Calculators",
+      "route": "/calculators/investment-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "initialDeposit",
+          "label": "Starting Capital",
+          "type": "number",
+          "defaultValue": 10000,
+          "min": 0,
+          "max": 10000000,
+          "step": 500,
+          "unit": "$"
+        },
+        {
+          "id": "monthlyContribution",
+          "label": "Monthly Deposit",
+          "type": "number",
+          "defaultValue": 500,
+          "min": 0,
+          "max": 100000,
+          "step": 50,
+          "unit": "$"
+        },
+        {
+          "id": "returnRate",
+          "label": "Expected Annual Return (%)",
+          "type": "slider",
+          "defaultValue": 8,
+          "min": 1,
+          "max": 30,
+          "step": 0.5,
+          "unit": "%"
+        },
+        {
+          "id": "years",
+          "label": "Investment Horizon (Years)",
+          "type": "slider",
+          "defaultValue": 20,
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "unit": "Years"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "investment",
+        "compound-interest",
+        "roi",
+        "portfolio",
+        "cagr",
+        "stocks",
+        "wealth"
+      ],
+      "badge": "Wealth Engine",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-004",
+      "slug": "tax-calculator",
+      "name": "Income Tax & Net Paycheck Calculator",
+      "category": "financial",
+      "categoryLabel": "Financial Calculators",
+      "route": "/calculators/tax-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "grossIncome",
+          "label": "Gross Annual Salary ($)",
+          "type": "number",
+          "defaultValue": 95000,
+          "min": 0,
+          "max": 2000000,
+          "step": 1000,
+          "unit": "$"
+        },
+        {
+          "id": "filingStatus",
+          "label": "Filing Status",
+          "type": "select",
+          "defaultValue": "single"
+        },
+        {
+          "id": "deductions",
+          "label": "Additional Pre-Tax Deductions (401k, HSA)",
+          "type": "number",
+          "defaultValue": 6000,
+          "min": 0,
+          "max": 50000,
+          "step": 500,
+          "unit": "$"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "tax",
+        "income-tax",
+        "salary",
+        "take-home",
+        "net-pay",
+        "deductions",
+        "w2"
+      ],
+      "badge": "Tax Diagnostics",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-005",
+      "slug": "marketing-calculator",
+      "name": "Marketing ROI, CAC & ROAS Calculator",
+      "category": "financial",
+      "categoryLabel": "Financial Calculators",
+      "route": "/calculators/marketing-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "adSpend",
+          "label": "Total Ad Spend ($)",
+          "type": "number",
+          "defaultValue": 15000,
+          "min": 100,
+          "max": 10000000,
+          "step": 500,
+          "unit": "$"
+        },
+        {
+          "id": "conversions",
+          "label": "Customers Acquired",
+          "type": "number",
+          "defaultValue": 250,
+          "min": 1,
+          "max": 100000,
+          "step": 10
+        },
+        {
+          "id": "ltv",
+          "label": "Average Customer LTV ($)",
+          "type": "number",
+          "defaultValue": 450,
+          "min": 1,
+          "max": 50000,
+          "step": 25,
+          "unit": "$"
+        },
+        {
+          "id": "revenueGenerated",
+          "label": "Total Revenue Generated ($)",
+          "type": "number",
+          "defaultValue": 48000,
+          "min": 100,
+          "max": 50000000,
+          "step": 1000,
+          "unit": "$"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "marketing",
+        "cac",
+        "roas",
+        "ltv",
+        "ad-spend",
+        "growth",
+        "conversion"
+      ],
+      "badge": "Growth Metrics",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-006",
+      "slug": "personal-finance-calculator",
+      "name": "50/30/20 Budget & Emergency Fund Calculator",
+      "category": "financial",
+      "categoryLabel": "Financial Calculators",
+      "route": "/calculators/personal-finance-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "monthlyIncome",
+          "label": "Monthly Net Income ($)",
+          "type": "number",
+          "defaultValue": 6500,
+          "min": 500,
+          "max": 200000,
+          "step": 100,
+          "unit": "$"
+        },
+        {
+          "id": "emergencyMonths",
+          "label": "Emergency Fund Runway Target",
+          "type": "select",
+          "defaultValue": "6"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "budget",
+        "savings",
+        "emergency-fund",
+        "50-30-20",
+        "personal-finance",
+        "money"
+      ],
+      "badge": "Budget Framework",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-007",
+      "slug": "business-calculator",
+      "name": "Business Break-Even & Profit Margin Calculator",
+      "category": "financial",
+      "categoryLabel": "Financial Calculators",
+      "route": "/calculators/business-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "fixedCosts",
+          "label": "Monthly Fixed Costs (Rent, Salaries, Software)",
+          "type": "number",
+          "defaultValue": 18000,
+          "min": 100,
+          "max": 5000000,
+          "step": 500,
+          "unit": "$"
+        },
+        {
+          "id": "unitPrice",
+          "label": "Selling Price Per Unit ($)",
+          "type": "number",
+          "defaultValue": 85,
+          "min": 1,
+          "max": 100000,
+          "step": 5,
+          "unit": "$"
+        },
+        {
+          "id": "variableCost",
+          "label": "Variable Cost Per Unit ($)",
+          "type": "number",
+          "defaultValue": 35,
+          "min": 0,
+          "max": 100000,
+          "step": 5,
+          "unit": "$"
+        },
+        {
+          "id": "estimatedSales",
+          "label": "Expected Monthly Units Sold",
+          "type": "number",
+          "defaultValue": 600,
+          "min": 1,
+          "max": 500000,
+          "step": 25
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "business",
+        "break-even",
+        "profit-margin",
+        "fixed-cost",
+        "revenue",
+        "startup"
+      ],
+      "badge": "Commercial Modeling",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-008",
+      "slug": "real-estate-calculator",
+      "name": "Real Estate Cap Rate & Rental Yield Calculator",
+      "category": "financial",
+      "categoryLabel": "Financial Calculators",
+      "route": "/calculators/real-estate-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "purchasePrice",
+          "label": "Property Purchase Price ($)",
+          "type": "number",
+          "defaultValue": 420000,
+          "min": 20000,
+          "max": 20000000,
+          "step": 5000,
+          "unit": "$"
+        },
+        {
+          "id": "monthlyRent",
+          "label": "Monthly Gross Rental Income ($)",
+          "type": "number",
+          "defaultValue": 3200,
+          "min": 100,
+          "max": 100000,
+          "step": 50,
+          "unit": "$"
+        },
+        {
+          "id": "annualExpenses",
+          "label": "Annual Operating Expenses (Taxes, HOA, Maintenance)",
+          "type": "number",
+          "defaultValue": 8400,
+          "min": 0,
+          "max": 500000,
+          "step": 200,
+          "unit": "$"
+        },
+        {
+          "id": "monthlyMortgage",
+          "label": "Monthly Mortgage Payment (P&I) ($)",
+          "type": "number",
+          "defaultValue": 1950,
+          "min": 0,
+          "max": 50000,
+          "step": 50,
+          "unit": "$"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "real-estate",
+        "cap-rate",
+        "rental-yield",
+        "property",
+        "mortgage",
+        "cash-flow",
+        "investing"
+      ],
+      "badge": "Property Analytics",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-009",
+      "slug": "construction-calculator",
+      "name": "Construction & Concrete Volume Estimator",
+      "category": "specialized",
+      "categoryLabel": "General & Scientific Calculators",
+      "route": "/calculators/construction-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "length",
+          "label": "Slab Length (Feet)",
+          "type": "number",
+          "defaultValue": 24,
+          "min": 1,
+          "max": 1000,
+          "step": 1,
+          "unit": "ft"
+        },
+        {
+          "id": "width",
+          "label": "Slab Width (Feet)",
+          "type": "number",
+          "defaultValue": 16,
+          "min": 1,
+          "max": 1000,
+          "step": 1,
+          "unit": "ft"
+        },
+        {
+          "id": "thickness",
+          "label": "Slab Thickness (Inches)",
+          "type": "select",
+          "defaultValue": "4"
+        },
+        {
+          "id": "waste",
+          "label": "Waste Buffer Tolerance (%)",
+          "type": "slider",
+          "defaultValue": 10,
+          "min": 0,
+          "max": 25,
+          "step": 1,
+          "unit": "%"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "construction",
+        "concrete",
+        "volume",
+        "drywall",
+        "framing",
+        "lumber",
+        "masonry"
+      ],
+      "badge": "Jobsite Estimator",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-010",
+      "slug": "health-calculator",
+      "name": "BMR, TDEE & Daily Caloric Deficit Calculator",
+      "category": "specialized",
+      "categoryLabel": "General & Scientific Calculators",
+      "route": "/calculators/health-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "gender",
+          "label": "Biological Sex",
+          "type": "select",
+          "defaultValue": "male"
+        },
+        {
+          "id": "age",
+          "label": "Age (Years)",
+          "type": "number",
+          "defaultValue": 28,
+          "min": 14,
+          "max": 100,
+          "step": 1
+        },
+        {
+          "id": "weightKg",
+          "label": "Weight (kg)",
+          "type": "number",
+          "defaultValue": 78,
+          "min": 30,
+          "max": 300,
+          "step": 0.5,
+          "unit": "kg"
+        },
+        {
+          "id": "heightCm",
+          "label": "Height (cm)",
+          "type": "number",
+          "defaultValue": 178,
+          "min": 100,
+          "max": 240,
+          "step": 1,
+          "unit": "cm"
+        },
+        {
+          "id": "activity",
+          "label": "Activity Level",
+          "type": "select",
+          "defaultValue": "moderate"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "health",
+        "bmr",
+        "tdee",
+        "calories",
+        "nutrition",
+        "weight-loss",
+        "macros"
+      ],
+      "badge": "Metabolic Science",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-011",
+      "slug": "fitness-calculator",
+      "name": "One-Rep Max (1RM) & Strength Zones Calculator",
+      "category": "specialized",
+      "categoryLabel": "General & Scientific Calculators",
+      "route": "/calculators/fitness-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "weightLifted",
+          "label": "Weight Lifted",
+          "type": "number",
+          "defaultValue": 225,
+          "min": 20,
+          "max": 1500,
+          "step": 5,
+          "unit": "lbs"
+        },
+        {
+          "id": "reps",
+          "label": "Repetitions Completed (1-10)",
+          "type": "slider",
+          "defaultValue": 5,
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "unit": "Reps"
+        },
+        {
+          "id": "formula",
+          "label": "Calculation Formula",
+          "type": "select",
+          "defaultValue": "brzycki"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "fitness",
+        "1rm",
+        "strength",
+        "one-rep-max",
+        "powerlifting",
+        "workout",
+        "training"
+      ],
+      "badge": "Strength Diagnostics",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-012",
+      "slug": "educational-calculator",
+      "name": "GPA & Target Exam Grade Calculator",
+      "category": "specialized",
+      "categoryLabel": "General & Scientific Calculators",
+      "route": "/calculators/educational-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "currentGrade",
+          "label": "Current Class Grade (%)",
+          "type": "number",
+          "defaultValue": 86.5,
+          "min": 0,
+          "max": 100,
+          "step": 0.5,
+          "unit": "%"
+        },
+        {
+          "id": "targetGrade",
+          "label": "Desired Final Course Grade (%)",
+          "type": "number",
+          "defaultValue": 90,
+          "min": 50,
+          "max": 100,
+          "step": 0.5,
+          "unit": "%"
+        },
+        {
+          "id": "finalExamWeight",
+          "label": "Final Exam Weight (%)",
+          "type": "slider",
+          "defaultValue": 30,
+          "min": 5,
+          "max": 80,
+          "step": 1,
+          "unit": "%"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "education",
+        "gpa",
+        "grades",
+        "exam",
+        "college",
+        "student",
+        "cgpa"
+      ],
+      "badge": "Academic Metrics",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-013",
+      "slug": "geometry-calculator",
+      "name": "Geometry 2D/3D Area & Volume Calculator",
+      "category": "specialized",
+      "categoryLabel": "General & Scientific Calculators",
+      "route": "/calculators/geometry-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "shape",
+          "label": "Select Shape",
+          "type": "select",
+          "defaultValue": "cylinder"
+        },
+        {
+          "id": "dimensionA",
+          "label": "Primary Dimension (Radius or Length)",
+          "type": "number",
+          "defaultValue": 5,
+          "min": 0.1,
+          "max": 10000,
+          "step": 0.5
+        },
+        {
+          "id": "dimensionB",
+          "label": "Secondary Dimension (Height or Width)",
+          "type": "number",
+          "defaultValue": 12,
+          "min": 0.1,
+          "max": 10000,
+          "step": 0.5
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "geometry",
+        "area",
+        "volume",
+        "surface-area",
+        "shapes",
+        "math",
+        "circle"
+      ],
+      "badge": "Geometric Engine",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-014",
+      "slug": "mathematics-calculator",
+      "name": "Scientific Mathematics & Percentage Calculator",
+      "category": "specialized",
+      "categoryLabel": "General & Scientific Calculators",
+      "route": "/calculators/mathematics-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "operation",
+          "label": "Select Operation",
+          "type": "select",
+          "defaultValue": "pct_of"
+        },
+        {
+          "id": "valX",
+          "label": "Value X",
+          "type": "number",
+          "defaultValue": 15,
+          "min": 0,
+          "max": 1000000,
+          "step": 0.1
+        },
+        {
+          "id": "valY",
+          "label": "Value Y",
+          "type": "number",
+          "defaultValue": 250,
+          "min": 0.0001,
+          "max": 1000000,
+          "step": 0.1
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "math",
+        "mathematics",
+        "percentage",
+        "ratio",
+        "fraction",
+        "calculator",
+        "algebra"
+      ],
+      "badge": "Mathematical Core",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-015",
+      "slug": "statistics-calculator",
+      "name": "Statistics Mean, Variance & Standard Deviation Calculator",
+      "category": "specialized",
+      "categoryLabel": "General & Scientific Calculators",
+      "route": "/calculators/statistics-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "dataset",
+          "label": "Dataset Numbers (Comma or Space separated)",
+          "type": "number",
+          "defaultValue": "12, 18, 22, 25, 29, 34, 38, 42, 50"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "statistics",
+        "standard-deviation",
+        "mean",
+        "median",
+        "mode",
+        "variance",
+        "data"
+      ],
+      "badge": "Statistical Engine",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-016",
+      "slug": "physics-calculator",
+      "name": "Classical Kinematics & Kinetic Energy Calculator",
+      "category": "specialized",
+      "categoryLabel": "General & Scientific Calculators",
+      "route": "/calculators/physics-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "v0",
+          "label": "Initial Velocity (v₀)",
+          "type": "number",
+          "defaultValue": 0,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "m/s"
+        },
+        {
+          "id": "acceleration",
+          "label": "Acceleration (a)",
+          "type": "number",
+          "defaultValue": 9.81,
+          "min": -1000,
+          "max": 1000,
+          "step": 0.1,
+          "unit": "m/s²"
+        },
+        {
+          "id": "time",
+          "label": "Time Elapsed (t)",
+          "type": "number",
+          "defaultValue": 5,
+          "min": 0.1,
+          "max": 1000,
+          "step": 0.5,
+          "unit": "s"
+        },
+        {
+          "id": "mass",
+          "label": "Object Mass (m)",
+          "type": "number",
+          "defaultValue": 75,
+          "min": 0.1,
+          "max": 100000,
+          "step": 1,
+          "unit": "kg"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "physics",
+        "kinematics",
+        "velocity",
+        "acceleration",
+        "force",
+        "energy",
+        "science"
+      ],
+      "badge": "Physics Engine",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-017",
+      "slug": "electronics-calculator",
+      "name": "Electronics Voltage Divider & Ohm’s Law Calculator",
+      "category": "specialized",
+      "categoryLabel": "General & Scientific Calculators",
+      "route": "/calculators/electronics-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "vin",
+          "label": "Input Voltage (V_in)",
+          "type": "number",
+          "defaultValue": 12,
+          "min": 0.1,
+          "max": 1000,
+          "step": 0.5,
+          "unit": "V"
+        },
+        {
+          "id": "r1",
+          "label": "Resistor R1 (Ohms)",
+          "type": "number",
+          "defaultValue": 10000,
+          "min": 1,
+          "max": 10000000,
+          "step": 100,
+          "unit": "Ω"
+        },
+        {
+          "id": "r2",
+          "label": "Resistor R2 (Ohms)",
+          "type": "number",
+          "defaultValue": 4700,
+          "min": 1,
+          "max": 10000000,
+          "step": 100,
+          "unit": "Ω"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "electronics",
+        "voltage-divider",
+        "ohms-law",
+        "resistor",
+        "circuit",
+        "hardware",
+        "pcb"
+      ],
+      "badge": "Hardware Circuitry",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-018",
+      "slug": "chemistry-calculator",
+      "name": "Chemistry Solution Dilution (M1V1 = M2V2) Calculator",
+      "category": "specialized",
+      "categoryLabel": "General & Scientific Calculators",
+      "route": "/calculators/chemistry-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "m1",
+          "label": "Initial Stock Concentration (M1)",
+          "type": "number",
+          "defaultValue": 5,
+          "min": 0.001,
+          "max": 100,
+          "step": 0.1,
+          "unit": "M (mol/L)"
+        },
+        {
+          "id": "m2",
+          "label": "Desired Final Concentration (M2)",
+          "type": "number",
+          "defaultValue": 0.5,
+          "min": 0.001,
+          "max": 100,
+          "step": 0.05,
+          "unit": "M (mol/L)"
+        },
+        {
+          "id": "v2",
+          "label": "Desired Final Total Volume (V2)",
+          "type": "number",
+          "defaultValue": 500,
+          "min": 1,
+          "max": 50000,
+          "step": 10,
+          "unit": "mL"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "chemistry",
+        "dilution",
+        "molarity",
+        "solutions",
+        "concentration",
+        "laboratory",
+        "science"
+      ],
+      "badge": "Laboratory Science",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-019",
+      "slug": "automotive-calculator",
+      "name": "Automotive Fuel Economy & Trip Cost Calculator",
+      "category": "specialized",
+      "categoryLabel": "General & Scientific Calculators",
+      "route": "/calculators/automotive-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "distance",
+          "label": "Trip Distance (Miles)",
+          "type": "number",
+          "defaultValue": 350,
+          "min": 1,
+          "max": 20000,
+          "step": 10,
+          "unit": "Miles"
+        },
+        {
+          "id": "fuelUsed",
+          "label": "Fuel Consumed (Gallons)",
+          "type": "number",
+          "defaultValue": 12.5,
+          "min": 0.1,
+          "max": 2000,
+          "step": 0.5,
+          "unit": "Gallons"
+        },
+        {
+          "id": "pricePerGallon",
+          "label": "Fuel Price Per Gallon ($)",
+          "type": "number",
+          "defaultValue": 3.65,
+          "min": 0.5,
+          "max": 20,
+          "step": 0.05,
+          "unit": "$"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "automotive",
+        "fuel-economy",
+        "mpg",
+        "liters-per-100km",
+        "trip-cost",
+        "gas",
+        "vehicle"
+      ],
+      "badge": "Vehicle Telemetry",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    },
+    {
+      "id": "CALC-020",
+      "slug": "agriculture-calculator",
+      "name": "Agriculture Fertilizer & Crop Seeding Rate Calculator",
+      "category": "specialized",
+      "categoryLabel": "General & Scientific Calculators",
+      "route": "/calculators/agriculture-calculator",
+      "implementationLocation": "aiiseverything-front/src/lib/config/calculators.ts",
+      "inputs": [
+        {
+          "id": "fieldAcres",
+          "label": "Field Size (Acres)",
+          "type": "number",
+          "defaultValue": 40,
+          "min": 0.1,
+          "max": 100000,
+          "step": 5,
+          "unit": "Acres"
+        },
+        {
+          "id": "targetNitrogen",
+          "label": "Target Nitrogen Rate (lbs N / Acre)",
+          "type": "number",
+          "defaultValue": 120,
+          "min": 1,
+          "max": 500,
+          "step": 5,
+          "unit": "lbs/acre"
+        },
+        {
+          "id": "fertilizerType",
+          "label": "Fertilizer Nitrogen Grade",
+          "type": "select",
+          "defaultValue": "urea"
+        }
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Mathematical Verification against Independent Formula",
+      "tags": [
+        "agriculture",
+        "fertilizer",
+        "seeding",
+        "crop",
+        "farming",
+        "yield",
+        "agronomy"
+      ],
+      "badge": "Agronomy Modeling",
+      "faqsCount": 3,
+      "formulaStepsCount": 3
+    }
+  ],
+  "tools": [
+    {
+      "id": "TOOL-001",
+      "slug": "robots-txt-generator",
+      "name": "Robots.txt Generator & Directives Validator",
+      "category": "seo",
+      "categoryName": "SEO Diagnostics",
+      "route": "/tools/robots-txt-generator",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Custom Paths or Rules (Optional)",
+      "outputLabel": "Generated robots.txt Configuration",
+      "sampleInput": "/admin/\n/checkout/\n/api/v1/internal/",
+      "options": [
+        {
+          "id": "domain",
+          "label": "Website Domain",
+          "type": "text",
+          "defaultValue": "https://example.com"
+        },
+        {
+          "id": "allowAiCrawlers",
+          "label": "Allow Generative AI Bots (GPTBot, ClaudeBot)",
+          "type": "boolean",
+          "defaultValue": true
+        },
+        {
+          "id": "crawlDelay",
+          "label": "Crawl Delay (Seconds, 0 for none)",
+          "type": "text",
+          "defaultValue": "0"
+        }
+      ],
+      "features": [
+        "Comprehensive crawler control (Googlebot, Bing, Baidu, Yandex)",
+        "Specific rules for LLM crawlers (GPTBot, ClaudeBot, PerplexityBot)",
+        "Automatic sitemap directive injection",
+        "Conflicting rule detection and RFC compliance"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-002",
+      "slug": "xml-sitemap-generator",
+      "name": "XML Sitemap Generator & Tag Validator",
+      "category": "seo",
+      "categoryName": "SEO Diagnostics",
+      "route": "/tools/xml-sitemap-generator",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Paste URLs (One URL per line)",
+      "outputLabel": "Standard sitemap.xml Output",
+      "sampleInput": "https://aiiseverything.com\nhttps://aiiseverything.com/ai-tools\nhttps://aiiseverything.com/blog\nhttps://aiiseverything.com/tools/robots-txt-generator\nhttps://aiiseverything.com/tools/json-to-typescript",
+      "options": [
+        {
+          "id": "changefreq",
+          "label": "Change Frequency",
+          "type": "select",
+          "choices": [
+            "always",
+            "hourly",
+            "daily",
+            "weekly",
+            "monthly",
+            "yearly"
+          ],
+          "defaultValue": "weekly"
+        },
+        {
+          "id": "priority",
+          "label": "Default Priority",
+          "type": "select",
+          "choices": [
+            "1.0",
+            "0.8",
+            "0.6",
+            "0.4",
+            "0.2"
+          ],
+          "defaultValue": "0.8"
+        }
+      ],
+      "features": [
+        "Validates all URLs against strict RFC 3986 web standards",
+        "Encodes illegal XML characters (&, <, >, \", ') safely",
+        "Assigns dynamic lastmod timestamps and priority scores",
+        "Ready for Google Search Console and Bing Webmaster uploads"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-003",
+      "slug": "schema-markup-generator",
+      "name": "JSON-LD Schema Markup Builder & Validator",
+      "category": "seo",
+      "categoryName": "SEO Diagnostics",
+      "route": "/tools/schema-markup-generator",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Entity Parameters (JSON or Key-Value format)",
+      "outputLabel": "JSON-LD <script> Schema Output",
+      "sampleInput": "title: 10x Developer Productivity Guide\nauthor: Engineering Team\ndescription: Comprehensive blueprint to building production-grade full-stack architectures in Record Time.\nurl: https://aiiseverything.com/blog/developer-productivity",
+      "options": [
+        {
+          "id": "schemaType",
+          "label": "Schema Type",
+          "type": "select",
+          "choices": [
+            "Article",
+            "Organization",
+            "SoftwareApplication",
+            "FAQPage",
+            "LocalBusiness",
+            "Product"
+          ],
+          "defaultValue": "Article"
+        }
+      ],
+      "features": [
+        "Generates compliant Schema.org JSON-LD formatted blocks",
+        "Supported Rich Results: Article, Software, FAQPage, Organization, Product",
+        "Pre-packaged with Google Search Central required fields",
+        "Zero syntax errors with instant client validation"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-004",
+      "slug": "open-graph-generator",
+      "name": "Open Graph & Twitter Card Social Previewer",
+      "category": "seo",
+      "categoryName": "SEO Diagnostics",
+      "route": "/tools/open-graph-generator",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Social Preview Attributes",
+      "outputLabel": "Social Meta Tags Markup",
+      "sampleInput": "title: AIIsEverything — Neural Developer Hub\ndescription: The definitive directory of 26+ interactive developer converters, SEO analyzers, and neural intelligence suites.\nurl: https://aiiseverything.com\nimage: https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80\ntwitter: @aiiseverything",
+      "options": [],
+      "features": [
+        "Generates Open Graph (og:title, og:image, og:url, og:site_name)",
+        "Generates Twitter summary_large_image card tags",
+        "Accurate pixel and character boundary previews",
+        "1-click HTML snippet copy for Next.js or static sites"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-005",
+      "slug": "canonical-hreflang-generator",
+      "name": "Canonical & International Hreflang Constructor",
+      "category": "seo",
+      "categoryName": "SEO Diagnostics",
+      "route": "/tools/canonical-hreflang-generator",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Regional Language Mappings (Locale: URL)",
+      "outputLabel": "Canonical & Hreflang Tags",
+      "sampleInput": "en: https://aiiseverything.com/\nes: https://aiiseverything.com/es/\nde: https://aiiseverything.com/de/\nfr: https://aiiseverything.com/fr/\nja: https://aiiseverything.com/ja/\nx-default: https://aiiseverything.com/",
+      "options": [
+        {
+          "id": "baseUrl",
+          "label": "Default Canonical URL",
+          "type": "text",
+          "defaultValue": "https://aiiseverything.com"
+        }
+      ],
+      "features": [
+        "Self-referential canonical link construction",
+        "Supports x-default fallback for multi-regional homepages",
+        "Validates ISO 639-1 language and ISO 3166-1 country pairings",
+        "Bidirectional cluster validation compliance"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-006",
+      "slug": "serp-simulator",
+      "name": "SERP Snippet & Pixel Width Calculator",
+      "category": "seo",
+      "categoryName": "SEO Diagnostics",
+      "route": "/tools/serp-simulator",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "SERP Attributes (Key: Value)",
+      "outputLabel": "Pixel Audit & SERP Report",
+      "sampleInput": "title: AIIsEverything — 26+ Free Developer Tools, Neural Compilers & AI News\nurl: https://aiiseverything.com/ai-tools\ndescription: Explore the definitive directory of free developer converters, AST parsers, SEO diagnostic engines, and technical tutorials with zero paywalls.",
+      "options": [],
+      "features": [
+        "Calculates accurate proportional Arial 20px / 14px font pixel widths",
+        "Detects desktop (600px) and mobile (580px) title truncations",
+        "Live visual Google search result snippet mockup",
+        "Recommends optimal title length to maximize organic CTR"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-007",
+      "slug": "meta-tag-analyzer",
+      "name": "Technical Meta Tag Inspector & Heading Auditor",
+      "category": "seo",
+      "categoryName": "SEO Diagnostics",
+      "route": "/tools/meta-tag-analyzer",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Paste HTML Head or Page Source",
+      "outputLabel": "Technical SEO Audit Report",
+      "sampleInput": "<!DOCTYPE html>\n<html>\n<head>\n  <title>AIIsEverything - Free AI Developer Tools & Converters</title>\n  <meta name=\"description\" content=\"Discover 26+ free interactive developer tools, AST code converters, and technical SEO diagnostic suites built for high-performance software engineering teams.\">\n  <link rel=\"canonical\" href=\"https://aiiseverything.com/ai-tools\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <meta property=\"og:title\" content=\"AIIsEverything Developer Suite\">\n  <meta property=\"og:image\" content=\"https://aiiseverything.com/og-default.png\">\n</head>\n</html>",
+      "options": [],
+      "features": [
+        "Comprehensive HTML head tag parser",
+        "Audits title, description, robots, canonical, and mobile viewports",
+        "Computes an aggregate Technical SEO Health Score (0-100)",
+        "Pinpoints missing or duplicate tags instantly"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-008",
+      "slug": "heading-structure-analyzer",
+      "name": "Heading Hierarchy (H1-H6) Tree Analyzer",
+      "category": "seo",
+      "categoryName": "SEO Diagnostics",
+      "route": "/tools/heading-structure-analyzer",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Paste HTML or Markdown Content",
+      "outputLabel": "Heading Hierarchy Tree & Audit",
+      "sampleInput": "<h1>Architectural Guide to Neural Compilers</h1>\n<p>Modern compilers require deterministic evaluation pipelines.</p>\n<h2>1. Core Compilation Topologies</h2>\n<h3>1.1 Abstract Syntax Tree (AST) Extraction</h3>\n<h4>Detailed Token Inspection</h4>\n<h2>2. Distributed State Synchronization</h2>\n<h3>2.1 Edge Caching Strategies</h3>\n<h2>3. Production Verification Protocol</h2>",
+      "options": [],
+      "features": [
+        "Visual hierarchical node tree rendering",
+        "Validates sequential nesting (catches skipped levels like H1 -> H3)",
+        "Identifies multiple H1 declarations or missing H1 tags",
+        "Compatible with both raw HTML and Markdown formats"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-009",
+      "slug": "keyword-density-checker",
+      "name": "Keyword Density & N-Gram Tokenizer",
+      "category": "seo",
+      "categoryName": "SEO Diagnostics",
+      "route": "/tools/keyword-density-checker",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Paste Article or Webpage Text",
+      "outputLabel": "N-Gram Frequency & Density Report",
+      "sampleInput": "Artificial intelligence tools and developer utilities are accelerating modern software engineering. With advanced neural code converters, teams can transform legacy code into modern frameworks with zero manual friction. Developer tools powered by AI ensure clean architecture, reliable AST parsing, and robust error handling. Embracing AI developer tools empowers engineers to focus on high-impact system architecture.",
+      "options": [],
+      "features": [
+        "Strips 150+ common English stop words for authentic signal extraction",
+        "Calculates 1-gram and 2-gram phrase frequency distributions",
+        "Percentage-based density metrics with over-optimization warnings",
+        "Total word and non-stopword token accounting"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-010",
+      "slug": "slug-generator",
+      "name": "URL Slug Sanitizer & Redirection Rule Builder",
+      "category": "seo",
+      "categoryName": "SEO Diagnostics",
+      "route": "/tools/slug-generator",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Page Title or Raw String",
+      "outputLabel": "URL Slug & Server Redirect Snippets",
+      "sampleInput": "Building Scalable Full-Stack Web Architectures: The 2026 Comprehensive Handbook & Blueprint!",
+      "options": [
+        {
+          "id": "delimiter",
+          "label": "Slug Separator",
+          "type": "select",
+          "choices": [
+            "-",
+            "_"
+          ],
+          "defaultValue": "-"
+        },
+        {
+          "id": "oldUrl",
+          "label": "Old URL Path for 301 Redirect",
+          "type": "text",
+          "defaultValue": "/old-handbook-path"
+        }
+      ],
+      "features": [
+        "Normalizes diacritics, accents, and international glyphs",
+        "Eliminates punctuation and illegal URL characters safely",
+        "Generates Apache .htaccess 301 permanent redirect rules",
+        "Generates NGINX rewrite directives and Next.js redirect objects"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-011",
+      "slug": "image-alt-seo-helper",
+      "name": "Image Alt-Text Quality Inspector",
+      "category": "seo",
+      "categoryName": "SEO Diagnostics",
+      "route": "/tools/image-alt-seo-helper",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Paste HTML with <img> Elements",
+      "outputLabel": "Image Alt Audit & Suggestions",
+      "sampleInput": "<div class=\"gallery\">\n  <img src=\"https://images.unsplash.com/photo-1677442136019-21780ecad995\" alt=\"image\">\n  <img src=\"/static/neural-network-diagram.png\">\n  <img src=\"/icons/brand-logo.svg\" alt=\"logo\">\n  <img src=\"/previews/workbench-ide-screen.png\" alt=\"AIIsEverything Developer IDE Workbench with dual editor panes\">\n</div>",
+      "options": [],
+      "features": [
+        "Scans all <img> markup elements across raw HTML",
+        "Detects missing alt attributes and empty alt=\"\" strings",
+        "Flags generic low-value terms (photo, image, pic, screenshot, logo)",
+        "Generates context-aware replacement alt text suggestions"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-012",
+      "slug": "link-extractor",
+      "name": "Internal vs. External Link Extractor & Rel Auditor",
+      "category": "seo",
+      "categoryName": "SEO Diagnostics",
+      "route": "/tools/link-extractor",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Paste HTML with Anchor <a> Links",
+      "outputLabel": "Link Audit Breakdown",
+      "sampleInput": "<nav>\n  <a href=\"/\">Home</a>\n  <a href=\"/ai-tools\">All AI Tools</a>\n  <a href=\"/blog/developer-productivity\">Productivity Article</a>\n  <a href=\"https://twitter.com/aiiseverything\" target=\"_blank\">Twitter Follow</a>\n  <a href=\"https://github.com/aiiseverything\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub Repo</a>\n  <a href=\"mailto:support@aiiseverything.com\">Email Us</a>\n</nav>",
+      "options": [
+        {
+          "id": "domain",
+          "label": "Primary Internal Domain",
+          "type": "text",
+          "defaultValue": "aiiseverything.com"
+        }
+      ],
+      "features": [
+        "Classifies links into Internal, External, Anchor, and Protocol types",
+        "Flags target=\"_blank\" links missing rel=\"noopener\" security protections",
+        "Audits nofollow, sponsored, and ugc link attributes",
+        "Extracts anchor text alongside destination endpoints"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-013",
+      "slug": "json-to-typescript",
+      "name": "JSON to TypeScript Interface & Zod Schema Compiler",
+      "category": "dev",
+      "categoryName": "Code & Syntax",
+      "route": "/tools/json-to-typescript",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Source JSON Object",
+      "outputLabel": "TypeScript Interfaces & Zod Schemas",
+      "sampleInput": "{\n  \"id\": \"usr_9981\",\n  \"username\": \"alex_dev\",\n  \"profile\": {\n    \"firstName\": \"Alex\",\n    \"lastName\": \"Vance\",\n    \"age\": 29,\n    \"verified\": true,\n    \"createdAt\": \"2026-04-12T10:00:00.000Z\"\n  },\n  \"roles\": [\n    \"admin\",\n    \"editor\"\n  ],\n  \"metrics\": {\n    \"totalLogins\": 420,\n    \"lastIp\": \"192.168.1.1\"\n  }\n}",
+      "options": [
+        {
+          "id": "rootName",
+          "label": "Root Type Name",
+          "type": "text",
+          "defaultValue": "UserPayload"
+        },
+        {
+          "id": "mode",
+          "label": "Output Mode",
+          "type": "select",
+          "choices": [
+            "typescript",
+            "zod",
+            "both"
+          ],
+          "defaultValue": "both"
+        }
+      ],
+      "features": [
+        "Deep recursive AST parsing of nested JSON objects",
+        "Emits idiomatic TypeScript interfaces with proper type unions",
+        "Generates runtime Zod validation schemas (z.object, z.string.datetime)",
+        "Instant execution with sub-millisecond compile time"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-014",
+      "slug": "json-to-csv",
+      "name": "JSON to CSV / CSV to JSON Engine",
+      "category": "data",
+      "categoryName": "Data Converters",
+      "route": "/tools/json-to-csv",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Source Data (JSON Array or CSV)",
+      "outputLabel": "Converted Tabular or JSON Result",
+      "sampleInput": "[\n  {\n    \"id\": \"t1\",\n    \"name\": \"Robots.txt Generator\",\n    \"category\": \"SEO\",\n    \"isFree\": true,\n    \"views\": 1420\n  },\n  {\n    \"id\": \"t2\",\n    \"name\": \"JSON to TypeScript\",\n    \"category\": \"Developer\",\n    \"isFree\": true,\n    \"views\": 2890\n  },\n  {\n    \"id\": \"t3\",\n    \"name\": \"JWT Debugger\",\n    \"category\": \"Security\",\n    \"isFree\": true,\n    \"views\": 3410\n  }\n]",
+      "options": [
+        {
+          "id": "mode",
+          "label": "Conversion Direction",
+          "type": "select",
+          "choices": [
+            "json-to-csv",
+            "csv-to-json"
+          ],
+          "defaultValue": "json-to-csv"
+        },
+        {
+          "id": "delimiter",
+          "label": "Delimiter",
+          "type": "select",
+          "choices": [
+            ",",
+            ";",
+            "\t"
+          ],
+          "defaultValue": ","
+        }
+      ],
+      "features": [
+        "Bidirectional conversion: JSON to CSV and CSV to JSON",
+        "Automatically flattens nested JSON objects (e.g. user.profile.city)",
+        "Proper RFC 4180 quotation and comma escaping",
+        "Supports custom delimiters including commas, semicolons, and tabs"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-015",
+      "slug": "xml-to-json",
+      "name": "XML to JSON / JSON to XML Stream Engine",
+      "category": "data",
+      "categoryName": "Data Converters",
+      "route": "/tools/xml-to-json",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "XML Document or JSON Object",
+      "outputLabel": "Converted JSON or XML Output",
+      "sampleInput": "<feed xmlns=\"http://www.w3.org/2005/Atom\">\n  <title>AIIsEverything Developer Feed</title>\n  <updated>2026-04-12T12:00:00Z</updated>\n  <entry>\n    <id>post-101</id>\n    <title>Next-Gen Neural Code Compilation</title>\n    <author>Engineering Editorial</author>\n  </entry>\n  <entry>\n    <id>post-102</id>\n    <title>Deterministic Micro-Service Routing</title>\n    <author>DevOps Team</author>\n  </entry>\n</feed>",
+      "options": [
+        {
+          "id": "mode",
+          "label": "Conversion Direction",
+          "type": "select",
+          "choices": [
+            "xml-to-json",
+            "json-to-xml"
+          ],
+          "defaultValue": "xml-to-json"
+        }
+      ],
+      "features": [
+        "Bidirectional XML to JSON and JSON to XML transformations",
+        "Preserves tag hierarchy, nested lists, and sibling elements",
+        "Formatted, indented output with clean syntactic serialization",
+        "Zero external server round-trips for complete data privacy"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-016",
+      "slug": "html-to-markdown",
+      "name": "HTML to Markdown / Markdown to HTML Parser",
+      "category": "dev",
+      "categoryName": "Code & Syntax",
+      "route": "/tools/html-to-markdown",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Source HTML Markup or Markdown Text",
+      "outputLabel": "Converted Markdown or HTML Output",
+      "sampleInput": "<article>\n  <h1>Mastering Modern AI Developer Tooling</h1>\n  <p>Software development in 2026 demands <strong>deterministic execution</strong> and high-throughput pipelines.</p>\n  <h2>Core Requirements</h2>\n  <ul>\n    <li>Abstract Syntax Tree (AST) compilation</li>\n    <li>Edge-rendered micro-tools</li>\n    <li>Zero runtime exceptions</li>\n  </ul>\n  <blockquote>\"Architecture is the art of eliminating unnecessary friction.\"</blockquote>\n</article>",
+      "options": [
+        {
+          "id": "mode",
+          "label": "Mode",
+          "type": "select",
+          "choices": [
+            "html-to-markdown",
+            "markdown-to-html"
+          ],
+          "defaultValue": "html-to-markdown"
+        }
+      ],
+      "features": [
+        "Bidirectional HTML to Markdown and Markdown to HTML conversion",
+        "Converts headers (#), emphasis (**), lists, links, blockquotes",
+        "Preserves code blocks and syntax formatting",
+        "Sanitizes dangerous script tags from generated HTML"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-017",
+      "slug": "css-to-tailwind",
+      "name": "CSS to Tailwind CSS Utility Class Converter",
+      "category": "dev",
+      "categoryName": "Code & Syntax",
+      "route": "/tools/css-to-tailwind",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Standard CSS Rules or Declarations",
+      "outputLabel": "Equivalent Tailwind CSS Classes",
+      "sampleInput": ".hero-banner {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 24px;\n  margin: 0 auto;\n  border-radius: 12px;\n  cursor: pointer;\n  box-sizing: border-box;\n}",
+      "options": [],
+      "features": [
+        "Maps display, flexbox, grid, and alignment properties",
+        "Translates px margins and paddings into rem spacing units",
+        "Supports border radius, font weights, and text alignment",
+        "Outputs clean class=\"...\" snippets ready for React/Next.js components"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-018",
+      "slug": "jwt-decoder",
+      "name": "JWT Debugger & Signature Payload Inspector",
+      "category": "security",
+      "categoryName": "Security & Encoding",
+      "route": "/tools/jwt-decoder",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Encoded JWT Token (Header.Payload.Signature)",
+      "outputLabel": "Decoded Token Claims & Validity Report",
+      "sampleInput": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFsaWNlIFNtaXRoIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMiwiZXhwIjoxODkzNDU2MDAwfQ.Pz8_Pz8_Pz8_Pz8_Pz8_Pz8_Pz8_Pz8_Pz8_Pz8_Pz8",
+      "options": [],
+      "features": [
+        "Decodes Header, Payload, and Signature components",
+        "Validates expiration timestamp (exp) against current real-time clock",
+        "Computes remaining token lifespan or expired duration",
+        "Secure local environment: zero network transmission for complete credential safety"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-019",
+      "slug": "curl-to-code",
+      "name": "cURL Command to Multi-Language Code Generator",
+      "category": "dev",
+      "categoryName": "Code & Syntax",
+      "route": "/tools/curl-to-code",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Raw cURL Command",
+      "outputLabel": "Generated Multi-Language Code Snippets",
+      "sampleInput": "curl -X POST https://api.aiiseverything.com/v1/tools/execute \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer my_jwt_token_here\" \\\n  -d '{\"tool\": \"json-to-typescript\", \"input\": \"{\\\"id\\\": 1}\"}'",
+      "options": [
+        {
+          "id": "language",
+          "label": "Target Language",
+          "type": "select",
+          "choices": [
+            "all",
+            "javascript",
+            "python",
+            "go"
+          ],
+          "defaultValue": "all"
+        }
+      ],
+      "features": [
+        "Extracts HTTP method, target endpoint URL, headers, and request body",
+        "Generates native JavaScript fetch API snippets",
+        "Generates Python requests library scripts",
+        "Generates production Go net/http client code"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-020",
+      "slug": "cron-parser",
+      "name": "Cron Expression Parser & Schedule Explainer",
+      "category": "dev",
+      "categoryName": "Code & Syntax",
+      "route": "/tools/cron-parser",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Cron Expression (5 or 6 fields)",
+      "outputLabel": "Human Schedule & Upcoming Execution Timestamps",
+      "sampleInput": "0 9 * * 1-5",
+      "options": [],
+      "features": [
+        "Deconstructs minute, hour, day-of-month, month, and day-of-week fields",
+        "Translates expressions into clear, plain English descriptions",
+        "Calculates the next 5 scheduled executions in UTC timestamps",
+        "Supports standard shorthand wildcards (*, */n, ranges)"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-021",
+      "slug": "regex-tester",
+      "name": "Regex Tester & Match Capturing Inspector",
+      "category": "dev",
+      "categoryName": "Code & Syntax",
+      "route": "/tools/regex-tester",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Test Subject String",
+      "outputLabel": "Matched Tokens & Capture Groups",
+      "sampleInput": "Contact our support engineers at support@aiiseverything.com or billing@aiiseverything.com.\nFor enterprise licensing inquiries, reach out to enterprise-leads@google.com.",
+      "options": [
+        {
+          "id": "pattern",
+          "label": "Regex Pattern",
+          "type": "text",
+          "defaultValue": "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b"
+        },
+        {
+          "id": "flags",
+          "label": "Regex Flags",
+          "type": "text",
+          "defaultValue": "g"
+        },
+        {
+          "id": "replaceWith",
+          "label": "Optional Replace String",
+          "type": "text",
+          "defaultValue": "[REDACTED_EMAIL]"
+        }
+      ],
+      "features": [
+        "Real-time regular expression evaluation against input test strings",
+        "Inspects full match positions, character indexes, and capture groups",
+        "Provides match substitution and string replacement preview",
+        "Supports all JavaScript regex flags (g, i, m, s, u)"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-022",
+      "slug": "hash-encoder",
+      "name": "Base64 / URL / Hash Multi-Encoder & Decryptor",
+      "category": "security",
+      "categoryName": "Security & Encoding",
+      "route": "/tools/hash-encoder",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Input Text String",
+      "outputLabel": "Cryptographic Hashes & Encoded Strings",
+      "sampleInput": "AIIsEverything: The Enterprise AI & Developer Tooling Platform",
+      "options": [],
+      "features": [
+        "Calculates SHA-256, SHA-512, and SHA-1 checksums via native Web Crypto API",
+        "Base64 encode and decode conversions",
+        "URL percent-encoding and decoding",
+        "Instant local execution with zero credential leakage"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-023",
+      "slug": "html-to-css-converter",
+      "name": "HTML to CSS Converter & Class Extractor",
+      "category": "dev",
+      "categoryName": "Code & Syntax",
+      "route": "/tools/html-to-css-converter",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Paste HTML Code",
+      "outputLabel": "Generated Scoped CSS Stylesheet",
+      "sampleInput": "<div class=\"dashboard-wrapper\">\n  <header class=\"header-bar\">\n    <h1 class=\"page-title\">Developer Console</h1>\n    <button class=\"action-btn\">New Project</button>\n  </header>\n  <main class=\"content-panel\">\n    <div class=\"metrics-grid\">\n      <div class=\"metric-card\">\n        <span class=\"card-label\">Execution Time</span>\n      </div>\n    </div>\n  </main>\n</div>",
+      "options": [],
+      "features": [
+        "Extracts all CSS classes and unique element IDs automatically",
+        "Generates responsive layout resets for flex and grid containers",
+        "Scoped selector prefix support to avoid CSS namespace collisions",
+        "Clean modular formatting ready for design system integration"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-024",
+      "slug": "json-formatter",
+      "name": "JSON Formatter, Minifier & Validator",
+      "category": "dev",
+      "categoryName": "Code & Syntax",
+      "route": "/tools/json-formatter",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Paste Raw or Unformatted JSON",
+      "outputLabel": "Beautified or Minified JSON",
+      "sampleInput": "{\"name\":\"AIIsEverything\",\"categories\":[\"SEO\",\"Developer\",\"Security\"],\"tools\":26,\"metrics\":{\"speedMs\":1.2,\"activeUsers\":15200},\"status\":\"OPERATIONAL\"}",
+      "options": [
+        {
+          "id": "mode",
+          "label": "Formatting Mode",
+          "type": "select",
+          "choices": [
+            "format",
+            "minify"
+          ],
+          "defaultValue": "format"
+        },
+        {
+          "id": "indent",
+          "label": "Indentation Spaces",
+          "type": "select",
+          "choices": [
+            "2",
+            "4"
+          ],
+          "defaultValue": "2"
+        }
+      ],
+      "features": [
+        "Prettifies and minifies JSON payloads instantly",
+        "Validates RFC 8259 syntax compliance",
+        "Accurately indicates line and column on syntax errors",
+        "Handles multi-megabyte payloads in browser with zero lag"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-025",
+      "slug": "ai-summarizer",
+      "name": "AI Text Summarizer & Executive Brief Generator",
+      "category": "text",
+      "categoryName": "Content & Writing",
+      "route": "/tools/ai-summarizer",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Document Text or Article",
+      "outputLabel": "Executive Summary & Bullet Points",
+      "sampleInput": "Artificial intelligence is fundamentally restructuring how software engineers design, test, and deploy applications. Rather than manually writing boilerplate components, modern engineering teams leverage specialized AI developer tools that handle deterministic transformations, AST parsing, and security auditing. This shift drastically reduces development cycles and allows engineers to focus on architectural reliability and system scalability. High-throughput platforms built around interactive web worker tools provide instant sub-millisecond responsiveness without incurring unnecessary cloud API costs. Ultimately, the integration of intelligent developer suites represents the most significant productivity inflection point in modern software engineering history.",
+      "options": [
+        {
+          "id": "length",
+          "label": "Summary Length",
+          "type": "select",
+          "choices": [
+            "short",
+            "medium",
+            "detailed"
+          ],
+          "defaultValue": "medium"
+        }
+      ],
+      "features": [
+        "Term frequency sentence ranking and extractive intelligence",
+        "Condenses verbose copy into actionable executive bullet points",
+        "Customizable summary length (short, medium, detailed)",
+        "Computes original vs summarized compression ratios"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-026",
+      "slug": "readability-checker",
+      "name": "Readability Checker (Flesch-Kincaid Engine)",
+      "category": "text",
+      "categoryName": "Content & Writing",
+      "route": "/tools/readability-checker",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Paste Copy to Evaluate",
+      "outputLabel": "Readability Score & Comprehension Report",
+      "sampleInput": "Building distributed web applications requires clear architectural design and disciplined engineering practices. When systems are designed with modular components and deterministic compilers, developers can iterate with confidence. Clear code leads to reliable software and happier engineering teams across the entire organization.",
+      "options": [],
+      "features": [
+        "Flesch Reading Ease score calculation (0 - 100)",
+        "Flesch-Kincaid Grade Level mapping (e.g. Grade 8, College level)",
+        "Syllable, word, and complex word accounting",
+        "Average words-per-sentence complexity diagnostics"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-027",
+      "slug": "css-to-html",
+      "name": "CSS to HTML / JSX Semantic Scaffolder",
+      "category": "dev",
+      "categoryName": "Developer Compilers",
+      "route": "/tools/css-to-html",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Paste CSS Rules or Selectors",
+      "outputLabel": "Generated HTML / JSX Scaffolding",
+      "sampleInput": "/* Navigation Header */\n.navbar {\n  display: flex;\n  justify-content: space-between;\n  padding: 1rem 2rem;\n}\n\n.navbar .brand-logo {\n  font-weight: bold;\n  font-size: 1.25rem;\n}\n\n.navbar .nav-menu {\n  display: flex;\n  gap: 1.5rem;\n}\n\n.navbar .nav-menu a.nav-link {\n  color: #333;\n  text-decoration: none;\n}\n\n.navbar .cta-button {\n  background: #0070f3;\n  color: #fff;\n  padding: 0.5rem 1rem;\n  border-radius: 4px;\n}\n\n/* Card Showcase Grid */\n.showcase-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 1.5rem;\n}\n\n.showcase-grid .product-card {\n  border: 1px solid #e2e8f0;\n  border-radius: 8px;\n  padding: 1.5rem;\n}\n\n.product-card .card-badge {\n  background: #f1f5f9;\n  font-size: 0.75rem;\n}\n\n.product-card h3.card-title {\n  font-size: 1.125rem;\n}\n\n.product-card p.card-description {\n  color: #64748b;\n}",
+      "options": [
+        {
+          "id": "mode",
+          "label": "Output Syntax",
+          "type": "select",
+          "choices": [
+            "html",
+            "jsx"
+          ],
+          "defaultValue": "html"
+        },
+        {
+          "id": "semantic",
+          "label": "Infer Semantic HTML Tags",
+          "type": "boolean",
+          "defaultValue": true
+        },
+        {
+          "id": "includeBoilerplate",
+          "label": "Include Full Page Boilerplate",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ],
+      "features": [
+        "Parses complex compound selectors (.card > .header.active)",
+        "Intelligently infers semantic HTML5 tags (nav, header, footer, button, a, section)",
+        "Generates clean React JSX with className or standard HTML with class",
+        "Preserves selector nesting depth and compound hierarchy"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-028",
+      "slug": "html-to-python-ast",
+      "name": "HTML to Python AST / BeautifulSoup Generator",
+      "category": "dev",
+      "categoryName": "Developer Compilers",
+      "route": "/tools/html-to-python-ast",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Paste Raw HTML Markup",
+      "outputLabel": "Generated Python Script / DOM AST",
+      "sampleInput": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Tech Insights Daily</title>\n</head>\n<body>\n  <header id=\"main-header\">\n    <h1>Latest Artificial Intelligence Breakthroughs</h1>\n    <p class=\"lead-text\">Curated daily dispatch on LLMs, neural compute, and robotics.</p>\n  </header>\n\n  <main class=\"content-container\">\n    <div class=\"articles-grid\">\n      <article class=\"article-card\" data-id=\"101\">\n        <h2 class=\"article-title\">OpenAI Releases Next-Gen Reasoning Models</h2>\n        <a class=\"read-more-link\" href=\"https://example.com/articles/reasoning-models\">Read Deep Dive</a>\n        <img class=\"hero-image\" src=\"https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe\" alt=\"Neural network visualization\" />\n      </article>\n\n      <article class=\"article-card\" data-id=\"102\">\n        <h2 class=\"article-title\">Google DeepMind Demonstrates Real-Time Code Synthesis</h2>\n        <a class=\"read-more-link\" href=\"https://example.com/articles/code-synthesis\">Read Deep Dive</a>\n        <img class=\"hero-image\" src=\"https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5\" alt=\"Code stream monitor\" />\n      </article>\n    </div>\n\n    <table class=\"benchmark-table\">\n      <thead>\n        <tr><th>Model</th><th>MMLU Score</th><th>Latency (ms)</th></tr>\n      </thead>\n      <tbody>\n        <tr><td>Gemini 2.5 Pro</td><td>91.2%</td><td>180ms</td></tr>\n        <tr><td>GPT-4o</td><td>88.7%</td><td>210ms</td></tr>\n      </tbody>\n    </table>\n  </main>\n</body>\n</html>",
+      "options": [
+        {
+          "id": "mode",
+          "label": "Output Mode",
+          "type": "select",
+          "choices": [
+            "scraping",
+            "ast"
+          ],
+          "defaultValue": "scraping"
+        },
+        {
+          "id": "parser",
+          "label": "BS4 Parser",
+          "type": "select",
+          "choices": [
+            "html.parser",
+            "lxml"
+          ],
+          "defaultValue": "html.parser"
+        },
+        {
+          "id": "url",
+          "label": "Target URL",
+          "type": "text",
+          "defaultValue": "https://example.com/news"
+        }
+      ],
+      "features": [
+        "Generates complete, executable Python scraping scripts with requests + bs4",
+        "Auto-detects repeating cards, tables, headings, links, and media elements",
+        "Structural DOM AST mode generates clean Python dictionary representation",
+        "Robust handling of malformed tags, script blocks, and escaped characters"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-029",
+      "slug": "json-to-yaml",
+      "name": "JSON to YAML / YAML to JSON Stream Engine",
+      "category": "dev",
+      "categoryName": "Developer Compilers",
+      "route": "/tools/json-to-yaml",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Input JSON or YAML Payload",
+      "outputLabel": "Converted Output (YAML / JSON)",
+      "sampleInput": "{\n  \"apiVersion\": \"apps/v1\",\n  \"kind\": \"Deployment\",\n  \"metadata\": {\n    \"name\": \"ai-neural-api\",\n    \"namespace\": \"production\",\n    \"labels\": {\n      \"app\": \"aiiseverything-api\",\n      \"tier\": \"backend\",\n      \"environment\": \"production\"\n    }\n  },\n  \"spec\": {\n    \"replicas\": 5,\n    \"strategy\": {\n      \"type\": \"RollingUpdate\",\n      \"rollingUpdate\": {\n        \"maxSurge\": 1,\n        \"maxUnavailable\": 0\n      }\n    },\n    \"template\": {\n      \"spec\": {\n        \"containers\": [\n          {\n            \"name\": \"api-service\",\n            \"image\": \"registry.aiiseverything.com/api:v2.4.0\",\n            \"ports\": [\n              { \"containerPort\": 4000, \"name\": \"http\" }\n            ],\n            \"resources\": {\n              \"limits\": { \"cpu\": \"2000m\", \"memory\": \"4Gi\" },\n              \"requests\": { \"cpu\": \"500m\", \"memory\": \"1Gi\" }\n            },\n            \"readinessProbe\": {\n              \"httpGet\": { \"path\": \"/health\", \"port\": 4000 },\n              \"initialDelaySeconds\": 5,\n              \"periodSeconds\": 10\n            }\n          }\n        ]\n      }\n    }\n  }\n}",
+      "options": [
+        {
+          "id": "mode",
+          "label": "Conversion Direction",
+          "type": "select",
+          "choices": [
+            "auto",
+            "json-to-yaml",
+            "yaml-to-json"
+          ],
+          "defaultValue": "auto"
+        },
+        {
+          "id": "indent",
+          "label": "Indentation Spaces",
+          "type": "select",
+          "choices": [
+            "2",
+            "4"
+          ],
+          "defaultValue": "2"
+        },
+        {
+          "id": "sortKeys",
+          "label": "Sort Keys Alphabetically",
+          "type": "boolean",
+          "defaultValue": false
+        },
+        {
+          "id": "multiDocument",
+          "label": "Multi-Document (---) Support",
+          "type": "boolean",
+          "defaultValue": true
+        }
+      ],
+      "features": [
+        "Bi-directional auto-detecting conversion between JSON and YAML",
+        "Multi-document stream handling (Kubernetes manifests, CI/CD pipelines)",
+        "Safe parsing enforcing strict schema isolation to prevent prototype pollution",
+        "Supports multiline strings, arrays, dates, booleans, and null primitives"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-030",
+      "slug": "js-to-ts",
+      "name": "JavaScript to TypeScript Strict Inferencer",
+      "category": "dev",
+      "categoryName": "Developer Compilers",
+      "route": "/tools/js-to-ts",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Input JavaScript Code (ES6+)",
+      "outputLabel": "Inferred TypeScript Definitions & Implementation",
+      "sampleInput": "// User Profile Configuration\nconst userProfile = {\n  id: \"usr_99214a\",\n  username: \"alex_coder\",\n  email: \"alex@aiiseverything.com\",\n  reputation: 1450,\n  isVerified: true,\n  roles: [\"admin\", \"developer\"],\n  preferences: {\n    theme: \"dark\",\n    notificationsEnabled: true,\n    timezone: \"UTC\"\n  }\n};\n\n// Database Query Function\nasync function fetchUserById(userId, includeProfile = false) {\n  const query = { id: userId };\n  if (includeProfile) {\n    query.populate = \"profile\";\n  }\n  const result = await db.collection(\"users\").findOne(query);\n  return result;\n}\n\n// Math Utility Function\nfunction calculateTax(amount, taxRate = 0.08, currency = \"USD\") {\n  const tax = amount * taxRate;\n  const total = amount + tax;\n  return {\n    subtotal: amount,\n    tax,\n    total,\n    currency\n  };\n}",
+      "options": [
+        {
+          "id": "strict",
+          "label": "Strict Mode (unknown instead of any)",
+          "type": "boolean",
+          "defaultValue": true
+        },
+        {
+          "id": "target",
+          "label": "Type Declaration Style",
+          "type": "select",
+          "choices": [
+            "interfaces",
+            "types"
+          ],
+          "defaultValue": "interfaces"
+        },
+        {
+          "id": "exportInterfaces",
+          "label": "Export Interface Declarations",
+          "type": "boolean",
+          "defaultValue": true
+        }
+      ],
+      "features": [
+        "Extracts inline object literals into named interfaces and types",
+        "Infers function parameters from default values and usage",
+        "Supports async/await with Promise<unknown> return type inference",
+        "Strict mode replaces ambiguous implicit any with safe unknown guards"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-031",
+      "slug": "svg-to-jsx",
+      "name": "SVG to Production JSX / TSX Component Engine",
+      "category": "dev",
+      "categoryName": "Developer Compilers",
+      "route": "/tools/svg-to-jsx",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Paste Raw SVG Markup",
+      "outputLabel": "Generated React JSX/TSX Component",
+      "sampleInput": "<svg width=\"48\" height=\"48\" viewBox=\"0 0 48 48\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <!-- Generator: Adobe Illustrator 28.0, SVG Export Plug-In -->\n  <defs>\n    <linearGradient id=\"gradient-mark\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\">\n      <stop offset=\"0%\" stop-color=\"#FF8A00\" stop-opacity=\"1\" />\n      <stop offset=\"100%\" stop-color=\"#FFB03A\" stop-opacity=\"1\" />\n    </linearGradient>\n  </defs>\n  <rect x=\"4\" y=\"4\" width=\"40\" height=\"40\" rx=\"8\" fill=\"url(#gradient-mark)\" stroke=\"#000000\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />\n  <path d=\"M16 24L22 30L32 18\" stroke=\"#ffffff\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />\n  <circle cx=\"24\" cy=\"24\" r=\"16\" stroke=\"#000000\" stroke-width=\"1.5\" stroke-dasharray=\"4 2\" />\n</svg>",
+      "options": [
+        {
+          "id": "componentName",
+          "label": "Component Name",
+          "type": "text",
+          "defaultValue": "CheckmarkIcon"
+        },
+        {
+          "id": "typescript",
+          "label": "Generate TypeScript Props (TSX)",
+          "type": "boolean",
+          "defaultValue": true
+        },
+        {
+          "id": "currentColor",
+          "label": "Use currentColor for Dynamic Colors",
+          "type": "boolean",
+          "defaultValue": true
+        },
+        {
+          "id": "expandProps",
+          "label": "Spread Props ({...props})",
+          "type": "boolean",
+          "defaultValue": true
+        }
+      ],
+      "features": [
+        "Converts all hyphenated SVG attributes (stroke-width -> strokeWidth) to React camelCase",
+        "Transforms inline style strings into valid JSX style objects",
+        "Strips redundant Illustrator/Figma metadata and unneeded XML wrappers",
+        "Provides dynamic size and currentColor support for seamless Tailwind integration"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-032",
+      "slug": "sql-to-schema-orm",
+      "name": "SQL to Schema ORM Generator (Prisma, Drizzle & TypeORM)",
+      "category": "dev",
+      "categoryName": "Developer Compilers",
+      "route": "/tools/sql-to-schema-orm",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Paste SQL DDL (CREATE TABLE Statements)",
+      "outputLabel": "Generated ORM Schema / Entity Models",
+      "sampleInput": "-- ── Database Schema: E-Commerce & Users ──\n\nCREATE TYPE user_role AS ENUM ('super_admin', 'admin', 'customer', 'guest');\n\nCREATE TABLE users (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  email VARCHAR(255) NOT NULL UNIQUE,\n  password_hash VARCHAR(255) NOT NULL,\n  full_name VARCHAR(150),\n  role user_role DEFAULT 'customer',\n  is_active BOOLEAN NOT NULL DEFAULT true,\n  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP\n);\n\nCREATE TABLE categories (\n  id SERIAL PRIMARY KEY,\n  name VARCHAR(100) NOT NULL UNIQUE,\n  slug VARCHAR(120) NOT NULL UNIQUE,\n  description TEXT\n);\n\nCREATE TABLE products (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  title VARCHAR(200) NOT NULL,\n  slug VARCHAR(220) NOT NULL UNIQUE,\n  description TEXT,\n  price DECIMAL(10, 2) NOT NULL,\n  stock_quantity INT NOT NULL DEFAULT 0,\n  category_id INT NOT NULL REFERENCES categories(id) ON DELETE CASCADE,\n  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP\n);\n\nCREATE TABLE orders (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n  total_amount DECIMAL(10, 2) NOT NULL,\n  status VARCHAR(50) NOT NULL DEFAULT 'pending',\n  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP\n);",
+      "options": [
+        {
+          "id": "target",
+          "label": "Target ORM Framework",
+          "type": "select",
+          "choices": [
+            "prisma",
+            "drizzle",
+            "typeorm"
+          ],
+          "defaultValue": "prisma"
+        },
+        {
+          "id": "casing",
+          "label": "Field Casing Convention",
+          "type": "select",
+          "choices": [
+            "camelCase",
+            "snake_case"
+          ],
+          "defaultValue": "camelCase"
+        },
+        {
+          "id": "includeRelations",
+          "label": "Generate Foreign Key Relations",
+          "type": "boolean",
+          "defaultValue": true
+        }
+      ],
+      "features": [
+        "Parses PostgreSQL, MySQL, and SQLite CREATE TABLE and ENUM statements",
+        "Generates production Prisma schemas with @id, @relation, and @map directives",
+        "Generates Drizzle ORM pgTable declarations with type builders",
+        "Generates TypeORM Entity classes with decorators and relations"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-033",
+      "slug": "css-to-html-scaffolder",
+      "name": "CSS to HTML / JSX Semantic Scaffolder",
+      "category": "dev",
+      "categoryName": "Developer Compilers",
+      "route": "/tools/css-to-html-scaffolder",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Paste CSS Rules",
+      "outputLabel": "Generated HTML / JSX Scaffolding",
+      "sampleInput": ".navbar {\n  display: flex;\n}\n.navbar .brand { font-weight: bold; }",
+      "options": [
+        {
+          "id": "mode",
+          "label": "Output Syntax",
+          "type": "select",
+          "choices": [
+            "html",
+            "jsx"
+          ],
+          "defaultValue": "html"
+        },
+        {
+          "id": "semantic",
+          "label": "Infer Semantic HTML Tags",
+          "type": "boolean",
+          "defaultValue": true
+        }
+      ],
+      "features": [
+        "Compound selector parsing",
+        "Semantic tag deduction"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-034",
+      "slug": "yaml-to-json",
+      "name": "YAML to JSON / JSON to YAML Converter",
+      "category": "dev",
+      "categoryName": "Developer Compilers",
+      "route": "/tools/yaml-to-json",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Input YAML or JSON Payload",
+      "outputLabel": "Converted Output",
+      "sampleInput": "name: AIIsEverything\nversion: 2.0\nenabled: true",
+      "options": [
+        {
+          "id": "mode",
+          "label": "Conversion Direction",
+          "type": "select",
+          "choices": [
+            "auto",
+            "yaml-to-json",
+            "json-to-yaml"
+          ],
+          "defaultValue": "yaml-to-json"
+        },
+        {
+          "id": "indent",
+          "label": "Indentation Spaces",
+          "type": "select",
+          "choices": [
+            "2",
+            "4"
+          ],
+          "defaultValue": "2"
+        }
+      ],
+      "features": [
+        "Bi-directional YAML and JSON streaming"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-035",
+      "slug": "javascript-to-typescript",
+      "name": "JavaScript to TypeScript Strict Transpiler",
+      "category": "dev",
+      "categoryName": "Developer Compilers",
+      "route": "/tools/javascript-to-typescript",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "JavaScript Source Code",
+      "outputLabel": "TypeScript Code",
+      "sampleInput": "function add(a = 0, b = 0) {\n  return a + b;\n}",
+      "options": [
+        {
+          "id": "strict",
+          "label": "Strict Mode",
+          "type": "boolean",
+          "defaultValue": true
+        }
+      ],
+      "features": [
+        "Parameter inference",
+        "Interface extraction"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-036",
+      "slug": "svg-to-react",
+      "name": "SVG to React JSX / TSX Component Generator",
+      "category": "dev",
+      "categoryName": "Developer Compilers",
+      "route": "/tools/svg-to-react",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "SVG Code",
+      "outputLabel": "React Component",
+      "sampleInput": "<svg viewBox=\"0 0 24 24\"><path d=\"M5 12h14\" /></svg>",
+      "options": [
+        {
+          "id": "componentName",
+          "label": "Component Name",
+          "type": "text",
+          "defaultValue": "Icon"
+        },
+        {
+          "id": "typescript",
+          "label": "TypeScript TSX",
+          "type": "boolean",
+          "defaultValue": true
+        }
+      ],
+      "features": [
+        "Clean SVG to React",
+        "camelCase attributes"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-037",
+      "slug": "sql-to-prisma",
+      "name": "SQL to Prisma Schema Generator",
+      "category": "dev",
+      "categoryName": "Developer Compilers",
+      "route": "/tools/sql-to-prisma",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "SQL DDL Statements",
+      "outputLabel": "Prisma Schema Output",
+      "sampleInput": "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,\n  name VARCHAR(100) NOT NULL\n);",
+      "options": [
+        {
+          "id": "target",
+          "label": "Target ORM",
+          "type": "select",
+          "choices": [
+            "prisma",
+            "drizzle",
+            "typeorm"
+          ],
+          "defaultValue": "prisma"
+        }
+      ],
+      "features": [
+        "Prisma model generation",
+        "Field type mapping"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-038",
+      "slug": "ai-syntax-debugger",
+      "name": "AI Syntax Debugger",
+      "category": "dev",
+      "categoryName": "AI Utilities",
+      "route": "/tools/ai-syntax-debugger",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Source Code to Inspect",
+      "outputLabel": "Diagnostic Report & Unified Diff",
+      "sampleInput": "function processOrder(order) {\n  if (order = null) return false;\n  const total = await fetchPrices(order.items);\n  return { success: true, total };\n}",
+      "options": [],
+      "features": [
+        "Unified inline diff output",
+        "Conditional assignment detection",
+        "Bracket parity analyzer",
+        "Zero-cloud execution"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-039",
+      "slug": "prompt-optimizer",
+      "name": "Prompt Optimizer Pro",
+      "category": "text",
+      "categoryName": "AI Utilities",
+      "route": "/tools/prompt-optimizer",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Raw Prompt Input",
+      "outputLabel": "Compressed & Structured LLM Prompt",
+      "sampleInput": "Can you please kindly help me write a production-ready typescript microservice for handling user authentication with JWT tokens? I would like you to make sure that it has refresh tokens and proper error handling in order to be secure.",
+      "options": [
+        {
+          "id": "framework",
+          "label": "Architecture Framework",
+          "type": "select",
+          "choices": [
+            "rctc",
+            "xml",
+            "markdown",
+            "fewshot"
+          ],
+          "defaultValue": "rctc"
+        }
+      ],
+      "features": [
+        "BPE token compression metrics",
+        "XML-delimited & RCTC frameworks",
+        "Eliminates conversational filler",
+        "Sharpened instruction hierarchy"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-040",
+      "slug": "regex-neural-generator",
+      "name": "RegEx Neural Generator",
+      "category": "dev",
+      "categoryName": "Code Converters",
+      "route": "/tools/regex-neural-generator",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Natural Language Criteria",
+      "outputLabel": "Compiled Regular Expression & VM Analysis",
+      "sampleInput": "Match strong passwords with at least 8 characters, one uppercase, one digit, and one special symbol",
+      "options": [
+        {
+          "id": "flags",
+          "label": "RegEx Flags",
+          "type": "text",
+          "defaultValue": "gmi"
+        }
+      ],
+      "features": [
+        "Plain English to RegEx synthesis",
+        "ReDoS catastrophic backtracking safe",
+        "Token-by-token breakdown",
+        "JavaScript and Python snippets"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-041",
+      "slug": "unit-test-builder",
+      "name": "Unit Test Builder",
+      "category": "dev",
+      "categoryName": "Code Converters",
+      "route": "/tools/unit-test-builder",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Target Function Signature or Implementation",
+      "outputLabel": "Synthesized Vitest / Jest Test Suite",
+      "sampleInput": "export async function processPayment(userId: string, amount: number, currency: string): Promise<{ success: boolean; txId: string }> {\n  if (!userId || amount <= 0) throw new Error('Invalid payment parameters');\n  return { success: true, txId: 'tx_12345' };\n}",
+      "options": [
+        {
+          "id": "runner",
+          "label": "Test Runner",
+          "type": "select",
+          "choices": [
+            "vitest",
+            "jest"
+          ],
+          "defaultValue": "vitest"
+        }
+      ],
+      "features": [
+        "Vitest and Jest compatibility",
+        "Boundary & edge-case test matrices",
+        "Mocking setup included",
+        "Async exception contract assertions"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-042",
+      "slug": "markdown-live-editor",
+      "name": "Markdown Live Editor",
+      "category": "text",
+      "categoryName": "Text & Web",
+      "route": "/tools/markdown-live-editor",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "GFM Markdown Document",
+      "outputLabel": "Sanitized Semantic HTML",
+      "sampleInput": "# API Architecture Overview\n\nHigh-throughput **AST execution** engine with zero cloud latency.\n\n### Key Features\n- [x] 100% Deterministic parsers\n- [x] RFC 6902 JSON Patch compliance\n- [ ] Cloud telemetry: *Disabled*\n\n> \"Simplicity is prerequisite for reliability.\"\n\n```ts\nexport function executeTool(slug: string): void {}\n```",
+      "options": [],
+      "features": [
+        "Real-time GFM compilation",
+        "Word & character count analytics",
+        "Clean semantic HTML output",
+        "Sanitized security-safe conversion"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-043",
+      "slug": "tailwind-converter",
+      "name": "Tailwind Class Converter",
+      "category": "dev",
+      "categoryName": "Code Converters",
+      "route": "/tools/tailwind-converter",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Standard CSS Ruleset",
+      "outputLabel": "Tailwind Utility Classes",
+      "sampleInput": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  background-color: #0f172a;\n  color: #ffffff;\n  border-radius: 12px;\n  padding: 24px;\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);\n}",
+      "options": [],
+      "features": [
+        "CSS to Tailwind transpilation",
+        "JIT arbitrary value support",
+        "Flexbox and grid property mapping",
+        "CSS shorthand unwrapping"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-044",
+      "slug": "json-patch-applier",
+      "name": "JSON Patch Applier",
+      "category": "data",
+      "categoryName": "Code Converters",
+      "route": "/tools/json-patch-applier",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "JSON Document & Patch Operations Array",
+      "outputLabel": "Patched JSON Document & Audit Log",
+      "sampleInput": "{\n  \"title\": \"My Task\",\n  \"tags\": [\"personal\"]\n}\n---\n[\n  { \"op\": \"add\", \"path\": \"/tags/-\", \"value\": \"work\" },\n  { \"op\": \"replace\", \"path\": \"/title\", \"value\": \"Finish Seeding\" }\n]",
+      "options": [],
+      "features": [
+        "Full RFC 6902 specification (add, remove, replace, move, copy, test)",
+        "RFC 6901 JSON pointer resolution",
+        "Step-by-step operation audit trail",
+        "Atomic validation with rollback safety"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-045",
+      "slug": "minifier-pro",
+      "name": "Minifier Pro WASM",
+      "category": "dev",
+      "categoryName": "Code Converters",
+      "route": "/tools/minifier-pro",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Source Code to Minify",
+      "outputLabel": "Minified Output & Compression Metrics",
+      "sampleInput": "/* Main Navigation Stylesheet */\n.nav-header {\n  display: flex;\n  justify-content: space-between;\n  padding: 16px 24px;\n  background-color: #060810;\n  color: #ffffff;\n}",
+      "options": [
+        {
+          "id": "language",
+          "label": "Language",
+          "type": "select",
+          "choices": [
+            "auto",
+            "javascript",
+            "css",
+            "html",
+            "json"
+          ],
+          "defaultValue": "auto"
+        }
+      ],
+      "features": [
+        "Multi-language support (JS, CSS, HTML, JSON)",
+        "Comment stripping and token compaction",
+        "Compression ratio calculation",
+        "Zero server roundtrips"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test"
+    },
+    {
+      "id": "TOOL-046",
+      "slug": "ascii-to-hex",
+      "name": "ASCII to Hex Converter",
+      "category": "dev",
+      "categoryName": "Developer Tools",
+      "route": "/tools/ascii-to-hex",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Text / ASCII Input",
+      "outputLabel": "Hexadecimal Output",
+      "sampleInput": "Hello, World! 🚀",
+      "options": [
+        {
+          "id": "delimiter",
+          "label": "Delimiter",
+          "type": "select",
+          "choices": [
+            "space",
+            "none",
+            "comma",
+            "prefix-0x",
+            "prefix-slash-x"
+          ],
+          "defaultValue": "space"
+        },
+        {
+          "id": "letterCase",
+          "label": "Case",
+          "type": "select",
+          "choices": [
+            "lowercase",
+            "uppercase"
+          ],
+          "defaultValue": "lowercase"
+        },
+        {
+          "id": "direction",
+          "label": "Direction",
+          "type": "select",
+          "choices": [
+            "ascii-to-hex",
+            "hex-to-ascii"
+          ],
+          "defaultValue": "ascii-to-hex"
+        }
+      ],
+      "features": [
+        "Multi-byte UTF-8 character encoding with emoji support",
+        "Configurable delimiters (space, none, comma, 0x, \\x)",
+        "Uppercase and lowercase hex options",
+        "Instant two-way Hex to ASCII decoding",
+        "100% browser-native client-side execution"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test",
+      "categoryTag": "Encoding",
+      "engineSubBadge": "UTF-8 Binary Engine",
+      "primaryGroup": "code-converters"
+    },
+    {
+      "id": "TOOL-047",
+      "slug": "base64-to-text",
+      "name": "Base64 to Text Converter",
+      "category": "dev",
+      "categoryName": "Developer Tools",
+      "route": "/tools/base64-to-text",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Base64 Input",
+      "outputLabel": "Decoded Plain Text",
+      "sampleInput": "SGVsbG8sIFdvcmxkISBXZWxjb21lIHRvIEFpVG9vbHMgU3R1ZGlvLg==",
+      "options": [
+        {
+          "id": "direction",
+          "label": "Mode",
+          "type": "select",
+          "choices": [
+            "base64-to-text",
+            "text-to-base64"
+          ],
+          "defaultValue": "base64-to-text"
+        },
+        {
+          "id": "urlSafe",
+          "label": "URL-Safe Format",
+          "type": "boolean",
+          "defaultValue": false
+        },
+        {
+          "id": "wrapLines",
+          "label": "Wrap Lines (76 chars)",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ],
+      "features": [
+        "Full UTF-8 Unicode decoding (avoids atob Latin-1 errors)",
+        "URL-Safe Base64 encoding and decoding (- and _)",
+        "Automatic padding healing for truncated strings",
+        "Two-way encoding and decoding",
+        "Zero server transmission with browser-native speed"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test",
+      "categoryTag": "Encoding",
+      "engineSubBadge": "RFC 4648 Engine",
+      "primaryGroup": "code-converters"
+    },
+    {
+      "id": "TOOL-048",
+      "slug": "hex-to-pantone",
+      "name": "Hex Code to Pantone Converter",
+      "category": "dev",
+      "categoryName": "Design & Code Utilities",
+      "route": "/tools/hex-to-pantone",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Hex Color Code",
+      "outputLabel": "Pantone (PMS) Match Report",
+      "sampleInput": "#00D2FF",
+      "options": [
+        {
+          "id": "maxMatches",
+          "label": "Top Alternatives to Show",
+          "type": "select",
+          "choices": [
+            "3",
+            "5",
+            "8"
+          ],
+          "defaultValue": "5"
+        }
+      ],
+      "features": [
+        "Perceptual Euclidean Delta-E color distance matching",
+        "Side-by-side visual color swatch comparison",
+        "CMYK and RGB print formula approximations",
+        "Top 4 alternative closest Pantone shades",
+        "Zero-latency browser calculation"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test",
+      "categoryTag": "Design & Color",
+      "engineSubBadge": "Perceptual ΔE Engine",
+      "primaryGroup": "ai-utilities"
+    },
+    {
+      "id": "TOOL-049",
+      "slug": "decimal-to-ascii",
+      "name": "Decimal to ASCII Converter",
+      "category": "dev",
+      "categoryName": "Developer Tools",
+      "route": "/tools/decimal-to-ascii",
+      "implementationLocation": "aiiseverything-front/src/lib/tools/registry.ts",
+      "inputLabel": "Decimal Character Codes",
+      "outputLabel": "Converted ASCII / Text",
+      "sampleInput": "72 101 108 108 111 44 32 87 111 114 108 100 33",
+      "options": [
+        {
+          "id": "direction",
+          "label": "Conversion Direction",
+          "type": "select",
+          "choices": [
+            "decimal-to-ascii",
+            "ascii-to-decimal"
+          ],
+          "defaultValue": "decimal-to-ascii"
+        },
+        {
+          "id": "delimiter",
+          "label": "Output Delimiter (for text to decimal)",
+          "type": "select",
+          "choices": [
+            "space",
+            "comma",
+            "newline"
+          ],
+          "defaultValue": "space"
+        }
+      ],
+      "features": [
+        "Universal delimiter parsing (spaces, commas, newlines, HTML entities)",
+        "Full Unicode code point support up to 0x10FFFF",
+        "Two-way Decimal to ASCII and ASCII to Decimal conversion",
+        "Inline error handling for out-of-range values",
+        "100% private browser execution"
+      ],
+      "status": "DISCOVERED",
+      "testMethod": "Deterministic Input/Output Fixture Test",
+      "categoryTag": "Encoding",
+      "engineSubBadge": "Base-10 Unicode Engine",
+      "primaryGroup": "code-converters"
+    }
+  ]
+}

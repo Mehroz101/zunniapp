@@ -1,0 +1,1227 @@
+[
+  {
+    "id": "TOOL-001",
+    "slug": "robots-txt-generator",
+    "name": "Robots.txt Generator & Directives Validator",
+    "category": "SEO Diagnostics",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "# ==================================================================== # Robots.",
+      "notes": "Output: # ==================================================================== # Robots."
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.89
+  },
+  {
+    "id": "TOOL-002",
+    "slug": "xml-sitemap-generator",
+    "name": "XML Sitemap Generator & Tag Validator",
+    "category": "SEO Diagnostics",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <urlset xmlns=\"http://www.sitemaps.org/sc",
+      "notes": "Output: <?xml version=\"1.0\" encoding=\"UTF-8\"?> <urlset xmlns=\"http://www.sitemaps.org/sc"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 4.56
+  },
+  {
+    "id": "TOOL-003",
+    "slug": "schema-markup-generator",
+    "name": "JSON-LD Schema Markup Builder & Validator",
+    "category": "SEO Diagnostics",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "<script type=\"application/ld+json\"> {   \"@context\": \"https://schema.org\",   \"@ty",
+      "notes": "Output: <script type=\"application/ld+json\"> {   \"@context\": \"https://schema.org\",   \"@ty"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.38
+  },
+  {
+    "id": "TOOL-004",
+    "slug": "open-graph-generator",
+    "name": "Open Graph & Twitter Card Social Previewer",
+    "category": "SEO Diagnostics",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "<!-- Primary Meta Tags --> <title>AIIsEverything — Neural Developer Hub</title> ",
+      "notes": "Output: <!-- Primary Meta Tags --> <title>AIIsEverything — Neural Developer Hub</title> "
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.19
+  },
+  {
+    "id": "TOOL-005",
+    "slug": "canonical-hreflang-generator",
+    "name": "Canonical & International Hreflang Constructor",
+    "category": "SEO Diagnostics",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "<!-- Canonical Link --> <link rel=\"canonical\" href=\"https\" />  <!-- Multi-Region",
+      "notes": "Output: <!-- Canonical Link --> <link rel=\"canonical\" href=\"https\" />  <!-- Multi-Region"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.36
+  },
+  {
+    "id": "TOOL-006",
+    "slug": "serp-simulator",
+    "name": "SERP Snippet & Pixel Width Calculator",
+    "category": "SEO Diagnostics",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "==================================================== GOOGLE SERP SNIPPET AUDIT &",
+      "notes": "Output: ==================================================== GOOGLE SERP SNIPPET AUDIT &"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.73
+  },
+  {
+    "id": "TOOL-007",
+    "slug": "meta-tag-analyzer",
+    "name": "Technical Meta Tag Inspector & Heading Auditor",
+    "category": "SEO Diagnostics",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "TECHNICAL SEO AUDIT REPORT (Score: 100/100) ====================================",
+      "notes": "Output: TECHNICAL SEO AUDIT REPORT (Score: 100/100) ===================================="
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.78
+  },
+  {
+    "id": "TOOL-008",
+    "slug": "heading-structure-analyzer",
+    "name": "Heading Hierarchy (H1-H6) Tree Analyzer",
+    "category": "SEO Diagnostics",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "HEADING HIERARCHY TREE ====================================================  [H1",
+      "notes": "Output: HEADING HIERARCHY TREE ====================================================  [H1"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.54
+  },
+  {
+    "id": "TOOL-009",
+    "slug": "keyword-density-checker",
+    "name": "Keyword Density & N-Gram Tokenizer",
+    "category": "SEO Diagnostics",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "KEYWORD DENSITY & N-GRAM ANALYSIS REPORT =======================================",
+      "notes": "Output: KEYWORD DENSITY & N-GRAM ANALYSIS REPORT ======================================="
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.61
+  },
+  {
+    "id": "TOOL-010",
+    "slug": "slug-generator",
+    "name": "URL Slug Sanitizer & Redirection Rule Builder",
+    "category": "SEO Diagnostics",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "SANITIZED URL SLUG: building-scalable-full-stack-web-architectures-the-2026-comp",
+      "notes": "Output: SANITIZED URL SLUG: building-scalable-full-stack-web-architectures-the-2026-comp"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.71
+  },
+  {
+    "id": "TOOL-011",
+    "slug": "image-alt-seo-helper",
+    "name": "Image Alt-Text Quality Inspector",
+    "category": "SEO Diagnostics",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "IMAGE ACCESSIBILITY & TECHNICAL SEO ALT AUDIT ==================================",
+      "notes": "Output: IMAGE ACCESSIBILITY & TECHNICAL SEO ALT AUDIT =================================="
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.43
+  },
+  {
+    "id": "TOOL-012",
+    "slug": "link-extractor",
+    "name": "Internal vs. External Link Extractor & Rel Auditor",
+    "category": "SEO Diagnostics",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "LINK EXTRACTION & ATTRIBUTE AUDIT REPORT =======================================",
+      "notes": "Output: LINK EXTRACTION & ATTRIBUTE AUDIT REPORT ======================================="
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.67
+  },
+  {
+    "id": "TOOL-013",
+    "slug": "json-to-typescript",
+    "name": "JSON to TypeScript Interface & Zod Schema Compiler",
+    "category": "Code & Syntax",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "// ── TypeScript Definitions ── export interface UserPayload {   id: string;   u",
+      "notes": "Output: // ── TypeScript Definitions ── export interface UserPayload {   id: string;   u"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Cleanly rejected with error: Invalid JSON syntax: Unterminated string in JSON at position 41 (line 1 column 42)"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.4
+  },
+  {
+    "id": "TOOL-014",
+    "slug": "json-to-csv",
+    "name": "JSON to CSV / CSV to JSON Engine",
+    "category": "Data Converters",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "id,name,category,isFree,views t1,Robots.txt Generator,SEO,true,1420 t2,JSON to T",
+      "notes": "Output: id,name,category,isFree,views t1,Robots.txt Generator,SEO,true,1420 t2,JSON to T"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Cleanly rejected with error: Invalid JSON: Unterminated string in JSON at position 41 (line 1 column 42)"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.41
+  },
+  {
+    "id": "TOOL-015",
+    "slug": "xml-to-json",
+    "name": "XML to JSON / JSON to XML Stream Engine",
+    "category": "Data Converters",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "{   \"feed\": {     \"title\": \"AIIsEverything Developer Feed\",     \"updated\": \"2026",
+      "notes": "Output: {   \"feed\": {     \"title\": \"AIIsEverything Developer Feed\",     \"updated\": \"2026"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.41
+  },
+  {
+    "id": "TOOL-016",
+    "slug": "html-to-markdown",
+    "name": "HTML to Markdown / Markdown to HTML Parser",
+    "category": "Code & Syntax",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "# Mastering Modern AI Developer Tooling    Software development in 2026 demands ",
+      "notes": "Output: # Mastering Modern AI Developer Tooling    Software development in 2026 demands "
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 2.4
+  },
+  {
+    "id": "TOOL-017",
+    "slug": "css-to-tailwind",
+    "name": "CSS to Tailwind CSS Utility Class Converter",
+    "category": "Code & Syntax",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "TAILWIND CSS UTILITY CLASSES ===================================================",
+      "notes": "Output: TAILWIND CSS UTILITY CLASSES ==================================================="
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.5
+  },
+  {
+    "id": "TOOL-018",
+    "slug": "jwt-decoder",
+    "name": "JWT Debugger & Signature Payload Inspector",
+    "category": "Security & Encoding",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "JWT DECODED PAYLOAD & SECURITY REPORT ==========================================",
+      "notes": "Output: JWT DECODED PAYLOAD & SECURITY REPORT =========================================="
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Cleanly rejected with error: Invalid JWT format. A valid JSON Web Token must contain exactly 3 dot-separated parts (Header.Payload.Signature)."
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.27
+  },
+  {
+    "id": "TOOL-019",
+    "slug": "curl-to-code",
+    "name": "cURL Command to Multi-Language Code Generator",
+    "category": "Code & Syntax",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "// JavaScript (Native Fetch API) const res = await fetch('POST', {   method: 'PO",
+      "notes": "Output: // JavaScript (Native Fetch API) const res = await fetch('POST', {   method: 'PO"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.81
+  },
+  {
+    "id": "TOOL-020",
+    "slug": "cron-parser",
+    "name": "Cron Expression Parser & Schedule Explainer",
+    "category": "Code & Syntax",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "CRON EXPRESSION SCHEDULE REPORT ================================================",
+      "notes": "Output: CRON EXPRESSION SCHEDULE REPORT ================================================"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.27
+  },
+  {
+    "id": "TOOL-021",
+    "slug": "regex-tester",
+    "name": "Regex Tester & Match Capturing Inspector",
+    "category": "Code & Syntax",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "REGEX MATCHING REPORT ==================================================== Patte",
+      "notes": "Output: REGEX MATCHING REPORT ==================================================== Patte"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.33
+  },
+  {
+    "id": "TOOL-022",
+    "slug": "hash-encoder",
+    "name": "Base64 / URL / Hash Multi-Encoder & Decryptor",
+    "category": "Security & Encoding",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "MULTI-FORMAT ENCODING & CRYPTOGRAPHIC HASH REPORT ==============================",
+      "notes": "Output: MULTI-FORMAT ENCODING & CRYPTOGRAPHIC HASH REPORT =============================="
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 6.1
+  },
+  {
+    "id": "TOOL-023",
+    "slug": "html-to-css-converter",
+    "name": "HTML to CSS Converter & Class Extractor",
+    "category": "Code & Syntax",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "/* ====================================================    SCOPED STYLESHEET GEN",
+      "notes": "Output: /* ====================================================    SCOPED STYLESHEET GEN"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.89
+  },
+  {
+    "id": "TOOL-024",
+    "slug": "json-formatter",
+    "name": "JSON Formatter, Minifier & Validator",
+    "category": "Code & Syntax",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "{   \"name\": \"AIIsEverything\",   \"categories\": [     \"SEO\",     \"Developer\",     ",
+      "notes": "Output: {   \"name\": \"AIIsEverything\",   \"categories\": [     \"SEO\",     \"Developer\",     "
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Cleanly rejected with error: Unterminated string in JSON at position 41 (line 1 column 42)"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.26
+  },
+  {
+    "id": "TOOL-025",
+    "slug": "ai-summarizer",
+    "name": "AI Text Summarizer & Executive Brief Generator",
+    "category": "Content & Writing",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "EXECUTIVE SUMMARY & ACTIONABLE TAKEAWAYS =======================================",
+      "notes": "Output: EXECUTIVE SUMMARY & ACTIONABLE TAKEAWAYS ======================================="
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.45
+  },
+  {
+    "id": "TOOL-026",
+    "slug": "readability-checker",
+    "name": "Readability Checker (Flesch-Kincaid Engine)",
+    "category": "Content & Writing",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "READABILITY AUDIT & COMPREHENSION METRICS ======================================",
+      "notes": "Output: READABILITY AUDIT & COMPREHENSION METRICS ======================================"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.42
+  },
+  {
+    "id": "TOOL-027",
+    "slug": "css-to-html",
+    "name": "CSS to HTML / JSX Semantic Scaffolder",
+    "category": "Developer Compilers",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "<nav class=\"navbar\">   <div class=\"brand-logo\"></div>   <nav class=\"nav-menu\">  ",
+      "notes": "Output: <nav class=\"navbar\">   <div class=\"brand-logo\"></div>   <nav class=\"nav-menu\">  "
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 1.96
+  },
+  {
+    "id": "TOOL-028",
+    "slug": "html-to-python-ast",
+    "name": "HTML to Python AST / BeautifulSoup Generator",
+    "category": "Developer Compilers",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "\"\"\" High-Throughput Web Scraping & DOM Extraction Pipeline Engine: BeautifulSoup",
+      "notes": "Output: \"\"\" High-Throughput Web Scraping & DOM Extraction Pipeline Engine: BeautifulSoup"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.68
+  },
+  {
+    "id": "TOOL-029",
+    "slug": "json-to-yaml",
+    "name": "JSON to YAML / YAML to JSON Stream Engine",
+    "category": "Developer Compilers",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "apiVersion: apps/v1 kind: Deployment metadata:   name: ai-neural-api   namespace",
+      "notes": "Output: apiVersion: apps/v1 kind: Deployment metadata:   name: ai-neural-api   namespace"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Cleanly rejected with error: YAML Parse Error: unexpected end of the stream within a double quoted scalar"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 5.98
+  },
+  {
+    "id": "TOOL-030",
+    "slug": "js-to-ts",
+    "name": "JavaScript to TypeScript Strict Inferencer",
+    "category": "Developer Compilers",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "// User Profile Configuration const userProfile = {   id: \"usr_99214a\",   userna",
+      "notes": "Output: // User Profile Configuration const userProfile = {   id: \"usr_99214a\",   userna"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 1
+  },
+  {
+    "id": "TOOL-031",
+    "slug": "svg-to-jsx",
+    "name": "SVG to Production JSX / TSX Component Engine",
+    "category": "Developer Compilers",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "import * as React from 'react';  export interface CheckmarkIconProps extends Rea",
+      "notes": "Output: import * as React from 'react';  export interface CheckmarkIconProps extends Rea"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Cleanly rejected with error: Invalid SVG markup. Ensure your input starts with or includes a root <svg> element."
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 1.29
+  },
+  {
+    "id": "TOOL-032",
+    "slug": "sql-to-schema-orm",
+    "name": "SQL to Schema ORM Generator (Prisma, Drizzle & TypeORM)",
+    "category": "Developer Compilers",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "// ── Prisma Schema Definition ── generator client {   provider = \"prisma-client",
+      "notes": "Output: // ── Prisma Schema Definition ── generator client {   provider = \"prisma-client"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Cleanly rejected with error: Could not detect any valid \"CREATE TABLE\" statements in input."
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 2.24
+  },
+  {
+    "id": "TOOL-033",
+    "slug": "css-to-html-scaffolder",
+    "name": "CSS to HTML / JSX Semantic Scaffolder",
+    "category": "Developer Compilers",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "<nav class=\"navbar\">   <div class=\"brand\"></div> </nav>",
+      "notes": "Output: <nav class=\"navbar\">   <div class=\"brand\"></div> </nav>"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.17
+  },
+  {
+    "id": "TOOL-034",
+    "slug": "yaml-to-json",
+    "name": "YAML to JSON / JSON to YAML Converter",
+    "category": "Developer Compilers",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "{   \"name\": \"AIIsEverything\",   \"version\": 2,   \"enabled\": true }",
+      "notes": "Output: {   \"name\": \"AIIsEverything\",   \"version\": 2,   \"enabled\": true }"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Cleanly rejected with error: YAML Parse Error: unexpected end of the stream within a double quoted scalar"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.98
+  },
+  {
+    "id": "TOOL-035",
+    "slug": "javascript-to-typescript",
+    "name": "JavaScript to TypeScript Strict Transpiler",
+    "category": "Developer Compilers",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "function add(a: number = 0, b: number = 0): unknown {   return a + b; }",
+      "notes": "Output: function add(a: number = 0, b: number = 0): unknown {   return a + b; }"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.06
+  },
+  {
+    "id": "TOOL-036",
+    "slug": "svg-to-react",
+    "name": "SVG to React JSX / TSX Component Generator",
+    "category": "Developer Compilers",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "import * as React from 'react';  export interface IconProps extends React.SVGPro",
+      "notes": "Output: import * as React from 'react';  export interface IconProps extends React.SVGPro"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Cleanly rejected with error: Invalid SVG markup. Ensure your input starts with or includes a root <svg> element."
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.21
+  },
+  {
+    "id": "TOOL-037",
+    "slug": "sql-to-prisma",
+    "name": "SQL to Prisma Schema Generator",
+    "category": "Developer Compilers",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "// ── Prisma Schema Definition ── generator client {   provider = \"prisma-client",
+      "notes": "Output: // ── Prisma Schema Definition ── generator client {   provider = \"prisma-client"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Cleanly rejected with error: Could not detect any valid \"CREATE TABLE\" statements in input."
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.08
+  },
+  {
+    "id": "TOOL-038",
+    "slug": "ai-syntax-debugger",
+    "name": "AI Syntax Debugger",
+    "category": "AI Utilities",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "// ========================================================================== //",
+      "notes": "Output: // ========================================================================== //"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.7
+  },
+  {
+    "id": "TOOL-039",
+    "slug": "prompt-optimizer",
+    "name": "Prompt Optimizer Pro",
+    "category": "AI Utilities",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "// ========================================================================== //",
+      "notes": "Output: // ========================================================================== //"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.56
+  },
+  {
+    "id": "TOOL-040",
+    "slug": "regex-neural-generator",
+    "name": "RegEx Neural Generator",
+    "category": "Code Converters",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "// ========================================================================== //",
+      "notes": "Output: // ========================================================================== //"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.31
+  },
+  {
+    "id": "TOOL-041",
+    "slug": "unit-test-builder",
+    "name": "Unit Test Builder",
+    "category": "Code Converters",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "// ========================================================================== //",
+      "notes": "Output: // ========================================================================== //"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.5
+  },
+  {
+    "id": "TOOL-042",
+    "slug": "markdown-live-editor",
+    "name": "Markdown Live Editor",
+    "category": "Text & Web",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "<!-- ========================================================================== ",
+      "notes": "Output: <!-- ========================================================================== "
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.76
+  },
+  {
+    "id": "TOOL-043",
+    "slug": "tailwind-converter",
+    "name": "Tailwind Class Converter",
+    "category": "Code Converters",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "TAILWIND CSS UTILITY CLASSES ===================================================",
+      "notes": "Output: TAILWIND CSS UTILITY CLASSES ==================================================="
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.1
+  },
+  {
+    "id": "TOOL-044",
+    "slug": "json-patch-applier",
+    "name": "JSON Patch Applier",
+    "category": "Code Converters",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "// ========================================================================== //",
+      "notes": "Output: // ========================================================================== //"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Cleanly rejected with error: Invalid JSON syntax: Unterminated string in JSON at position 41 (line 1 column 42). Provide valid JSON document and patch array."
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.66
+  },
+  {
+    "id": "TOOL-045",
+    "slug": "minifier-pro",
+    "name": "Minifier Pro WASM",
+    "category": "Code Converters",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "/* Minifier Pro: 168B -> 112B (Saved 33%) */ .nav-header{display:flex;justify-co",
+      "notes": "Output: /* Minifier Pro: 168B -> 112B (Saved 33%) */ .nav-header{display:flex;justify-co"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.25
+  },
+  {
+    "id": "TOOL-046",
+    "slug": "ascii-to-hex",
+    "name": "ASCII to Hex Converter",
+    "category": "Developer Tools",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "48 65 6c 6c 6f 2c 20 57 6f 72 6c 64 21 20 f0 9f 9a 80",
+      "notes": "Output: 48 65 6c 6c 6f 2c 20 57 6f 72 6c 64 21 20 f0 9f 9a 80"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Tolerated malformed input"
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.27
+  },
+  {
+    "id": "TOOL-047",
+    "slug": "base64-to-text",
+    "name": "Base64 to Text Converter",
+    "category": "Developer Tools",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "Hello, World! Welcome to AiTools Studio.",
+      "notes": "Output: Hello, World! Welcome to AiTools Studio."
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Cleanly rejected with error: Invalid Base64 sequence: String contains characters outside RFC 4648 Base64 alphabet."
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.61
+  },
+  {
+    "id": "TOOL-048",
+    "slug": "hex-to-pantone",
+    "name": "Hex Code to Pantone Converter",
+    "category": "Design & Code Utilities",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "### Best Pantone Matching System (PMS) Result  • Matched Pantone: **Pantone 306 ",
+      "notes": "Output: ### Best Pantone Matching System (PMS) Result  • Matched Pantone: **Pantone 306 "
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Cleanly rejected with error: Invalid Hex color code \"{\"unclosed_json: true, invalid syntax %%%\". Please provide a standard 3-character or 6-character hexadecimal color (e.g. #FF5733 or #00D2FF)."
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 1.38
+  },
+  {
+    "id": "TOOL-049",
+    "slug": "decimal-to-ascii",
+    "name": "Decimal to ASCII Converter",
+    "category": "Developer Tools",
+    "normalTest": {
+      "passed": true,
+      "outputSnippet": "Hello, World!",
+      "notes": "Output: Hello, World!"
+    },
+    "emptyTest": {
+      "passed": true,
+      "notes": "Handled empty string safely"
+    },
+    "invalidOrEdgeTest": {
+      "passed": true,
+      "notes": "Cleanly rejected with error: Invalid decimal token \"{\"unclosed_json:\" at position 1. Decimal codes must be whole integers."
+    },
+    "unicodeTest": {
+      "passed": true,
+      "notes": "Successfully processed multi-byte Unicode/emojis"
+    },
+    "overallStatus": "PASS",
+    "executionTimeMs": 0.33
+  }
+]
