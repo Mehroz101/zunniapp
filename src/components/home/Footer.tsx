@@ -1,174 +1,136 @@
 import Link from 'next/link';
-import { Lock, ShieldCheck, Cpu, ArrowUpRight } from 'lucide-react';
-import { AiLogo } from './Navbar';
+import { ArrowUpRight } from 'lucide-react';
+import { BrandLogo } from '@/components/brand/BrandLogo';
 
 export function Footer() {
   return (
     <footer className="border-t border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#05070c] text-slate-600 dark:text-slate-400 transition-colors duration-200">
-      {/* ── Main Developer Footer Columns ── */}
+      {/* ── Main Editorial Footer Section ── */}
       <div className="px-6 sm:px-8 lg:px-12 py-16 sm:py-20">
         <div className="mx-auto max-w-[1440px]">
           <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
             {/* Brand Column */}
             <div className="lg:col-span-2">
               <Link href="/" className="mb-4 inline-flex items-center gap-2">
-                <AiLogo />
+                <BrandLogo />
               </Link>
-              <p className="max-w-sm text-xs leading-relaxed text-slate-500 dark:text-slate-400 mt-3 font-normal">
-                The open developer operating system and intelligence suite for artificial intelligence — curated zero-latency tools, AST code converters, model diagnostics, and technical documentation.
+              <p className="max-w-md text-xs sm:text-[13px] leading-relaxed text-slate-500 dark:text-slate-400 mt-4 font-normal">
+                AiTools Studio is the ultimate discovery platform and utility workbench. We empower developers, creators, and businesses to explore, build, and scale with production-ready AI tools, intelligent code compilers, and advanced diagnostic utilities.
               </p>
-
-              {/* Trust & Engineering Security Badges */}
-              <div className="mt-6 flex flex-wrap items-center gap-2.5 text-[11px] font-mono text-slate-600 dark:text-slate-300">
-                <div className="flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 px-3 py-1 shadow-2xs">
-                  <Lock className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
-                  <span>Developer Workbench</span>
-                </div>
-                <div className="flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 px-3 py-1 shadow-2xs">
-                  <ShieldCheck className="h-3 w-3 text-[#FF8A00] dark:text-[#FF8A00]" />
-                  <span>Zero Server Logging</span>
-                </div>
-                <div className="flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 px-3 py-1 shadow-2xs">
-                  <Cpu className="h-3 w-3 text-orange-500 dark:text-orange-400" />
-                  <span>Edge WASM</span>
-                </div>
-              </div>
             </div>
 
             {/* Column 1: Code Converters */}
             <div>
-              <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-100">
+              <h4 className="mb-4 text-xs font-semibold uppercase tracking-tight text-slate-900 dark:text-slate-100">
                 Code Converters
               </h4>
               <ul className="space-y-2.5 text-xs font-sans">
                 <li>
-                  <Link href="/tools/css-to-html" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
+                  <Link href="/tools/css-to-html" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
                     CSS → HTML Scaffolder
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tools/html-to-python-ast" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
+                  <Link href="/tools/html-to-python-ast" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
                     HTML → Python AST
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tools/json-to-yaml" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
+                  <Link href="/tools/json-to-yaml" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
                     JSON ↔ YAML Stream
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tools/js-to-ts" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
+                  <Link href="/tools/js-to-ts" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
                     JS → TypeScript Strict
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tools/svg-to-jsx" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
+                  <Link href="/tools/svg-to-jsx" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
                     SVG → JSX Component
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tools/sql-to-schema-orm" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
+                  <Link href="/tools/sql-to-schema-orm" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
                     SQL → Schema ORM
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Column 2: AI Studio */}
+            {/* Column 2: AI Studio & Toolkits */}
             <div>
-              <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-100">
-                AI Studio
+              <h4 className="mb-4 text-xs font-semibold uppercase tracking-tight text-slate-900 dark:text-slate-100">
+                AI Studio &amp; Toolkits
               </h4>
               <ul className="space-y-2.5 text-xs font-sans">
                 <li>
-                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
-                    AI Syntax Debugger
+                  <Link href="/ai-tools" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
+                    AI Tools Directory
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/writing" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
-                    Prompt Optimizer Pro
+                  <Link href="/toolkits" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
+                    Curated AI Toolkits
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
-                    RegEx Neural Generator
+                  <Link href="/guides" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
+                    Engineering Masterclasses
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/coding" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
-                    Unit Test Synthesizer
+                  <Link href="/calculators/finance" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
+                    Financial Calculators
                   </Link>
                 </li>
                 <li>
-                  <Link href="/ai-tools/text" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
-                    Markdown Live Canvas
+                  <Link href="/calculators/scientific" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
+                    Scientific &amp; Math Engines
                   </Link>
                 </li>
                 <li>
-                  <Link href="/calculators" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
-                    19+ Calculators Suite
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/ai-tools" className="font-semibold text-[#FF8A00] dark:text-[#FF8A00] hover:underline flex items-center gap-1 pt-1">
-                    All Utilities Suite →
+                  <Link href="/tools" className="font-semibold text-[#FF8A00] hover:underline flex items-center gap-1 pt-1">
+                    Explore All Tools Suite →
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Column 3: Documentation & APIs */}
+            {/* Column 3: Platform & Legal */}
             <div>
-              <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-slate-100">
-                Documentation & APIs
+              <h4 className="mb-4 text-xs font-semibold uppercase tracking-tight text-slate-900 dark:text-slate-100">
+                Platform &amp; Legal
               </h4>
               <ul className="space-y-2.5 text-xs font-sans">
                 <li>
-                  <Link href="/glossary" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
-                    Neural Terms Glossary
+                  <Link href="/blog" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
+                    AI News &amp; Dispatches
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="https://aiiseverythingback.vercel.app/docs"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors"
-                  >
-                    <span>OpenAPI / Swagger</span>
-                    <ArrowUpRight className="h-3 w-3 text-slate-400" />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://aiiseverythingback.vercel.app/health"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors"
-                  >
-                    <span>Health Metrics</span>
-                    <ArrowUpRight className="h-3 w-3 text-slate-400" />
-                  </a>
+                  <Link href="/glossary" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
+                    Neural Terms Glossary
+                  </Link>
                 </li>
                 <li>
                   <a
                     href="https://aiiseverythingdashboard.vercel.app"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors"
+                    className="flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed"
                   >
                     <span>Admin Control Center</span>
                     <ArrowUpRight className="h-3 w-3 text-slate-400" />
                   </a>
                 </li>
                 <li>
-                  <Link href="/privacy" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
-                    Privacy & Legal Policy
+                  <Link href="/privacy" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
+                    Privacy Policy
                   </Link>
                 </li>
                 <li>
-                  <Link href="/terms" className="text-slate-500 dark:text-slate-400 hover:text-[#FF8A00] dark:hover:text-[#FF8A00] transition-colors">
+                  <Link href="/terms" className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100 transition-colors leading-relaxed">
                     Terms of Service
                   </Link>
                 </li>
@@ -178,11 +140,11 @@ export function Footer() {
 
           {/* Bottom Metadata & Status Bar */}
           <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-slate-200 dark:border-slate-800 pt-8 text-xs font-mono text-slate-500 dark:text-slate-400 sm:flex-row">
-            <p>© {new Date().getFullYear()} AiTools Studio. Open Developer Platform.</p>
+            <p>© {new Date().getFullYear()} AiTools Studio. All rights reserved.</p>
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-emerald-700 dark:text-emerald-400 font-semibold font-mono text-[11px]">
-                All Browser Engines Operational
+                All Systems Operational
               </span>
             </div>
           </div>
@@ -191,3 +153,5 @@ export function Footer() {
     </footer>
   );
 }
+
+export default Footer;

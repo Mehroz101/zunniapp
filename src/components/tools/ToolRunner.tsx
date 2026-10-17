@@ -443,7 +443,7 @@ function IframeRunner({
       <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-xs text-slate-700 shadow-2xs">
         <div className="flex items-center gap-2">
           <Shield className="h-3.5 w-3.5 text-emerald-600" />
-          <span className="font-semibold">Secure Isolated Iframe</span>
+          <span className="font-semibold">Secure Preview</span>
         </div>
         <div className="flex items-center gap-2">
           <button

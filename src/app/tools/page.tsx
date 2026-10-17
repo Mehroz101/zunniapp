@@ -11,24 +11,24 @@ import { ToolDefinition } from '@/lib/tools/types';
 import { buildCollectionPageSchema, buildBreadcrumbSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Free Developer & Technical SEO Tools Suite | AIIsEverything',
+  title: 'Free Developer & Technical SEO Tools Suite | AiTools Studio',
   description:
     'Explore 26+ production-ready developer compilers, AST code converters, and technical SEO diagnostic suites. Fast, interactive, 100% free with zero paywalls.',
   alternates: {
     canonical: 'https://aiiseverything.com/tools',
   },
   openGraph: {
-    title: 'Free Developer & Technical SEO Tools Suite | AIIsEverything',
+    title: 'Free Developer & Technical SEO Tools Suite | AiTools Studio',
     description:
       'Explore 26+ production-ready developer compilers, AST code converters, and technical SEO diagnostic suites.',
     url: 'https://aiiseverything.com/tools',
-    siteName: 'AIIsEverything',
+    siteName: 'AiTools Studio',
     images: [{ url: '/og-default.png', width: 1200, height: 630 }],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Developer & Technical SEO Tools Suite | AIIsEverything',
+    title: 'Free Developer & Technical SEO Tools Suite | AiTools Studio',
     description:
       '26+ deterministic developer compilers, code converters, and technical SEO utilities.',
     images: ['/og-default.png'],
@@ -85,7 +85,7 @@ export default async function ToolsHubPage() {
   ]);
 
   const collectionSchema = buildCollectionPageSchema({
-    name: 'AIIsEverything Developer & SEO Tools Directory',
+    name: 'AiTools Studio Developer & SEO Tools Directory',
     description:
       'Explore 26+ production-ready developer compilers, AST code converters, and technical SEO diagnostic suites.',
     url: 'https://aiiseverything.com/tools',

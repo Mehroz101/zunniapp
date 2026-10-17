@@ -2,13 +2,13 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'AIIsEverything',
-    short_name: 'AIIsEverything',
-    description: 'Your definitive guide to artificial intelligence',
+    name: 'AiTools Studio',
+    short_name: 'AiTools Studio',
+    description: 'The ultimate discovery platform and utility workbench for AI tools and developer utilities.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#0a0a0a',
-    theme_color: '#6366f1',
+    background_color: '#05070c',
+    theme_color: '#FF8A00',
     icons: [
       {
         src: '/icons/icon-192.png',

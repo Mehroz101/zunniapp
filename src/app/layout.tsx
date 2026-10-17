@@ -21,19 +21,19 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aiisevery.vercel.app'),
 
   title: {
-    default: 'AiTools Studio — Developer AI Operating System & Code Tools',
+    default: 'AiTools Studio — Discovery Directory & Utility Workbench',
     template: '%s | AiTools Studio',
   },
 
   description:
-    'AiTools Studio is the open developer operating system and intelligence suite — curated zero-latency tools, AST code converters, model diagnostics, and technical documentation.',
+    'AiTools Studio is the ultimate discovery platform and utility workbench. Explore production-ready AI tools, intelligent code compilers, and advanced diagnostic utilities.',
 
   keywords: [
     'artificial intelligence',
     'developer tools',
     'code converters',
     'AST transpiler',
-    'WASM AI runtime',
+    'AI utilities',
     'prompt optimizer',
     'AiTools Studio',
     'machine learning',
@@ -73,6 +73,13 @@ export const metadata: Metadata = {
     images: ['/og-default.png'],
   },
 
+  // ── Favicon & App Icons ──────────────────────
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
+
   // ── Robots ───────────────────────────────────
   robots: {
     index: true,
@@ -93,7 +100,7 @@ export const metadata: Metadata = {
   },
 
   // ── App ──────────────────────────────────────
-  applicationName: 'AIIsEverything',
+  applicationName: 'AiTools Studio',
   category: 'technology',
 };
 

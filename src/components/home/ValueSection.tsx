@@ -4,30 +4,30 @@ const PILLARS = [
   {
     icon: Zap,
     color: 'text-orange-500',
-    title: 'Sub-Millisecond Edge WASM',
+    title: 'Ultra-Low Latency Execution',
     description:
-      'Every converter and transcoder compiles directly inside the secure browser runtime using WebAssembly. Instantaneous results with zero network hops.',
+      'Every converter and utility executes instantly on your device. High-throughput performance with zero waiting and zero network roundtrips.',
   },
   {
     icon: ShieldCheck,
     color: 'text-emerald-600',
-    title: 'Zero Server Logging & Telemetry',
+    title: 'Complete Privacy & Security',
     description:
-      'Your snippets, confidential JSON schemas, and code logic never leave your machine. No storage, no telemetry tracking, complete data privacy.',
+      'Your snippets, confidential schemas, and proprietary code logic never leave your device. Complete end-to-end client confidentiality.',
   },
   {
     icon: Cpu,
     color: 'text-orange-600',
-    title: 'Deterministic AST Compilers',
+    title: 'Deterministic Accuracy',
     description:
-      'Rather than relying purely on hallucination-prone models, our tools use formal syntax tree parsers to guarantee bug-free structural output.',
+      'Engineered with formal syntax tree parsers and precision logic to guarantee reliable, production-ready output on every run.',
   },
   {
     icon: Code2,
     color: 'text-amber-600',
-    title: 'Open Ecosystem Protocols',
+    title: 'Modern Developer Ergonomics',
     description:
-      'Structured on schema-driven definitions. Build your own custom transformers or connect your local development workflow effortlessly.',
+      'Designed with intuitive keyboard workflows, copy-ready exports, and seamless integrations into your daily engineering toolchain.',
   },
 ];
 

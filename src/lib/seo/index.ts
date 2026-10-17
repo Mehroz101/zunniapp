@@ -29,14 +29,14 @@ export interface PageSeoProps {
 
 // ── Default Site Config ───────────────────────
 export const defaultSeoConfig: SeoConfig = {
-  siteName: 'AIIsEverything',
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aiiseverything.com',
-  defaultTitle: 'AIIsEverything — AI For Every Corner of Life',
-  titleTemplate: '%s | AIIsEverything',
+  siteName: 'AiTools Studio',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aiisevery.vercel.app',
+  defaultTitle: 'AiTools Studio — Discovery Directory & Utility Workbench',
+  titleTemplate: '%s | AiTools Studio',
   defaultDescription:
-    'AIIsEverything.com is your definitive guide to artificial intelligence — news, tools, tutorials, and insights for everyone.',
+    'AiTools Studio is the ultimate discovery platform and utility workbench. Explore production-ready AI tools, intelligent code compilers, and advanced diagnostic utilities.',
   defaultOgImage: '/og-default.png',
-  twitterHandle: '@aiiseverything',
+  twitterHandle: '@aitoolsstudio',
   locale: 'en_US',
 };
 

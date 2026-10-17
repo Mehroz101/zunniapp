@@ -68,7 +68,7 @@ export function CalculatorsDirectoryView({
   badgeText = 'UNIVERSAL 19+ CALCULATION SUITE',
   headingTitle = 'Precision Calculators for',
   headingAccent = 'Finance & Science',
-  headingSubtitle = 'Explore our collection of 19 high-precision financial, mathematical, engineering, and scientific calculation engines. Zero telemetry logging, 100% free and instant.',
+  headingSubtitle = 'Explore our collection of 19 high-precision financial, mathematical, engineering, and scientific calculation engines. 100% private, free, and instant.',
 }: CalculatorsDirectoryViewProps = {}) {
   const calculators = useMemo(() => propCalculators || getAllCalculators(), [propCalculators]);
   const searchInputRef = useRef<HTMLInputElement>(null);

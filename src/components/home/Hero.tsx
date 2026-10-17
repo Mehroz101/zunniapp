@@ -459,15 +459,15 @@ export function Hero({ stats: _stats }: HeroProps) {
         <div className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-slate-500 dark:text-slate-400 font-medium">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-            <span>100% Zero-Latency Execution</span>
+            <span>Instant Execution</span>
           </div>
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-[#FF8A00]" />
-            <span>Zero Sign-up Required</span>
+            <span>No Signup Required</span>
           </div>
           <div className="flex items-center gap-2">
             <Terminal className="h-4 w-4 text-orange-500" />
-            <span>Deterministic AST Output</span>
+            <span>Production-Ready Precision</span>
           </div>
         </div>
       </div>

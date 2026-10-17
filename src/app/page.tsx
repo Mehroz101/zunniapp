@@ -13,18 +13,18 @@ import { fetchLiveLandingData } from '@/lib/data';
 export const metadata: Metadata = {
   title: 'AiTools Studio — Developer AI Operating System & Code Tools',
   description:
-    'Sleek, zero-latency developer utilities, AST code converters, and AI diagnostics. Browser-native WASM execution with zero telemetry logging.',
+    'AiTools Studio is the ultimate discovery platform and utility workbench. Explore production-ready AI tools, intelligent code compilers, and advanced diagnostic utilities.',
   openGraph: {
-    title: 'AiTools Studio — Developer AI Operating System & Code Tools',
-    description: 'Zero-latency developer utilities, AST code converters, and AI diagnostics.',
+    title: 'AiTools Studio — Discovery Directory & Utility Workbench',
+    description: 'Explore production-ready AI tools, intelligent code compilers, and advanced diagnostic utilities.',
     url: 'https://aiisevery.vercel.app',
     siteName: 'AiTools Studio',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AiTools Studio — Developer AI Operating System & Code Tools',
-    description: 'Zero-latency developer utilities, AST code converters, and AI diagnostics.',
+    title: 'AiTools Studio — Discovery Directory & Utility Workbench',
+    description: 'Explore production-ready AI tools, intelligent code compilers, and advanced diagnostic utilities.',
   },
 };
 

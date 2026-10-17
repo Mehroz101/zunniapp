@@ -43,67 +43,59 @@ import {
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 
 /* ==============================================================================
-   ULTRA-MINIMALIST DEVELOPER LOGO (ADAPTS TO BOTH LIGHT AND DARK THEMES)
+   BESPOKE ULTRA-MINIMALIST STUDIO LOGO (DYNAMIC THEME ADAPTIVE)
    ============================================================================== */
 export function AiLogo({ className = '' }: { className?: string }) {
   return (
-    <div
-      className={`inline-flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-slate-950 dark:bg-slate-900/95 border border-slate-800 dark:border-slate-700/80 shadow-xs dark:ring-1 dark:ring-orange-500/20 transition-all duration-200 group-hover:border-orange-500/50 group-hover:shadow-[0_0_20px_rgba(255,138,0,0.2)] select-none group cursor-pointer ${className}`}
-    >
-      {/* Sleek Geometric SVG Syntax / Spark Mark */}
-      <div className="relative flex items-center justify-center w-6 h-6 shrink-0">
+    <div className={`inline-flex items-center gap-2.5 select-none group cursor-pointer ${className}`}>
+      {/* Precision Geometric Vector Mark (Scales 16px to 256px) */}
+      <div className="relative flex items-center justify-center shrink-0">
         <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
+          width="26"
+          height="26"
+          viewBox="0 0 32 32"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="transition-transform duration-300 group-hover:scale-110"
+          className="transition-transform duration-200 group-hover:scale-105"
         >
-          {/* Hairline Light-Orange Syntax Brackets */}
+          {/* Architectural Rounded Rhombus Frame */}
+          <rect
+            x="3"
+            y="3"
+            width="26"
+            height="26"
+            rx="7"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            className="text-slate-900 dark:text-white transition-colors"
+          />
+          {/* Sharp Geometric Monogram Apex (A) */}
           <path
-            d="M6 8L2 12L6 16"
-            stroke="#FF8A00"
-            strokeWidth="1.75"
+            d="M10 21.5L16 9.5L22 21.5"
+            stroke="currentColor"
+            strokeWidth="2.2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            className="text-slate-900 dark:text-white transition-colors"
           />
+          {/* Signature Studio Crossbar (T) in light orange */}
           <path
-            d="M18 8L22 12L18 16"
+            d="M12.5 17.5H19.5"
             stroke="#FF8A00"
-            strokeWidth="1.75"
+            strokeWidth="2.2"
             strokeLinecap="round"
-            strokeLinejoin="round"
           />
-          {/* Pure White Syntax Transcoder Slash */}
-          <path
-            d="M14 4.5L10 19.5"
-            stroke="#FFFFFF"
-            strokeWidth="1.75"
-            strokeLinecap="round"
-            strokeOpacity="0.9"
-          />
-          {/* Central 4-Point Geometric Spark */}
-          <path
-            d="M12 9.5L13.2 12L12 14.5L10.8 12Z"
-            fill="#FF8A00"
-          />
-          <circle cx="12" cy="12" r="1" fill="#FFFFFF" />
+          {/* Studio Vertex Spark */}
+          <circle cx="16" cy="9.5" r="1.5" fill="#FF8A00" />
         </svg>
       </div>
 
-      {/* High-End Developer Suite Typography Lockup */}
-      <div className="flex flex-col text-left leading-none">
-        <div className="flex items-center gap-1.5">
-          <span className="font-mono text-xs sm:text-[13px] font-extrabold tracking-tight text-white group-hover:text-orange-400 transition-colors">
-            AIIsEverything
-          </span>
-          <span className="inline-flex items-center text-[9px] font-mono font-bold px-1.5 py-0.5 rounded-sm bg-orange-500/15 text-[#FF8A00] border border-orange-500/30">
-            .COM
-          </span>
-        </div>
-        <span className="text-[9px] font-mono text-slate-400 dark:text-slate-400 tracking-wider uppercase mt-0.5 font-semibold">
-          AI Tools · Dev · Calculators
+      <div className="flex items-center gap-1.5 leading-none">
+        <span className="font-sans text-[16px] sm:text-[17px] font-black tracking-tight text-slate-900 dark:text-white transition-colors">
+          AiTools<span className="text-[#FF8A00]">.</span>
+        </span>
+        <span className="text-[9.5px] font-mono font-bold tracking-widest uppercase px-1.5 py-0.5 rounded-md bg-orange-500/10 dark:bg-orange-500/15 text-[#FF8A00] border border-orange-500/20">
+          STUDIO
         </span>
       </div>
     </div>
