@@ -41,24 +41,17 @@ export function CalculatorWorkbench({ slug, calculator: propCalc }: CalculatorWo
   const [copied, setCopied] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  // Synchronize inputs if calculator slug changes
-  useEffect(() => {
-    setInputs(initialInputs);
-  }, [initialInputs]);
-
-  if (!calculator) {
-    return (
-      <div className="py-20 text-center">
-        <h2 className="text-xl font-bold">Calculator not found</h2>
-        <Link href="/calculators" className="text-orange-500 hover:underline mt-2 inline-block">
-          Return to Calculators Directory
-        </Link>
-      </div>
-    );
-  }
-
-  // Execute mathematical calculation
+  // Execute mathematical calculation unconditionally to obey Rules of Hooks
   const result = useMemo(() => {
+    if (!calculator) {
+      return {
+        primaryValue: 'Calculation Pending',
+        primaryLabel: 'Result',
+        primarySubtext: 'Please adjust input fields',
+        summary: [],
+        breakdown: [],
+      };
+    }
     try {
       return calculator.calculate(inputs);
     } catch {
@@ -71,6 +64,17 @@ export function CalculatorWorkbench({ slug, calculator: propCalc }: CalculatorWo
       };
     }
   }, [calculator, inputs]);
+
+  if (!calculator) {
+    return (
+      <div className="py-20 text-center">
+        <h2 className="text-xl font-bold">Calculator not found</h2>
+        <Link href="/calculators" className="text-orange-500 hover:underline mt-2 inline-block">
+          Return to Calculators Directory
+        </Link>
+      </div>
+    );
+  }
 
   // Handle single input change
   const handleChange = (id: string, value: any) => {

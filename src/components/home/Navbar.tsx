@@ -506,6 +506,65 @@ const MEGA_MENUS: MegaMenuConfig[] = [
       },
     ],
   },
+
+  // 6. "AI Tools" Dropdown (/ai-tools) -> Machine Learning & AI Utilities
+  {
+    key: 'ai-tools',
+    label: 'AI Tools',
+    href: '/ai-tools',
+    headline: 'Artificial Intelligence & Neural Generation Suite',
+    subheadline: 'Text summarizers, AST debuggers, prompt optimizers, and neural regex generators',
+    footerText: 'Explore All AI Tools & Intelligent Utilities',
+    footerHref: '/ai-tools',
+    categories: [
+      {
+        title: 'Content & Semantic Intelligence',
+        items: [
+          {
+            name: 'AI Text Summarizer & Brief',
+            desc: 'Executive summaries with customizable density & compression.',
+            icon: Sparkles,
+            href: '/tools/ai-summarizer',
+          },
+          {
+            name: 'Readability Checker (Flesch-Kincaid)',
+            desc: 'Real-time grade-level and reading ease scoring.',
+            icon: BookOpen,
+            href: '/tools/readability-checker',
+          },
+          {
+            name: 'Prompt Optimizer Pro',
+            desc: 'Refine system prompts with few-shot examples & constraints.',
+            icon: Terminal,
+            href: '/tools/prompt-optimizer',
+          },
+        ],
+      },
+      {
+        title: 'Code & Pattern Generation',
+        items: [
+          {
+            name: 'AI Syntax Debugger',
+            desc: 'Locate syntax errors, missing braces, and structural faults.',
+            icon: Code2,
+            href: '/tools/ai-syntax-debugger',
+          },
+          {
+            name: 'RegEx Neural Generator',
+            desc: 'Natural language specification to production regular expressions.',
+            icon: Binary,
+            href: '/tools/regex-neural-generator',
+          },
+          {
+            name: 'Unit Test Builder',
+            desc: 'Automated test suite generation for Jest, Vitest, and Mocha.',
+            icon: ShieldCheck,
+            href: '/tools/unit-test-builder',
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 /* ==============================================================================
@@ -602,17 +661,8 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Center: Desktop Mega-Menu Category Trigger Links & Dedicated AI Tools / Guides / Toolkits */}
+          {/* Center: Desktop Mega-Menu Category Trigger Links & Dedicated AI Toolkits / Guides */}
           <div className="hidden lg:flex items-center gap-1 xl:gap-2">
-            <Link
-              href="/ai-tools"
-              onClick={() => setActiveDropdown(null)}
-              className="inline-flex items-center gap-1.5 text-[13px] font-bold px-3 py-1.5 rounded-full text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100/90 dark:hover:bg-slate-800/80 transition-all duration-200 cursor-pointer"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-[#FF8A00]" />
-              <span>AI Tools</span>
-            </Link>
-
             <Link
               href="/toolkits"
               onClick={() => setActiveDropdown(null)}
