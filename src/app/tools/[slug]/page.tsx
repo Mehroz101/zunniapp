@@ -118,7 +118,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
       inputPlaceholder: 'Paste your input here...',
       outputLabel: 'Processed Output',
       sampleInput: '',
-      features: (dbTool.config as any)?.features || ['Zero-latency execution', 'Browser sandbox security'],
+      features: (dbTool.config as any)?.features || ['Zero-latency execution', 'Browser-native privacy'],
       howToSteps: [
         { title: 'Input data', description: 'Paste or upload content to process.' },
         { title: 'Execute', description: 'Click run or press Ctrl+Enter to process.' },
@@ -157,7 +157,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
   });
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-cyan-500/30 selection:text-cyan-900 dark:selection:text-cyan-200">
+    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-[#FF8A00]/30 selection:text-slate-950">
       {/* Schema.org Injections */}
       <script
         type="application/ld+json"

@@ -17,14 +17,14 @@ import {
 export const metadata: Metadata = {
   title: 'AI Tools Directory — Developer Utilities Suite | AIIsEverything',
   description:
-    'High-throughput client-side code transducers, formatters, and AI debuggers. 100% free, browser-native execution with zero cloud telemetry.',
+    'High-throughput browser-native code transducers, formatters, and AI debuggers. 100% free, zero-latency execution with zero cloud telemetry.',
   alternates: {
     canonical: 'https://aiiseverything.com/ai-tools',
   },
   openGraph: {
     title: 'AI Tools Directory — Developer Utilities Suite | AIIsEverything',
     description:
-      'High-throughput client-side code transducers, formatters, and AI debuggers. Zero cloud telemetry.',
+      'High-throughput browser-native code transducers, formatters, and AI debuggers. Zero cloud telemetry.',
     url: 'https://aiiseverything.com/ai-tools',
     siteName: 'AIIsEverything',
     images: [{ url: '/og-default.png', width: 1200, height: 630 }],
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'AI Tools Directory — Developer Utilities Suite | AIIsEverything',
     description:
-      'High-throughput client-side code transducers, formatters, and AI debuggers. Zero cloud telemetry.',
+      'High-throughput browser-native code transducers, formatters, and AI debuggers. Zero cloud telemetry.',
     images: ['/og-default.png'],
   },
   other: buildGeoMetaTags({
@@ -96,7 +96,7 @@ export default async function AIToolsArchivePage() {
   const collectionSchema = buildCollectionPageSchema({
     name: 'AI Tools Directory — Developer Utilities Suite',
     description:
-      'High-throughput client-side code transducers, formatters, and AI debuggers. Zero cloud telemetry.',
+      'High-throughput browser-native code transducers, formatters, and AI debuggers. Zero cloud telemetry.',
     url: 'https://aiiseverything.com/ai-tools',
     items: tools.map((t) => ({
       name: t.name,
@@ -106,7 +106,7 @@ export default async function AIToolsArchivePage() {
   });
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 selection:bg-[#00D2FF]/30 selection:text-slate-950 font-sans transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 selection:bg-[#FF8A00]/30 selection:text-slate-950 font-sans transition-colors duration-200">
       {/* ── Schema.org JSON-LD ── */}
       <script
         type="application/ld+json"
@@ -123,7 +123,7 @@ export default async function AIToolsArchivePage() {
       <main className="relative pt-28 pb-20">
         {/* ── Background Subtle Tint ── */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute left-1/2 -top-20 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-gradient-to-b from-[#00D2FF]/10 to-indigo-500/5 blur-[130px]" />
+          <div className="absolute left-1/2 -top-20 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-gradient-to-b from-[#FF8A00]/10 to-orange-500/5 blur-[130px]" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -146,7 +146,7 @@ export default async function AIToolsArchivePage() {
           <section className="mt-24 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-gradient-to-b from-slate-50 to-white dark:from-[#0a101d] dark:to-[#060911] p-8 sm:p-12 text-center shadow-xs">
             <div className="mx-auto max-w-xl">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3.5 py-1 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-xs mb-4">
-                <Sparkles className="h-3.5 w-3.5 text-[#00D2FF]" />
+                <Sparkles className="h-3.5 w-3.5 text-[#FF8A00]" />
                 <span>Never Miss a New Tool</span>
               </span>
               <h2 className="text-2xl font-extrabold text-slate-950 dark:text-white sm:text-3xl">

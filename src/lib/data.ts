@@ -49,11 +49,11 @@ export interface LivePlatformStats {
 // ── Default Category Meta Mapping (Icons and Gradients) ──
 export const CATEGORY_ACCENTS: Record<string, { color: string; bgGlow: string }> = {
   writing: { color: 'from-violet-600 to-purple-600', bgGlow: 'rgba(139, 92, 246, 0.15)' },
-  coding: { color: 'from-indigo-600 to-blue-600', bgGlow: 'rgba(99, 102, 241, 0.15)' },
+  coding: { color: 'from-amber-500 to-[#FF8A00]', bgGlow: 'rgba(255, 138, 0, 0.15)' },
   image: { color: 'from-pink-600 to-rose-600', bgGlow: 'rgba(244, 63, 94, 0.15)' },
   text: { color: 'from-emerald-600 to-teal-600', bgGlow: 'rgba(16, 185, 129, 0.15)' },
   seo: { color: 'from-amber-600 to-orange-600', bgGlow: 'rgba(245, 158, 11, 0.15)' },
-  data: { color: 'from-cyan-600 to-sky-600', bgGlow: 'rgba(6, 182, 212, 0.15)' },
+  data: { color: 'from-amber-600 to-orange-500', bgGlow: 'rgba(255, 138, 0, 0.15)' },
 };
 
 export async function fetchLiveLandingData() {

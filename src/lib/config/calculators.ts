@@ -480,7 +480,7 @@ export const CALCULATORS_REGISTRY: Record<string, CalculatorDefinition> = {
           { label: 'Annual Savings Capacity', value: `$${Math.round(savings * 12).toLocaleString()}` },
         ],
         breakdown: [
-          { label: '50% Needs', percentage: 50, amount: `$${Math.round(needs).toLocaleString()}`, color: 'bg-blue-500' },
+          { label: '50% Needs', percentage: 50, amount: `$${Math.round(needs).toLocaleString()}`, color: 'bg-[#FF8A00]' },
           { label: '30% Wants', percentage: 30, amount: `$${Math.round(wants).toLocaleString()}`, color: 'bg-purple-500' },
           { label: '20% Savings', percentage: 20, amount: `$${Math.round(savings).toLocaleString()}`, color: 'bg-emerald-500' },
         ],
@@ -982,7 +982,7 @@ export const CALCULATORS_REGISTRY: Record<string, CalculatorDefinition> = {
           { label: 'Volumetric Metric', value: `${volume.toFixed(2)} units³` },
         ],
         breakdown: [
-          { label: 'Volumetric Capacity', percentage: 65, amount: `${volume.toFixed(1)} u³`, color: 'bg-cyan-500' },
+          { label: 'Volumetric Capacity', percentage: 65, amount: `${volume.toFixed(1)} u³`, color: 'bg-[#FF8A00]' },
           { label: 'Surface Area Enclosure', percentage: 35, amount: `${surfaceArea.toFixed(1)} u²`, color: 'bg-indigo-500' },
         ],
       };
@@ -1208,7 +1208,7 @@ export const CALCULATORS_REGISTRY: Record<string, CalculatorDefinition> = {
           { label: 'Terminal Speed in km/h', value: `${(v * 3.6).toFixed(2)} km/h` },
         ],
         breakdown: [
-          { label: 'Initial Velocity Component', percentage: Math.min(100, Math.round((v0 / (v || 1)) * 100)), amount: `${v0} m/s`, color: 'bg-blue-500' },
+          { label: 'Initial Velocity Component', percentage: Math.min(100, Math.round((v0 / (v || 1)) * 100)), amount: `${v0} m/s`, color: 'bg-[#FF8A00]' },
           { label: 'Acceleration Contribution', percentage: Math.max(0, 100 - Math.min(100, Math.round((v0 / (v || 1)) * 100))), amount: `${(a * t).toFixed(1)} m/s`, color: 'bg-amber-500' },
         ],
       };
@@ -1341,7 +1341,7 @@ export const CALCULATORS_REGISTRY: Record<string, CalculatorDefinition> = {
         ],
         breakdown: [
           { label: 'Stock Solution (V1)', percentage: Math.round((v1 / v2) * 100), amount: `${v1.toFixed(1)} mL`, color: 'bg-indigo-500' },
-          { label: 'Solvent (Diluent)', percentage: 100 - Math.round((v1 / v2) * 100), amount: `${solvent.toFixed(1)} mL`, color: 'bg-cyan-500' },
+          { label: 'Solvent (Diluent)', percentage: 100 - Math.round((v1 / v2) * 100), amount: `${solvent.toFixed(1)} mL`, color: 'bg-[#FF8A00]' },
         ],
       };
     },

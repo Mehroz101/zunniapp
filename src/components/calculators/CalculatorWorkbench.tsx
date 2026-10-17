@@ -50,7 +50,7 @@ export function CalculatorWorkbench({ slug, calculator: propCalc }: CalculatorWo
     return (
       <div className="py-20 text-center">
         <h2 className="text-xl font-bold">Calculator not found</h2>
-        <Link href="/calculators" className="text-cyan-500 hover:underline mt-2 inline-block">
+        <Link href="/calculators" className="text-orange-500 hover:underline mt-2 inline-block">
           Return to Calculators Directory
         </Link>
       </div>
@@ -121,7 +121,7 @@ export function CalculatorWorkbench({ slug, calculator: propCalc }: CalculatorWo
             {calculator.categoryLabel}
           </span>
           <span className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 font-semibold">
-            ● CLIENT-SIDE WASM
+            ● INSTANT WASM ENGINE
           </span>
         </div>
       </div>
@@ -142,7 +142,7 @@ export function CalculatorWorkbench({ slug, calculator: propCalc }: CalculatorWo
         <div className="lg:col-span-6 xl:col-span-7 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90 p-6 sm:p-8 shadow-xs">
           <div className="flex items-center justify-between pb-5 border-b border-slate-100 dark:border-slate-800 mb-6">
             <div className="flex items-center gap-2">
-              <div className={`p-2 rounded-lg ${isFinancial ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400' : 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400'}`}>
+              <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400">
                 <Calculator className="h-4 w-4" />
               </div>
               <h2 className="text-base font-bold text-slate-950 dark:text-white">Input Parameters</h2>
@@ -344,7 +344,7 @@ export function CalculatorWorkbench({ slug, calculator: propCalc }: CalculatorWo
       {/* ── Below the Fold: Step-by-Step Formula Explanation ── */}
       <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90 p-6 sm:p-8 shadow-xs mb-10">
         <div className="flex items-center gap-2 mb-6">
-          <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400">
             <Sparkles className="h-4 w-4" />
           </div>
           <div>

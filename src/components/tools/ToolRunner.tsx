@@ -83,7 +83,7 @@ export function ToolRunner({ tool }: ToolRunnerProps) {
 }
 
 // ─────────────────────────────────────────────
-// 1. CLIENT-SIDE RUNNER
+// 1. BROWSER-NATIVE RUNNER
 // ─────────────────────────────────────────────
 function ClientSideRunner({
   tool,
@@ -170,7 +170,7 @@ function ClientSideRunner({
       {/* Runner Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50/70 p-4 shadow-2xs">
         <div className="flex items-center gap-2.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-950 text-[#00D2FF]">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-50 border border-orange-200 text-orange-500">
             <Code2 className="h-4 w-4" />
           </div>
           <div>
@@ -194,7 +194,7 @@ function ClientSideRunner({
             disabled={isProcessing}
             className="flex items-center gap-1.5 rounded-xl bg-slate-950 px-4 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-slate-800 transition disabled:opacity-50 cursor-pointer"
           >
-            {isProcessing ? <Loader2 className="h-3.5 w-3.5 animate-spin text-[#00D2FF]" /> : <Play className="h-3.5 w-3.5 fill-current text-[#00D2FF]" />}
+            {isProcessing ? <Loader2 className="h-3.5 w-3.5 animate-spin text-[#FF8A00]" /> : <Play className="h-3.5 w-3.5 fill-current text-[#FF8A00]" />}
             Execute Tool
           </button>
         </div>
@@ -273,7 +273,7 @@ function ClientSideRunner({
           {Object.entries(outputValues).map(([key, val]) => (
             <div key={key} className="relative rounded-2xl border border-slate-800 bg-slate-950 overflow-hidden shadow-lg">
               <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900 px-4 py-2.5 text-xs text-slate-400">
-                <span className="font-mono text-[11px] text-[#00D2FF]">
+                <span className="font-mono text-[11px] text-[#FF8A00]">
                   {config.outputs?.find((o) => o.id === key)?.label ?? key}
                 </span>
                 <button
@@ -387,12 +387,12 @@ function ApiPoweredRunner({
       >
         {loading ? (
           <>
-            <Loader2 className="h-4 w-4 animate-spin text-[#00D2FF]" />
+            <Loader2 className="h-4 w-4 animate-spin text-[#FF8A00]" />
             <span>Processing with AI Model...</span>
           </>
         ) : (
           <>
-            <Sparkles className="h-4 w-4 text-[#00D2FF]" />
+            <Sparkles className="h-4 w-4 text-[#FF8A00]" />
             <span>Process with AI</span>
           </>
         )}
@@ -443,7 +443,7 @@ function IframeRunner({
       <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-xs text-slate-700 shadow-2xs">
         <div className="flex items-center gap-2">
           <Shield className="h-3.5 w-3.5 text-emerald-600" />
-          <span className="font-semibold">Sandboxed Secure Iframe</span>
+          <span className="font-semibold">Secure Isolated Iframe</span>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -540,7 +540,7 @@ function ExternalLinkRunner({
           className="flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 py-4 text-sm font-semibold text-white shadow-md hover:bg-slate-800 transition"
         >
           <span>{cta}</span>
-          <ExternalLink className="h-4 w-4 text-[#00D2FF]" />
+          <ExternalLink className="h-4 w-4 text-[#FF8A00]" />
         </a>
         <p className="mt-2 text-center text-[11px] text-slate-500">
           Opens in a secure new browser tab · Direct verified link

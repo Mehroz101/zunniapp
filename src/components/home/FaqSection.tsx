@@ -10,9 +10,9 @@ interface FaqItem {
 
 const FAQS: FaqItem[] = [
   {
-    question: 'How does client-side WASM execution guarantee snippet privacy?',
+    question: 'How does instant WASM execution guarantee snippet privacy?',
     answer:
-      'All code converters, formatters, and transpilers run within a sandboxed WebAssembly (WASM) and browser engine runtime. Your source code, JSON schemas, and confidential queries are processed in your local browser memory and never transmitted to external servers or logged in telemetry databases.',
+      'All code converters, formatters, and transpilers run within a secure WebAssembly (WASM) browser runtime. Your source code, JSON schemas, and confidential queries are processed in your local browser memory and never transmitted to external servers or logged in telemetry databases.',
   },
   {
     question: 'Are code conversions deterministic or AI-generated?',
@@ -22,7 +22,7 @@ const FAQS: FaqItem[] = [
   {
     question: 'What is the maximum token count for the Prompt Optimizer?',
     answer:
-      'The Prompt Optimizer uses a client-side Byte-Pair Encoding (BPE) tokenizer capable of parsing prompt payloads up to 128k tokens in real-time, analyzing token density, redundant stopwords, and context utilization.',
+      'The Prompt Optimizer uses a high-speed Byte-Pair Encoding (BPE) tokenizer capable of parsing prompt payloads up to 128k tokens in real-time, analyzing token density, redundant stopwords, and context utilization.',
   },
   {
     question: 'Can I integrate these developer utilities into local CLI workflows?',
@@ -48,13 +48,13 @@ export function FaqSection() {
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="text-center mb-14">
-          <div className="mb-3.5 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-mono text-[#0092c7] shadow-xs">
+          <div className="mb-3.5 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-mono text-orange-600 shadow-xs">
             <HelpCircle className="h-3.5 w-3.5" />
             <span>KNOWLEDGE MATRIX</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-950">
             Frequently Asked{' '}
-            <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-[#0092c7] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
               Questions
             </span>
           </h2>
@@ -81,7 +81,7 @@ export function FaqSection() {
                     {faq.question}
                   </span>
                   <ChevronDown
-                    className={`w-4 h-4 text-[#0092c7] shrink-0 transition-transform duration-300 ${
+                    className={`w-4 h-4 text-orange-500 shrink-0 transition-transform duration-300 ${
                       isOpen ? 'rotate-180' : ''
                     }`}
                   />

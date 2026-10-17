@@ -214,7 +214,7 @@ export default async function ToolExecutionPage({ params }: PageProps) {
 
   const toolConfig = (tool.config as Record<string, unknown>) || {};
   const featuresList = (toolConfig.features as string[]) || [
-    'Zero-latency client-side processing',
+    'Zero-latency browser-native processing',
     'Real-time output rendering',
     'Browser-based copy to clipboard',
     'Responsive desktop and mobile support',
@@ -285,7 +285,7 @@ export default async function ToolExecutionPage({ params }: PageProps) {
   ) as ToolDefinition[];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-cyan-500/30 selection:text-cyan-900 dark:selection:text-cyan-200">
+    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-[#FF8A00]/30 selection:text-slate-950">
       {/* ── Schema.org JSON-LD Injection ── */}
       <script
         type="application/ld+json"

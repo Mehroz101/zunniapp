@@ -14,11 +14,11 @@ export function ToolView({ tool, seoContent, relatedTools = [] }: ToolViewProps)
     <div className="w-full">
       {/* ── Breadcrumbs Navigation ── */}
       <nav className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-mono mb-6">
-        <Link href="/" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition">
+        <Link href="/" className="hover:text-orange-600 dark:hover:text-orange-400 transition">
           Home
         </Link>
         <ChevronRight className="h-3 w-3 text-slate-300 dark:text-slate-700" />
-        <Link href="/tools" className="hover:text-cyan-600 dark:hover:text-cyan-400 transition">
+        <Link href="/tools" className="hover:text-orange-600 dark:hover:text-orange-400 transition">
           {tool.categoryName || 'Tools'}
         </Link>
         <ChevronRight className="h-3 w-3 text-slate-300 dark:text-slate-700" />
@@ -48,7 +48,7 @@ export function ToolView({ tool, seoContent, relatedTools = [] }: ToolViewProps)
           // Injected Rich CMS Content from Database
           <div className="rounded-2xl border border-neutral-200/80 dark:border-slate-800/80 bg-white dark:bg-[#07090f] p-8 sm:p-12 shadow-xs">
             <div
-              className="prose prose-slate max-w-none dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-cyan-600 dark:prose-a:text-cyan-400 prose-a:underline hover:prose-a:text-cyan-500 prose-pre:bg-slate-950 prose-pre:border prose-pre:border-slate-800"
+              className="prose prose-slate max-w-none dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-orange-600 dark:prose-a:text-orange-400 prose-a:underline hover:prose-a:text-orange-500 prose-pre:bg-slate-950 prose-pre:border prose-pre:border-slate-800"
               dangerouslySetInnerHTML={{ __html: seoContent }}
             />
           </div>
@@ -63,7 +63,7 @@ export function ToolView({ tool, seoContent, relatedTools = [] }: ToolViewProps)
                     Key Engine Capabilities
                   </h2>
                   <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                    Engineered for maximum fidelity, RFC standards compliance, and client-side execution safety.
+                    Engineered for maximum fidelity, RFC standards compliance, and deterministic execution safety.
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -72,7 +72,7 @@ export function ToolView({ tool, seoContent, relatedTools = [] }: ToolViewProps)
                       key={idx}
                       className="flex items-start gap-3 rounded-xl border border-neutral-200/80 dark:border-slate-800/80 bg-white dark:bg-[#07090f] p-4 text-xs shadow-xs"
                     >
-                      <CheckCircle2 className="h-4 w-4 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="h-4 w-4 text-orange-500 dark:text-orange-400 shrink-0 mt-0.5" />
                       <span className="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
                         {feat}
                       </span>
@@ -99,7 +99,7 @@ export function ToolView({ tool, seoContent, relatedTools = [] }: ToolViewProps)
                       key={idx}
                       className="rounded-2xl border border-neutral-200/80 dark:border-slate-800/80 bg-white dark:bg-[#07090f] p-6 shadow-xs"
                     >
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold font-mono text-xs mb-4">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400 font-bold font-mono text-xs mb-4">
                         0{idx + 1}
                       </div>
                       <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-2">
@@ -132,7 +132,7 @@ export function ToolView({ tool, seoContent, relatedTools = [] }: ToolViewProps)
                       className="rounded-2xl border border-neutral-200/80 dark:border-slate-800/80 bg-white dark:bg-[#07090f] p-6 shadow-xs"
                     >
                       <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                        <HelpCircle className="h-4 w-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
+                        <HelpCircle className="h-4 w-4 text-orange-500 dark:text-orange-400 shrink-0" />
                         {faq.question}
                       </h3>
                       <p className="mt-2 text-xs leading-relaxed text-slate-600 dark:text-slate-400 pl-6">
@@ -157,9 +157,9 @@ export function ToolView({ tool, seoContent, relatedTools = [] }: ToolViewProps)
                 <Link
                   key={rel.slug}
                   href={`/tools/${rel.slug}`}
-                  className="rounded-xl border border-neutral-200/80 dark:border-slate-800 bg-white dark:bg-[#07090f] p-4 hover:border-cyan-500/50 transition shadow-xs group"
+                  className="rounded-xl border border-neutral-200/80 dark:border-slate-800 bg-white dark:bg-[#07090f] p-4 hover:border-orange-500/50 transition shadow-xs group"
                 >
-                  <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 transition">
+                  <div className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition">
                     {rel.name}
                   </div>
                   <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">

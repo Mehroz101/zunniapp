@@ -117,7 +117,7 @@ export default async function CategoryToolsPage({ params }: PageProps) {
       .slice(0, 3);
 
     return (
-      <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-cyan-500/30 selection:text-cyan-900 dark:selection:text-cyan-200">
+      <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-[#FF8A00]/30 selection:text-slate-950">
         <Navbar />
         <main className="flex-1 pt-28 pb-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -303,7 +303,7 @@ export default async function CategoryToolsPage({ params }: PageProps) {
             </p>
           </div>
 
-          {/* ── Interactive Client-Side Filter & Search Grid ── */}
+          {/* ── Interactive Filter & Search Grid ── */}
           <ToolsFilterGrid
             initialTools={tools}
             categories={categories}

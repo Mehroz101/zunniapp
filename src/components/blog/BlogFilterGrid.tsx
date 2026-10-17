@@ -207,7 +207,7 @@ export function BlogFilterGrid({
             <span>
               {' '}
               in{' '}
-              <span className="text-violet-600 font-semibold">
+              <span className="text-orange-600 font-semibold">
                 {categories.find((c) => c.slug === selectedCategory)?.name}
               </span>
             </span>
@@ -218,7 +218,7 @@ export function BlogFilterGrid({
           <button
             type="button"
             onClick={handleClearFilters}
-            className="flex items-center gap-1 text-violet-600 hover:text-violet-700 font-semibold transition cursor-pointer"
+            className="flex items-center gap-1 text-orange-600 hover:text-orange-700 font-semibold transition cursor-pointer"
           >
             <X className="h-3 w-3" />
             <span>Reset filters</span>
@@ -249,7 +249,7 @@ export function BlogFilterGrid({
                 </div>
 
                 {/* Title */}
-                <h3 className="text-lg font-bold leading-snug text-slate-900 group-hover:text-indigo-600 transition">
+                <h3 className="text-lg font-bold leading-snug text-slate-900 group-hover:text-orange-600 transition">
                   {post.title}
                 </h3>
 
@@ -277,7 +277,7 @@ export function BlogFilterGrid({
               <div className="mt-6 space-y-3 border-t border-slate-100 pt-4">
                 <div className="flex items-center justify-between text-xs text-slate-500">
                   <div className="flex items-center gap-1.5">
-                    <User className="h-3.5 w-3.5 text-indigo-600" />
+                    <User className="h-3.5 w-3.5 text-orange-600" />
                     <span className="truncate max-w-[130px] font-medium text-slate-700">
                       {post.author?.name || 'AIIsEverything'}
                     </span>
@@ -297,7 +297,7 @@ export function BlogFilterGrid({
                     <span>{formatNumber(post.viewCount)} views</span>
                   </div>
 
-                  <span className="flex items-center gap-1 font-semibold text-slate-700 group-hover:text-indigo-600 transition">
+                  <span className="flex items-center gap-1 font-semibold text-slate-700 group-hover:text-orange-600 transition">
                     <span>Read article</span>
                     <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
                   </span>
@@ -309,7 +309,7 @@ export function BlogFilterGrid({
       ) : (
         /* ── Zero-State Message ── */
         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-12 text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-50 text-violet-600 border border-violet-100">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 text-orange-600 border border-orange-100">
             <BookOpen className="h-6 w-6" />
           </div>
           <h3 className="text-xl font-bold text-slate-900">No Articles Found</h3>

@@ -68,7 +68,7 @@ export function CalculatorsDirectoryView({
   badgeText = 'UNIVERSAL 19+ CALCULATION SUITE',
   headingTitle = 'Precision Calculators for',
   headingAccent = 'Finance & Science',
-  headingSubtitle = 'Explore our collection of 19 high-precision financial, mathematical, engineering, and scientific calculation engines. Zero telemetry logging, 100% free and client-side.',
+  headingSubtitle = 'Explore our collection of 19 high-precision financial, mathematical, engineering, and scientific calculation engines. Zero telemetry logging, 100% free and instant.',
 }: CalculatorsDirectoryViewProps = {}) {
   const calculators = useMemo(() => propCalculators || getAllCalculators(), [propCalculators]);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -116,13 +116,13 @@ export function CalculatorsDirectoryView({
       {/* ── Directory Header / Kicker & Search ── */}
       <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 px-3.5 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md">
-          <Calculator className="h-3.5 w-3.5 text-[#00D2FF]" />
+          <Calculator className="h-3.5 w-3.5 text-[#FF8A00]" />
           <span>{badgeText}</span>
         </div>
 
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.1]">
           {headingTitle}{' '}
-          <span className="bg-gradient-to-r from-[#00D2FF] via-cyan-400 to-sky-400 dark:from-[#00D2FF] dark:via-cyan-400 dark:to-sky-500 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
             {headingAccent}
           </span>
         </h1>
@@ -203,7 +203,7 @@ export function CalculatorsDirectoryView({
           onClick={() => setActiveTab('specialized')}
           className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
             activeTab === 'specialized'
-              ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-600/20'
+              ? 'bg-[#FF8A00] text-white shadow-sm shadow-orange-500/20'
               : 'border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800'
           }`}
         >
@@ -251,7 +251,7 @@ export function CalculatorsDirectoryView({
                     <div className={`flex h-11 w-11 items-center justify-center rounded-xl transition-colors ${
                       isFinancial
                         ? 'bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 group-hover:bg-amber-500 group-hover:text-white'
-                        : 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white'
+                        : 'bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 group-hover:bg-[#FF8A00] group-hover:text-white'
                     }`}>
                       <Icon className="h-5 w-5" />
                     </div>

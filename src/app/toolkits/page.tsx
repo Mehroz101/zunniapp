@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     'Curated, high-velocity AI toolkits for frontend developers, prompt engineers, SEO architects, and full-stack system designers.',
   openGraph: {
     title: 'AI Toolkits & Developer Workflow Suites',
-    description: 'Curated suites of AI tools and client-side compilers engineered for high throughput.',
+    description: 'Curated suites of AI tools and browser-native compilers engineered for high throughput.',
     url: 'https://aiisevery.vercel.app/toolkits',
     siteName: 'AiTools Studio',
   },
@@ -42,8 +42,8 @@ const TOOLKITS = [
     title: 'Full-Stack Developer Toolkit',
     badge: 'CORE SUITE',
     icon: Code2,
-    color: 'text-[#00D2FF]',
-    bg: 'bg-cyan-500/10',
+    color: 'text-[#FF8A00]',
+    bg: 'bg-orange-500/10',
     description:
       'High-performance AST converters and strict typing engines designed for instant code transpilation without external CLI overhead.',
     tools: [
@@ -74,8 +74,8 @@ const TOOLKITS = [
     title: 'Prompt Engineering & LLM Harness',
     badge: 'AI OPTIMIZER',
     icon: Sparkles,
-    color: 'text-sky-500 dark:text-sky-400',
-    bg: 'bg-sky-500/10',
+    color: 'text-amber-500 dark:text-amber-400',
+    bg: 'bg-amber-500/10',
     description:
       'Token-efficient prompt compressors, role assignment templates, and context window optimization tools for frontier LLMs.',
     tools: [
@@ -93,7 +93,7 @@ const TOOLKITS = [
     color: 'text-purple-500 dark:text-purple-400',
     bg: 'bg-purple-500/10',
     description:
-      'Zero-log cryptographic engines executing 100% on the client side without transmitting sensitive payload hashes over the wire.',
+      'Zero-log cryptographic engines executing 100% locally with zero-latency without transmitting sensitive payload hashes over the wire.',
     tools: [
       { name: 'JWT Secret Inspector', href: '/tools/jwt-debugger', desc: 'Decode header, claims payload, and verify HS256 signatures locally' },
       { name: 'Base64 WASM Studio', href: '/tools/base64-encoder-decoder', desc: 'Bi-directional text and image encoding with high throughput' },
@@ -112,13 +112,13 @@ export default function ToolkitsHubPage() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 px-3.5 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md">
-            <Cpu className="h-3.5 w-3.5 text-[#00D2FF]" />
+            <Cpu className="h-3.5 w-3.5 text-[#FF8A00]" />
             <span>CURATED DEVELOPER WORKFLOW SUITES</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.1]">
             Integrated AI &amp;{' '}
-            <span className="bg-gradient-to-r from-[#00D2FF] via-cyan-400 to-sky-400 dark:from-[#00D2FF] dark:via-cyan-400 dark:to-sky-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
               Developer Toolkits
             </span>
           </h1>
@@ -135,7 +135,7 @@ export default function ToolkitsHubPage() {
             return (
               <div
                 key={toolkit.id}
-                className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c1220] p-6 sm:p-8 shadow-xs hover:border-cyan-500/40 dark:hover:border-cyan-500/40 transition-all flex flex-col justify-between"
+                className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c1220] p-6 sm:p-8 shadow-xs hover:border-orange-500/40 dark:hover:border-orange-500/40 transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between gap-3 mb-4">
@@ -147,7 +147,7 @@ export default function ToolkitsHubPage() {
                         <h2 className="text-lg font-bold text-slate-950 dark:text-white">
                           {toolkit.title}
                         </h2>
-                        <span className="text-[10px] font-mono font-bold text-[#00D2FF] uppercase tracking-wider">
+                        <span className="text-[10px] font-mono font-bold text-[#FF8A00] uppercase tracking-wider">
                           {toolkit.badge}
                         </span>
                       </div>
@@ -167,14 +167,14 @@ export default function ToolkitsHubPage() {
                         className="group flex items-center justify-between p-3 rounded-xl border border-slate-100 dark:border-slate-800/80 bg-slate-50/70 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors"
                       >
                         <div className="min-w-0 pr-3">
-                          <div className="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-[#00D2FF] transition truncate">
+                          <div className="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-[#FF8A00] transition truncate">
                             {tool.name}
                           </div>
                           <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
                             {tool.desc}
                           </div>
                         </div>
-                        <ArrowRight className="h-3.5 w-3.5 text-slate-400 group-hover:text-[#00D2FF] group-hover:translate-x-0.5 transition shrink-0" />
+                        <ArrowRight className="h-3.5 w-3.5 text-slate-400 group-hover:text-[#FF8A00] group-hover:translate-x-0.5 transition shrink-0" />
                       </Link>
                     ))}
                   </div>
@@ -186,7 +186,7 @@ export default function ToolkitsHubPage() {
                   </span>
                   <Link
                     href="/tools"
-                    className="text-xs font-bold text-[#00D2FF] hover:underline flex items-center gap-1"
+                    className="text-xs font-bold text-[#FF8A00] hover:underline flex items-center gap-1"
                   >
                     <span>Launch Tools</span>
                     <ArrowRight className="h-3 w-3" />

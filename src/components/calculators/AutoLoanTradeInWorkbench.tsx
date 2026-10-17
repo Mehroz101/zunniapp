@@ -206,7 +206,7 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
                   value={tradeValue}
                   onChange={(e) => setTradeValue(Number(e.target.value))}
                   placeholder="15000"
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/70 px-4 py-3 text-sm font-mono font-medium text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-cyan-500 dark:focus:border-[#00D2FF] focus:ring-2 focus:ring-cyan-500/10 transition"
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/70 px-4 py-3 text-sm font-mono font-medium text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-orange-500 dark:focus:border-[#FF8A00] focus:ring-2 focus:ring-orange-500/10 transition"
                 />
               </div>
             </div>
@@ -225,7 +225,7 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
                   value={loanPayoff}
                   onChange={(e) => setLoanPayoff(Number(e.target.value))}
                   placeholder="11000"
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/70 px-4 py-3 text-sm font-mono font-medium text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-cyan-500 dark:focus:border-[#00D2FF] focus:ring-2 focus:ring-cyan-500/10 transition"
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/70 px-4 py-3 text-sm font-mono font-medium text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-orange-500 dark:focus:border-[#FF8A00] focus:ring-2 focus:ring-orange-500/10 transition"
                 />
               </div>
             </div>
@@ -244,7 +244,7 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
                   value={newPrice}
                   onChange={(e) => setNewPrice(Number(e.target.value))}
                   placeholder="32000"
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/70 px-4 py-3 text-sm font-mono font-medium text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-cyan-500 dark:focus:border-[#00D2FF] focus:ring-2 focus:ring-cyan-500/10 transition"
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/70 px-4 py-3 text-sm font-mono font-medium text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-orange-500 dark:focus:border-[#FF8A00] focus:ring-2 focus:ring-orange-500/10 transition"
                 />
               </div>
             </div>
@@ -264,7 +264,7 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
                   value={taxRate}
                   onChange={(e) => setTaxRate(Number(e.target.value))}
                   placeholder="6"
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/70 px-4 py-3 text-sm font-mono font-medium text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-cyan-500 dark:focus:border-[#00D2FF] focus:ring-2 focus:ring-cyan-500/10 transition"
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/70 px-4 py-3 text-sm font-mono font-medium text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-orange-500 dark:focus:border-[#FF8A00] focus:ring-2 focus:ring-orange-500/10 transition"
                 />
               </div>
             </div>
@@ -283,7 +283,7 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
                   value={downPayment}
                   onChange={(e) => setDownPayment(Number(e.target.value))}
                   placeholder="1000"
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/70 px-4 py-3 text-sm font-mono font-medium text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-cyan-500 dark:focus:border-[#00D2FF] focus:ring-2 focus:ring-cyan-500/10 transition"
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/70 px-4 py-3 text-sm font-mono font-medium text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-orange-500 dark:focus:border-[#FF8A00] focus:ring-2 focus:ring-orange-500/10 transition"
                 />
               </div>
             </div>
@@ -399,7 +399,7 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
               </div>
               <div className="flex justify-between pt-2 font-bold text-sm text-slate-950 dark:text-white">
                 <span>Total Amount to Finance:</span>
-                <span className="text-[#00D2FF] dark:text-[#00D2FF]">${math.pFinanced.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                <span className="text-orange-600 dark:text-[#FF8A00]">${math.pFinanced.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
               </div>
             </div>
           </div>
@@ -419,7 +419,7 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
           <div className="space-y-12 text-slate-700 dark:text-slate-300 leading-relaxed">
             {/* 1. Introduction */}
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-700 dark:text-[#00D2FF] border border-cyan-500/20 mb-3">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-orange-500/10 text-orange-700 dark:text-[#FF8A00] border border-orange-500/20 mb-3">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Financial Engineering Guide</span>
               </div>
@@ -431,7 +431,7 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
               </p>
               <p className="mt-3 text-slate-600 dark:text-slate-400 leading-relaxed">
                 Whether you possess <strong className="text-slate-900 dark:text-slate-100">Positive Equity</strong> or are <strong className="text-slate-900 dark:text-slate-100">Underwater (Negative Equity)</strong> drastically alters your borrowing requirements, monthly payment schedule, and loan-to-value (LTV) risk. Use our companion{' '}
-                <Link href="/calculators/loan-calculator" className="font-semibold text-cyan-600 dark:text-[#00D2FF] underline hover:opacity-80">
+                <Link href="/calculators/loan-calculator" className="font-semibold text-orange-600 dark:text-[#FF8A00] underline hover:opacity-80">
                   Loan &amp; EMI Amortization Calculator
                 </Link>{' '}
                 to simulate exact amortization schedules once your net financed principal is established.
@@ -466,7 +466,7 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60">
-                  <div className="text-xs font-mono text-cyan-600 dark:text-[#00D2FF] font-bold uppercase mb-1">
+                  <div className="text-xs font-mono text-orange-600 dark:text-[#FF8A00] font-bold uppercase mb-1">
                     1. Net Trade Equity (E_net)
                   </div>
                   <div className="font-mono text-sm text-slate-900 dark:text-white font-semibold">
@@ -478,7 +478,7 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
                 </div>
 
                 <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60">
-                  <div className="text-xs font-mono text-cyan-600 dark:text-[#00D2FF] font-bold uppercase mb-1">
+                  <div className="text-xs font-mono text-orange-600 dark:text-[#FF8A00] font-bold uppercase mb-1">
                     2. Net Sales Tax Liability (T_net)
                   </div>
                   <div className="font-mono text-sm text-slate-900 dark:text-white font-semibold">
@@ -490,7 +490,7 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
                 </div>
 
                 <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60">
-                  <div className="text-xs font-mono text-cyan-600 dark:text-[#00D2FF] font-bold uppercase mb-1">
+                  <div className="text-xs font-mono text-orange-600 dark:text-[#FF8A00] font-bold uppercase mb-1">
                     3. Sales Tax Dollars Saved (T_saved)
                   </div>
                   <div className="font-mono text-sm text-slate-900 dark:text-white font-semibold">
@@ -502,7 +502,7 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
                 </div>
 
                 <div className="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60">
-                  <div className="text-xs font-mono text-cyan-600 dark:text-[#00D2FF] font-bold uppercase mb-1">
+                  <div className="text-xs font-mono text-orange-600 dark:text-[#FF8A00] font-bold uppercase mb-1">
                     4. Final Financed Principal (P_financed)
                   </div>
                   <div className="font-mono text-sm text-slate-900 dark:text-white font-semibold">
@@ -592,7 +592,7 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
         <div className="mt-14 pt-10 border-t border-slate-200 dark:border-slate-800">
           <div className="mb-8">
             <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-950 dark:text-white tracking-tight flex items-center gap-2">
-              <HelpCircle className="w-6 h-6 text-cyan-600 dark:text-[#00D2FF]" />
+              <HelpCircle className="w-6 h-6 text-orange-600 dark:text-[#FF8A00]" />
               <span>Frequently Asked Questions</span>
             </h3>
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
@@ -611,12 +611,12 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
                   <button
                     type="button"
                     onClick={() => setOpenFaq(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-sm sm:text-base text-slate-900 dark:text-slate-100 hover:text-cyan-600 dark:hover:text-[#00D2FF] transition"
+                    className="w-full flex items-center justify-between p-4 sm:p-5 text-left font-semibold text-sm sm:text-base text-slate-900 dark:text-slate-100 hover:text-orange-600 dark:hover:text-[#FF8A00] transition"
                   >
                     <span>{faq.question}</span>
                     <ChevronDown
                       className={`w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ml-4 ${
-                        isOpen ? 'rotate-180 text-cyan-600 dark:text-[#00D2FF]' : ''
+                        isOpen ? 'rotate-180 text-orange-600 dark:text-[#FF8A00]' : ''
                       }`}
                     />
                   </button>

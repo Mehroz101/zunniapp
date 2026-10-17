@@ -30,9 +30,9 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
       title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-      className={`relative w-9 h-9 rounded-full flex items-center justify-center border transition-all duration-300 transform hover:scale-110 active:scale-95 cursor-pointer shadow-2xs select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00D2FF] ${
+      className={`relative w-9 h-9 rounded-full flex items-center justify-center border transition-all duration-300 transform hover:scale-110 active:scale-95 cursor-pointer shadow-2xs select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8A00] ${
         isDark
-          ? 'bg-slate-900/90 hover:bg-slate-800 border-slate-800 text-amber-300 ring-1 ring-cyan-500/20 shadow-[0_0_15px_rgba(0,210,255,0.1)]'
+          ? 'bg-slate-900/90 hover:bg-slate-800 border-slate-800 text-amber-300 ring-1 ring-orange-500/20 shadow-[0_0_15px_rgba(255,138,0,0.15)]'
           : 'bg-white hover:bg-slate-50 border-slate-200/90 text-slate-700 hover:text-slate-950'
       } ${className}`}
     >

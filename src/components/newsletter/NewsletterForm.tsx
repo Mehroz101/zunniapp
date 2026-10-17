@@ -63,12 +63,12 @@ export function NewsletterForm() {
         >
           {status === 'loading' ? (
             <>
-              <Loader2 className="h-4 w-4 animate-spin text-[#00D2FF]" />
+              <Loader2 className="h-4 w-4 animate-spin text-[#FF8A00]" />
               <span>Subscribing...</span>
             </>
           ) : (
             <>
-              <Send className="h-3.5 w-3.5 text-[#00D2FF]" />
+              <Send className="h-3.5 w-3.5 text-[#FF8A00]" />
               <span>Subscribe Free</span>
             </>
           )}

@@ -13,7 +13,7 @@ import { fetchLiveLandingData } from '@/lib/data';
 export const metadata: Metadata = {
   title: 'AiTools Studio — Developer AI Operating System & Code Tools',
   description:
-    'Sleek, zero-latency developer utilities, AST code converters, and AI diagnostics. Client-side WASM execution with zero telemetry logging.',
+    'Sleek, zero-latency developer utilities, AST code converters, and AI diagnostics. Browser-native WASM execution with zero telemetry logging.',
   openGraph: {
     title: 'AiTools Studio — Developer AI Operating System & Code Tools',
     description: 'Zero-latency developer utilities, AST code converters, and AI diagnostics.',
@@ -35,7 +35,7 @@ export default async function HomePage() {
   const { categories, stats } = await fetchLiveLandingData();
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 selection:bg-[#00D2FF]/30 selection:text-slate-950 font-sans overflow-x-clip transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 selection:bg-[#FF8A00]/30 selection:text-slate-950 font-sans overflow-x-clip transition-colors duration-200">
       {/* ── Fixed Floating Developer Pill Navbar ── */}
       <Navbar />
 
@@ -55,18 +55,18 @@ export default async function HomePage() {
         {/* ── 6. Developer Newsletter Capture Section ── */}
         <section className="relative overflow-hidden bg-slate-50/50 dark:bg-slate-950/50 border-t border-slate-200/80 dark:border-slate-800 px-6 sm:px-8 lg:px-12 py-24 sm:py-28">
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute left-1/2 top-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/[0.06] blur-[140px]" />
+            <div className="absolute left-1/2 top-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/[0.06] blur-[140px]" />
           </div>
 
           <div className="relative z-10 mx-auto max-w-2xl text-center">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3.5 py-1 text-xs font-mono text-[#0092c7] dark:text-[#00D2FF] shadow-xs">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3.5 py-1 text-xs font-mono text-orange-600 dark:text-[#FF8A00] shadow-xs">
               <Terminal className="h-3.5 w-3.5" />
               <span>DEVELOPER TELEMETRY DISPATCH</span>
             </div>
 
             <h2 className="text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl md:text-5xl">
               Engineering Dispatch,{' '}
-              <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-[#0092c7] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
                 Weekly.
               </span>
             </h2>

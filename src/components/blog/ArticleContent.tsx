@@ -48,10 +48,10 @@ export function ArticleContent({ contentMd }: ArticleContentProps) {
           const slug = slugify(plainText);
 
           if (token.depth === 2) {
-            return `<h2 id="${slug}" class="scroll-mt-28 mt-12 mb-4 text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 group flex items-center gap-2"><a href="#${slug}" class="text-inherit hover:text-indigo-600 transition">${content}</a></h2>\n`;
+            return `<h2 id="${slug}" class="scroll-mt-28 mt-12 mb-4 text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 group flex items-center gap-2"><a href="#${slug}" class="text-inherit hover:text-orange-600 transition">${content}</a></h2>\n`;
           }
           if (token.depth === 3) {
-            return `<h3 id="${slug}" class="scroll-mt-28 mt-8 mb-3 text-xl font-bold tracking-tight text-slate-900 group flex items-center gap-2"><a href="#${slug}" class="text-inherit hover:text-indigo-600 transition">${content}</a></h3>\n`;
+            return `<h3 id="${slug}" class="scroll-mt-28 mt-8 mb-3 text-xl font-bold tracking-tight text-slate-900 group flex items-center gap-2"><a href="#${slug}" class="text-inherit hover:text-orange-600 transition">${content}</a></h3>\n`;
           }
           if (token.depth === 4) {
             return `<h4 id="${slug}" class="scroll-mt-28 mt-6 mb-2 text-lg font-semibold text-slate-900">${content}</h4>\n`;
@@ -67,7 +67,7 @@ export function ArticleContent({ contentMd }: ArticleContentProps) {
           return `
 <div class="code-block-wrapper relative my-6 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 shadow-lg">
   <div class="flex items-center justify-between border-b border-slate-800 bg-slate-900 px-4 py-2 text-xs text-slate-400">
-    <span class="font-mono text-[11px] font-semibold uppercase tracking-wider text-[#00D2FF]">${lang}</span>
+    <span class="font-mono text-[11px] font-semibold uppercase tracking-wider text-[#FF8A00]">${lang}</span>
     <button type="button" class="copy-code-btn flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 px-2.5 py-1 text-[11px] font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition cursor-pointer" data-code="${encoded}">
       <span>Copy</span>
     </button>
@@ -79,13 +79,13 @@ export function ArticleContent({ contentMd }: ArticleContentProps) {
 
         blockquote(this: { parser: { parse: (t: Tokens.Blockquote['tokens']) => string } }, token: Tokens.Blockquote) {
           const body = this.parser.parse(token.tokens);
-          return `<blockquote class="my-6 border-l-4 border-indigo-600 bg-indigo-50/70 px-6 py-4 rounded-r-2xl text-slate-700 italic text-sm sm:text-base leading-relaxed">${body}</blockquote>\n`;
+          return `<blockquote class="my-6 border-l-4 border-orange-500 bg-orange-50/70 px-6 py-4 rounded-r-2xl text-slate-700 italic text-sm sm:text-base leading-relaxed">${body}</blockquote>\n`;
         },
 
         link(this: { parser: { parseInline: (t: Tokens.Link['tokens']) => string } }, token: Tokens.Link) {
           const text = this.parser.parseInline(token.tokens);
           const isExternal = token.href.startsWith('http');
-          return `<a href="${token.href}" ${token.title ? `title="${token.title}"` : ''} class="text-indigo-600 hover:text-indigo-700 underline underline-offset-4 decoration-indigo-300 hover:decoration-indigo-600 font-semibold transition" ${isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`;
+          return `<a href="${token.href}" ${token.title ? `title="${token.title}"` : ''} class="text-orange-600 hover:text-orange-700 underline underline-offset-4 decoration-orange-300 hover:decoration-orange-600 font-semibold transition" ${isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`;
         },
 
         table(token: Tokens.Table) {
@@ -133,7 +133,7 @@ export function ArticleContent({ contentMd }: ArticleContentProps) {
         },
 
         codespan(token: Tokens.Codespan) {
-          return `<code class="rounded-md border border-slate-200 bg-slate-100 px-1.5 py-0.5 font-mono text-xs sm:text-sm text-indigo-700 font-semibold">${token.text}</code>`;
+          return `<code class="rounded-md border border-slate-200 bg-slate-100 px-1.5 py-0.5 font-mono text-xs sm:text-sm text-orange-700 font-semibold">${token.text}</code>`;
         },
       },
     });

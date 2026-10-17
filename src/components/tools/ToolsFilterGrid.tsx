@@ -171,7 +171,7 @@ export function ToolsFilterGrid({
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
               placeholder="Search tools by name, keyword, or capabilities..."
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 pl-10 pr-10 py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:border-slate-950 dark:focus:border-[#00D2FF] focus:outline-none focus:ring-1 focus:ring-slate-950 dark:focus:ring-[#00D2FF] shadow-xs"
+              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 pl-10 pr-10 py-3 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:border-slate-950 dark:focus:border-[#FF8A00] focus:outline-none focus:ring-1 focus:ring-slate-950 dark:focus:ring-[#FF8A00] shadow-xs"
             />
             {searchQuery && (
               <button
@@ -202,7 +202,7 @@ export function ToolsFilterGrid({
                   onClick={() => handlePricingChange(tab.id)}
                   className={`rounded-lg px-2.5 py-1.5 font-medium transition cursor-pointer ${
                     selectedPricing === tab.id
-                      ? 'bg-slate-950 text-white dark:bg-[#00D2FF] dark:text-slate-950 shadow-xs font-bold'
+                      ? 'bg-slate-950 text-white dark:bg-[#FF8A00] dark:text-slate-950 shadow-xs font-bold'
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
@@ -216,7 +216,7 @@ export function ToolsFilterGrid({
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'popular' | 'newest' | 'featured')}
-                className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-xs font-medium text-slate-800 dark:text-slate-200 shadow-2xs focus:border-slate-950 dark:focus:border-[#00D2FF] focus:outline-none cursor-pointer"
+                className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-xs font-medium text-slate-800 dark:text-slate-200 shadow-2xs focus:border-slate-950 dark:focus:border-[#FF8A00] focus:outline-none cursor-pointer"
               >
                 <option value="featured">Featured First</option>
                 <option value="popular">Most Popular</option>
@@ -233,7 +233,7 @@ export function ToolsFilterGrid({
             onClick={() => handleCategoryChange('all')}
             className={`flex flex-shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition cursor-pointer ${
               selectedCategory === 'all'
-                ? 'border border-slate-950 bg-slate-950 text-white dark:border-[#00D2FF] dark:bg-[#00D2FF] dark:text-slate-950 font-bold shadow-xs'
+                ? 'border border-slate-950 bg-slate-950 text-white dark:border-[#FF8A00] dark:bg-[#FF8A00] dark:text-slate-950 font-bold shadow-xs'
                 : 'border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white shadow-2xs'
             }`}
           >
@@ -250,7 +250,7 @@ export function ToolsFilterGrid({
               onClick={() => handleCategoryChange(cat.slug)}
               className={`flex flex-shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition cursor-pointer ${
                 selectedCategory === cat.slug
-                  ? 'border border-slate-950 bg-slate-950 text-white dark:border-[#00D2FF] dark:bg-[#00D2FF] dark:text-slate-950 font-bold shadow-xs'
+                  ? 'border border-slate-950 bg-slate-950 text-white dark:border-[#FF8A00] dark:bg-[#FF8A00] dark:text-slate-950 font-bold shadow-xs'
                   : 'border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white shadow-2xs'
               }`}
             >
@@ -268,7 +268,7 @@ export function ToolsFilterGrid({
         <div>
           Showing <span className="font-semibold text-slate-900 dark:text-white">{filteredTools.length}</span> tools
           {selectedCategory !== 'all' && (
-            <span> in <span className="text-[#00D2FF] font-semibold">{categories.find((c) => c.slug === selectedCategory)?.name}</span></span>
+            <span> in <span className="text-[#FF8A00] font-semibold">{categories.find((c) => c.slug === selectedCategory)?.name}</span></span>
           )}
           {selectedPricing !== 'all' && (
             <span> ({selectedPricing})</span>
@@ -279,7 +279,7 @@ export function ToolsFilterGrid({
           <button
             type="button"
             onClick={handleClearFilters}
-            className="flex items-center gap-1 text-cyan-600 dark:text-[#00D2FF] hover:underline font-semibold transition cursor-pointer"
+            className="flex items-center gap-1 text-orange-600 dark:text-[#FF8A00] hover:underline font-semibold transition cursor-pointer"
           >
             <X className="h-3 w-3" />
             <span>Reset filters</span>
@@ -326,7 +326,7 @@ export function ToolsFilterGrid({
                   </div>
 
                   {/* Title & Tagline */}
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-[#00D2FF] transition">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-[#FF8A00] transition">
                     {tool.name}
                   </h3>
 
@@ -356,7 +356,7 @@ export function ToolsFilterGrid({
                     <span>{formatNumber(tool.viewCount)} views</span>
                   </div>
 
-                  <span className="flex items-center gap-1 text-xs font-semibold text-slate-700 dark:text-slate-300 group-hover:text-cyan-600 dark:group-hover:text-[#00D2FF] transition">
+                  <span className="flex items-center gap-1 text-xs font-semibold text-slate-700 dark:text-slate-300 group-hover:text-orange-600 dark:group-hover:text-[#FF8A00] transition">
                     <span>Launch Tool</span>
                     <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
                   </span>
@@ -368,7 +368,7 @@ export function ToolsFilterGrid({
       ) : (
         /* ── Zero-State Message ── */
         <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0a0f1d] p-12 text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-50 dark:bg-cyan-950/40 text-cyan-600 dark:text-[#00D2FF] border border-cyan-100 dark:border-cyan-800/60">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 dark:bg-orange-950/40 text-orange-600 dark:text-[#FF8A00] border border-orange-100 dark:border-orange-800/60">
             <Search className="h-6 w-6" />
           </div>
           <h3 className="text-xl font-bold text-slate-900 dark:text-white">No AI Tools Found</h3>
@@ -378,7 +378,7 @@ export function ToolsFilterGrid({
           <button
             type="button"
             onClick={handleClearFilters}
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-950 dark:bg-[#00D2FF] px-5 py-2.5 text-xs font-bold text-white dark:text-slate-950 shadow-md transition hover:bg-slate-800 dark:hover:bg-[#38bdf8] cursor-pointer"
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#FF8A00] hover:bg-[#ff9e2e] px-5 py-2.5 text-xs font-bold text-slate-950 shadow-md transition cursor-pointer"
           >
             Clear All Filters
           </button>
@@ -412,7 +412,7 @@ export function ToolsFilterGrid({
                   onClick={() => setCurrentPage(page)}
                   className={`h-8 w-8 rounded-lg text-xs font-medium transition cursor-pointer ${
                     currentPage === page
-                      ? 'bg-slate-950 text-white dark:bg-[#00D2FF] dark:text-slate-950 font-bold'
+                      ? 'bg-[#FF8A00] text-slate-950 font-bold'
                       : 'border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
                   }`}
                 >

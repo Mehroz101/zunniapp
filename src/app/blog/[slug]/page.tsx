@@ -303,7 +303,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   });
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-cyan-500/30 selection:text-cyan-900 dark:selection:text-cyan-200">
+    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-[#FF8A00]/30 selection:text-slate-950">
       {/* ── JSON-LD Structured Data Injection ── */}
       <script
         type="application/ld+json"
@@ -464,7 +464,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 {/* Newsletter Card */}
                 <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900/60 dark:to-slate-900/20 p-6 text-center space-y-4 shadow-xs">
                   <div className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-slate-950 dark:bg-slate-800 text-white mx-auto shadow-sm">
-                    <Sparkles className="h-4 w-4 text-[#00D2FF]" />
+                    <Sparkles className="h-4 w-4 text-[#FF8A00]" />
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-slate-900 dark:text-white">

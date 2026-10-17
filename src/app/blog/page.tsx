@@ -201,7 +201,7 @@ export default async function BlogArchivePage() {
   });
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-cyan-500/30 selection:text-cyan-900 dark:selection:text-cyan-200">
+    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-[#FF8A00]/30 selection:text-slate-950">
       {/* JSON-LD Schemas */}
       <script
         type="application/ld+json"
@@ -231,12 +231,12 @@ export default async function BlogArchivePage() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-slate-200 dark:border-slate-800">
           <div className="max-w-2xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-xs font-mono text-slate-700 dark:text-slate-300">
-              <Newspaper className="h-3.5 w-3.5 text-[#00D2FF]" />
+              <Newspaper className="h-3.5 w-3.5 text-[#FF8A00]" />
               AIIsEverything Intelligence Dispatches
             </div>
             <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-950 dark:text-white">
               AI News, Guides &{' '}
-              <span className="bg-gradient-to-r from-[#00D2FF] via-indigo-400 to-violet-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
                 Technical Insights
               </span>
             </h1>
@@ -261,8 +261,8 @@ export default async function BlogArchivePage() {
 
         {/* Newsletter CTA Section */}
         <section className="mt-20 rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/40 p-8 sm:p-12 text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/20 bg-indigo-500/10 text-xs font-mono text-indigo-600 dark:text-indigo-400 mb-4">
-            <Sparkles className="h-3.5 w-3.5 text-[#00D2FF]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orange-500/20 bg-orange-500/10 text-xs font-mono text-orange-600 dark:text-[#FF8A00] mb-4">
+            <Sparkles className="h-3.5 w-3.5 text-[#FF8A00]" />
             Direct To Your Inbox
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3">

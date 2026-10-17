@@ -97,7 +97,7 @@ export default async function ToolsHubPage() {
   });
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-cyan-500/30 selection:text-cyan-900 dark:selection:text-cyan-200">
+    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-[#FF8A00]/30 selection:text-slate-950">
       {/* Schema.org Structured Data */}
       <script
         type="application/ld+json"
@@ -120,22 +120,22 @@ export default async function ToolsHubPage() {
           <div className="mt-20 rounded-3xl border border-slate-200 dark:border-slate-800/80 bg-slate-50 dark:bg-[#07090f] p-8 sm:p-12">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="space-y-2">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-500">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500/10 text-[#FF8A00]">
                   <Zap className="h-5 w-5" />
                 </div>
                 <h3 className="text-base font-bold text-slate-900 dark:text-white">Sub-Millisecond Execution</h3>
                 <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                  Compiled client-side in Web Workers and modern native APIs for instant results with zero network overhead.
+                  Compiled directly in browser Web Workers and modern native APIs for instant results with zero network overhead.
                 </p>
               </div>
 
               <div className="space-y-2">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-500">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500/10 text-orange-600 dark:text-orange-400">
                   <ShieldCheck className="h-5 w-5" />
                 </div>
                 <h3 className="text-base font-bold text-slate-900 dark:text-white">Zero Data Transmission</h3>
                 <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                  Tokens, JWT keys, and proprietary code payloads remain strictly in your browser memory sandbox.
+                  Tokens, cryptographic keys, and proprietary code payloads remain strictly within your local browser memory.
                 </p>
               </div>
 

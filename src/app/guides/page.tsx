@@ -17,7 +17,7 @@ import { Footer } from '@/components/home/Footer';
 export const metadata: Metadata = {
   title: 'AI Engineering Guides & Production Architectures | AiTools Studio',
   description:
-    'Comprehensive technical guides on client-side AST transpilation, Next.js 16 Edge architecture, stateful mathematical workbenches, and LLM prompt engineering.',
+    'Comprehensive technical guides on browser-native AST transpilation, Next.js 16 Edge architecture, stateful mathematical workbenches, and LLM prompt engineering.',
   openGraph: {
     title: 'AI Engineering Guides & Production Architectures',
     description: 'In-depth engineering masterclasses, tutorials, and benchmarks for modern builders.',
@@ -35,7 +35,7 @@ export const revalidate = 0;
 const GUIDES = [
   {
     slug: 'ast-compilers-in-production',
-    title: 'Building Client-Side AST Compilers & Transpilers in Production',
+    title: 'Building Browser-Native AST Compilers & Transpilers in Production',
     category: 'Architecture',
     readTime: '8 min read',
     date: 'Oct 2026',
@@ -57,7 +57,7 @@ const GUIDES = [
   },
   {
     slug: 'stateful-ai-workbenches',
-    title: 'Engineering Pure Client-Side Math & Financial Calculation Engines',
+    title: 'Engineering Browser-Native Math & Financial Calculation Engines',
     category: 'Engineering',
     readTime: '6 min read',
     date: 'Oct 2026',
@@ -110,13 +110,13 @@ export default function GuidesHubPage() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 px-3.5 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md">
-            <Compass className="h-3.5 w-3.5 text-[#00D2FF]" />
+            <Compass className="h-3.5 w-3.5 text-[#FF8A00]" />
             <span>AI ENGINEERING KNOWLEDGE BASE</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 dark:text-white leading-[1.1]">
             Technical Guides &amp;{' '}
-            <span className="bg-gradient-to-r from-[#00D2FF] via-cyan-400 to-sky-400 dark:from-[#00D2FF] dark:via-cyan-400 dark:to-sky-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
               Architecture Playbooks
             </span>
           </h1>
@@ -132,11 +132,11 @@ export default function GuidesHubPage() {
             <Link
               key={guide.slug}
               href={guide.href}
-              className="group rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c1220] p-6 shadow-xs hover:border-cyan-500/40 dark:hover:border-cyan-500/40 transition-all flex flex-col justify-between"
+              className="group rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c1220] p-6 shadow-xs hover:border-orange-500/40 dark:hover:border-orange-500/40 transition-all flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-3">
-                  <span className="font-mono font-bold text-[#00D2FF] text-[10px] uppercase tracking-wider">
+                  <span className="font-mono font-bold text-[#FF8A00] text-[10px] uppercase tracking-wider">
                     {guide.category}
                   </span>
                   <div className="flex items-center gap-1.5 text-[11px]">
@@ -145,7 +145,7 @@ export default function GuidesHubPage() {
                   </div>
                 </div>
 
-                <h2 className="text-base sm:text-lg font-bold text-slate-950 dark:text-white group-hover:text-[#00D2FF] transition leading-snug mb-3">
+                <h2 className="text-base sm:text-lg font-bold text-slate-950 dark:text-white group-hover:text-[#FF8A00] transition leading-snug mb-3">
                   {guide.title}
                 </h2>
 
@@ -166,7 +166,7 @@ export default function GuidesHubPage() {
                   ))}
                 </div>
 
-                <div className="flex items-center justify-between text-xs font-semibold text-[#00D2FF] pt-1">
+                <div className="flex items-center justify-between text-xs font-semibold text-[#FF8A00] pt-1">
                   <span>Read Full Guide</span>
                   <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition" />
                 </div>

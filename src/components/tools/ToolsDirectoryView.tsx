@@ -158,7 +158,7 @@ const SUITE_TOOL_METADATA: Record<string, ToolBadgeInfo> = {
     sub: 'Rust WASM',
     speed: '< 0.4ms',
     title: 'Minifier Pro WASM',
-    desc: 'Client-side bytecode minifier for HTML, CSS, and JS. Zero payload leaks to any server.',
+    desc: 'Instant bytecode minifier for HTML, CSS, and JS. Zero payload leaks to any server.',
     group: 'text-web',
   },
 };
@@ -231,7 +231,7 @@ export function ToolsDirectoryView({ tools }: ToolsDirectoryViewProps) {
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 pb-2">
         <div className="space-y-3 max-w-2xl">
           {/* Kicker Badge */}
-          <div className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 dark:border-sky-900/60 bg-sky-50/60 dark:bg-sky-950/30 px-3.5 py-1 text-xs font-semibold text-sky-600 dark:text-sky-400">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-orange-200 dark:border-orange-900/60 bg-orange-50/60 dark:bg-orange-950/30 px-3.5 py-1 text-xs font-semibold text-orange-600 dark:text-orange-400">
             <Sparkles className="h-3.5 w-3.5" />
             <span>DEVELOPER UTILITIES SUITE</span>
           </div>
@@ -239,14 +239,14 @@ export function ToolsDirectoryView({ tools }: ToolsDirectoryViewProps) {
           {/* Headline */}
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-950 dark:text-white leading-tight">
             AI Tools for{' '}
-            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
               Every Workflow
             </span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 leading-relaxed">
-            High-throughput client-side code transducers, formatters, and AI debuggers.
+            High-throughput deterministic code transducers, formatters, and AI debuggers.
             <br className="hidden sm:inline" />
             {' '}Zero cloud telemetry.
           </p>
@@ -262,7 +262,7 @@ export function ToolsDirectoryView({ tools }: ToolsDirectoryViewProps) {
                 onClick={() => setSelectedCategory(tab.id)}
                 className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all duration-150 cursor-pointer ${
                   isActive
-                    ? 'bg-slate-950 text-white shadow-xs dark:bg-white dark:text-slate-950'
+                    ? 'bg-[#FF8A00] text-slate-950 font-bold shadow-xs'
                     : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white hover:border-slate-300'
                 }`}
               >
@@ -281,7 +281,7 @@ export function ToolsDirectoryView({ tools }: ToolsDirectoryViewProps) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search tools by name, AST engine, or keyword..."
-          className="w-full rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 py-2 pl-9 pr-8 text-xs sm:text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 shadow-2xs outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+          className="w-full rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 py-2 pl-9 pr-8 text-xs sm:text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 shadow-2xs outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
         />
         {query && (
           <button
@@ -302,7 +302,7 @@ export function ToolsDirectoryView({ tools }: ToolsDirectoryViewProps) {
               setQuery('');
               setSelectedCategory('all');
             }}
-            className="mt-3 text-xs font-semibold text-blue-600 dark:text-sky-400 hover:underline"
+            className="mt-3 text-xs font-semibold text-orange-600 dark:text-[#FF8A00] hover:underline"
           >
             Reset Filters
           </button>
@@ -326,20 +326,20 @@ export function ToolsDirectoryView({ tools }: ToolsDirectoryViewProps) {
               <Link
                 key={tool.slug}
                 href={`/tools/${tool.slug}`}
-                className="group flex flex-col justify-between rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900/40 p-5 shadow-2xs transition-all duration-200 hover:border-blue-300 dark:hover:border-cyan-500/40 hover:shadow-md hover:-translate-y-0.5"
+                className="group flex flex-col justify-between rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900/40 p-5 shadow-2xs transition-all duration-200 hover:border-orange-300 dark:hover:border-orange-500/40 hover:shadow-md hover:shadow-orange-500/5 hover:-translate-y-0.5"
               >
                 <div>
                   {/* Top Row: Icon + Upper Tag/Sub Badge on Left, Speed Badge on Right */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-sky-100 dark:border-sky-900/60 bg-sky-50 dark:bg-sky-950/40 text-sky-500 dark:text-sky-400">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-orange-200/80 dark:border-orange-800/50 bg-orange-50/90 dark:bg-orange-950/40 text-orange-500 dark:text-orange-400 group-hover:border-orange-400/60 group-hover:bg-orange-500/10 transition">
                         <IconComponent className="h-4 w-4" />
                       </div>
                       <div className="flex flex-col">
                         <span className="text-[10px] font-mono font-bold tracking-wider uppercase text-slate-400 dark:text-slate-500">
                           {tag}
                         </span>
-                        <span className="text-[11px] font-semibold text-sky-600 dark:text-sky-400">
+                        <span className="text-[11px] font-semibold text-orange-600 dark:text-orange-400">
                           {sub}
                         </span>
                       </div>
@@ -351,11 +351,11 @@ export function ToolsDirectoryView({ tools }: ToolsDirectoryViewProps) {
                   </div>
 
                   {/* Tool Title */}
-                  <h3 className="text-[15px] font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-sky-400 transition-colors leading-snug">
+                  <h3 className="text-[15px] font-bold text-slate-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors leading-snug">
                     {arrowParts.length > 1 ? (
                       <>
                         <span>{arrowParts[0].trim()}</span>
-                        <span className="text-blue-600 dark:text-sky-400 mx-1.5 font-bold">➔</span>
+                        <span className="text-orange-500 dark:text-orange-400 mx-1.5 font-bold">➔</span>
                         <span>{arrowParts[1].trim()}</span>
                       </>
                     ) : (
@@ -371,10 +371,10 @@ export function ToolsDirectoryView({ tools }: ToolsDirectoryViewProps) {
 
                 {/* Bottom Row */}
                 <div className="mt-6 flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800/60 text-xs">
-                  <span className="text-[11px] font-mono text-slate-400 dark:text-slate-500">
-                    Client Sandbox
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                    {tag}
                   </span>
-                  <span className="font-semibold text-blue-600 dark:text-sky-400 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                  <span className="font-semibold text-orange-600 dark:text-orange-400 hover:text-orange-700 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                     <span>Launch Tool</span>
                     <ArrowRight className="h-3.5 w-3.5" />
                   </span>

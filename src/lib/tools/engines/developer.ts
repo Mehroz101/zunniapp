@@ -608,7 +608,7 @@ export function runJwtDecoder(input: string): ToolExecutionResult {
   out += JSON.stringify(payload, null, 2) + '\n\n';
 
   out += `SIGNATURE:\n`;
-  out += `${parts[2]} (Verified client-side structure)\n`;
+  out += `${parts[2]} (Verified local signature structure)\n`;
 
   const executionTimeMs = Math.round((performance.now() - startTime) * 100) / 100;
   return {

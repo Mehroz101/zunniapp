@@ -13,12 +13,12 @@ export function LatestArticlesGrid({ posts }: LatestArticlesGridProps) {
         {/* Section Header */}
         <div className="mb-14 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-violet-200 bg-violet-50 px-3.5 py-1 text-xs font-semibold text-violet-800 shadow-xs">
-              <BookOpen className="h-3.5 w-3.5 text-violet-600" /> Editorial & Tutorials
+            <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-orange-200/80 bg-orange-50 px-3.5 py-1 text-xs font-semibold text-orange-700 shadow-xs">
+              <BookOpen className="h-3.5 w-3.5 text-orange-500" /> Editorial & Tutorials
             </div>
             <h2 className="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl md:text-5xl">
               Latest{' '}
-              <span className="bg-gradient-to-r from-violet-600 via-indigo-600 to-[#0092c7] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
                 AI Intelligence
               </span>
             </h2>
@@ -52,7 +52,7 @@ export function LatestArticlesGrid({ posts }: LatestArticlesGridProps) {
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-bold leading-snug text-slate-900 transition group-hover:text-indigo-600">
+                  <h3 className="text-lg font-bold leading-snug text-slate-900 transition group-hover:text-orange-600">
                     {post.title}
                   </h3>
 
@@ -61,7 +61,7 @@ export function LatestArticlesGrid({ posts }: LatestArticlesGridProps) {
                   </p>
                 </div>
 
-                <div className="mt-6 flex items-center gap-1 border-t border-slate-100 pt-4 text-xs font-semibold text-slate-700 transition group-hover:text-indigo-600">
+                <div className="mt-6 flex items-center gap-1 border-t border-slate-100 pt-4 text-xs font-semibold text-slate-700 transition group-hover:text-orange-600">
                   <span>Read Article</span>
                   <ArrowRight className="h-3 w-3 transition group-hover:translate-x-1" />
                 </div>
@@ -71,7 +71,7 @@ export function LatestArticlesGrid({ posts }: LatestArticlesGridProps) {
         ) : (
           /* Zero-State */
           <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-white p-12 text-center">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 text-violet-600 border border-violet-100">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-orange-600 border border-orange-200/80">
               <FileText className="h-6 w-6" />
             </div>
             <h3 className="text-lg font-bold text-slate-900">Articles Ready to Index</h3>
@@ -84,7 +84,7 @@ export function LatestArticlesGrid({ posts }: LatestArticlesGridProps) {
               rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-950 px-4 py-2 text-xs font-semibold text-white shadow-md transition hover:bg-slate-800"
             >
-              <PlusCircle className="h-4 w-4 text-[#00D2FF]" />
+              <PlusCircle className="h-4 w-4 text-[#FF8A00]" />
               Write Article in Dashboard
             </a>
           </div>

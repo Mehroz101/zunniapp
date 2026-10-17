@@ -187,7 +187,7 @@ const TOOLS_SHOWCASE: ToolItem[] = [
     id: 'minifier-pro-wasm',
     name: 'Minifier Pro WASM',
     category: 'web',
-    tagline: 'Client-side bytecode minifier for HTML, CSS, and JS. Zero payload leaks to any server.',
+    tagline: 'Instant bytecode minifier for HTML, CSS, and JS. Zero payload leaks to any server.',
     engine: 'Rust WASM',
     speed: '< 0.4ms',
     href: '/tools/minifier-pro',
@@ -211,23 +211,23 @@ export function DeveloperToolsShowcase() {
   });
 
   return (
-    <section className="bg-white border-t border-slate-200/80 px-6 sm:px-8 lg:px-12 py-24 sm:py-28" id="tools">
+    <section className="bg-white dark:bg-[#05070c] border-t border-slate-200/80 dark:border-slate-800/80 px-6 sm:px-8 lg:px-12 py-24 sm:py-28 transition-colors duration-200" id="tools">
       <div className="mx-auto max-w-[1440px]">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <div className="mb-3.5 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-mono text-[#0092c7] shadow-xs">
+            <div className="mb-3.5 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3.5 py-1 text-xs font-mono text-orange-600 dark:text-[#FF8A00] shadow-xs">
               <Zap className="h-3 w-3" />
               <span>DEVELOPER UTILITIES SUITE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-950">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-950 dark:text-white">
               AI Tools for{' '}
-              <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-[#0092c7] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
                 Every Workflow
               </span>
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-xl">
-              High-throughput client-side code transducers, formatters, and AI debuggers. Zero cloud telemetry.
+            <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-xl">
+              High-throughput deterministic code transducers, formatters, and AI debuggers. Zero cloud telemetry.
             </p>
           </div>
 
@@ -244,8 +244,8 @@ export function DeveloperToolsShowcase() {
                 onClick={() => setActiveCategory(tab.id as ToolCategory)}
                 className={`px-4 py-2 rounded-full text-xs font-mono transition-all cursor-pointer ${
                   activeCategory === tab.id
-                    ? 'bg-slate-950 text-white font-semibold shadow-xs'
-                    : 'bg-white text-slate-700 hover:text-slate-950 border border-slate-200 hover:border-slate-300'
+                    ? 'bg-[#FF8A00] text-slate-950 font-bold shadow-xs'
+                    : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
                 }`}
               >
                 {tab.label}
@@ -262,7 +262,7 @@ export function DeveloperToolsShowcase() {
             placeholder="Search tools by name, AST engine, or keyword..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white border border-slate-200 rounded-full pl-11 pr-4 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-950 transition-colors font-mono shadow-xs"
+            className="w-full bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-full pl-11 pr-4 py-2.5 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-[#FF8A00] focus:ring-2 focus:ring-[#FF8A00]/20 transition-all font-mono shadow-xs"
           />
         </div>
 
@@ -274,45 +274,45 @@ export function DeveloperToolsShowcase() {
               <Link
                 key={tool.id}
                 href={tool.href}
-                className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs transition-all duration-300 hover:border-slate-300 hover:shadow-xl hover:-translate-y-0.5"
+                className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900/40 p-6 shadow-xs transition-all duration-300 hover:border-orange-300 dark:hover:border-orange-500/40 hover:shadow-xl hover:-translate-y-0.5"
               >
                 <div>
                   {/* Top Bar with Icon and Badges */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-[#0092c7] group-hover:border-[#0092c7]/40 group-hover:bg-[#00D2FF]/10 transition">
+                      <div className="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200/80 dark:border-orange-800/50 flex items-center justify-center text-orange-500 dark:text-orange-400 group-hover:border-orange-400/60 group-hover:bg-orange-500/10 transition">
                         <Icon className="w-5 h-5" />
                       </div>
                       <div>
-                        <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                           {tool.badge}
                         </span>
-                        <span className="text-[10px] font-mono text-[#0092c7] font-semibold">
+                        <span className="text-[10px] font-mono text-orange-600 dark:text-orange-400 font-semibold">
                           {tool.engine}
                         </span>
                       </div>
                     </div>
 
-                    <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-medium text-emerald-700 bg-emerald-50 border border-emerald-200">
+                    <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-medium text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60">
                       {tool.speed}
                     </span>
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="text-base font-bold text-slate-900 transition group-hover:text-indigo-600">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white transition group-hover:text-orange-600 dark:group-hover:text-orange-400">
                     {tool.name}
                   </h3>
-                  <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-slate-500 line-clamp-2">
+                  <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-slate-500 dark:text-slate-400 line-clamp-2">
                     {tool.tagline}
                   </p>
                 </div>
 
                 {/* Footer Bar */}
-                <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
-                  <span className="text-[11px] font-mono text-slate-400">
-                    Client Sandbox
+                <div className="mt-6 flex items-center justify-between border-t border-slate-100 dark:border-slate-800/60 pt-4">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                    {tool.badge}
                   </span>
-                  <span className="flex items-center gap-1 text-xs font-mono font-semibold text-slate-700 transition group-hover:text-indigo-600">
+                  <span className="flex items-center gap-1 text-xs font-mono font-semibold text-orange-600 dark:text-orange-400 transition group-hover:text-orange-700 dark:group-hover:text-orange-300">
                     Launch Tool <ArrowRight className="w-3.5 h-3.5 transition group-hover:translate-x-1" />
                   </span>
                 </div>
