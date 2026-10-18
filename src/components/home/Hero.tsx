@@ -307,17 +307,17 @@ export function Hero({ stats: _stats }: HeroProps) {
       </div>
 
       {/* ── 2. CENTERED ENTERPRISE HERO CONTENT (100% UNCLUTTERED OVER RADIAL MASK) ── */}
-      <div className="relative z-10 mx-auto max-w-5xl w-full px-6 sm:px-8 lg:px-12 text-center flex flex-col items-center">
+      <div className="relative z-10 mx-auto max-w-5xl w-full px-4 sm:px-8 lg:px-12 text-center flex flex-col items-center">
         {/* Top Modern Kicker Badge */}
-        <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md transition-all hover:border-slate-300 dark:hover:border-slate-700">
+        <div className="mb-6 sm:mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-3.5 sm:px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md transition-all hover:border-slate-300 dark:hover:border-slate-700">
           <span className="flex h-2 w-2 rounded-full bg-[#FF8A00] shadow-[0_0_8px_#FF8A00]" />
-          <span className="tracking-wide">
+          <span className="tracking-wide text-[11px] sm:text-xs">
             ⚡ The Ultimate Directory for Modern Developers &amp; Builders
           </span>
         </div>
 
         {/* Primary Headline (H1) with Signature Light Orange Accent — Rock-Solid, ZERO BLINKING */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-[1.08] max-w-4xl">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-[1.1] sm:leading-[1.08] max-w-4xl">
           Best Way to Find the Right{' '}
           <span className="block sm:inline bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
             AI Tools &amp; Utilities
@@ -325,12 +325,12 @@ export function Hero({ stats: _stats }: HeroProps) {
         </h1>
 
         {/* Value Proposition Sub-Headline */}
-        <p className="mt-6 text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl font-normal leading-relaxed">
+        <p className="mt-4 sm:mt-6 text-sm sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl font-normal leading-relaxed">
           AiTools Studio is the premier discovery directory and utility workbench helping developers, engineers, and creators explore, test, and adopt production-ready AI tools, code compilers, and developer utilities.
         </p>
 
         {/* Global Search Console Container */}
-        <div className="mt-9 w-full max-w-2xl mx-auto relative z-30">
+        <div className="mt-7 sm:mt-9 w-full max-w-2xl mx-auto relative z-30">
           <form
             onSubmit={handleSearchSubmit}
             className={`relative flex items-center rounded-2xl border transition-all duration-200 shadow-lg ${
@@ -368,8 +368,8 @@ export function Hero({ stats: _stats }: HeroProps) {
                   }
                 }
               }}
-              placeholder="Search 50+ tools, compilers, calculators (e.g. 'css to html', 'loan', 'ast')..."
-              className="w-full py-4 pl-3.5 pr-28 text-sm sm:text-base text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 bg-transparent outline-none focus:ring-0"
+              placeholder="Search 50+ tools, compilers, calculators..."
+              className="w-full py-3.5 sm:py-4 pl-3.5 pr-28 text-[16px] sm:text-base text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 bg-transparent outline-none focus:ring-0"
             />
 
             <div className="absolute right-3.5 flex items-center gap-1.5">

@@ -181,7 +181,7 @@ export function Base64TextWorkbench({
                 : 'Enter plain text to encode to Base64...'
             }
             rows={10}
-            className="w-full flex-1 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-[#070b14] p-4 font-mono text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:border-orange-500 dark:focus:border-[#00D2FF] focus:outline-none transition leading-relaxed min-h-[220px]"
+            className="w-full flex-1 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-[#070b14] p-4 font-mono text-[16px] sm:text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:border-orange-500 dark:focus:border-[#00D2FF] focus:outline-none transition leading-relaxed min-h-[220px]"
           />
 
           {error && (
@@ -210,7 +210,7 @@ export function Base64TextWorkbench({
               type="button"
               onClick={handleCopy}
               disabled={!output}
-              className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition shadow-xs cursor-pointer ${
+              className={`inline-flex min-h-[40px] items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition shadow-xs cursor-pointer ${
                 copied
                   ? 'bg-emerald-500 text-white shadow-emerald-500/20'
                   : 'bg-[#FF8A00] dark:bg-[#00D2FF] text-slate-950 hover:opacity-95 shadow-orange-500/20'
@@ -235,7 +235,7 @@ export function Base64TextWorkbench({
             value={output}
             placeholder="Decoded text will appear instantly as you type..."
             rows={10}
-            className="w-full flex-1 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#070b14] p-4 font-mono text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none leading-relaxed min-h-[220px]"
+            className="w-full flex-1 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#070b14] p-4 font-mono text-[16px] sm:text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none leading-relaxed min-h-[220px]"
           />
 
           <div className="mt-3 flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400 pt-1">

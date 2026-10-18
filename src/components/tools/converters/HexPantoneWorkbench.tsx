@@ -210,7 +210,7 @@ Match Fidelity: ${best.similarity}% (Delta-E: ${best.deltaE})`;
                 onChange={(e) => setHexInput(e.target.value)}
                 placeholder="#00D2FF or 3b82f6..."
                 maxLength={9}
-                className="w-full bg-transparent font-mono text-base font-bold text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none uppercase"
+                className="w-full bg-transparent font-mono text-[16px] sm:text-base font-bold text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none uppercase"
               />
             </div>
 
@@ -257,7 +257,7 @@ Match Fidelity: ${best.similarity}% (Delta-E: ${best.deltaE})`;
                 <button
                   type="button"
                   onClick={handleCopySummary}
-                  className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition shadow-xs cursor-pointer ${
+                  className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-2 min-h-[44px] text-xs font-bold transition shadow-xs cursor-pointer ${
                     copiedAll
                       ? 'bg-emerald-500 text-white shadow-emerald-500/20'
                       : 'bg-[#FF8A00] dark:bg-[#00D2FF] text-slate-950 hover:opacity-95 shadow-orange-500/20'
@@ -376,7 +376,7 @@ Match Fidelity: ${best.similarity}% (Delta-E: ${best.deltaE})`;
                       <button
                         type="button"
                         onClick={() => handleCopyText(m.pantone.code, `alt-${idx}`)}
-                        className="text-[10px] font-semibold text-slate-500 hover:text-orange-500 dark:hover:text-[#00D2FF] px-1.5 py-1 rounded cursor-pointer"
+                        className="text-[10px] font-semibold text-slate-500 hover:text-orange-500 dark:hover:text-[#00D2FF] p-2 min-h-[36px] min-w-[36px] flex items-center justify-center rounded cursor-pointer"
                         title="Copy code"
                       >
                         {copiedCode === `alt-${idx}` ? 'Copied' : <Copy className="h-3 w-3" />}

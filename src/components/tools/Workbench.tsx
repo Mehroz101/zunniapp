@@ -344,7 +344,7 @@ export function Workbench({ tool }: WorkbenchProps) {
                     placeholder={`{\n  "title": "My Task",\n  "tags": ["personal"]\n}`}
                     rows={8}
                     spellCheck={false}
-                    className="w-full rounded-xl border border-neutral-200 dark:border-slate-800 bg-slate-50/50 dark:bg-[#0a0f1d] p-4 font-mono text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:border-orange-500 focus:outline-none transition leading-relaxed"
+                    className="w-full rounded-xl border border-neutral-200 dark:border-slate-800 bg-slate-50/50 dark:bg-[#0a0f1d] p-4 font-mono text-[16px] sm:text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:border-orange-500 focus:outline-none transition leading-relaxed min-h-[160px]"
                   />
                 </div>
 
@@ -363,7 +363,7 @@ export function Workbench({ tool }: WorkbenchProps) {
                     placeholder={`[\n  { "op": "add", "path": "/tags/-", "value": "work" },\n  { "op": "replace", "path": "/title", "value": "Finish Seeding" }\n]`}
                     rows={8}
                     spellCheck={false}
-                    className="w-full rounded-xl border border-neutral-200 dark:border-slate-800 bg-slate-50/50 dark:bg-[#0a0f1d] p-4 font-mono text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:border-orange-500 focus:outline-none transition leading-relaxed"
+                    className="w-full rounded-xl border border-neutral-200 dark:border-slate-800 bg-slate-50/50 dark:bg-[#0a0f1d] p-4 font-mono text-[16px] sm:text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:border-orange-500 focus:outline-none transition leading-relaxed min-h-[160px]"
                   />
                 </div>
               </div>
@@ -380,10 +380,32 @@ export function Workbench({ tool }: WorkbenchProps) {
                   placeholder={tool.inputPlaceholder}
                   rows={18}
                   spellCheck={false}
-                  className="w-full flex-1 rounded-xl border border-neutral-200 dark:border-slate-800 bg-slate-50/50 dark:bg-[#0a0f1d] p-4 font-mono text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:border-orange-500 focus:outline-none transition leading-relaxed min-h-[360px]"
+                  className="w-full flex-1 rounded-xl border border-neutral-200 dark:border-slate-800 bg-slate-50/50 dark:bg-[#0a0f1d] p-4 font-mono text-[16px] sm:text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:border-orange-500 focus:outline-none transition leading-relaxed min-h-[220px] sm:min-h-[360px]"
                 />
               </div>
             )}
+
+            {/* Mobile Immediate Execution Bar (Stack-to-Scroll Architecture) */}
+            <div className="lg:hidden pt-2">
+              <button
+                type="button"
+                onClick={() => handleRun()}
+                disabled={isRunning}
+                className="w-full min-h-[44px] inline-flex items-center justify-center gap-2 rounded-xl bg-[#FF8A00] hover:bg-[#ff9e2e] text-slate-950 px-6 py-2.5 text-xs font-bold transition active:scale-95 disabled:opacity-50 cursor-pointer shadow-sm"
+              >
+                {isRunning ? (
+                  <>
+                    <span className="h-4 w-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                    <span>Executing...</span>
+                  </>
+                ) : (
+                  <>
+                    <Play className="h-4 w-4 fill-current" />
+                    <span>Execute / Convert</span>
+                  </>
+                )}
+              </button>
+            </div>
           </div>
 
           {/* ── Middle Separator ── */}
@@ -488,7 +510,7 @@ export function Workbench({ tool }: WorkbenchProps) {
                 placeholder="Execution result will appear here..."
                 rows={18}
                 spellCheck={false}
-                className="w-full flex-1 rounded-xl border border-neutral-200 dark:border-slate-800 bg-white dark:bg-[#060811] p-4 font-mono text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none leading-relaxed min-h-[360px]"
+                className="w-full flex-1 rounded-xl border border-neutral-200 dark:border-slate-800 bg-white dark:bg-[#060811] p-4 font-mono text-[16px] sm:text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none leading-relaxed min-h-[220px] sm:min-h-[360px]"
               />
             </div>
           </div>
@@ -514,7 +536,7 @@ export function Workbench({ tool }: WorkbenchProps) {
             type="button"
             onClick={() => handleRun()}
             disabled={isRunning}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#FF8A00] hover:bg-[#ff9e2e] text-slate-950 px-6 py-2.5 text-xs font-bold transition active:scale-95 disabled:opacity-50 cursor-pointer shadow-sm"
+            className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-[#FF8A00] hover:bg-[#ff9e2e] text-slate-950 px-6 py-2.5 text-xs font-bold transition active:scale-95 disabled:opacity-50 cursor-pointer shadow-sm"
           >
             {isRunning ? (
               <>

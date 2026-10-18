@@ -206,7 +206,7 @@ export function CalculatorWorkbench({ slug, calculator: propCalc }: CalculatorWo
                         id={field.id}
                         value={val}
                         onChange={(e) => handleChange(field.id, e.target.value)}
-                        className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/80 px-4 py-3 text-sm font-medium text-slate-900 dark:text-white outline-none focus:border-amber-500 dark:focus:border-amber-400 transition"
+                        className="w-full min-h-[44px] rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/80 px-4 py-2.5 text-[16px] sm:text-sm font-medium text-slate-900 dark:text-white outline-none focus:border-amber-500 dark:focus:border-amber-400 transition"
                       >
                         {field.options?.map((opt) => (
                           <option key={opt.value} value={opt.value}>
@@ -230,7 +230,7 @@ export function CalculatorWorkbench({ slug, calculator: propCalc }: CalculatorWo
                             typeof field.defaultValue === 'number' ? Number(e.target.value) : e.target.value
                           )
                         }
-                        className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/80 px-4 py-3 text-sm font-mono font-medium text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-amber-500 dark:focus:border-amber-400 transition"
+                        className="w-full min-h-[44px] rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/80 px-4 py-2.5 text-[16px] sm:text-sm font-mono font-medium text-slate-900 dark:text-white placeholder-slate-400 outline-none focus:border-amber-500 dark:focus:border-amber-400 transition"
                       />
                       {field.unit && (
                         <span className="absolute right-3.5 text-xs font-mono font-semibold text-slate-400 dark:text-slate-500">
@@ -308,7 +308,7 @@ export function CalculatorWorkbench({ slug, calculator: propCalc }: CalculatorWo
               <button
                 type="button"
                 onClick={handleCopySummary}
-                className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 px-4 py-2.5 text-xs font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition shadow-xs"
+                className="flex-1 min-h-[44px] inline-flex items-center justify-center gap-2 rounded-xl bg-slate-950 dark:bg-white text-white dark:text-slate-950 px-4 py-2.5 text-xs font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition shadow-xs cursor-pointer active:scale-95"
               >
                 {copied ? (
                   <>
@@ -327,16 +327,16 @@ export function CalculatorWorkbench({ slug, calculator: propCalc }: CalculatorWo
 
           {/* Detailed Summary Data Table */}
           {result.summary && result.summary.length > 0 && (
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90 p-6 shadow-xs">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90 p-5 sm:p-6 shadow-xs overflow-x-auto">
               <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4 font-bold">
                 Analytical Summary
               </h3>
 
-              <div className="divide-y divide-slate-100 dark:divide-slate-800">
+              <div className="divide-y divide-slate-100 dark:divide-slate-800 min-w-full">
                 {result.summary.map((row, idx) => (
-                  <div key={idx} className="py-2.5 flex items-center justify-between text-xs sm:text-sm">
-                    <span className="text-slate-600 dark:text-slate-400">{row.label}</span>
-                    <span className="font-mono font-bold text-slate-950 dark:text-white">{row.value}</span>
+                  <div key={idx} className="py-2.5 flex items-center justify-between text-xs sm:text-sm gap-4">
+                    <span className="text-slate-600 dark:text-slate-400 shrink-0">{row.label}</span>
+                    <span className="font-mono font-bold text-slate-950 dark:text-white text-right">{row.value}</span>
                   </div>
                 ))}
               </div>
