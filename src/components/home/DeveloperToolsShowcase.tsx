@@ -220,13 +220,13 @@ export function DeveloperToolsShowcase() {
               <Zap className="h-3 w-3" />
               <span>DEVELOPER UTILITIES SUITE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-950 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-[-0.02em] text-slate-900 dark:text-slate-50">
               AI Tools for{' '}
               <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
                 Every Workflow
               </span>
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-xl">
+            <p className="mt-3 text-slate-600 dark:text-slate-300 font-normal leading-relaxed text-[15px] sm:text-base max-w-xl">
               High-throughput deterministic code transducers, formatters, and AI debuggers. Zero cloud telemetry.
             </p>
           </div>
@@ -299,7 +299,7 @@ export function DeveloperToolsShowcase() {
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white transition group-hover:text-orange-600 dark:group-hover:text-orange-400">
+                  <h3 className="text-base font-semibold tracking-[-0.01em] text-slate-900 dark:text-slate-100 transition group-hover:text-orange-600 dark:group-hover:text-orange-400">
                     {tool.name}
                   </h3>
                   <p className="mt-2 text-xs sm:text-[13px] leading-relaxed text-slate-500 dark:text-slate-400 line-clamp-2">

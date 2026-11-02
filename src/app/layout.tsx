@@ -1,21 +1,21 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Geist_Mono } from 'next/font/google';
+import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 
-// ── Fonts ─────────────────────────────────────
-const inter = Inter({
+// ── Fonts Configuration ────────────────────────
+const sansFont = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-sans',
   display: 'swap',
   preload: true,
-  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+  fallback: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
   adjustFontFallback: true,
 });
 
-const geistMono = Geist_Mono({
+const monoFont = JetBrains_Mono({
   subsets: ['latin'],
-  variable: '--font-geist-mono',
+  variable: '--font-mono',
   display: 'swap',
   preload: false,
 });
@@ -128,10 +128,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${geistMono.variable}`}
+      className={`${sansFont.variable} ${monoFont.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen max-w-full overflow-x-hidden bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-[#FF8A00]/30 selection:text-slate-950 transition-colors duration-200">
+      <body className="min-h-screen max-w-full overflow-x-hidden bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 font-sans antialiased text-rendering-optimizeLegibility selection:bg-[#FF8A00]/30 selection:text-slate-950 transition-colors duration-200">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}
         </ThemeProvider>

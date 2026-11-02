@@ -15,7 +15,7 @@ import {
   AlertCircle,
   Shield,
 } from 'lucide-react';
-import { executeTool } from '@/lib/tools/registry';
+import { executeToolServerAction } from '@/app/actions/executeToolAction';
 
 interface ToolConfig {
   component?: string;
@@ -129,7 +129,7 @@ function ClientSideRunner({
         Object.values(inputValues)[0] ||
         '';
 
-      const res = await executeTool(tool.slug, rawInput, inputValues);
+      const res = await executeToolServerAction(tool.slug, rawInput, inputValues);
 
       if (res.success) {
         const newOutputs: Record<string, string> = {
@@ -166,7 +166,7 @@ function ClientSideRunner({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 min-h-[520px]">
       {/* Runner Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50/70 p-4 shadow-2xs">
         <div className="flex items-center gap-2.5">
@@ -355,7 +355,7 @@ function ApiPoweredRunner({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 min-h-[520px]">
       <div className="flex items-center justify-between rounded-2xl border border-indigo-200 bg-indigo-50/70 p-4 text-xs text-indigo-900 shadow-2xs">
         <div className="flex items-center gap-2">
           <Sparkles className="h-4 w-4 text-indigo-600" />

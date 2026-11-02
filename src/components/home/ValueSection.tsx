@@ -33,19 +33,19 @@ const PILLARS = [
 
 export function ValueSection() {
   return (
-    <section className="bg-slate-50/50 border-t border-slate-200/80 px-6 sm:px-8 lg:px-12 py-24 sm:py-28" id="values">
+    <section className="bg-slate-50/50 dark:bg-slate-950/40 border-t border-slate-200/80 dark:border-slate-800/80 px-6 sm:px-8 lg:px-12 py-20 sm:py-24 transition-colors duration-200" id="values">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-14 text-center">
-          <div className="mb-3.5 inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-mono text-orange-600 shadow-xs">
+          <div className="mb-3.5 inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3.5 py-1 text-xs font-mono text-orange-600 dark:text-[#FF8A00] shadow-xs">
             <span>ENGINEERING FOUNDATION</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-950">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-[-0.02em] text-slate-900 dark:text-slate-50">
             Architecture Designed for{' '}
             <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
-              Speed & Precision
+              Speed &amp; Precision
             </span>
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base text-slate-600">
+          <p className="mx-auto mt-3 max-w-xl text-slate-600 dark:text-slate-300 font-normal leading-relaxed text-[15px] sm:text-base">
             A minimalist execution environment engineered for senior developers and AI researchers.
           </p>
         </div>
@@ -56,16 +56,16 @@ export function ValueSection() {
             return (
               <div
                 key={pillar.title}
-                className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs transition-all duration-300 hover:border-slate-300 hover:shadow-xl hover:-translate-y-1"
+                className="group relative flex flex-col justify-between rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900/40 p-6 shadow-xs transition-all duration-300 hover:border-orange-300 dark:hover:border-orange-500/40 hover:shadow-xl hover:-translate-y-1"
               >
                 <div>
-                  <div className={`mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-50 border border-slate-200 ${pillar.color} group-hover:bg-orange-500/10 transition`}>
+                  <div className={`mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 ${pillar.color} group-hover:bg-orange-500/10 transition`}>
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h3 className="text-base font-bold text-slate-900 transition group-hover:text-orange-600">
+                  <h3 className="text-base font-semibold tracking-[-0.01em] text-slate-900 dark:text-slate-100 transition group-hover:text-orange-600 dark:group-hover:text-orange-400">
                     {pillar.title}
                   </h3>
-                  <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-slate-500">
+                  <p className="mt-2.5 text-xs sm:text-[13px] leading-relaxed text-slate-500 dark:text-slate-400">
                     {pillar.description}
                   </p>
                 </div>

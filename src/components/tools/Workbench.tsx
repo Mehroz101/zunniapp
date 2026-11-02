@@ -19,7 +19,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import { ToolDefinition, ToolExecutionResult } from '@/lib/tools/types';
-import { executeTool } from '@/lib/tools/registry';
+import { executeToolServerAction } from '@/app/actions/executeToolAction';
 
 interface WorkbenchProps {
   tool: ToolDefinition;
@@ -74,7 +74,7 @@ export function Workbench({ tool }: WorkbenchProps) {
       setError(null);
 
       try {
-        const res = await executeTool(tool.slug, rawPayload, resolvedOptions);
+        const res = await executeToolServerAction(tool.slug, rawPayload, resolvedOptions);
         if (res.success) {
           setOutput(res.output);
           setTelemetry(res.telemetry);
@@ -221,7 +221,7 @@ export function Workbench({ tool }: WorkbenchProps) {
   const currentLinesCount = (isDualInput ? input1 : singleInput).split(/\r?\n/).length;
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-6 min-h-[520px]">
       {/* Hidden file input */}
       <input
         ref={fileInputRef}

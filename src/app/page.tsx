@@ -84,14 +84,14 @@ export default async function HomePage() {
               <span>DEVELOPER TELEMETRY DISPATCH</span>
             </div>
 
-            <h2 className="text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-4xl md:text-5xl">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-[-0.02em] text-slate-900 dark:text-slate-50">
               Engineering Dispatch,{' '}
               <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
                 Weekly.
               </span>
             </h2>
 
-            <p className="mt-4 mb-8 text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-400">
+            <p className="mt-3 mb-8 text-slate-600 dark:text-slate-300 font-normal leading-relaxed text-[15px] sm:text-base">
               Join senior engineers, frontend architects, and researchers receiving curated AST transpiler updates, model benchmarks, and open-source releases.
             </p>
 

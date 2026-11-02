@@ -307,30 +307,26 @@ export function Hero({ stats: _stats }: HeroProps) {
 
       {/* ── 2. CENTERED ENTERPRISE HERO CONTENT (100% UNCLUTTERED OVER RADIAL MASK) ── */}
       <div className="relative z-10 mx-auto max-w-5xl w-full px-4 sm:px-8 lg:px-12 text-center flex flex-col items-center">
-        {/* Top Modern Kicker Badge with reserved height */}
-        <div className="mb-6 sm:mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-3.5 sm:px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md transition-all hover:border-slate-300 dark:hover:border-slate-700 min-h-[32px]">
-          <span className="flex h-2 w-2 rounded-full bg-[#FF8A00] shadow-[0_0_8px_#FF8A00]" />
+        {/* Top Modern Kicker Badge */}
+        <div className="mb-6 sm:mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-3.5 sm:px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md transition-all hover:border-slate-300 dark:hover:border-slate-700">
+          <span className="flex h-2 w-2 rounded-full bg-[#FF8A00] shadow-[0_0_8px_#FF8A00] shrink-0" />
           <span className="tracking-wide text-[11px] sm:text-xs">
             ⚡ TOOLty — The Ultimate Directory for Modern Developers &amp; Builders
           </span>
         </div>
 
-        {/* Primary Headline (H1) with Signature Light Orange Accent and height reservation */}
-        <div className="min-h-[76px] sm:min-h-[136px] flex items-center justify-center">
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-[1.1] sm:leading-[1.08] max-w-4xl">
-            Best Way to Find the Right{' '}
-            <span className="block sm:inline bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
-              AI Tools &amp; Utilities
-            </span>
-          </h1>
-        </div>
+        {/* Primary Headline (H1) with Signature Light Orange Accent */}
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.12] text-slate-950 dark:text-white max-w-4xl">
+          Best Way to Find the Right{' '}
+          <span className="block sm:inline bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
+            AI Tools &amp; Utilities
+          </span>
+        </h1>
 
-        {/* Value Proposition Sub-Headline with height reservation */}
-        <div className="min-h-[72px] sm:min-h-[56px] flex items-center justify-center mt-4 sm:mt-6">
-          <p className="text-sm sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl font-normal leading-relaxed">
-            TOOLty is the premier free online directory and utility workbench helping developers, professionals, and creators explore, calculate, and convert with 100% free online tools, converters, and financial calculators.
-          </p>
-        </div>
+        {/* Value Proposition Sub-Headline */}
+        <p className="mt-4 sm:mt-6 text-sm sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl font-normal leading-relaxed">
+          TOOLty is the premier free online directory and utility workbench helping developers, professionals, and creators explore, calculate, and convert with 100% free online tools, converters, and financial calculators.
+        </p>
 
         {/* Global Search Console Container */}
         <div className="mt-7 sm:mt-9 w-full max-w-2xl mx-auto relative z-30">
