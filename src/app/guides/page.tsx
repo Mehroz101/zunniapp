@@ -15,17 +15,17 @@ import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
 
 export const metadata: Metadata = {
-  title: 'AI Engineering Guides & Production Architectures | AiTools Studio',
+  title: 'AI Engineering Guides & Production Architectures | FreeToolsStore',
   description:
     'Comprehensive technical guides on browser-native AST transpilation, Next.js 16 Edge architecture, stateful mathematical workbenches, and LLM prompt engineering.',
   openGraph: {
     title: 'AI Engineering Guides & Production Architectures',
     description: 'In-depth engineering masterclasses, tutorials, and benchmarks for modern builders.',
-    url: 'https://aiisevery.vercel.app/guides',
-    siteName: 'AiTools Studio',
+    url: 'https://freetoolsstore.online/guides',
+    siteName: 'FreeToolsStore',
   },
   alternates: {
-    canonical: 'https://aiisevery.vercel.app/guides',
+    canonical: 'https://freetoolsstore.online/guides',
   },
 };
 

@@ -5,17 +5,17 @@ import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
 
 export const metadata: Metadata = {
-  title: 'Free Online Calculators — Finance, Math & Science Suite | AiTools Studio',
+  title: 'Free Online Calculators — Finance, Math & Science Suite | FreeToolsStore',
   description:
     'Explore 19 dedicated, zero-latency calculation engines across financial planning, business margins, mathematics, physics, geometry, health, and engineering.',
   openGraph: {
     title: 'Free Online Calculators — Finance, Math & Science Suite',
     description: 'Explore 19 dedicated calculation engines with real-time mathematical formulas and visual breakdowns.',
-    url: 'https://aiisevery.vercel.app/calculators',
-    siteName: 'AiTools Studio',
+    url: 'https://freetoolsstore.online/calculators',
+    siteName: 'FreeToolsStore',
   },
   alternates: {
-    canonical: 'https://aiisevery.vercel.app/calculators',
+    canonical: 'https://freetoolsstore.online/calculators',
   },
 };
 
@@ -33,13 +33,13 @@ export default function CalculatorsHubPage() {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://aiisevery.vercel.app',
+        item: 'https://freetoolsstore.online',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Calculators',
-        item: 'https://aiisevery.vercel.app/calculators',
+        item: 'https://freetoolsstore.online/calculators',
       },
     ],
   };
@@ -49,13 +49,13 @@ export default function CalculatorsHubPage() {
     '@type': 'CollectionPage',
     name: 'Universal 19+ Online Calculator Suite',
     description: 'High-precision financial, scientific, and specialized calculation tools.',
-    url: 'https://aiisevery.vercel.app/calculators',
+    url: 'https://freetoolsstore.online/calculators',
     hasPart: calculators.map((c) => ({
       '@type': 'SoftwareApplication',
       name: c.title,
       applicationCategory: 'UtilityApplication',
       operatingSystem: 'All',
-      url: `https://aiisevery.vercel.app/calculators/${c.slug}`,
+      url: `https://freetoolsstore.online/calculators/${c.slug}`,
     })),
   };
 

@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const rawBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://aiiseverything.com';
+  const rawBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://freetoolsstore.online';
   const baseUrl = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
   const now = new Date();
 

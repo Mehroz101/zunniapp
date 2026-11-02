@@ -11,24 +11,24 @@ import { ToolDefinition } from '@/lib/tools/types';
 import { buildCollectionPageSchema, buildBreadcrumbSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Free Developer & Technical SEO Tools Suite | AiTools Studio',
+  title: 'Free Developer & Technical SEO Tools Suite | FreeToolsStore',
   description:
     'Explore 26+ production-ready developer compilers, AST code converters, and technical SEO diagnostic suites. Fast, interactive, 100% free with zero paywalls.',
   alternates: {
-    canonical: 'https://aiiseverything.com/tools',
+    canonical: 'https://freetoolsstore.online/tools',
   },
   openGraph: {
-    title: 'Free Developer & Technical SEO Tools Suite | AiTools Studio',
+    title: 'Free Developer & Technical SEO Tools Suite | FreeToolsStore',
     description:
       'Explore 26+ production-ready developer compilers, AST code converters, and technical SEO diagnostic suites.',
-    url: 'https://aiiseverything.com/tools',
-    siteName: 'AiTools Studio',
+    url: 'https://freetoolsstore.online/tools',
+    siteName: 'FreeToolsStore',
     images: [{ url: '/og-default.png', width: 1200, height: 630 }],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Developer & Technical SEO Tools Suite | AiTools Studio',
+    title: 'Free Developer & Technical SEO Tools Suite | FreeToolsStore',
     description:
       '26+ deterministic developer compilers, code converters, and technical SEO utilities.',
     images: ['/og-default.png'],
@@ -80,18 +80,18 @@ export default async function ToolsHubPage() {
   const tools = [...registryTools, ...mappedDbTools];
 
   const breadcrumbs = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://aiiseverything.com' },
-    { name: 'Tools Directory', item: 'https://aiiseverything.com/tools' },
+    { name: 'Home', item: 'https://freetoolsstore.online' },
+    { name: 'Tools Directory', item: 'https://freetoolsstore.online/tools' },
   ]);
 
   const collectionSchema = buildCollectionPageSchema({
-    name: 'AiTools Studio Developer & SEO Tools Directory',
+    name: 'FreeToolsStore Developer & SEO Tools Directory',
     description:
       'Explore 26+ production-ready developer compilers, AST code converters, and technical SEO diagnostic suites.',
-    url: 'https://aiiseverything.com/tools',
+    url: 'https://freetoolsstore.online/tools',
     items: tools.map((t) => ({
       name: t.name,
-      url: `https://aiiseverything.com/tools/${t.slug}`,
+      url: `https://freetoolsstore.online/tools/${t.slug}`,
       description: t.tagline,
     })),
   });

@@ -19,17 +19,17 @@ import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
 
 export const metadata: Metadata = {
-  title: 'AI Toolkits & Developer Workflow Suites | AiTools Studio',
+  title: 'AI Toolkits & Developer Workflow Suites | FreeToolsStore',
   description:
     'Curated, high-velocity AI toolkits for frontend developers, prompt engineers, SEO architects, and full-stack system designers.',
   openGraph: {
     title: 'AI Toolkits & Developer Workflow Suites',
     description: 'Curated suites of AI tools and browser-native compilers engineered for high throughput.',
-    url: 'https://aiisevery.vercel.app/toolkits',
-    siteName: 'AiTools Studio',
+    url: 'https://freetoolsstore.online/toolkits',
+    siteName: 'FreeToolsStore',
   },
   alternates: {
-    canonical: 'https://aiisevery.vercel.app/toolkits',
+    canonical: 'https://freetoolsstore.online/toolkits',
   },
 };
 

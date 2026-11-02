@@ -98,7 +98,7 @@ export function CalculatorWorkbench({ slug, calculator: propCalc }: CalculatorWo
       '',
       ...result.summary.map((s) => `${s.label}: ${s.value}`),
       '',
-      `Calculated on AiTools Studio (${window.location.href})`,
+      `Calculated on FreeToolsStore (${window.location.href})`,
     ].filter(Boolean);
 
     await navigator.clipboard.writeText(lines.join('\n'));

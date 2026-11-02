@@ -104,7 +104,7 @@ export function AutoLoanTradeInWorkbench({ cmsData }: AutoLoanTradeInWorkbenchPr
       `New Vehicle Price: $${math.pNew.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
       `Cash Down Payment: $${math.dCash.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
       '',
-      `Calculated via AiTools Studio (${typeof window !== 'undefined' ? window.location.href : 'https://aiiseverything.com'})`,
+      `Calculated via FreeToolsStore (${typeof window !== 'undefined' ? window.location.href : 'https://freetoolsstore.online'})`,
     ];
 
     try {

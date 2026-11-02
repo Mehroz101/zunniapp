@@ -8,7 +8,7 @@ import { HexPantoneWorkbench } from '@/components/tools/converters/HexPantoneWor
 import { buildSoftwareApplicationSchema, buildBreadcrumbSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Hex Code to Pantone Converter — Nearest PMS Color Matcher | AiTools Studio',
+  title: 'Hex Code to Pantone Converter — Nearest PMS Color Matcher | FreeToolsStore',
   description:
     'Convert any web Hex color code to the closest official Pantone Matching System (PMS) color swatch. Features live side-by-side swatch comparison, Delta-E Euclidean perceptual color distance calculations, RGB/CMYK breakdowns, and alternative matches.',
   keywords: [
@@ -23,14 +23,14 @@ export const metadata: Metadata = {
     'design utilities',
   ],
   alternates: {
-    canonical: 'https://aiiseverything.com/tools/hex-to-pantone',
+    canonical: 'https://freetoolsstore.online/tools/hex-to-pantone',
   },
   openGraph: {
     title: 'Hex Code to Pantone Converter — Nearest PMS Color Matcher',
     description:
       'Match any web Hex code to official Pantone PMS colors with live visual swatches, perceptual distance algorithms, and CMYK approximations.',
-    url: 'https://aiiseverything.com/tools/hex-to-pantone',
-    siteName: 'AiTools Studio',
+    url: 'https://freetoolsstore.online/tools/hex-to-pantone',
+    siteName: 'FreeToolsStore',
     images: [{ url: '/og-default.png', width: 1200, height: 630, alt: 'Hex to Pantone Converter' }],
     type: 'website',
   },
@@ -82,11 +82,11 @@ const FAQS = [
 ];
 
 export default function HexToPantonePage() {
-  const canonicalUrl = 'https://aiiseverything.com/tools/hex-to-pantone';
+  const canonicalUrl = 'https://freetoolsstore.online/tools/hex-to-pantone';
 
   const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://aiiseverything.com' },
-    { name: 'Tools', item: 'https://aiiseverything.com/tools' },
+    { name: 'Home', item: 'https://freetoolsstore.online' },
+    { name: 'Tools', item: 'https://freetoolsstore.online/tools' },
     { name: 'Hex Code to Pantone Converter', item: canonicalUrl },
   ]);
 

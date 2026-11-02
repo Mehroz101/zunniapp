@@ -18,31 +18,31 @@ import {
 import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
 
 export const metadata: Metadata = {
-  title: 'Latest AI News, Insights & Guides | AIIsEverything',
+  title: 'Latest AI News, Insights & Guides | FreeToolsStore',
   description:
     'Stay ahead with breaking artificial intelligence news, deep technical guides, in-depth tutorials, and frontier LLM reviews. Updated daily for engineers, founders, and creators.',
   alternates: {
-    canonical: 'https://aiiseverything.com/blog',
+    canonical: 'https://freetoolsstore.online/blog',
   },
   openGraph: {
-    title: 'Latest AI News, Insights & Guides | AIIsEverything',
+    title: 'Latest AI News, Insights & Guides | FreeToolsStore',
     description:
       'Daily AI intelligence, machine learning breakdowns, tutorials, and model comparisons.',
-    url: 'https://aiiseverything.com/blog',
-    siteName: 'AIIsEverything',
+    url: 'https://freetoolsstore.online/blog',
+    siteName: 'FreeToolsStore',
     images: [{ url: '/og-default.png', width: 1200, height: 630 }],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Latest AI News, Insights & Guides | AIIsEverything',
+    title: 'Latest AI News, Insights & Guides | FreeToolsStore',
     description: 'Explore the definitive publication for artificial intelligence news and guides.',
     images: ['/og-default.png'],
   },
   other: buildGeoMetaTags({
     summary:
       'The authoritative knowledge base for artificial intelligence developments, model benchmarks, and production workflows.',
-    entities: ['AIIsEverything', 'AI News', 'Machine Learning', 'Artificial Intelligence', 'LLM'],
+    entities: ['FreeToolsStore', 'AI News', 'Machine Learning', 'Artificial Intelligence', 'LLM'],
   }),
 };
 
@@ -147,7 +147,7 @@ export default async function BlogArchivePage() {
           }
         : {
             id: 'editorial',
-            name: 'AIIsEverything Editorial',
+            name: 'FreeToolsStore Editorial',
           },
       tags: postTags,
     };
@@ -184,18 +184,18 @@ export default async function BlogArchivePage() {
 
   // 4. Schema.org JSON-LD
   const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://aiiseverything.com' },
-    { name: 'Blog', item: 'https://aiiseverything.com/blog' },
+    { name: 'Home', item: 'https://freetoolsstore.online' },
+    { name: 'Blog', item: 'https://freetoolsstore.online/blog' },
   ]);
 
   const collectionSchema = buildCollectionPageSchema({
     name: 'Latest AI News, Insights & Guides',
     description:
       'Curated intelligence covering artificial intelligence breakthroughs, foundational models, workflows, and machine learning tutorials.',
-    url: 'https://aiiseverything.com/blog',
+    url: 'https://freetoolsstore.online/blog',
     items: posts.slice(0, 15).map((p) => ({
       name: p.title,
-      url: `https://aiiseverything.com/blog/${p.slug}`,
+      url: `https://freetoolsstore.online/blog/${p.slug}`,
       description: p.excerpt,
     })),
   });
@@ -232,7 +232,7 @@ export default async function BlogArchivePage() {
           <div className="max-w-2xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-xs font-mono text-slate-700 dark:text-slate-300">
               <Newspaper className="h-3.5 w-3.5 text-[#FF8A00]" />
-              AIIsEverything Intelligence Dispatches
+              FreeToolsStore Intelligence Dispatches
             </div>
             <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-950 dark:text-white">
               AI News, Guides &{' '}

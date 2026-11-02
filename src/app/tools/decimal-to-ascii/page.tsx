@@ -8,7 +8,7 @@ import { DecimalAsciiWorkbench } from '@/components/tools/converters/DecimalAsci
 import { buildSoftwareApplicationSchema, buildBreadcrumbSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Decimal to ASCII Converter — Character Code Translator | AiTools Studio',
+  title: 'Decimal to ASCII Converter — Character Code Translator | FreeToolsStore',
   description:
     'Convert decimal numbers (base-10 character codes) to ASCII and UTF-8 characters instantly. Free online Decimal to ASCII converter with support for spaces, commas, newlines, HTML entities, and reverse ASCII to Decimal encoding.',
   keywords: [
@@ -22,14 +22,14 @@ export const metadata: Metadata = {
     'developer tools',
   ],
   alternates: {
-    canonical: 'https://aiiseverything.com/tools/decimal-to-ascii',
+    canonical: 'https://freetoolsstore.online/tools/decimal-to-ascii',
   },
   openGraph: {
     title: 'Decimal to ASCII Converter — Character Code Translator',
     description:
       'Translate decimal byte integers into human-readable ASCII and UTF-8 strings with zero-latency browser execution.',
-    url: 'https://aiiseverything.com/tools/decimal-to-ascii',
-    siteName: 'AiTools Studio',
+    url: 'https://freetoolsstore.online/tools/decimal-to-ascii',
+    siteName: 'FreeToolsStore',
     images: [{ url: '/og-default.png', width: 1200, height: 630, alt: 'Decimal to ASCII Converter' }],
     type: 'website',
   },
@@ -86,11 +86,11 @@ const FAQS = [
 ];
 
 export default function DecimalToAsciiPage() {
-  const canonicalUrl = 'https://aiiseverything.com/tools/decimal-to-ascii';
+  const canonicalUrl = 'https://freetoolsstore.online/tools/decimal-to-ascii';
 
   const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://aiiseverything.com' },
-    { name: 'Tools', item: 'https://aiiseverything.com/tools' },
+    { name: 'Home', item: 'https://freetoolsstore.online' },
+    { name: 'Tools', item: 'https://freetoolsstore.online/tools' },
     { name: 'Decimal to ASCII Converter', item: canonicalUrl },
   ]);
 

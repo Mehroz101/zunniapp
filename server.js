@@ -26,6 +26,6 @@ app.prepare().then(() => {
       process.exit(1);
     })
     .listen(port, () => {
-      console.log(`> AiTools Studio ready on http://${hostname}:${port}`);
+      console.log(`> FreeToolsStore ready on http://${hostname}:${port}`);
     });
 });

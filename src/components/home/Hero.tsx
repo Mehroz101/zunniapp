@@ -326,7 +326,7 @@ export function Hero({ stats: _stats }: HeroProps) {
 
         {/* Value Proposition Sub-Headline */}
         <p className="mt-4 sm:mt-6 text-sm sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl font-normal leading-relaxed">
-          AiTools Studio is the premier discovery directory and utility workbench helping developers, engineers, and creators explore, test, and adopt production-ready AI tools, code compilers, and developer utilities.
+          FreeToolsStore is the premier free online directory and utility workbench helping developers, professionals, and creators explore, calculate, and convert with 100% free online tools, converters, and financial calculators.
         </p>
 
         {/* Global Search Console Container */}

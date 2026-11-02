@@ -6,7 +6,7 @@ export interface SeoConfig {
   siteName: string;
   siteUrl: string;
   defaultTitle: string;
-  titleTemplate: string; // e.g. "%s | AIIsEverything"
+  titleTemplate: string; // e.g. "%s | FreeToolsStore"
   defaultDescription: string;
   defaultOgImage: string;
   twitterHandle: string;
@@ -29,14 +29,14 @@ export interface PageSeoProps {
 
 // ── Default Site Config ───────────────────────
 export const defaultSeoConfig: SeoConfig = {
-  siteName: 'AiTools Studio',
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aiisevery.vercel.app',
-  defaultTitle: 'AiTools Studio — Discovery Directory & Utility Workbench',
-  titleTemplate: '%s | AiTools Studio',
+  siteName: 'FreeToolsStore',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://freetoolsstore.online',
+  defaultTitle: 'FreeToolsStore — Free Online Tools & Calculators Directory',
+  titleTemplate: '%s | FreeToolsStore',
   defaultDescription:
-    'AiTools Studio is the ultimate discovery platform and utility workbench. Explore production-ready AI tools, intelligent code compilers, and advanced diagnostic utilities.',
+    'FreeToolsStore is the ultimate free online utility workbench. Explore 100% free developer utilities, financial calculators, unit converters, and online tools.',
   defaultOgImage: '/og-default.png',
-  twitterHandle: '@aitoolsstudio',
+  twitterHandle: '@freetoolsstore',
   locale: 'en_US',
 };
 

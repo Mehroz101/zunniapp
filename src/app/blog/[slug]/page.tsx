@@ -112,8 +112,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!post || post.status !== 'PUBLISHED') {
     const fallbackTitle = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
     return {
-      title: `${fallbackTitle} | AIIsEverything`,
-      description: `Read technical guides and AI intelligence on AIIsEverything.`,
+      title: `${fallbackTitle} | FreeToolsStore`,
+      description: `Read technical guides and AI intelligence on FreeToolsStore.`,
     };
   }
 
@@ -129,11 +129,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }) || {};
 
   const pageTitle =
-    seoMeta.metaTitle || seoMeta.title || `${post.title} | AIIsEverything`;
+    seoMeta.metaTitle || seoMeta.title || `${post.title} | FreeToolsStore`;
   const pageDescription =
     seoMeta.metaDescription || seoMeta.description || post.excerpt;
   const canonicalUrl =
-    seoMeta.canonicalUrl || seoMeta.canonical || `https://aiiseverything.com/blog/${slug}`;
+    seoMeta.canonicalUrl || seoMeta.canonical || `https://freetoolsstore.online/blog/${slug}`;
   const ogImageUrl =
     post.coverImage || post.ogImage || seoMeta.ogImage || '/og-default.png';
 
@@ -151,7 +151,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     entities: [
       post.title,
       categoryName,
-      'AIIsEverything',
+      'FreeToolsStore',
       'Artificial Intelligence',
       ...(seoMeta.keywords || []),
       ...tagsList,
@@ -184,11 +184,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: pageTitle,
       description: pageDescription,
       url: canonicalUrl,
-      siteName: 'AIIsEverything',
+      siteName: 'FreeToolsStore',
       type: 'article',
       publishedTime: pubDate.toISOString(),
       modifiedTime: modDate.toISOString(),
-      authors: [post.author?.name || 'AIIsEverything Editorial'],
+      authors: [post.author?.name || 'FreeToolsStore Editorial'],
       section: categoryName,
       tags: tagsList,
       images: [
@@ -263,7 +263,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     post.readingTimeMins > 0 ? post.readingTimeMins : Math.max(1, Math.ceil(wordCount / 200));
 
   const tocItems = extractHeadings(contentText);
-  const canonicalUrl = `https://aiiseverything.com/blog/${post.slug}`;
+  const canonicalUrl = `https://freetoolsstore.online/blog/${post.slug}`;
   const bannerImage = post.coverImage || post.ogImage || null;
 
   const pubDate = post.publishedAt
@@ -278,9 +278,9 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   // JSON-LD Schemas
   const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://aiiseverything.com' },
-    { name: 'Blog', item: 'https://aiiseverything.com/blog' },
-    { name: categoryName, item: `https://aiiseverything.com/blog?category=${categorySlug}` },
+    { name: 'Home', item: 'https://freetoolsstore.online' },
+    { name: 'Blog', item: 'https://freetoolsstore.online/blog' },
+    { name: categoryName, item: `https://freetoolsstore.online/blog?category=${categorySlug}` },
     { name: post.title, item: canonicalUrl },
   ]);
 
@@ -294,8 +294,8 @@ export default async function BlogPostPage({ params }: PageProps) {
         ? post.updatedAt
         : post.updatedAt.toISOString()
       : pubDate,
-    authorName: post.author?.name || 'AIIsEverything Editorial',
-    imageUrl: bannerImage || 'https://aiiseverything.com/og-default.png',
+    authorName: post.author?.name || 'FreeToolsStore Editorial',
+    imageUrl: bannerImage || 'https://freetoolsstore.online/og-default.png',
     articleSection: categoryName,
     keywords: Array.isArray(post.tags)
       ? post.tags.map((t: any) => (typeof t === 'string' ? t : t.name))
@@ -386,7 +386,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </div>
                 <div>
                   <div className="text-xs font-bold text-slate-900 dark:text-slate-100">
-                    {post.author?.name || 'AIIsEverything Editorial'}
+                    {post.author?.name || 'FreeToolsStore Editorial'}
                   </div>
                   <div className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
                     Published {formatDate(pubDate)}

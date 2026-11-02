@@ -5,17 +5,17 @@ import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
 
 export const metadata: Metadata = {
-  title: 'Financial & Commercial Calculators — Loans, Investments & ROI | AiTools Studio',
+  title: 'Financial & Commercial Calculators — Loans, Investments & ROI | FreeToolsStore',
   description:
     'Dedicated calculation engines for auto trade-in equity, mortgage amortization, compound ROI, loan EMI, business margins, and tax planning.',
   openGraph: {
     title: 'Financial & Commercial Calculators — Loans, Investments & ROI',
     description: 'Explore high-precision financial engines with real-time formulas and amortization schedules.',
-    url: 'https://aiisevery.vercel.app/calculators/finance',
-    siteName: 'AiTools Studio',
+    url: 'https://freetoolsstore.online/calculators/finance',
+    siteName: 'FreeToolsStore',
   },
   alternates: {
-    canonical: 'https://aiisevery.vercel.app/calculators/finance',
+    canonical: 'https://freetoolsstore.online/calculators/finance',
   },
 };
 
@@ -33,19 +33,19 @@ export default function FinanceCalculatorsPage() {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://aiisevery.vercel.app',
+        item: 'https://freetoolsstore.online',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Calculators',
-        item: 'https://aiisevery.vercel.app/calculators',
+        item: 'https://freetoolsstore.online/calculators',
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: 'Finance',
-        item: 'https://aiisevery.vercel.app/calculators/finance',
+        item: 'https://freetoolsstore.online/calculators/finance',
       },
     ],
   };

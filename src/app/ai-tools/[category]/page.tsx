@@ -34,9 +34,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // 1. Check if slug matches a tool directly
   const tool = getToolBySlug(slug);
   if (tool) {
-    const title = `${tool.name} — Free Online Tool | AIIsEverything`;
+    const title = `${tool.name} — Free Online Tool | FreeToolsStore`;
     const description = tool.tagline || tool.description;
-    const canonicalUrl = `https://aiiseverything.com/ai-tools/${tool.slug}`;
+    const canonicalUrl = `https://freetoolsstore.online/ai-tools/${tool.slug}`;
     return {
       title,
       description,
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         title,
         description,
         url: canonicalUrl,
-        siteName: 'AIIsEverything',
+        siteName: 'FreeToolsStore',
         images: [{ url: '/og-default.png', width: 1200, height: 630 }],
         type: 'website',
       },
@@ -60,12 +60,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!category || !category.isActive) {
     return {
-      title: 'Category Not Found | AIIsEverything',
+      title: 'Category Not Found | FreeToolsStore',
       description: 'The requested AI tools category could not be found.',
     };
   }
 
-  const title = `${category.name} AI Tools — Free & Interactive Directory | AIIsEverything`;
+  const title = `${category.name} AI Tools — Free & Interactive Directory | FreeToolsStore`;
   const description =
     category.description ||
     `Browse our complete collection of ${category.name} AI tools and utilities. Interactive, free, and updated daily.`;
@@ -74,13 +74,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     alternates: {
-      canonical: `https://aiiseverything.com/ai-tools/${slug}`,
+      canonical: `https://freetoolsstore.online/ai-tools/${slug}`,
     },
     openGraph: {
       title,
       description,
-      url: `https://aiiseverything.com/ai-tools/${slug}`,
-      siteName: 'AIIsEverything',
+      url: `https://freetoolsstore.online/ai-tools/${slug}`,
+      siteName: 'FreeToolsStore',
       images: [{ url: '/og-default.png', width: 1200, height: 630 }],
       type: 'website',
     },
@@ -91,8 +91,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       images: ['/og-default.png'],
     },
     other: buildGeoMetaTags({
-      summary: `${category.name} AI tools directory on AIIsEverything. ${description}`,
-      entities: [category.name, 'AI Tools', 'AIIsEverything', 'Artificial Intelligence'],
+      summary: `${category.name} AI tools directory on FreeToolsStore. ${description}`,
+      entities: [category.name, 'AI Tools', 'FreeToolsStore', 'Artificial Intelligence'],
     }),
   };
 }
@@ -212,11 +212,11 @@ export default async function CategoryToolsPage({ params }: PageProps) {
 
   // 6. Schema.org JSON-LD
   const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://aiiseverything.com' },
-    { name: 'AI Tools', item: 'https://aiiseverything.com/ai-tools' },
+    { name: 'Home', item: 'https://freetoolsstore.online' },
+    { name: 'AI Tools', item: 'https://freetoolsstore.online/ai-tools' },
     {
       name: currentCategory.name,
-      item: `https://aiiseverything.com/ai-tools/${currentCategory.slug}`,
+      item: `https://freetoolsstore.online/ai-tools/${currentCategory.slug}`,
     },
   ]);
 
@@ -225,14 +225,14 @@ export default async function CategoryToolsPage({ params }: PageProps) {
     description:
       currentCategory.description ||
       `Explore curated ${currentCategory.name} artificial intelligence tools and utilities.`,
-    url: `https://aiiseverything.com/ai-tools/${currentCategory.slug}`,
+    url: `https://freetoolsstore.online/ai-tools/${currentCategory.slug}`,
     items: tools
       .filter((t) => t.category.slug === currentCategory.slug)
       .slice(0, 20)
       .map((t) => ({
         name: t.name,
         description: t.tagline,
-        url: `https://aiiseverything.com/ai-tools/${t.category.slug}/${t.slug}`,
+        url: `https://freetoolsstore.online/ai-tools/${t.category.slug}/${t.slug}`,
       })),
   });
 

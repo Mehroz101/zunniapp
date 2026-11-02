@@ -18,47 +18,48 @@ const geistMono = Geist_Mono({
 
 // ── Site-wide Metadata ───────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aiisevery.vercel.app'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://freetoolsstore.online'),
 
   title: {
-    default: 'AiTools Studio — Discovery Directory & Utility Workbench',
-    template: '%s | AiTools Studio',
+    default: 'FreeToolsStore — Free Online Tools, Calculators & Utility Workbench',
+    template: '%s | FreeToolsStore',
   },
 
   description:
-    'AiTools Studio is the ultimate discovery platform and utility workbench. Explore production-ready AI tools, intelligent code compilers, and advanced diagnostic utilities.',
+    'FreeToolsStore is your free online utility workbench. Explore 100% free developer utilities, financial calculators, unit converters, and online tools.',
 
   keywords: [
-    'artificial intelligence',
+    'free online tools',
+    'free calculators',
+    'financial calculators',
     'developer tools',
     'code converters',
-    'AST transpiler',
-    'AI utilities',
-    'prompt optimizer',
-    'AiTools Studio',
-    'machine learning',
-    'LLM',
+    'FreeToolsStore',
+    'online utilities',
+    'hex to pantone',
+    'ascii converter',
+    'base64 converter',
   ],
 
-  authors: [{ name: 'AiTools Studio Team', url: 'https://aiisevery.vercel.app' }],
-  creator: 'AiTools Studio',
-  publisher: 'AiTools Studio',
+  authors: [{ name: 'FreeToolsStore Team', url: 'https://freetoolsstore.online' }],
+  creator: 'FreeToolsStore',
+  publisher: 'FreeToolsStore',
 
   // ── Open Graph ───────────────────────────────
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://aiisevery.vercel.app',
-    siteName: 'AiTools Studio',
-    title: 'AiTools Studio — Developer AI Operating System & Code Tools',
+    url: 'https://freetoolsstore.online',
+    siteName: 'FreeToolsStore',
+    title: 'FreeToolsStore — Free Online Tools, Calculators & Utility Workbench',
     description:
-      'Curated zero-latency developer utilities, AST code converters, model diagnostics, and developer documentation.',
+      'Curated zero-latency developer utilities, financial calculators, formatters, converters, and free tools.',
     images: [
       {
         url: '/og-default.png',
         width: 1200,
         height: 630,
-        alt: 'AiTools Studio',
+        alt: 'FreeToolsStore',
       },
     ],
   },
@@ -66,10 +67,10 @@ export const metadata: Metadata = {
   // ── Twitter / X ──────────────────────────────
   twitter: {
     card: 'summary_large_image',
-    title: 'AiTools Studio — Developer AI Operating System & Code Tools',
-    description: 'Curated zero-latency developer utilities, AST code converters, model diagnostics, and developer documentation.',
-    site: '@aitoolsstudio',
-    creator: '@aitoolsstudio',
+    title: 'FreeToolsStore — Free Online Tools, Calculators & Utility Workbench',
+    description: 'Curated zero-latency developer utilities, financial calculators, formatters, converters, and free tools.',
+    site: '@freetoolsstore',
+    creator: '@freetoolsstore',
     images: ['/og-default.png'],
   },
 
@@ -100,7 +101,7 @@ export const metadata: Metadata = {
   },
 
   // ── App ──────────────────────────────────────
-  applicationName: 'AiTools Studio',
+  applicationName: 'FreeToolsStore',
   category: 'technology',
 };
 

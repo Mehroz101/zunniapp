@@ -11,20 +11,20 @@ import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
 import { fetchLiveLandingData } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'AiTools Studio — Developer AI Operating System & Code Tools',
+  title: 'FreeToolsStore — Free Online Tools & Calculators Directory',
   description:
-    'AiTools Studio is the ultimate discovery platform and utility workbench. Explore production-ready AI tools, intelligent code compilers, and advanced diagnostic utilities.',
+    'FreeToolsStore is your free online utility workbench. Explore 100% free developer utilities, financial calculators, unit converters, and online tools.',
   openGraph: {
-    title: 'AiTools Studio — Discovery Directory & Utility Workbench',
-    description: 'Explore production-ready AI tools, intelligent code compilers, and advanced diagnostic utilities.',
-    url: 'https://aiisevery.vercel.app',
-    siteName: 'AiTools Studio',
+    title: 'FreeToolsStore — Free Online Tools & Calculators Directory',
+    description: 'Explore 100% free developer utilities, financial calculators, unit converters, and online tools.',
+    url: 'https://freetoolsstore.online',
+    siteName: 'FreeToolsStore',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AiTools Studio — Discovery Directory & Utility Workbench',
-    description: 'Explore production-ready AI tools, intelligent code compilers, and advanced diagnostic utilities.',
+    title: 'FreeToolsStore — Free Online Tools & Calculators Directory',
+    description: 'Explore 100% free developer utilities, financial calculators, unit converters, and online tools.',
   },
 };
 

@@ -92,10 +92,10 @@ export function AiLogo({ className = '' }: { className?: string }) {
 
       <div className="flex items-center gap-1.5 leading-none">
         <span className="font-sans text-[16px] sm:text-[17px] font-black tracking-tight text-slate-900 dark:text-white transition-colors">
-          AiTools<span className="text-[#FF8A00]">.</span>
+          FreeTools<span className="text-[#FF8A00]">.</span>
         </span>
         <span className="text-[9.5px] font-mono font-bold tracking-widest uppercase px-1.5 py-0.5 rounded-md bg-orange-500/10 dark:bg-orange-500/15 text-[#FF8A00] border border-orange-500/20">
-          STUDIO
+          STORE
         </span>
       </div>
     </div>

@@ -5,17 +5,17 @@ import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
 
 export const metadata: Metadata = {
-  title: 'Scientific, Physics & Engineering Calculators | AiTools Studio',
+  title: 'Scientific, Physics & Engineering Calculators | FreeToolsStore',
   description:
     'Dedicated calculation engines for kinematics, Ohm’s law, 3D geometry, chemical molar mass, statistics, unit conversions, and health metrics.',
   openGraph: {
     title: 'Scientific, Physics & Engineering Calculators',
     description: 'Real-time scientific formulas, physics kinematics, geometry, and health measurement engines.',
-    url: 'https://aiisevery.vercel.app/calculators/scientific',
-    siteName: 'AiTools Studio',
+    url: 'https://freetoolsstore.online/calculators/scientific',
+    siteName: 'FreeToolsStore',
   },
   alternates: {
-    canonical: 'https://aiisevery.vercel.app/calculators/scientific',
+    canonical: 'https://freetoolsstore.online/calculators/scientific',
   },
 };
 
@@ -33,19 +33,19 @@ export default function ScientificCalculatorsPage() {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://aiisevery.vercel.app',
+        item: 'https://freetoolsstore.online',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Calculators',
-        item: 'https://aiisevery.vercel.app/calculators',
+        item: 'https://freetoolsstore.online/calculators',
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: 'Scientific',
-        item: 'https://aiisevery.vercel.app/calculators/scientific',
+        item: 'https://freetoolsstore.online/calculators/scientific',
       },
     ],
   };

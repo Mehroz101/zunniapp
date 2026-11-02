@@ -8,7 +8,7 @@ import { Base64TextWorkbench } from '@/components/tools/converters/Base64TextWor
 import { buildSoftwareApplicationSchema, buildBreadcrumbSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Base64 to Text Converter — Free Online Decoder & Encoder | AiTools Studio',
+  title: 'Base64 to Text Converter — Free Online Decoder & Encoder | FreeToolsStore',
   description:
     'Decode Base64 strings to plain text or encode text to Base64 instantly. Features full UTF-8 Unicode decoding, URL-safe Base64 support, automatic padding correction, and zero-latency client-side security.',
   keywords: [
@@ -22,14 +22,14 @@ export const metadata: Metadata = {
     'developer tools',
   ],
   alternates: {
-    canonical: 'https://aiiseverything.com/tools/base64-to-text',
+    canonical: 'https://freetoolsstore.online/tools/base64-to-text',
   },
   openGraph: {
     title: 'Base64 to Text Converter — Free Online Decoder & Encoder',
     description:
       'Instant, secure Base64 to text converter with full UTF-8 Unicode decoding and URL-safe formatting options.',
-    url: 'https://aiiseverything.com/tools/base64-to-text',
-    siteName: 'AiTools Studio',
+    url: 'https://freetoolsstore.online/tools/base64-to-text',
+    siteName: 'FreeToolsStore',
     images: [{ url: '/og-default.png', width: 1200, height: 630, alt: 'Base64 to Text Converter' }],
     type: 'website',
   },
@@ -79,11 +79,11 @@ const FAQS = [
 ];
 
 export default function Base64ToTextPage() {
-  const canonicalUrl = 'https://aiiseverything.com/tools/base64-to-text';
+  const canonicalUrl = 'https://freetoolsstore.online/tools/base64-to-text';
 
   const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://aiiseverything.com' },
-    { name: 'Tools', item: 'https://aiiseverything.com/tools' },
+    { name: 'Home', item: 'https://freetoolsstore.online' },
+    { name: 'Tools', item: 'https://freetoolsstore.online/tools' },
     { name: 'Base64 to Text Converter', item: canonicalUrl },
   ]);
 

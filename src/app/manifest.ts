@@ -2,9 +2,9 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'AiTools Studio',
-    short_name: 'AiTools Studio',
-    description: 'The ultimate discovery platform and utility workbench for AI tools and developer utilities.',
+    name: 'FreeToolsStore',
+    short_name: 'FreeToolsStore',
+    description: 'FreeToolsStore — Free Online Tools, Calculators & Utility Workbench.',
     start_url: '/',
     display: 'standalone',
     background_color: '#05070c',
