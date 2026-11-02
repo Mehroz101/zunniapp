@@ -15,7 +15,7 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
     if (typeof window !== 'undefined') {
       return url || window.location.href;
     }
-    return url || 'https://freetoolsstore.online/blog';
+    return url || 'https://toolty.online/blog';
   };
 
   const handleCopyLink = async () => {

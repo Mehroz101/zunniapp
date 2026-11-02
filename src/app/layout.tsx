@@ -18,15 +18,15 @@ const geistMono = Geist_Mono({
 
 // ── Site-wide Metadata ───────────────────────
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://freetoolsstore.online'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://toolty.online'),
 
   title: {
-    default: 'FreeToolsStore — Free Online Tools, Calculators & Utility Workbench',
-    template: '%s | FreeToolsStore',
+    default: 'TOOLty — Free Online Tools, Calculators & Utility Workbench',
+    template: '%s | TOOLty',
   },
 
   description:
-    'FreeToolsStore is your free online utility workbench. Explore 100% free developer utilities, financial calculators, unit converters, and online tools.',
+    'TOOLty is your free online utility workbench. Explore 100% free developer utilities, financial calculators, unit converters, and online tools.',
 
   keywords: [
     'free online tools',
@@ -34,24 +34,24 @@ export const metadata: Metadata = {
     'financial calculators',
     'developer tools',
     'code converters',
-    'FreeToolsStore',
+    'TOOLty',
     'online utilities',
     'hex to pantone',
     'ascii converter',
     'base64 converter',
   ],
 
-  authors: [{ name: 'FreeToolsStore Team', url: 'https://freetoolsstore.online' }],
-  creator: 'FreeToolsStore',
-  publisher: 'FreeToolsStore',
+  authors: [{ name: 'TOOLty Team', url: 'https://toolty.online' }],
+  creator: 'TOOLty',
+  publisher: 'TOOLty',
 
   // ── Open Graph ───────────────────────────────
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://freetoolsstore.online',
-    siteName: 'FreeToolsStore',
-    title: 'FreeToolsStore — Free Online Tools, Calculators & Utility Workbench',
+    url: 'https://toolty.online',
+    siteName: 'TOOLty',
+    title: 'TOOLty — Free Online Tools, Calculators & Utility Workbench',
     description:
       'Curated zero-latency developer utilities, financial calculators, formatters, converters, and free tools.',
     images: [
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
         url: '/og-default.png',
         width: 1200,
         height: 630,
-        alt: 'FreeToolsStore',
+        alt: 'TOOLty',
       },
     ],
   },
@@ -67,10 +67,10 @@ export const metadata: Metadata = {
   // ── Twitter / X ──────────────────────────────
   twitter: {
     card: 'summary_large_image',
-    title: 'FreeToolsStore — Free Online Tools, Calculators & Utility Workbench',
+    title: 'TOOLty — Free Online Tools, Calculators & Utility Workbench',
     description: 'Curated zero-latency developer utilities, financial calculators, formatters, converters, and free tools.',
-    site: '@freetoolsstore',
-    creator: '@freetoolsstore',
+    site: '@toolty',
+    creator: '@toolty',
     images: ['/og-default.png'],
   },
 
@@ -101,7 +101,7 @@ export const metadata: Metadata = {
   },
 
   // ── App ──────────────────────────────────────
-  applicationName: 'FreeToolsStore',
+  applicationName: 'TOOLty',
   category: 'technology',
 };
 

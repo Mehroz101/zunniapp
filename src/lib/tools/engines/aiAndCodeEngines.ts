@@ -424,7 +424,7 @@ export function runRegexNeuralGenerator(input: string, options?: Record<string, 
         `[-a-zA-Z0-9...]*   : Optional URL path, parameters, and fragments`,
       ],
       samples: {
-        match: ['https://freetoolsstore.online/tools', 'http://localhost:3000?query=ast'],
+        match: ['https://toolty.online/tools', 'http://localhost:3000?query=ast'],
         reject: ['ftp://wrongprotocol.com', 'just-a-string', 'http:/missing-slash.com'],
       },
     };

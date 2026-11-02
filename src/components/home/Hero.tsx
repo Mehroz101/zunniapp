@@ -312,7 +312,7 @@ export function Hero({ stats: _stats }: HeroProps) {
         <div className="mb-6 sm:mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-3.5 sm:px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md transition-all hover:border-slate-300 dark:hover:border-slate-700">
           <span className="flex h-2 w-2 rounded-full bg-[#FF8A00] shadow-[0_0_8px_#FF8A00]" />
           <span className="tracking-wide text-[11px] sm:text-xs">
-            ⚡ The Ultimate Directory for Modern Developers &amp; Builders
+            ⚡ TOOLty — The Ultimate Directory for Modern Developers &amp; Builders
           </span>
         </div>
 
@@ -326,7 +326,7 @@ export function Hero({ stats: _stats }: HeroProps) {
 
         {/* Value Proposition Sub-Headline */}
         <p className="mt-4 sm:mt-6 text-sm sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl font-normal leading-relaxed">
-          FreeToolsStore is the premier free online directory and utility workbench helping developers, professionals, and creators explore, calculate, and convert with 100% free online tools, converters, and financial calculators.
+          TOOLty is the premier free online directory and utility workbench helping developers, professionals, and creators explore, calculate, and convert with 100% free online tools, converters, and financial calculators.
         </p>
 
         {/* Global Search Console Container */}

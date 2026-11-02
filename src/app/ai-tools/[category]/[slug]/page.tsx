@@ -49,16 +49,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const reg = getToolBySlug(slug);
     if (reg) {
       return {
-        title: `${reg.name} — Free Online Tool | FreeToolsStore`,
+        title: `${reg.name} — Free Online Tool | TOOLty`,
         description: reg.tagline || reg.description,
         alternates: {
-          canonical: `https://freetoolsstore.online/ai-tools/${category}/${slug}`,
+          canonical: `https://toolty.online/ai-tools/${category}/${slug}`,
         },
       };
     }
     const fallbackTitle = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
     return {
-      title: `${fallbackTitle} — Free AI Tool | FreeToolsStore`,
+      title: `${fallbackTitle} — Free AI Tool | TOOLty`,
       description: `Run the free ${fallbackTitle} browser tool with instant execution.`,
     };
   }
@@ -71,10 +71,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ogImage?: string;
   }) || {};
 
-  const pageTitle = seoMeta.metaTitle || `${tool.name} — Free AI Tool | FreeToolsStore`;
+  const pageTitle = seoMeta.metaTitle || `${tool.name} — Free AI Tool | TOOLty`;
   const pageDescription = seoMeta.metaDescription || tool.tagline || tool.description;
   const canonicalUrl =
-    seoMeta.canonicalUrl || `https://freetoolsstore.online/ai-tools/${category}/${slug}`;
+    seoMeta.canonicalUrl || `https://toolty.online/ai-tools/${category}/${slug}`;
   const ogImageUrl = tool.ogImage || seoMeta.ogImage || '/og-default.png';
 
   const geoTags = buildGeoMetaTags({
@@ -82,7 +82,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     entities: [
       tool.name,
       tool.category.name,
-      'FreeToolsStore',
+      'TOOLty',
       'AI Tool',
       'Artificial Intelligence',
       ...(seoMeta.keywords || []),
@@ -99,7 +99,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: pageTitle,
       description: pageDescription,
       url: canonicalUrl,
-      siteName: 'FreeToolsStore',
+      siteName: 'TOOLty',
       images: [
         {
           url: ogImageUrl,
@@ -200,14 +200,14 @@ export default async function ToolExecutionPage({ params }: PageProps) {
   }
 
   // 5. Schema.org JSON-LD Generation
-  const canonicalUrl = `https://freetoolsstore.online/ai-tools/${tool.category.slug}/${tool.slug}`;
+  const canonicalUrl = `https://toolty.online/ai-tools/${tool.category.slug}/${tool.slug}`;
 
   const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://freetoolsstore.online' },
-    { name: 'AI Tools', item: 'https://freetoolsstore.online/ai-tools' },
+    { name: 'Home', item: 'https://toolty.online' },
+    { name: 'AI Tools', item: 'https://toolty.online/ai-tools' },
     {
       name: tool.category.name,
-      item: `https://freetoolsstore.online/ai-tools/${tool.category.slug}`,
+      item: `https://toolty.online/ai-tools/${tool.category.slug}`,
     },
     { name: tool.name, item: canonicalUrl },
   ]);

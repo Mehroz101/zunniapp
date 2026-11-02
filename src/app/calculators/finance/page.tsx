@@ -5,17 +5,17 @@ import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
 
 export const metadata: Metadata = {
-  title: 'Financial & Commercial Calculators — Loans, Investments & ROI | FreeToolsStore',
+  title: 'Financial & Commercial Calculators — Loans, Investments & ROI | TOOLty',
   description:
     'Dedicated calculation engines for auto trade-in equity, mortgage amortization, compound ROI, loan EMI, business margins, and tax planning.',
   openGraph: {
     title: 'Financial & Commercial Calculators — Loans, Investments & ROI',
     description: 'Explore high-precision financial engines with real-time formulas and amortization schedules.',
-    url: 'https://freetoolsstore.online/calculators/finance',
-    siteName: 'FreeToolsStore',
+    url: 'https://toolty.online/calculators/finance',
+    siteName: 'TOOLty',
   },
   alternates: {
-    canonical: 'https://freetoolsstore.online/calculators/finance',
+    canonical: 'https://toolty.online/calculators/finance',
   },
 };
 
@@ -33,19 +33,19 @@ export default function FinanceCalculatorsPage() {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://freetoolsstore.online',
+        item: 'https://toolty.online',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Calculators',
-        item: 'https://freetoolsstore.online/calculators',
+        item: 'https://toolty.online/calculators',
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: 'Finance',
-        item: 'https://freetoolsstore.online/calculators/finance',
+        item: 'https://toolty.online/calculators/finance',
       },
     ],
   };

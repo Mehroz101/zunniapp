@@ -53,14 +53,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!name) {
     const formatted = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
     return {
-      title: `${formatted} — Free Tool | FreeToolsStore`,
+      title: `${formatted} — Free Tool | TOOLty`,
       description: `Run the free ${formatted} browser utility with instant execution.`,
     };
   }
 
-  const title = `${name} — Free Online Tool | FreeToolsStore`;
+  const title = `${name} — Free Online Tool | TOOLty`;
   const desc = tagline || description || `Free ${name} online utility.`;
-  const canonicalUrl = `https://freetoolsstore.online/tools/${slug}`;
+  const canonicalUrl = `https://toolty.online/tools/${slug}`;
 
   return {
     title,
@@ -72,7 +72,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description: desc,
       url: canonicalUrl,
-      siteName: 'FreeToolsStore',
+      siteName: 'TOOLty',
       images: [{ url: '/og-default.png', width: 1200, height: 630 }],
       type: 'website',
     },
@@ -140,10 +140,10 @@ export default async function ToolDetailPage({ params }: PageProps) {
     .slice(0, 3);
 
   // Schema.org Structured Data
-  const canonicalUrl = `https://freetoolsstore.online/tools/${tool.slug}`;
+  const canonicalUrl = `https://toolty.online/tools/${tool.slug}`;
   const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://freetoolsstore.online' },
-    { name: 'Tools', item: 'https://freetoolsstore.online/tools' },
+    { name: 'Home', item: 'https://toolty.online' },
+    { name: 'Tools', item: 'https://toolty.online/tools' },
     { name: tool.name, item: canonicalUrl },
   ]);
 

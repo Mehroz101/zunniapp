@@ -15,24 +15,24 @@ import {
 } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'AI Tools Directory — Developer Utilities Suite | FreeToolsStore',
+  title: 'AI Tools Directory — Developer Utilities Suite | TOOLty',
   description:
     'High-throughput browser-native code transducers, formatters, and AI debuggers. 100% free, zero-latency execution with zero cloud telemetry.',
   alternates: {
-    canonical: 'https://freetoolsstore.online/ai-tools',
+    canonical: 'https://toolty.online/ai-tools',
   },
   openGraph: {
-    title: 'AI Tools Directory — Developer Utilities Suite | FreeToolsStore',
+    title: 'AI Tools Directory — Developer Utilities Suite | TOOLty',
     description:
       'High-throughput browser-native code transducers, formatters, and AI debuggers. Zero cloud telemetry.',
-    url: 'https://freetoolsstore.online/ai-tools',
-    siteName: 'FreeToolsStore',
+    url: 'https://toolty.online/ai-tools',
+    siteName: 'TOOLty',
     images: [{ url: '/og-default.png', width: 1200, height: 630 }],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Tools Directory — Developer Utilities Suite | FreeToolsStore',
+    title: 'AI Tools Directory — Developer Utilities Suite | TOOLty',
     description:
       'High-throughput browser-native code transducers, formatters, and AI debuggers. Zero cloud telemetry.',
     images: ['/og-default.png'],
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   other: buildGeoMetaTags({
     summary:
       'A curated, searchable directory of high-utility artificial intelligence applications and browser-native tools.',
-    entities: ['FreeToolsStore', 'AI Directory', 'AI Tools', 'Artificial Intelligence', 'Developer Utilities'],
+    entities: ['TOOLty', 'AI Directory', 'AI Tools', 'Artificial Intelligence', 'Developer Utilities'],
   }),
 };
 
@@ -89,19 +89,19 @@ export default async function AIToolsArchivePage() {
   const tools = [...registryTools, ...mappedDbTools];
 
   const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://freetoolsstore.online' },
-    { name: 'AI Tools', item: 'https://freetoolsstore.online/ai-tools' },
+    { name: 'Home', item: 'https://toolty.online' },
+    { name: 'AI Tools', item: 'https://toolty.online/ai-tools' },
   ]);
 
   const collectionSchema = buildCollectionPageSchema({
     name: 'AI Tools Directory — Developer Utilities Suite',
     description:
       'High-throughput browser-native code transducers, formatters, and AI debuggers. Zero cloud telemetry.',
-    url: 'https://freetoolsstore.online/ai-tools',
+    url: 'https://toolty.online/ai-tools',
     items: tools.map((t) => ({
       name: t.name,
       description: t.tagline,
-      url: `https://freetoolsstore.online/tools/${t.slug}`,
+      url: `https://toolty.online/tools/${t.slug}`,
     })),
   });
 

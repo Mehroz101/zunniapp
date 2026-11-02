@@ -2,9 +2,9 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'FreeToolsStore',
-    short_name: 'FreeToolsStore',
-    description: 'FreeToolsStore — Free Online Tools, Calculators & Utility Workbench.',
+    name: 'TOOLty',
+    short_name: 'TOOLty',
+    description: 'TOOLty — Free Online Tools, Calculators & Utility Workbench.',
     start_url: '/',
     display: 'standalone',
     background_color: '#05070c',

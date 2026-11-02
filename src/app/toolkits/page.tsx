@@ -19,17 +19,17 @@ import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
 
 export const metadata: Metadata = {
-  title: 'AI Toolkits & Developer Workflow Suites | FreeToolsStore',
+  title: 'AI Toolkits & Developer Workflow Suites | TOOLty',
   description:
     'Curated, high-velocity AI toolkits for frontend developers, prompt engineers, SEO architects, and full-stack system designers.',
   openGraph: {
     title: 'AI Toolkits & Developer Workflow Suites',
     description: 'Curated suites of AI tools and browser-native compilers engineered for high throughput.',
-    url: 'https://freetoolsstore.online/toolkits',
-    siteName: 'FreeToolsStore',
+    url: 'https://toolty.online/toolkits',
+    siteName: 'TOOLty',
   },
   alternates: {
-    canonical: 'https://freetoolsstore.online/toolkits',
+    canonical: 'https://toolty.online/toolkits',
   },
 };
 

@@ -15,7 +15,7 @@ export function Footer() {
                 <BrandLogo />
               </Link>
               <p className="max-w-md text-xs sm:text-[13px] leading-relaxed text-slate-500 dark:text-slate-400 mt-4 font-normal">
-                FreeToolsStore is your free online utility workbench. We empower developers, creators, and professionals to explore, calculate, and convert with 100% free online tools, financial calculators, and developer utilities.
+                TOOLty is your free online utility workbench. We empower developers, creators, and professionals to explore, calculate, and convert with 100% free online tools, financial calculators, and developer utilities.
               </p>
             </div>
 
@@ -160,7 +160,7 @@ export function Footer() {
 
           {/* Bottom Metadata & Status Bar */}
           <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-slate-200 dark:border-slate-800 pt-8 text-xs font-mono text-slate-500 dark:text-slate-400 sm:flex-row">
-            <p>© {new Date().getFullYear()} FreeToolsStore. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} TOOLty. All rights reserved.</p>
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-emerald-700 dark:text-emerald-400 font-semibold font-mono text-[11px]">

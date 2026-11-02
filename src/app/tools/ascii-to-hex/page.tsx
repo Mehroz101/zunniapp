@@ -8,7 +8,7 @@ import { AsciiHexWorkbench } from '@/components/tools/converters/AsciiHexWorkben
 import { buildSoftwareApplicationSchema, buildBreadcrumbSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'ASCII to Hex Converter — Free Online Character Encoder | FreeToolsStore',
+  title: 'ASCII to Hex Converter — Free Online Character Encoder | TOOLty',
   description:
     'Convert ASCII and UTF-8 text strings to hexadecimal notation instantly. Free online ASCII to Hex converter with custom delimiters (space, comma, 0x, \\x), uppercase/lowercase options, and two-way hex decoding.',
   keywords: [
@@ -22,14 +22,14 @@ export const metadata: Metadata = {
     'developer utilities',
   ],
   alternates: {
-    canonical: 'https://freetoolsstore.online/tools/ascii-to-hex',
+    canonical: 'https://toolty.online/tools/ascii-to-hex',
   },
   openGraph: {
     title: 'ASCII to Hex Converter — Free Online Character Encoder',
     description:
       'Convert ASCII and UTF-8 characters to clean hexadecimal representations with zero latency in your browser.',
-    url: 'https://freetoolsstore.online/tools/ascii-to-hex',
-    siteName: 'FreeToolsStore',
+    url: 'https://toolty.online/tools/ascii-to-hex',
+    siteName: 'TOOLty',
     images: [{ url: '/og-default.png', width: 1200, height: 630, alt: 'ASCII to Hex Converter' }],
     type: 'website',
   },
@@ -92,11 +92,11 @@ const FAQS = [
 ];
 
 export default function AsciiToHexPage() {
-  const canonicalUrl = 'https://freetoolsstore.online/tools/ascii-to-hex';
+  const canonicalUrl = 'https://toolty.online/tools/ascii-to-hex';
 
   const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://freetoolsstore.online' },
-    { name: 'Tools', item: 'https://freetoolsstore.online/tools' },
+    { name: 'Home', item: 'https://toolty.online' },
+    { name: 'Tools', item: 'https://toolty.online/tools' },
     { name: 'ASCII to Hex Converter', item: canonicalUrl },
   ]);
 

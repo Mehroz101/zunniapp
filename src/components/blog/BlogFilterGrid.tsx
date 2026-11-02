@@ -279,7 +279,7 @@ export function BlogFilterGrid({
                   <div className="flex items-center gap-1.5">
                     <User className="h-3.5 w-3.5 text-orange-600" />
                     <span className="truncate max-w-[130px] font-medium text-slate-700">
-                      {post.author?.name || 'FreeToolsStore'}
+                      {post.author?.name || 'TOOLty'}
                     </span>
                   </div>
 

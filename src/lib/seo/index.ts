@@ -6,7 +6,7 @@ export interface SeoConfig {
   siteName: string;
   siteUrl: string;
   defaultTitle: string;
-  titleTemplate: string; // e.g. "%s | FreeToolsStore"
+  titleTemplate: string; // e.g. "%s | TOOLty"
   defaultDescription: string;
   defaultOgImage: string;
   twitterHandle: string;
@@ -29,14 +29,14 @@ export interface PageSeoProps {
 
 // ── Default Site Config ───────────────────────
 export const defaultSeoConfig: SeoConfig = {
-  siteName: 'FreeToolsStore',
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://freetoolsstore.online',
-  defaultTitle: 'FreeToolsStore — Free Online Tools & Calculators Directory',
-  titleTemplate: '%s | FreeToolsStore',
+  siteName: 'TOOLty',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://toolty.online',
+  defaultTitle: 'TOOLty — Free Online Tools & Calculators Directory',
+  titleTemplate: '%s | TOOLty',
   defaultDescription:
-    'FreeToolsStore is the ultimate free online utility workbench. Explore 100% free developer utilities, financial calculators, unit converters, and online tools.',
+    'TOOLty is the ultimate free online utility workbench. Explore 100% free developer utilities, financial calculators, unit converters, and online tools.',
   defaultOgImage: '/og-default.png',
-  twitterHandle: '@freetoolsstore',
+  twitterHandle: '@toolty',
   locale: 'en_US',
 };
 

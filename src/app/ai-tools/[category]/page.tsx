@@ -34,9 +34,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // 1. Check if slug matches a tool directly
   const tool = getToolBySlug(slug);
   if (tool) {
-    const title = `${tool.name} — Free Online Tool | FreeToolsStore`;
+    const title = `${tool.name} — Free Online Tool | TOOLty`;
     const description = tool.tagline || tool.description;
-    const canonicalUrl = `https://freetoolsstore.online/ai-tools/${tool.slug}`;
+    const canonicalUrl = `https://toolty.online/ai-tools/${tool.slug}`;
     return {
       title,
       description,
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         title,
         description,
         url: canonicalUrl,
-        siteName: 'FreeToolsStore',
+        siteName: 'TOOLty',
         images: [{ url: '/og-default.png', width: 1200, height: 630 }],
         type: 'website',
       },
@@ -60,12 +60,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!category || !category.isActive) {
     return {
-      title: 'Category Not Found | FreeToolsStore',
+      title: 'Category Not Found | TOOLty',
       description: 'The requested AI tools category could not be found.',
     };
   }
 
-  const title = `${category.name} AI Tools — Free & Interactive Directory | FreeToolsStore`;
+  const title = `${category.name} AI Tools — Free & Interactive Directory | TOOLty`;
   const description =
     category.description ||
     `Browse our complete collection of ${category.name} AI tools and utilities. Interactive, free, and updated daily.`;
@@ -74,13 +74,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     alternates: {
-      canonical: `https://freetoolsstore.online/ai-tools/${slug}`,
+      canonical: `https://toolty.online/ai-tools/${slug}`,
     },
     openGraph: {
       title,
       description,
-      url: `https://freetoolsstore.online/ai-tools/${slug}`,
-      siteName: 'FreeToolsStore',
+      url: `https://toolty.online/ai-tools/${slug}`,
+      siteName: 'TOOLty',
       images: [{ url: '/og-default.png', width: 1200, height: 630 }],
       type: 'website',
     },
@@ -91,8 +91,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       images: ['/og-default.png'],
     },
     other: buildGeoMetaTags({
-      summary: `${category.name} AI tools directory on FreeToolsStore. ${description}`,
-      entities: [category.name, 'AI Tools', 'FreeToolsStore', 'Artificial Intelligence'],
+      summary: `${category.name} AI tools directory on TOOLty. ${description}`,
+      entities: [category.name, 'AI Tools', 'TOOLty', 'Artificial Intelligence'],
     }),
   };
 }
@@ -212,11 +212,11 @@ export default async function CategoryToolsPage({ params }: PageProps) {
 
   // 6. Schema.org JSON-LD
   const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://freetoolsstore.online' },
-    { name: 'AI Tools', item: 'https://freetoolsstore.online/ai-tools' },
+    { name: 'Home', item: 'https://toolty.online' },
+    { name: 'AI Tools', item: 'https://toolty.online/ai-tools' },
     {
       name: currentCategory.name,
-      item: `https://freetoolsstore.online/ai-tools/${currentCategory.slug}`,
+      item: `https://toolty.online/ai-tools/${currentCategory.slug}`,
     },
   ]);
 
@@ -225,14 +225,14 @@ export default async function CategoryToolsPage({ params }: PageProps) {
     description:
       currentCategory.description ||
       `Explore curated ${currentCategory.name} artificial intelligence tools and utilities.`,
-    url: `https://freetoolsstore.online/ai-tools/${currentCategory.slug}`,
+    url: `https://toolty.online/ai-tools/${currentCategory.slug}`,
     items: tools
       .filter((t) => t.category.slug === currentCategory.slug)
       .slice(0, 20)
       .map((t) => ({
         name: t.name,
         description: t.tagline,
-        url: `https://freetoolsstore.online/ai-tools/${t.category.slug}/${t.slug}`,
+        url: `https://toolty.online/ai-tools/${t.category.slug}/${t.slug}`,
       })),
   });
 

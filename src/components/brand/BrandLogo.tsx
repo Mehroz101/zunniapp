@@ -52,12 +52,12 @@ export function BrandLogo({ className = '', markOnly = false, size = 26 }: Brand
       </div>
 
       {!markOnly && (
-        <div className="flex items-center gap-1.5 leading-none">
-          <span className="font-sans text-[16px] sm:text-[17px] font-black tracking-tight text-slate-900 dark:text-white transition-colors">
-            FreeTools<span className="text-[#FF8A00]">.</span>
-          </span>
-          <span className="text-[9.5px] font-mono font-bold tracking-widest uppercase px-1.5 py-0.5 rounded-md bg-orange-500/10 dark:bg-orange-500/15 text-[#FF8A00] border border-orange-500/20">
-            STORE
+        <div className="flex items-center gap-1 leading-none select-none">
+          <span className="font-sans text-[20px] sm:text-[22px] font-black tracking-[-0.03em] text-slate-900 dark:text-white transition-colors flex items-center">
+            <span className="font-black text-slate-900 dark:text-white">TOOL</span>
+            <span className="bg-gradient-to-tr from-[#FF8A00] via-[#FFA229] to-[#FF5500] bg-clip-text text-transparent font-black drop-shadow-[0_2px_8px_rgba(255,138,0,0.35)]">
+              ty
+            </span>
           </span>
         </div>
       )}

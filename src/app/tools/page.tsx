@@ -11,24 +11,24 @@ import { ToolDefinition } from '@/lib/tools/types';
 import { buildCollectionPageSchema, buildBreadcrumbSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Free Developer & Technical SEO Tools Suite | FreeToolsStore',
+  title: 'Free Developer & Technical SEO Tools Suite | TOOLty',
   description:
     'Explore 26+ production-ready developer compilers, AST code converters, and technical SEO diagnostic suites. Fast, interactive, 100% free with zero paywalls.',
   alternates: {
-    canonical: 'https://freetoolsstore.online/tools',
+    canonical: 'https://toolty.online/tools',
   },
   openGraph: {
-    title: 'Free Developer & Technical SEO Tools Suite | FreeToolsStore',
+    title: 'Free Developer & Technical SEO Tools Suite | TOOLty',
     description:
       'Explore 26+ production-ready developer compilers, AST code converters, and technical SEO diagnostic suites.',
-    url: 'https://freetoolsstore.online/tools',
-    siteName: 'FreeToolsStore',
+    url: 'https://toolty.online/tools',
+    siteName: 'TOOLty',
     images: [{ url: '/og-default.png', width: 1200, height: 630 }],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Developer & Technical SEO Tools Suite | FreeToolsStore',
+    title: 'Free Developer & Technical SEO Tools Suite | TOOLty',
     description:
       '26+ deterministic developer compilers, code converters, and technical SEO utilities.',
     images: ['/og-default.png'],
@@ -80,18 +80,18 @@ export default async function ToolsHubPage() {
   const tools = [...registryTools, ...mappedDbTools];
 
   const breadcrumbs = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://freetoolsstore.online' },
-    { name: 'Tools Directory', item: 'https://freetoolsstore.online/tools' },
+    { name: 'Home', item: 'https://toolty.online' },
+    { name: 'Tools Directory', item: 'https://toolty.online/tools' },
   ]);
 
   const collectionSchema = buildCollectionPageSchema({
-    name: 'FreeToolsStore Developer & SEO Tools Directory',
+    name: 'TOOLty Developer & SEO Tools Directory',
     description:
       'Explore 26+ production-ready developer compilers, AST code converters, and technical SEO diagnostic suites.',
-    url: 'https://freetoolsstore.online/tools',
+    url: 'https://toolty.online/tools',
     items: tools.map((t) => ({
       name: t.name,
-      url: `https://freetoolsstore.online/tools/${t.slug}`,
+      url: `https://toolty.online/tools/${t.slug}`,
       description: t.tagline,
     })),
   });

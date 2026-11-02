@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next';
 export const dynamic = 'force-dynamic';
 
 export default function robots(): MetadataRoute.Robots {
-  const rawBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://freetoolsstore.online';
+  const rawBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolty.online';
   const baseUrl = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
 
   const privatePaths = [

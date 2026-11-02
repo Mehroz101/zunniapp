@@ -15,17 +15,17 @@ import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
 
 export const metadata: Metadata = {
-  title: 'AI Engineering Guides & Production Architectures | FreeToolsStore',
+  title: 'AI Engineering Guides & Production Architectures | TOOLty',
   description:
     'Comprehensive technical guides on browser-native AST transpilation, Next.js 16 Edge architecture, stateful mathematical workbenches, and LLM prompt engineering.',
   openGraph: {
     title: 'AI Engineering Guides & Production Architectures',
     description: 'In-depth engineering masterclasses, tutorials, and benchmarks for modern builders.',
-    url: 'https://freetoolsstore.online/guides',
-    siteName: 'FreeToolsStore',
+    url: 'https://toolty.online/guides',
+    siteName: 'TOOLty',
   },
   alternates: {
-    canonical: 'https://freetoolsstore.online/guides',
+    canonical: 'https://toolty.online/guides',
   },
 };
 

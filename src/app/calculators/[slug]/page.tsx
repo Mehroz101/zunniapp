@@ -18,22 +18,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!calc) {
     return {
-      title: 'Calculator Not Found | FreeToolsStore',
+      title: 'Calculator Not Found | TOOLty',
       description: 'The requested calculation engine could not be located in our directory.',
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://freetoolsstore.online';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolty.online';
 
   return {
-    title: `${calc.title} — Free Online Tool | FreeToolsStore`,
+    title: `${calc.title} — Free Online Tool | TOOLty`,
     description: calc.description,
     keywords: [...calc.tags, 'calculator', 'online tool', 'free calculator', calc.category],
     openGraph: {
       title: `${calc.title} — Free Online Tool`,
       description: calc.description,
       url: `${siteUrl}/calculators/${calc.slug}`,
-      siteName: 'FreeToolsStore',
+      siteName: 'TOOLty',
       type: 'website',
     },
     alternates: {
@@ -50,7 +50,7 @@ export default async function CalculatorDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://freetoolsstore.online';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolty.online';
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',

@@ -103,7 +103,7 @@ function ClientSideRunner({
   if (tool.slug.includes('html-to-css') && !defaultInputs['html_input']) {
     defaultInputs['html_input'] = `<div class="hero-container">\n  <h1 class="hero-title">AI Is Everywhere</h1>\n  <p class="hero-subtitle">Convert HTML to clean CSS instantly.</p>\n  <button class="cta-button">Explore Tools</button>\n</div>`;
   } else if (tool.slug.includes('json') && !defaultInputs['input']) {
-    defaultInputs['input'] = `{"name":"FreeToolsStore","status":"active","tools":50,"isFree":true}`;
+    defaultInputs['input'] = `{"name":"TOOLty","status":"active","tools":50,"isFree":true}`;
   }
 
   const [inputValues, setInputValues] = useState<Record<string, string>>(defaultInputs);
@@ -497,7 +497,7 @@ function ExternalLinkRunner({
   tool: ToolRunnerProps['tool'];
   config: ToolConfig;
 }) {
-  const externalUrl = config.externalUrl ?? 'https://freetoolsstore.online';
+  const externalUrl = config.externalUrl ?? 'https://toolty.online';
   const cta = config.cta ?? 'Launch Tool On Official Site';
   const pricing = config.pricing ?? (tool.isFree ? 'Free' : 'Freemium');
 

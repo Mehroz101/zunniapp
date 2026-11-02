@@ -5,7 +5,7 @@ const cspHeader = `
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   img-src 'self' data: blob: https:;
   font-src 'self' data: https://fonts.gstatic.com;
-  connect-src 'self' https://freetoolsstore.online https://*.freetoolsstore.online https://prod.spline.design https://*.spline.design https://*.vercel.app https://aiiseverythingback.vercel.app http://localhost:4000 ws: wss: https:;
+  connect-src 'self' https://toolty.online https://*.toolty.online https://prod.spline.design https://*.spline.design https://*.vercel.app https://aiiseverythingback.vercel.app http://localhost:4000 ws: wss: https:;
   frame-src 'self' https://*.spline.design https://my.spline.design;
   worker-src 'self' blob:;
   object-src 'none';
@@ -28,8 +28,8 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
-      { protocol: 'https', hostname: 'freetoolsstore.online' },
-      { protocol: 'https', hostname: '**.freetoolsstore.online' },
+      { protocol: 'https', hostname: 'toolty.online' },
+      { protocol: 'https', hostname: '**.toolty.online' },
       { protocol: 'https', hostname: 'aiiseverything.com' },
       { protocol: 'https', hostname: '**.aiiseverything.com' },
       { protocol: 'https', hostname: 'images.unsplash.com' },

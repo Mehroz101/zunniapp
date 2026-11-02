@@ -5,17 +5,17 @@ import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
 
 export const metadata: Metadata = {
-  title: 'Free Online Calculators — Finance, Math & Science Suite | FreeToolsStore',
+  title: 'Free Online Calculators — Finance, Math & Science Suite | TOOLty',
   description:
     'Explore 19 dedicated, zero-latency calculation engines across financial planning, business margins, mathematics, physics, geometry, health, and engineering.',
   openGraph: {
     title: 'Free Online Calculators — Finance, Math & Science Suite',
     description: 'Explore 19 dedicated calculation engines with real-time mathematical formulas and visual breakdowns.',
-    url: 'https://freetoolsstore.online/calculators',
-    siteName: 'FreeToolsStore',
+    url: 'https://toolty.online/calculators',
+    siteName: 'TOOLty',
   },
   alternates: {
-    canonical: 'https://freetoolsstore.online/calculators',
+    canonical: 'https://toolty.online/calculators',
   },
 };
 
@@ -33,13 +33,13 @@ export default function CalculatorsHubPage() {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://freetoolsstore.online',
+        item: 'https://toolty.online',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Calculators',
-        item: 'https://freetoolsstore.online/calculators',
+        item: 'https://toolty.online/calculators',
       },
     ],
   };
@@ -49,13 +49,13 @@ export default function CalculatorsHubPage() {
     '@type': 'CollectionPage',
     name: 'Universal 19+ Online Calculator Suite',
     description: 'High-precision financial, scientific, and specialized calculation tools.',
-    url: 'https://freetoolsstore.online/calculators',
+    url: 'https://toolty.online/calculators',
     hasPart: calculators.map((c) => ({
       '@type': 'SoftwareApplication',
       name: c.title,
       applicationCategory: 'UtilityApplication',
       operatingSystem: 'All',
-      url: `https://freetoolsstore.online/calculators/${c.slug}`,
+      url: `https://toolty.online/calculators/${c.slug}`,
     })),
   };
 

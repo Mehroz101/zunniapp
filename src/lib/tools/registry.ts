@@ -109,7 +109,7 @@ export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
     inputPlaceholder: 'https://example.com\nhttps://example.com/blog\nhttps://example.com/tools',
     outputLabel: 'Standard sitemap.xml Output',
     outputLanguage: 'xml',
-    sampleInput: 'https://freetoolsstore.online\nhttps://freetoolsstore.online/ai-tools\nhttps://freetoolsstore.online/blog\nhttps://freetoolsstore.online/tools/robots-txt-generator\nhttps://freetoolsstore.online/tools/json-to-typescript',
+    sampleInput: 'https://toolty.online\nhttps://toolty.online/ai-tools\nhttps://toolty.online/blog\nhttps://toolty.online/tools/robots-txt-generator\nhttps://toolty.online/tools/json-to-typescript',
     options: [
       { id: 'changefreq', label: 'Change Frequency', type: 'select', choices: ['always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly'], defaultValue: 'weekly' },
       { id: 'priority', label: 'Default Priority', type: 'select', choices: ['1.0', '0.8', '0.6', '0.4', '0.2'], defaultValue: '0.8' },
@@ -145,7 +145,7 @@ export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
     inputPlaceholder: 'title: Advanced Neural Search Architecture\nauthor: Dr. Sarah Chen\ndescription: A breakthrough analysis in multi-modal vector embeddings.',
     outputLabel: 'JSON-LD <script> Schema Output',
     outputLanguage: 'html',
-    sampleInput: 'title: 10x Developer Productivity Guide\nauthor: Engineering Team\ndescription: Comprehensive blueprint to building production-grade full-stack architectures in Record Time.\nurl: https://freetoolsstore.online/blog/developer-productivity',
+    sampleInput: 'title: 10x Developer Productivity Guide\nauthor: Engineering Team\ndescription: Comprehensive blueprint to building production-grade full-stack architectures in Record Time.\nurl: https://toolty.online/blog/developer-productivity',
     options: [
       { id: 'schemaType', label: 'Schema Type', type: 'select', choices: ['Article', 'Organization', 'SoftwareApplication', 'FAQPage', 'LocalBusiness', 'Product'], defaultValue: 'Article' },
     ],
@@ -177,10 +177,10 @@ export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
     categorySlug: 'seo',
     icon: 'Share2',
     inputLabel: 'Social Preview Attributes',
-    inputPlaceholder: 'title: FreeToolsStore Developer Suite\ndescription: Free AI tools for modern software engineers.\nurl: https://freetoolsstore.online\nimage: https://freetoolsstore.online/og-default.png',
+    inputPlaceholder: 'title: TOOLty Developer Suite\ndescription: Free AI tools for modern software engineers.\nurl: https://toolty.online\nimage: https://toolty.online/og-default.png',
     outputLabel: 'Social Meta Tags Markup',
     outputLanguage: 'html',
-    sampleInput: 'title: FreeToolsStore — Neural Developer Hub\ndescription: The definitive directory of 26+ interactive developer converters, SEO analyzers, and neural intelligence suites.\nurl: https://freetoolsstore.online\nimage: https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80\ntwitter: @aiiseverything',
+    sampleInput: 'title: TOOLty — Neural Developer Hub\ndescription: The definitive directory of 26+ interactive developer converters, SEO analyzers, and neural intelligence suites.\nurl: https://toolty.online\nimage: https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80\ntwitter: @aiiseverything',
     features: [
       'Generates Open Graph (og:title, og:image, og:url, og:site_name)',
       'Generates Twitter summary_large_image card tags',
@@ -212,9 +212,9 @@ export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
     inputPlaceholder: 'en: https://example.com/\nes: https://example.com/es/\nfr: https://example.com/fr/\nx-default: https://example.com/',
     outputLabel: 'Canonical & Hreflang Tags',
     outputLanguage: 'html',
-    sampleInput: 'en: https://freetoolsstore.online/\nes: https://freetoolsstore.online/es/\nde: https://freetoolsstore.online/de/\nfr: https://freetoolsstore.online/fr/\nja: https://freetoolsstore.online/ja/\nx-default: https://freetoolsstore.online/',
+    sampleInput: 'en: https://toolty.online/\nes: https://toolty.online/es/\nde: https://toolty.online/de/\nfr: https://toolty.online/fr/\nja: https://toolty.online/ja/\nx-default: https://toolty.online/',
     options: [
-      { id: 'baseUrl', label: 'Default Canonical URL', type: 'text', defaultValue: 'https://freetoolsstore.online' },
+      { id: 'baseUrl', label: 'Default Canonical URL', type: 'text', defaultValue: 'https://toolty.online' },
     ],
     features: [
       'Self-referential canonical link construction',
@@ -244,10 +244,10 @@ export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
     categorySlug: 'seo',
     icon: 'Search',
     inputLabel: 'SERP Attributes (Key: Value)',
-    inputPlaceholder: 'title: Master Artificial Intelligence Workflows in 2026\nurl: https://freetoolsstore.online/guides/ai-workflows\ndescription: Step-by-step handbook covering neural code compilation, prompt engineering, and high-throughput agent tooling.',
+    inputPlaceholder: 'title: Master Artificial Intelligence Workflows in 2026\nurl: https://toolty.online/guides/ai-workflows\ndescription: Step-by-step handbook covering neural code compilation, prompt engineering, and high-throughput agent tooling.',
     outputLabel: 'Pixel Audit & SERP Report',
     outputLanguage: 'text',
-    sampleInput: 'title: FreeToolsStore — 26+ Free Developer Tools, Neural Compilers & AI News\nurl: https://freetoolsstore.online/ai-tools\ndescription: Explore the definitive directory of free developer converters, AST parsers, SEO diagnostic engines, and technical tutorials with zero paywalls.',
+    sampleInput: 'title: TOOLty — 26+ Free Developer Tools, Neural Compilers & AI News\nurl: https://toolty.online/ai-tools\ndescription: Explore the definitive directory of free developer converters, AST parsers, SEO diagnostic engines, and technical tutorials with zero paywalls.',
     features: [
       'Calculates accurate proportional Arial 20px / 14px font pixel widths',
       'Detects desktop (600px) and mobile (580px) title truncations',
@@ -282,12 +282,12 @@ export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
     sampleInput: `<!DOCTYPE html>
 <html>
 <head>
-  <title>FreeToolsStore - Free AI Developer Tools & Converters</title>
+  <title>TOOLty - Free AI Developer Tools & Converters</title>
   <meta name="description" content="Discover 26+ free interactive developer tools, AST code converters, and technical SEO diagnostic suites built for high-performance software engineering teams.">
-  <link rel="canonical" href="https://freetoolsstore.online/ai-tools">
+  <link rel="canonical" href="https://toolty.online/ai-tools">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:title" content="FreeToolsStore Developer Suite">
-  <meta property="og:image" content="https://freetoolsstore.online/og-default.png">
+  <meta property="og:title" content="TOOLty Developer Suite">
+  <meta property="og:image" content="https://toolty.online/og-default.png">
 </head>
 </html>`,
     features: [
@@ -432,7 +432,7 @@ export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
   <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995" alt="image">
   <img src="/static/neural-network-diagram.png">
   <img src="/icons/brand-logo.svg" alt="logo">
-  <img src="/previews/workbench-ide-screen.png" alt="FreeToolsStore Developer IDE Workbench with dual editor panes">
+  <img src="/previews/workbench-ide-screen.png" alt="TOOLty Developer IDE Workbench with dual editor panes">
 </div>`,
     features: [
       'Scans all <img> markup elements across raw HTML',
@@ -469,12 +469,12 @@ export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
   <a href="/">Home</a>
   <a href="/ai-tools">All AI Tools</a>
   <a href="/blog/developer-productivity">Productivity Article</a>
-  <a href="https://twitter.com/freetoolsstore" target="_blank">Twitter Follow</a>
-  <a href="https://github.com/freetoolsstore" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
-  <a href="mailto:support@freetoolsstore.online">Email Us</a>
+  <a href="https://twitter.com/toolty" target="_blank">Twitter Follow</a>
+  <a href="https://github.com/toolty" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
+  <a href="mailto:support@toolty.online">Email Us</a>
 </nav>`,
     options: [
-      { id: 'domain', label: 'Primary Internal Domain', type: 'text', defaultValue: 'freetoolsstore.online' },
+      { id: 'domain', label: 'Primary Internal Domain', type: 'text', defaultValue: 'toolty.online' },
     ],
     features: [
       'Classifies links into Internal, External, Anchor, and Protocol types',
@@ -600,7 +600,7 @@ export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
     outputLabel: 'Converted JSON or XML Output',
     outputLanguage: 'json',
     sampleInput: `<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>FreeToolsStore Developer Feed</title>
+  <title>TOOLty Developer Feed</title>
   <updated>2026-04-12T12:00:00Z</updated>
   <entry>
     <id>post-101</id>
@@ -766,7 +766,7 @@ export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
     inputPlaceholder: 'curl -X POST https://api.example.com/v1/posts -H "Content-Type: application/json" -d \'{"title": "Hello"}\'',
     outputLabel: 'Generated Multi-Language Code Snippets',
     outputLanguage: 'typescript',
-    sampleInput: `curl -X POST https://api.freetoolsstore.online/v1/tools/execute \\
+    sampleInput: `curl -X POST https://api.toolty.online/v1/tools/execute \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer my_jwt_token_here" \\
   -d '{"tool": "json-to-typescript", "input": "{\\"id\\": 1}"}'`,
@@ -833,10 +833,10 @@ export const TOOLS_REGISTRY: Record<string, ToolDefinition> = {
     categorySlug: 'dev',
     icon: 'CheckSquare',
     inputLabel: 'Test Subject String',
-    inputPlaceholder: 'Contact us at support@freetoolsstore.online or sales@enterprise.co for technical inquiries.',
+    inputPlaceholder: 'Contact us at support@toolty.online or sales@enterprise.co for technical inquiries.',
     outputLabel: 'Matched Tokens & Capture Groups',
     outputLanguage: 'text',
-    sampleInput: `Contact our support engineers at support@freetoolsstore.online or billing@freetoolsstore.online.
+    sampleInput: `Contact our support engineers at support@toolty.online or billing@toolty.online.
 For enterprise licensing inquiries, reach out to enterprise-leads@google.com.`,
     options: [
       { id: 'pattern', label: 'Regex Pattern', type: 'text', defaultValue: '\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b' },
@@ -874,7 +874,7 @@ For enterprise licensing inquiries, reach out to enterprise-leads@google.com.`,
     inputPlaceholder: 'Enter any text to hash or encode...',
     outputLabel: 'Cryptographic Hashes & Encoded Strings',
     outputLanguage: 'text',
-    sampleInput: 'FreeToolsStore: The Enterprise AI & Developer Tooling Platform',
+    sampleInput: 'TOOLty: The Enterprise AI & Developer Tooling Platform',
     features: [
       'Calculates SHA-256, SHA-512, and SHA-1 checksums via native Web Crypto API',
       'Base64 encode and decode conversions',
@@ -948,10 +948,10 @@ For enterprise licensing inquiries, reach out to enterprise-leads@google.com.`,
     categorySlug: 'dev',
     icon: 'Code',
     inputLabel: 'Paste Raw or Unformatted JSON',
-    inputPlaceholder: '{"name":"FreeToolsStore","tools":26,"isFree":true}',
+    inputPlaceholder: '{"name":"TOOLty","tools":26,"isFree":true}',
     outputLabel: 'Beautified or Minified JSON',
     outputLanguage: 'json',
-    sampleInput: '{"name":"FreeToolsStore","categories":["SEO","Developer","Security"],"tools":26,"metrics":{"speedMs":1.2,"activeUsers":15200},"status":"OPERATIONAL"}',
+    sampleInput: '{"name":"TOOLty","categories":["SEO","Developer","Security"],"tools":26,"metrics":{"speedMs":1.2,"activeUsers":15200},"status":"OPERATIONAL"}',
     options: [
       { id: 'mode', label: 'Formatting Mode', type: 'select', choices: ['format', 'minify'], defaultValue: 'format' },
       { id: 'indent', label: 'Indentation Spaces', type: 'select', choices: ['2', '4'], defaultValue: '2' },
@@ -1131,7 +1131,7 @@ For enterprise licensing inquiries, reach out to enterprise-leads@google.com.`,
     inputPlaceholder: '{\n  "apiVersion": "v1",\n  "kind": "Pod"\n}',
     outputLabel: 'Converted Output (YAML / JSON)',
     outputLanguage: 'yaml',
-    sampleInput: `{\n  "apiVersion": "apps/v1",\n  "kind": "Deployment",\n  "metadata": {\n    "name": "ai-neural-api",\n    "namespace": "production",\n    "labels": {\n      "app": "freetoolsstore-api",\n      "tier": "backend",\n      "environment": "production"\n    }\n  },\n  "spec": {\n    "replicas": 5,\n    "strategy": {\n      "type": "RollingUpdate",\n      "rollingUpdate": {\n        "maxSurge": 1,\n        "maxUnavailable": 0\n      }\n    },\n    "template": {\n      "spec": {\n        "containers": [\n          {\n            "name": "api-service",\n            "image": "registry.freetoolsstore.online/api:v2.4.0",\n            "ports": [\n              { "containerPort": 4000, "name": "http" }\n            ],\n            "resources": {\n              "limits": { "cpu": "2000m", "memory": "4Gi" },\n              "requests": { "cpu": "500m", "memory": "1Gi" }\n            },\n            "readinessProbe": {\n              "httpGet": { "path": "/health", "port": 4000 },\n              "initialDelaySeconds": 5,\n              "periodSeconds": 10\n            }\n          }\n        ]\n      }\n    }\n  }\n}`,
+    sampleInput: `{\n  "apiVersion": "apps/v1",\n  "kind": "Deployment",\n  "metadata": {\n    "name": "ai-neural-api",\n    "namespace": "production",\n    "labels": {\n      "app": "toolty-api",\n      "tier": "backend",\n      "environment": "production"\n    }\n  },\n  "spec": {\n    "replicas": 5,\n    "strategy": {\n      "type": "RollingUpdate",\n      "rollingUpdate": {\n        "maxSurge": 1,\n        "maxUnavailable": 0\n      }\n    },\n    "template": {\n      "spec": {\n        "containers": [\n          {\n            "name": "api-service",\n            "image": "registry.toolty.online/api:v2.4.0",\n            "ports": [\n              { "containerPort": 4000, "name": "http" }\n            ],\n            "resources": {\n              "limits": { "cpu": "2000m", "memory": "4Gi" },\n              "requests": { "cpu": "500m", "memory": "1Gi" }\n            },\n            "readinessProbe": {\n              "httpGet": { "path": "/health", "port": 4000 },\n              "initialDelaySeconds": 5,\n              "periodSeconds": 10\n            }\n          }\n        ]\n      }\n    }\n  }\n}`,
     options: [
       { id: 'mode', label: 'Conversion Direction', type: 'select', choices: ['auto', 'json-to-yaml', 'yaml-to-json'], defaultValue: 'auto' },
       { id: 'indent', label: 'Indentation Spaces', type: 'select', choices: ['2', '4'], defaultValue: '2' },
@@ -1170,7 +1170,7 @@ For enterprise licensing inquiries, reach out to enterprise-leads@google.com.`,
     inputPlaceholder: 'const user = { name: "Alice", age: 30 };\nfunction getUser(id) { ... }',
     outputLabel: 'Inferred TypeScript Definitions & Implementation',
     outputLanguage: 'typescript',
-    sampleInput: `// User Profile Configuration\nconst userProfile = {\n  id: "usr_99214a",\n  username: "alex_coder",\n  email: "alex@freetoolsstore.online",\n  reputation: 1450,\n  isVerified: true,\n  roles: ["admin", "developer"],\n  preferences: {\n    theme: "dark",\n    notificationsEnabled: true,\n    timezone: "UTC"\n  }\n};\n\n// Database Query Function\nasync function fetchUserById(userId, includeProfile = false) {\n  const query = { id: userId };\n  if (includeProfile) {\n    query.populate = "profile";\n  }\n  const result = await db.collection("users").findOne(query);\n  return result;\n}\n\n// Math Utility Function\nfunction calculateTax(amount, taxRate = 0.08, currency = "USD") {\n  const tax = amount * taxRate;\n  const total = amount + tax;\n  return {\n    subtotal: amount,\n    tax,\n    total,\n    currency\n  };\n}`,
+    sampleInput: `// User Profile Configuration\nconst userProfile = {\n  id: "usr_99214a",\n  username: "alex_coder",\n  email: "alex@toolty.online",\n  reputation: 1450,\n  isVerified: true,\n  roles: ["admin", "developer"],\n  preferences: {\n    theme: "dark",\n    notificationsEnabled: true,\n    timezone: "UTC"\n  }\n};\n\n// Database Query Function\nasync function fetchUserById(userId, includeProfile = false) {\n  const query = { id: userId };\n  if (includeProfile) {\n    query.populate = "profile";\n  }\n  const result = await db.collection("users").findOne(query);\n  return result;\n}\n\n// Math Utility Function\nfunction calculateTax(amount, taxRate = 0.08, currency = "USD") {\n  const tax = amount * taxRate;\n  const total = amount + tax;\n  return {\n    subtotal: amount,\n    tax,\n    total,\n    currency\n  };\n}`,
     options: [
       { id: 'strict', label: 'Strict Mode (unknown instead of any)', type: 'boolean', defaultValue: true },
       { id: 'target', label: 'Type Declaration Style', type: 'select', choices: ['interfaces', 'types'], defaultValue: 'interfaces' },
@@ -1311,7 +1311,7 @@ For enterprise licensing inquiries, reach out to enterprise-leads@google.com.`,
     inputPlaceholder: 'name: John\nage: 30',
     outputLabel: 'Converted Output',
     outputLanguage: 'json',
-    sampleInput: `name: FreeToolsStore\nversion: 2.0\nenabled: true`,
+    sampleInput: `name: TOOLty\nversion: 2.0\nenabled: true`,
     options: [
       { id: 'mode', label: 'Conversion Direction', type: 'select', choices: ['auto', 'yaml-to-json', 'json-to-yaml'], defaultValue: 'yaml-to-json' },
       { id: 'indent', label: 'Indentation Spaces', type: 'select', choices: ['2', '4'], defaultValue: '2' },
@@ -1524,7 +1524,7 @@ For enterprise licensing inquiries, reach out to enterprise-leads@google.com.`,
     categorySlug: 'writing',
     icon: 'FileText',
     inputLabel: 'GFM Markdown Document',
-    inputPlaceholder: '# Welcome to FreeToolsStore\n\n- [x] Complete tool execution engines\n- [ ] Deploy live to production',
+    inputPlaceholder: '# Welcome to TOOLty\n\n- [x] Complete tool execution engines\n- [ ] Deploy live to production',
     outputLabel: 'Sanitized Semantic HTML',
     outputLanguage: 'html',
     sampleInput: `# API Architecture Overview\n\nHigh-throughput **AST execution** engine with zero cloud latency.\n\n### Key Features\n- [x] 100% Deterministic parsers\n- [x] RFC 6902 JSON Patch compliance\n- [ ] Cloud telemetry: *Disabled*\n\n> "Simplicity is prerequisite for reliability."\n\n\`\`\`ts\nexport function executeTool(slug: string): void {}\n\`\`\``,
