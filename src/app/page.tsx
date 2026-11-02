@@ -1,14 +1,34 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { Terminal } from 'lucide-react';
 import { Navbar } from '@/components/home/Navbar';
 import { Hero } from '@/components/home/Hero';
-import { DeveloperToolsShowcase } from '@/components/home/DeveloperToolsShowcase';
 import { CategoryGrid } from '@/components/home/CategoryGrid';
 import { ValueSection } from '@/components/home/ValueSection';
-import { FaqSection } from '@/components/home/FaqSection';
 import { Footer } from '@/components/home/Footer';
-import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
 import { fetchLiveLandingData } from '@/lib/data';
+
+// ── Code-Splitting: Lazy load below-the-fold interactive components ──
+const DeveloperToolsShowcase = dynamic(
+  () => import('@/components/home/DeveloperToolsShowcase').then((mod) => mod.DeveloperToolsShowcase),
+  {
+    loading: () => <div className="min-h-[520px] bg-white dark:bg-[#05070c]" aria-hidden="true" />,
+  }
+);
+
+const FaqSection = dynamic(
+  () => import('@/components/home/FaqSection').then((mod) => mod.FaqSection),
+  {
+    loading: () => <div className="min-h-[400px] bg-white dark:bg-[#05070c]" aria-hidden="true" />,
+  }
+);
+
+const NewsletterForm = dynamic(
+  () => import('@/components/newsletter/NewsletterForm').then((mod) => mod.NewsletterForm),
+  {
+    loading: () => <div className="min-h-[50px]" aria-hidden="true" />,
+  }
+);
 
 export const metadata: Metadata = {
   title: 'TOOLty — Free Online Tools & Calculators Directory',
@@ -28,8 +48,8 @@ export const metadata: Metadata = {
   },
 };
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// ISR: Cache statically with background revalidation (eliminates 600ms database render-blocking delay)
+export const revalidate = 300;
 
 export default async function HomePage() {
   const { categories, stats } = await fetchLiveLandingData();

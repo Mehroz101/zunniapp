@@ -18,7 +18,7 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
   if (!mounted) {
     return (
       <div
-        className={`min-w-[44px] min-h-[44px] sm:w-9 sm:h-9 sm:min-w-0 sm:min-h-0 rounded-full border border-slate-200/90 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 shadow-2xs ${className}`}
+        className={`min-w-[44px] min-h-[44px] sm:w-9 sm:h-9 sm:min-w-0 sm:min-h-0 rounded-full flex items-center justify-center border border-slate-200/90 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 shadow-2xs ${className}`}
         aria-hidden="true"
       />
     );

@@ -40,8 +40,7 @@ import {
   Percent,
   DollarSign,
 } from 'lucide-react';
-import { getAllTools } from '@/lib/tools/registry';
-import type { ToolDefinition } from '@/lib/tools/types';
+import { SEARCH_TOOLS, type SearchToolItem } from '@/lib/tools/searchCatalog';
 import type { LivePlatformStats } from '@/lib/data';
 
 interface HeroProps {
@@ -197,20 +196,11 @@ export function Hero({ stats: _stats }: HeroProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
-  // Tools registry cache for instant autocomplete
-  const allTools = useMemo<ToolDefinition[]>(() => {
-    try {
-      return getAllTools();
-    } catch {
-      return [];
-    }
-  }, []);
-
-  // Filter tools based on search query
-  const filteredTools = useMemo(() => {
+  // Filter tools based on search query using lightweight search index
+  const filteredTools = useMemo<SearchToolItem[]>(() => {
     const q = searchQuery.trim().toLowerCase();
     if (!q) return [];
-    return allTools
+    return SEARCH_TOOLS
       .filter(
         (t) =>
           t.name.toLowerCase().includes(q) ||
@@ -219,7 +209,7 @@ export function Hero({ stats: _stats }: HeroProps) {
           t.seoKeywords.some((k) => k.toLowerCase().includes(q))
       )
       .slice(0, 6);
-  }, [searchQuery, allTools]);
+  }, [searchQuery]);
 
   // Keyboard shortcut listener (Cmd+K / Ctrl+K)
   useEffect(() => {
@@ -270,18 +260,27 @@ export function Hero({ stats: _stats }: HeroProps) {
           {AMBIENT_COLUMNS.map((colConfig, colIdx) => {
             const isOdd = colIdx % 2 === 0;
             const animationClass = isOdd ? 'animate-scroll-up' : 'animate-scroll-down';
-            // Quad-duplicate cards to form seamless infinite loop across all resolutions
+            // 2x duplication is mathematically optimal for seamless -50% translate infinite loop
             const duplicatedCards = [
-              ...colConfig.cards,
-              ...colConfig.cards,
               ...colConfig.cards,
               ...colConfig.cards,
             ];
 
+            const colVisibilityClass =
+              colIdx < 2
+                ? 'block'
+                : colIdx === 2
+                ? 'hidden sm:block'
+                : colIdx === 3
+                ? 'hidden md:block'
+                : colIdx < 6
+                ? 'hidden lg:block'
+                : 'hidden xl:block';
+
             return (
               <div
                 key={`ambient-col-${colIdx}`}
-                className="relative overflow-hidden h-full flex flex-col"
+                className={`relative overflow-hidden h-full flex-col ${colVisibilityClass}`}
               >
                 <div
                   className={`flex flex-col ${animationClass}`}
@@ -308,26 +307,30 @@ export function Hero({ stats: _stats }: HeroProps) {
 
       {/* ── 2. CENTERED ENTERPRISE HERO CONTENT (100% UNCLUTTERED OVER RADIAL MASK) ── */}
       <div className="relative z-10 mx-auto max-w-5xl w-full px-4 sm:px-8 lg:px-12 text-center flex flex-col items-center">
-        {/* Top Modern Kicker Badge */}
-        <div className="mb-6 sm:mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-3.5 sm:px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md transition-all hover:border-slate-300 dark:hover:border-slate-700">
+        {/* Top Modern Kicker Badge with reserved height */}
+        <div className="mb-6 sm:mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-3.5 sm:px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md transition-all hover:border-slate-300 dark:hover:border-slate-700 min-h-[32px]">
           <span className="flex h-2 w-2 rounded-full bg-[#FF8A00] shadow-[0_0_8px_#FF8A00]" />
           <span className="tracking-wide text-[11px] sm:text-xs">
             ⚡ TOOLty — The Ultimate Directory for Modern Developers &amp; Builders
           </span>
         </div>
 
-        {/* Primary Headline (H1) with Signature Light Orange Accent — Rock-Solid, ZERO BLINKING */}
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-[1.1] sm:leading-[1.08] max-w-4xl">
-          Best Way to Find the Right{' '}
-          <span className="block sm:inline bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
-            AI Tools &amp; Utilities
-          </span>
-        </h1>
+        {/* Primary Headline (H1) with Signature Light Orange Accent and height reservation */}
+        <div className="min-h-[76px] sm:min-h-[136px] flex items-center justify-center">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-950 dark:text-white leading-[1.1] sm:leading-[1.08] max-w-4xl">
+            Best Way to Find the Right{' '}
+            <span className="block sm:inline bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
+              AI Tools &amp; Utilities
+            </span>
+          </h1>
+        </div>
 
-        {/* Value Proposition Sub-Headline */}
-        <p className="mt-4 sm:mt-6 text-sm sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl font-normal leading-relaxed">
-          TOOLty is the premier free online directory and utility workbench helping developers, professionals, and creators explore, calculate, and convert with 100% free online tools, converters, and financial calculators.
-        </p>
+        {/* Value Proposition Sub-Headline with height reservation */}
+        <div className="min-h-[72px] sm:min-h-[56px] flex items-center justify-center mt-4 sm:mt-6">
+          <p className="text-sm sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl font-normal leading-relaxed">
+            TOOLty is the premier free online directory and utility workbench helping developers, professionals, and creators explore, calculate, and convert with 100% free online tools, converters, and financial calculators.
+          </p>
+        </div>
 
         {/* Global Search Console Container */}
         <div className="mt-7 sm:mt-9 w-full max-w-2xl mx-auto relative z-30">
@@ -419,8 +422,8 @@ export function Hero({ stats: _stats }: HeroProps) {
           )}
         </div>
 
-        {/* Quick Filter Chips */}
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs">
+        {/* Quick Filter Chips with reserved min-height */}
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs min-h-[64px] sm:min-h-[36px]">
           <span className="text-slate-400 dark:text-slate-500 text-[11px] font-mono mr-1">
             Popular:
           </span>
@@ -435,8 +438,8 @@ export function Hero({ stats: _stats }: HeroProps) {
           ))}
         </div>
 
-        {/* Dual Primary Call-to-Actions */}
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3.5">
+        {/* Dual Primary Call-to-Actions with reserved min-height */}
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-3.5 min-h-[96px] sm:min-h-[48px]">
           <Link
             href="/tools"
             className="rounded-full bg-[#FF8A00] hover:bg-[#ff9e2e] text-slate-950 px-6 sm:px-7 py-3 text-xs sm:text-sm font-bold shadow-[0_0_20px_rgba(255,138,0,0.3)] transition active:scale-95 flex items-center gap-2 cursor-pointer"
@@ -455,8 +458,8 @@ export function Hero({ stats: _stats }: HeroProps) {
           </Link>
         </div>
 
-        {/* Live Directory Metrics Badges */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-slate-500 dark:text-slate-400 font-medium">
+        {/* Live Directory Metrics Badges with reserved min-height */}
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-slate-500 dark:text-slate-400 font-medium min-h-[24px]">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="h-4 w-4 text-emerald-500" />
             <span>Instant Execution</span>
