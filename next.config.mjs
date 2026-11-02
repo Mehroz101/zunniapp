@@ -22,6 +22,7 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', 'clsx', 'tailwind-merge'],
     agentUpgrade: 'security',
+    turbopackPluginRuntimeStrategy: 'forceWorkerThreads',
   },
 
   // ── Remote Image Optimization Patterns ──
