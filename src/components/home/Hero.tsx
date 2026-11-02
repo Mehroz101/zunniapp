@@ -249,14 +249,14 @@ export function Hero({ stats: _stats }: HeroProps) {
   };
 
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center bg-white dark:bg-[#05070c] pt-32 sm:pt-36 lg:pt-40 pb-20 lg:pb-24 overflow-hidden transition-colors duration-200">
-      {/* ── 1. AMBIENT BACKGROUND INFINITE SCROLL SYSTEM (Pure CSS Hardware Accelerated - AI Chief Style) ── */}
+    <section className="relative min-h-[90vh] sm:min-h-[92vh] flex items-center justify-center bg-white dark:bg-[#05070c] pt-24 sm:pt-36 lg:pt-40 pb-16 lg:pb-24 overflow-hidden transition-colors duration-200">
+      {/* ── 1. AMBIENT BACKGROUND INFINITE SCROLL SYSTEM (Only rendered on desktop md: and above - 0 mobile DOM overhead) ── */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
       >
-        {/* 7 Vertical Columns Grid (Straight vertical matching AI Chief, NO skew) */}
-        <div className="absolute -inset-x-4 -top-28 -bottom-28 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-3 sm:gap-3.5 p-4 opacity-75 dark:opacity-65">
+        {/* Desktop 7 Vertical Columns Grid (hidden on mobile < 768px to eliminate layout shift, memory & main-thread blocking) */}
+        <div className="hidden md:grid absolute -inset-x-4 -top-28 -bottom-28 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-3 sm:gap-3.5 p-4 opacity-75 dark:opacity-65">
           {AMBIENT_COLUMNS.map((colConfig, colIdx) => {
             const isOdd = colIdx % 2 === 0;
             const animationClass = isOdd ? 'animate-scroll-up' : 'animate-scroll-down';
@@ -267,12 +267,8 @@ export function Hero({ stats: _stats }: HeroProps) {
             ];
 
             const colVisibilityClass =
-              colIdx < 2
+              colIdx < 3
                 ? 'block'
-                : colIdx === 2
-                ? 'hidden sm:block'
-                : colIdx === 3
-                ? 'hidden md:block'
                 : colIdx < 6
                 ? 'hidden lg:block'
                 : 'hidden xl:block';
@@ -307,38 +303,42 @@ export function Hero({ stats: _stats }: HeroProps) {
 
       {/* ── 2. CENTERED ENTERPRISE HERO CONTENT (100% UNCLUTTERED OVER RADIAL MASK) ── */}
       <div className="relative z-10 mx-auto max-w-5xl w-full px-4 sm:px-8 lg:px-12 text-center flex flex-col items-center">
-        {/* Top Modern Kicker Badge */}
-        <div className="mb-6 sm:mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-3.5 sm:px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md transition-all hover:border-slate-300 dark:hover:border-slate-700">
+        {/* Top Modern Kicker Badge with explicit mobile min-height to prevent shift */}
+        <div className="mb-4 sm:mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-3.5 sm:px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs backdrop-blur-md transition-all hover:border-slate-300 dark:hover:border-slate-700 min-h-[32px] max-w-[94vw] sm:max-w-none">
           <span className="flex h-2 w-2 rounded-full bg-[#FF8A00] shadow-[0_0_8px_#FF8A00] shrink-0" />
-          <span className="tracking-wide text-[11px] sm:text-xs">
+          <span className="tracking-wide text-[11px] sm:text-xs truncate sm:whitespace-normal">
             ⚡ TOOLty — The Ultimate Directory for Modern Developers &amp; Builders
           </span>
         </div>
 
-        {/* Primary Headline (H1) with Signature Light Orange Accent */}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.12] text-slate-950 dark:text-white max-w-4xl">
-          Best Way to Find the Right{' '}
-          <span className="block sm:inline bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
-            AI Tools &amp; Utilities
-          </span>
-        </h1>
+        {/* Primary Headline (H1) with explicit mobile min-height wrapper to lock layout */}
+        <div className="w-full max-w-4xl min-h-[80px] sm:min-h-[120px] lg:min-h-[144px] flex items-center justify-center">
+          <h1 className="text-[32px] sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.15] sm:leading-[1.12] text-slate-950 dark:text-white">
+            Best Way to Find the Right{' '}
+            <span className="block sm:inline bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
+              AI Tools &amp; Utilities
+            </span>
+          </h1>
+        </div>
 
-        {/* Value Proposition Sub-Headline */}
-        <p className="mt-4 sm:mt-6 text-sm sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl font-normal leading-relaxed">
-          TOOLty is the premier free online directory and utility workbench helping developers, professionals, and creators explore, calculate, and convert with 100% free online tools, converters, and financial calculators.
-        </p>
+        {/* Value Proposition Sub-Headline with explicit mobile min-height wrapper */}
+        <div className="w-full max-w-3xl min-h-[72px] sm:min-h-[64px] flex items-center justify-center mt-3 sm:mt-6">
+          <p className="text-xs sm:text-lg md:text-xl text-slate-600 dark:text-slate-400 font-normal leading-relaxed">
+            TOOLty is the premier free online directory and utility workbench helping developers, professionals, and creators explore, calculate, and convert with 100% free online tools, converters, and financial calculators.
+          </p>
+        </div>
 
-        {/* Global Search Console Container */}
-        <div className="mt-7 sm:mt-9 w-full max-w-2xl mx-auto relative z-30">
+        {/* Global Search Console Container with explicit min-height */}
+        <div className="mt-6 sm:mt-9 w-full max-w-2xl mx-auto relative z-30 min-h-[52px] sm:min-h-[58px]">
           <form
             onSubmit={handleSearchSubmit}
-            className={`relative flex items-center rounded-2xl border transition-all duration-200 shadow-lg ${
+            className={`relative flex items-center rounded-2xl border transition-all duration-200 shadow-lg min-h-[52px] sm:min-h-[58px] ${
               isFocused
                 ? 'border-orange-500/80 dark:border-[#FF8A00]/80 ring-4 ring-orange-500/10 dark:ring-[#FF8A00]/10 bg-white dark:bg-slate-900 shadow-orange-500/10'
                 : 'border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 shadow-slate-200/50 dark:shadow-black/40'
             }`}
           >
-            <div className="pl-4 sm:pl-5 flex items-center pointer-events-none text-slate-400 dark:text-slate-500">
+            <div className="pl-4 sm:pl-5 flex items-center pointer-events-none text-slate-400 dark:text-slate-500 shrink-0">
               <Search className="h-5 w-5" />
             </div>
 
@@ -368,19 +368,19 @@ export function Hero({ stats: _stats }: HeroProps) {
                 }
               }}
               placeholder="Search 50+ tools, compilers, calculators..."
-              className="w-full py-3.5 sm:py-4 pl-3.5 pr-28 text-[16px] sm:text-base text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 bg-transparent outline-none focus:ring-0"
+              className="w-full py-3.5 sm:py-4 pl-3 sm:pl-3.5 pr-20 sm:pr-28 text-[15px] sm:text-base text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 bg-transparent outline-none focus:ring-0"
             />
 
-            <div className="absolute right-3.5 flex items-center gap-1.5">
+            <div className="absolute right-2.5 sm:right-3.5 flex items-center gap-1.5">
               <kbd className="hidden sm:inline-flex items-center gap-0.5 rounded-md border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[11px] font-mono text-slate-500 dark:text-slate-400 shadow-2xs">
                 <Command className="h-3 w-3" />K
               </kbd>
               <button
                 type="submit"
-                className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-[#FF8A00] hover:bg-[#ff9e2e] text-slate-950 font-bold text-xs transition active:scale-95 shadow-xs cursor-pointer flex items-center gap-1"
+                className="min-h-[40px] px-3 py-1.5 rounded-xl bg-[#FF8A00] hover:bg-[#ff9e2e] text-slate-950 font-bold text-xs transition active:scale-95 shadow-xs cursor-pointer flex items-center gap-1"
                 aria-label="Submit search"
               >
-                <ArrowRight className="h-3.5 w-3.5" />
+                <ArrowRight className="h-4 w-4" />
                 <span className="hidden sm:inline">Go</span>
               </button>
             </div>
@@ -418,8 +418,8 @@ export function Hero({ stats: _stats }: HeroProps) {
           )}
         </div>
 
-        {/* Quick Filter Chips with reserved min-height */}
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs min-h-[64px] sm:min-h-[36px]">
+        {/* Quick Filter Chips with explicit mobile min-height to prevent layout shift */}
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-xs min-h-[68px] sm:min-h-[36px]">
           <span className="text-slate-400 dark:text-slate-500 text-[11px] font-mono mr-1">
             Popular:
           </span>
@@ -427,46 +427,46 @@ export function Hero({ stats: _stats }: HeroProps) {
             <Link
               key={chip.label}
               href={chip.href}
-              className="rounded-full border border-slate-200 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/90 px-3 py-1 text-slate-700 dark:text-slate-300 transition hover:border-orange-500/50 hover:text-slate-950 dark:hover:text-white hover:bg-white dark:hover:bg-slate-800 shadow-2xs font-medium"
+              className="rounded-full border border-slate-200 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/90 px-2.5 sm:px-3 py-1 text-slate-700 dark:text-slate-300 transition hover:border-orange-500/50 hover:text-slate-950 dark:hover:text-white hover:bg-white dark:hover:bg-slate-800 shadow-2xs font-medium text-[11px] sm:text-xs min-h-[28px] inline-flex items-center"
             >
               {chip.label}
             </Link>
           ))}
         </div>
 
-        {/* Dual Primary Call-to-Actions with reserved min-height */}
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3.5 min-h-[96px] sm:min-h-[48px]">
+        {/* Dual Primary Call-to-Actions with explicit mobile min-height */}
+        <div className="mt-7 sm:mt-9 flex flex-col sm:flex-row items-center justify-center gap-3 min-h-[108px] sm:min-h-[48px] w-full max-w-sm sm:max-w-none">
           <Link
             href="/tools"
-            className="rounded-full bg-[#FF8A00] hover:bg-[#ff9e2e] text-slate-950 px-6 sm:px-7 py-3 text-xs sm:text-sm font-bold shadow-[0_0_20px_rgba(255,138,0,0.3)] transition active:scale-95 flex items-center gap-2 cursor-pointer"
+            className="w-full sm:w-auto rounded-full bg-[#FF8A00] hover:bg-[#ff9e2e] text-slate-950 px-6 sm:px-7 py-3 text-xs sm:text-sm font-bold shadow-[0_0_20px_rgba(255,138,0,0.3)] transition active:scale-95 flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
           >
-            <Zap className="h-4 w-4 fill-slate-950 text-slate-950" />
+            <Zap className="h-4 w-4 fill-slate-950 text-slate-950 shrink-0" />
             <span>Explore All 50+ Tools</span>
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="h-4 w-4 shrink-0" />
           </Link>
 
           <Link
             href="/calculators/finance"
-            className="rounded-full border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 px-5 sm:px-6 py-3 text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-850 shadow-xs transition active:scale-95 flex items-center gap-2"
+            className="w-full sm:w-auto rounded-full border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 px-5 sm:px-6 py-3 text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-850 shadow-xs transition active:scale-95 flex items-center justify-center gap-2 min-h-[44px]"
           >
-            <Calculator className="h-4 w-4 text-[#FF8A00]" />
+            <Calculator className="h-4 w-4 text-[#FF8A00] shrink-0" />
             <span>19+ Universal Calculators</span>
           </Link>
         </div>
 
-        {/* Live Directory Metrics Badges with reserved min-height */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-slate-500 dark:text-slate-400 font-medium min-h-[24px]">
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+        {/* Live Directory Metrics Badges with explicit min-height */}
+        <div className="mt-8 sm:mt-12 flex flex-wrap items-center justify-center gap-3.5 sm:gap-10 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium min-h-[40px] sm:min-h-[24px]">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-emerald-500 shrink-0" />
             <span>Instant Execution</span>
           </div>
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-[#FF8A00]" />
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#FF8A00] shrink-0" />
             <span>No Signup Required</span>
           </div>
-          <div className="flex items-center gap-2">
-            <Terminal className="h-4 w-4 text-orange-500" />
-            <span>Production-Ready Precision</span>
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <Terminal className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-orange-500 shrink-0" />
+            <span>Production Precision</span>
           </div>
         </div>
       </div>

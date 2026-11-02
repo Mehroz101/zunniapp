@@ -73,7 +73,7 @@ export default async function HomePage() {
         <ValueSection />
 
         {/* ── 6. Developer Newsletter Capture Section ── */}
-        <section className="relative overflow-hidden bg-slate-50/50 dark:bg-slate-950/50 border-t border-slate-200/80 dark:border-slate-800 px-6 sm:px-8 lg:px-12 py-24 sm:py-28">
+        <section className="relative overflow-hidden bg-slate-50/50 dark:bg-slate-950/50 border-t border-slate-200/80 dark:border-slate-800 px-4 sm:px-8 lg:px-12 py-16 sm:py-28">
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute left-1/2 top-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/[0.06] blur-[140px]" />
           </div>

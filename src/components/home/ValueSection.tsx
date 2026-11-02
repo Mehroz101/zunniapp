@@ -33,7 +33,7 @@ const PILLARS = [
 
 export function ValueSection() {
   return (
-    <section className="bg-slate-50/50 dark:bg-slate-950/40 border-t border-slate-200/80 dark:border-slate-800/80 px-6 sm:px-8 lg:px-12 py-20 sm:py-24 transition-colors duration-200" id="values">
+    <section className="bg-slate-50/50 dark:bg-slate-950/40 border-t border-slate-200/80 dark:border-slate-800/80 px-4 sm:px-8 lg:px-12 py-16 sm:py-24 transition-colors duration-200" id="values">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-14 text-center">
           <div className="mb-3.5 inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-3.5 py-1 text-xs font-mono text-orange-600 dark:text-[#FF8A00] shadow-xs">

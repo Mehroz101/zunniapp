@@ -44,7 +44,7 @@ export function FaqSection() {
   };
 
   return (
-    <section className="bg-white dark:bg-[#05070c] border-t border-slate-200/80 dark:border-slate-800/80 px-6 sm:px-8 lg:px-12 py-20 sm:py-24 min-h-[400px] transition-colors duration-200" id="faqs">
+    <section className="bg-white dark:bg-[#05070c] border-t border-slate-200/80 dark:border-slate-800/80 px-4 sm:px-8 lg:px-12 py-16 sm:py-24 min-h-[400px] transition-colors duration-200" id="faqs">
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="text-center mb-14">

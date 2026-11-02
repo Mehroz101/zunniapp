@@ -28,7 +28,7 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
   const displayList = categories.length > 0 ? categories : DEFAULT_CATEGORY_FALLBACKS;
 
   return (
-    <section className="bg-white dark:bg-[#05070c] border-t border-slate-200/80 dark:border-slate-800/80 px-6 sm:px-8 lg:px-12 py-20 sm:py-24 transition-colors duration-200" id="categories">
+    <section className="bg-white dark:bg-[#05070c] border-t border-slate-200/80 dark:border-slate-800/80 px-4 sm:px-8 lg:px-12 py-16 sm:py-24 transition-colors duration-200" id="categories">
       <div className="mx-auto max-w-[1440px]">
         {/* Section Header */}
         <div className="mb-14 text-center">

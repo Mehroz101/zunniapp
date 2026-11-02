@@ -14,6 +14,15 @@
   "engines": {
     "node": ">=18.18.0"
   },
+  "browserslist": [
+    "defaults",
+    "edge >= 115",
+    "chrome >= 115",
+    "firefox >= 115",
+    "safari >= 16.4",
+    "not dead",
+    "not IE 11"
+  ],
   "dependencies": {
     "@prisma/client": "^6.19.3",
     "@tailwindcss/postcss": "^4.3.3",

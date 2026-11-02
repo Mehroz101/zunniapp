@@ -2,45 +2,36 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import {
-  Code2,
-  Terminal,
-  Binary,
-  ArrowRight,
-  Zap,
-  FileText,
-  Boxes,
-  Database,
   Menu,
   X,
-  DollarSign,
-  TrendingUp,
-  Car,
-  Home,
-  Briefcase,
-  GraduationCap,
-  PieChart,
-  Atom,
-  SlidersHorizontal,
-  Box,
-  Dumbbell,
-  FlaskConical,
-  BarChart2,
-  Search,
-  ShieldCheck,
-  BookOpen,
   ChevronDown,
-  Key,
-  Layers,
-  Globe,
-  Clock,
-  Activity,
-  Hammer,
-  Wheat,
-  FileCode,
-  Sparkles,
+  Boxes,
+  BookOpen,
+  Zap,
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
+
+// ── Code-Splitting: Lazy load heavy mega-menu and drawer to save 81 KiB on initial mobile load ──
+const DesktopMegaMenu = dynamic(
+  () => import('./DesktopMegaMenu').then((mod) => mod.DesktopMegaMenu),
+  { ssr: false }
+);
+
+const MobileDrawer = dynamic(
+  () => import('./MobileDrawer').then((mod) => mod.MobileDrawer),
+  { ssr: false }
+);
+
+// Minimal lightweight trigger definitions for desktop nav bar (0 Lucide icons needed here)
+const NAV_TRIGGERS = [
+  { key: 'converters', label: 'Code Converters', href: '/tools' },
+  { key: 'ai', label: 'AI Studio', href: '/ai-tools' },
+  { key: 'calculators', label: 'Calculators', href: '/calculators' },
+  { key: 'diagnostics', label: 'Diagnostics', href: '/tools' },
+  { key: 'resources', label: 'Resources', href: '/blog' },
+];
 
 /* ==============================================================================
    BESPOKE ULTRA-MINIMALIST STUDIO LOGO (DYNAMIC THEME ADAPTIVE)
@@ -103,18 +94,11 @@ export function AiLogo({ className = '' }: { className?: string }) {
 }
 
 /* ==============================================================================
-   MEGA-MENU DATA TAXONOMY & DIRECTORY ROUTING (5 CORE CATEGORIES)
-   ============================================================================== */
-// Mega-menu data extracted to navData.ts for code-splitting & zero-blocking parse
-import { MEGA_MENUS } from './navData';
-
-/* ==============================================================================
    FLOATING HIGH-END DEVELOPER NAVBAR WITH MEGA-MENUS & THEME CONTROLLER
    ============================================================================== */
 export function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [mobileExpandedSection, setMobileExpandedSection] = useState<string | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -148,24 +132,26 @@ export function Navbar() {
     clearDebounce();
   }, [clearDebounce]);
 
-  // Click / touch toggle
-  const handleToggle = (menuKey: string) => {
-    clearDebounce();
-    setActiveDropdown((prev) => (prev === menuKey ? null : menuKey));
-  };
+  // Direct toggle for click / touch
+  const handleToggle = useCallback(
+    (menuKey: string) => {
+      clearDebounce();
+      setActiveDropdown((prev) => (prev === menuKey ? null : menuKey));
+    },
+    [clearDebounce]
+  );
 
-  // Click-outside and Escape key listeners
+  // Close dropdown on outside click or Escape key
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
-        clearDebounce();
         setActiveDropdown(null);
+        setIsMobileMenuOpen(false);
       }
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        clearDebounce();
         setActiveDropdown(null);
         setIsMobileMenuOpen(false);
       }
@@ -180,26 +166,12 @@ export function Navbar() {
     };
   }, [clearDebounce]);
 
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isMobileMenuOpen]);
-
-  const activeMenu = MEGA_MENUS.find((m) => m.key === activeDropdown);
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 pt-4 pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 pt-3 sm:pt-4 pointer-events-none h-[64px] sm:h-[72px]">
       <div className="max-w-[1440px] mx-auto flex items-center justify-between" ref={navRef}>
         {/* Floating Pill Nav Container: relative z-50 with no overflow clipping */}
         <nav
-          className="relative z-50 w-full bg-white/95 dark:bg-[#080d1a]/95 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] rounded-full px-4 sm:px-6 py-2 flex items-center justify-between pointer-events-auto transition-all"
+          className="relative z-50 w-full bg-white/95 dark:bg-[#080d1a]/95 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800 shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] rounded-full px-4 sm:px-6 py-2 flex items-center justify-between pointer-events-auto transition-all min-h-[52px] sm:min-h-[56px]"
           onMouseEnter={handleNavEnter}
           onMouseLeave={handleNavLeave}
         >
@@ -234,7 +206,7 @@ export function Navbar() {
               <span>AI Guides</span>
             </Link>
 
-            {MEGA_MENUS.map((menu) => {
+            {NAV_TRIGGERS.map((menu) => {
               const isOpen = activeDropdown === menu.key;
               return (
                 <button
@@ -262,108 +234,17 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Active Mega-Menu Dropdown Panel: Anchored directly to relative z-50 nav container */}
-          {activeMenu && (
-            <div
-              className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 z-50 w-[800px] max-w-[calc(100vw-32px)] animate-fadeIn transition-all duration-200 pointer-events-auto"
+          {/* Active Mega-Menu Dropdown Panel: Dynamically Loaded for Desktop */}
+          {activeDropdown && (
+            <DesktopMegaMenu
+              menuKey={activeDropdown}
               onMouseEnter={handleNavEnter}
               onMouseLeave={handleNavLeave}
-            >
-              <div className="bg-white/95 dark:bg-[#070b13]/95 backdrop-blur-md border border-slate-200 dark:border-slate-800/80 shadow-xl shadow-slate-200/50 dark:shadow-2xl dark:shadow-black/80 rounded-2xl p-5 overflow-hidden transition-all duration-200">
-                {/* Header Banner */}
-                <div className="mb-4 pb-3 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-[#FF8A00]/10 text-[#FF8A00] text-xs font-mono font-bold border border-[#FF8A00]/20">
-                      {activeMenu.label.charAt(0)}
-                    </span>
-                    <div>
-                      <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#FF8A00]">
-                        {activeMenu.headline}
-                      </div>
-                      <div className="text-[12px] text-slate-500 dark:text-slate-400 mt-0.5">
-                        {activeMenu.subheadline}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Staggered Mega-Menu Grid (2 Columns) */}
-                <div className="grid grid-cols-2 gap-4">
-                  {activeMenu.categories.map((category) => (
-                    <div key={category.title} className="space-y-1.5">
-                      <div className="px-2 text-[10.5px] font-mono font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                        {category.title}
-                      </div>
-                      <div className="space-y-0.5">
-                        {category.items.map((item) => {
-                          const Icon = item.icon;
-                          return (
-                            <Link
-                              key={item.name}
-                              href={item.href}
-                              onClick={() => {
-                                clearDebounce();
-                                setActiveDropdown(null);
-                              }}
-                              className="group flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-100/80 dark:hover:bg-slate-800/60 transition-colors"
-                            >
-                              {/* Clean Micro-Icon Container with Light Orange Ambient Glow */}
-                              <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 group-hover:text-[#FF8A00] group-hover:bg-[#FF8A00]/10 dark:group-hover:shadow-[0_0_12px_rgba(255,138,0,0.25)] shrink-0 transition-all duration-200">
-                                <Icon className="w-4 h-4" />
-                              </div>
-                              <div className="min-w-0">
-                                <div className="text-sm font-medium text-slate-900 dark:text-slate-100 group-hover:text-[#FF8A00] transition truncate">
-                                  {item.name}
-                                </div>
-                                <div className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 leading-snug mt-0.5">
-                                  {item.desc}
-                                </div>
-                              </div>
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Mega-Menu Footer Link */}
-                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between px-2">
-                  <Link
-                    href={activeMenu.footerHref}
-                    onClick={() => {
-                      clearDebounce();
-                      setActiveDropdown(null);
-                    }}
-                    className="text-xs font-bold text-[#FF8A00] hover:underline flex items-center gap-1.5"
-                  >
-                    <span>{activeMenu.footerText}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                  <div className="flex items-center gap-3">
-                    <Link
-                      href="/toolkits"
-                      onClick={() => setActiveDropdown(null)}
-                      className="text-[11px] font-mono text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition"
-                    >
-                      AI Toolkits
-                    </Link>
-                    <span className="text-slate-300 dark:text-slate-700">·</span>
-                    <Link
-                      href="/guides"
-                      onClick={() => setActiveDropdown(null)}
-                      className="text-[11px] font-mono text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition"
-                    >
-                      AI Guides
-                    </Link>
-                    <span className="text-slate-300 dark:text-slate-700">·</span>
-                    <span className="text-[10px] font-mono text-slate-400 dark:text-slate-500">
-                      Zero Server Latency
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+              onClose={() => {
+                clearDebounce();
+                setActiveDropdown(null);
+              }}
+            />
           )}
 
           {/* Right Action: Single-click Theme Toggle + Primary CTA Button */}
@@ -394,148 +275,15 @@ export function Navbar() {
         </nav>
       </div>
 
-      {/* Off-Canvas Mobile Drawer & Frosted Backdrop */}
+      {/* Off-Canvas Mobile Drawer: Dynamically Loaded on Demand */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden pointer-events-auto">
-          {/* Frosted Backdrop Overlay */}
-          <div
-            className="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm transition-opacity duration-300"
-            onClick={() => setIsMobileMenuOpen(false)}
-            aria-hidden="true"
-          />
-
-          {/* Slide-out Drawer Panel */}
-          <div className="fixed top-0 right-0 bottom-0 w-[88vw] max-w-[400px] bg-white dark:bg-[#080d1a] border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col z-50 animate-fadeIn">
-            {/* Drawer Header */}
-            <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-[#060a14]">
-              <AiLogo />
-              <button
-                type="button"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
-                aria-label="Close Navigation Menu"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Drawer Scrollable Content */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
-              <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#FF8A00] pb-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                <span>Directory &amp; Navigation</span>
-                <span className="text-[10px] text-slate-400">Live Suite</span>
-              </div>
-
-              {/* Dedicated Primary AI Links */}
-              <div className="space-y-2">
-                <Link
-                  href="/ai-tools"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="min-h-[44px] flex items-center justify-between p-3.5 rounded-2xl bg-[#FF8A00]/10 border border-[#FF8A00]/20 text-slate-950 dark:text-white font-bold text-sm transition hover:bg-[#FF8A00]/20 cursor-pointer"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <Sparkles className="w-4 h-4 text-[#FF8A00]" />
-                    <span>AI Tools Directory</span>
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-[#FF8A00]" />
-                </Link>
-
-                <div className="grid grid-cols-2 gap-2">
-                  <Link
-                    href="/toolkits"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="min-h-[44px] flex items-center gap-2 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 font-bold text-xs hover:border-orange-500/40"
-                  >
-                    <Boxes className="w-3.5 h-3.5 text-[#FF8A00]" />
-                    <span>AI Toolkits</span>
-                  </Link>
-                  <Link
-                    href="/guides"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="min-h-[44px] flex items-center gap-2 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 font-bold text-xs hover:border-orange-500/40"
-                  >
-                    <BookOpen className="w-3.5 h-3.5 text-[#FF8A00]" />
-                    <span>AI Guides</span>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Accordion Categories */}
-              <div className="space-y-1">
-                {MEGA_MENUS.map((menu) => {
-                  const isExpanded = mobileExpandedSection === menu.key;
-                  return (
-                    <div key={menu.key} className="border-b border-slate-100 dark:border-slate-800/80 pb-2">
-                      <div className="flex items-center justify-between">
-                        <Link
-                          href={menu.href}
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          className="min-h-[44px] flex items-center flex-1 text-sm font-bold text-slate-900 dark:text-slate-100 hover:text-[#FF8A00]"
-                        >
-                          {menu.label}
-                        </Link>
-                        <button
-                          type="button"
-                          onClick={() => setMobileExpandedSection(isExpanded ? null : menu.key)}
-                          className="min-h-[44px] min-w-[44px] flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 cursor-pointer"
-                          aria-label={`Toggle ${menu.label} subcategories`}
-                          aria-expanded={isExpanded}
-                        >
-                          <ChevronDown
-                            className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180 text-[#FF8A00]' : ''}`}
-                          />
-                        </button>
-                      </div>
-
-                      {isExpanded && (
-                        <div className="mt-1 pl-2 space-y-3 pt-2 border-t border-slate-100 dark:border-slate-800/50 animate-fadeIn">
-                          {menu.categories.map((category) => (
-                            <div key={category.title} className="space-y-1">
-                              <div className="text-[10px] font-mono uppercase text-slate-400 tracking-wider">
-                                {category.title}
-                              </div>
-                              <div className="space-y-0.5">
-                                {category.items.map((item) => {
-                                  const Icon = item.icon;
-                                  return (
-                                    <Link
-                                      key={item.name}
-                                      href={item.href}
-                                      onClick={() => setIsMobileMenuOpen(false)}
-                                      className="min-h-[40px] flex items-center gap-2.5 p-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-[#FF8A00] transition"
-                                    >
-                                      <div className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-[#FF8A00] shrink-0">
-                                        <Icon className="w-3.5 h-3.5" />
-                                      </div>
-                                      <span className="truncate">{item.name}</span>
-                                    </Link>
-                                  );
-                                })}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Bottom Quick Action */}
-              <div className="pt-2">
-                <Link
-                  href="/tools"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="min-h-[44px] w-full rounded-xl font-mono text-xs font-bold text-slate-950 bg-[#FF8A00] hover:bg-[#ff9e2e] flex items-center justify-center gap-2 shadow-sm"
-                >
-                  <Zap className="w-3.5 h-3.5 fill-slate-950 text-slate-950" />
-                  <span>Launch Universal Directory</span>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+        <MobileDrawer
+          isOpen={isMobileMenuOpen}
+          onClose={() => setIsMobileMenuOpen(false)}
+        />
       )}
     </header>
   );
 }
+
+export default Navbar;
