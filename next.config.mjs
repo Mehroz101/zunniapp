@@ -21,6 +21,7 @@ const nextConfig = {
   // ── Experimental Features ──
   experimental: {
     optimizePackageImports: ['lucide-react', 'clsx', 'tailwind-merge'],
+    agentUpgrade: 'security',
   },
 
   // ── Remote Image Optimization Patterns ──
