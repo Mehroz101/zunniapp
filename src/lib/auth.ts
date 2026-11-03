@@ -3,9 +3,16 @@
 // Strict Master Credentials & Web Crypto JWT Verification
 // ─────────────────────────────────────────────
 
+export const ALLOWED_ADMIN_EMAILS = [
+  'zunnorain7@gmail.com',
+  'zunnorainrajpoot7@gmail.com',
+  ...(process.env.ADMIN_EMAIL ? [process.env.ADMIN_EMAIL.trim().toLowerCase()] : []),
+];
+
 export const MASTER_ADMIN_CREDENTIALS = {
-  email: process.env.ADMIN_EMAIL || 'zunnorainrajpoot7@gmail.com',
+  email: process.env.ADMIN_EMAIL || 'zunnorain7@gmail.com',
   password: process.env.ADMIN_PASSWORD || 'Rajpoot786$$',
+  allowedEmails: ALLOWED_ADMIN_EMAILS,
 };
 
 const JWT_SECRET = process.env.ADMIN_JWT_SECRET || 'toolty_enterprise_admin_secret_jwt_2026_secure';

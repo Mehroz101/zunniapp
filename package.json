@@ -15,11 +15,10 @@
     "node": ">=18.18.0"
   },
   "browserslist": [
-    "defaults",
-    "edge >= 115",
-    "chrome >= 115",
-    "firefox >= 115",
-    "safari >= 16.4",
+    "chrome >= 109",
+    "edge >= 109",
+    "firefox >= 109",
+    "safari >= 15.6",
     "not dead",
     "not IE 11"
   ],

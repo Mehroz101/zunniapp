@@ -1,49 +1,10 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, AlertCircle, Loader2, Sparkles, Lock, ArrowUpRight } from 'lucide-react';
+import { Sparkles, Lock, ArrowUpRight } from 'lucide-react';
 import { BrandLogo } from '@/components/brand/BrandLogo';
+import { FooterNewsletter } from './FooterNewsletter';
 
 export function Footer() {
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [statusMessage, setStatusMessage] = useState('');
-
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !email.includes('@')) {
-      setStatus('error');
-      setStatusMessage('Please enter a valid email address.');
-      return;
-    }
-
-    setStatus('loading');
-    setStatusMessage('');
-
-    try {
-      const res = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim() }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok && data.success) {
-        setStatus('success');
-        setStatusMessage('Welcome! You have been successfully subscribed.');
-        setEmail('');
-      } else {
-        setStatus('error');
-        setStatusMessage(data.message || 'Unable to subscribe right now. Please try again.');
-      }
-    } catch {
-      setStatus('error');
-      setStatusMessage('Network error. Please try again later.');
-    }
-  };
-
   return (
     <footer className="relative bg-white dark:bg-[#05070c] text-slate-600 dark:text-slate-400 transition-colors duration-200">
       {/* ── Subtle Top Gradient Divider ── */}
@@ -73,52 +34,9 @@ export function Footer() {
               </p>
             </div>
 
-            {/* Right Form */}
+            {/* Right Form Component (Isolated Client Island) */}
             <div className="lg:col-span-5">
-              <form onSubmit={handleSubscribe} className="space-y-3">
-                <div className="flex flex-col sm:flex-row gap-2.5">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your work email..."
-                    disabled={status === 'loading'}
-                    required
-                    className="flex-1 px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-900 dark:text-white text-sm placeholder-slate-400 focus:outline-none focus:border-[#FF8A00] focus:ring-2 focus:ring-[#FF8A00]/20 transition shadow-inner font-sans"
-                  />
-                  <button
-                    type="submit"
-                    disabled={status === 'loading'}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#FF8A00] hover:bg-[#ff9e2e] active:scale-[0.98] text-slate-950 font-bold text-sm shadow-md shadow-orange-500/20 transition-all cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed shrink-0"
-                  >
-                    {status === 'loading' ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        <span>Subscribing...</span>
-                      </>
-                    ) : (
-                      <>
-                        <span>Subscribe</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </>
-                    )}
-                  </button>
-                </div>
-
-                {status === 'success' && (
-                  <div className="flex items-center gap-2 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-                    <CheckCircle2 className="w-4 h-4 shrink-0" />
-                    <span>{statusMessage}</span>
-                  </div>
-                )}
-
-                {status === 'error' && (
-                  <div className="flex items-center gap-2 text-xs text-rose-600 dark:text-rose-400 font-medium">
-                    <AlertCircle className="w-4 h-4 shrink-0" />
-                    <span>{statusMessage}</span>
-                  </div>
-                )}
-              </form>
+              <FooterNewsletter />
             </div>
           </div>
         </div>
@@ -141,12 +59,12 @@ export function Footer() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                 </span>
-                <span>All Systems Operational</span>
+                <span>System Operational · 99.99%</span>
               </div>
             </div>
           </div>
 
-          {/* Column 3: AI Utilities & Converters */}
+          {/* Column 3: Utilities & Converters */}
           <div>
             <h4 className="mb-4 text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100 font-mono">
               Utilities &amp; Converters
@@ -288,14 +206,16 @@ export function Footer() {
                 </a>
               </li>
               <li className="pt-2">
-                <Link
-                  href="/login"
+                <a
+                  href="https://aiiseverythingdashboard.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition text-[11px] font-mono font-medium"
                 >
                   <Lock className="w-3 h-3 text-[#FF8A00]" />
-                  <span>Admin Console</span>
+                  <span>Admin Panel</span>
                   <ArrowUpRight className="w-3 h-3 text-slate-400" />
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

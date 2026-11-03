@@ -20,9 +20,10 @@ export async function POST(request: Request) {
     }
 
     const trimmedEmail = String(email).trim().toLowerCase();
-    const targetEmail = MASTER_ADMIN_CREDENTIALS.email.trim().toLowerCase();
+    const isEmailAllowed = MASTER_ADMIN_CREDENTIALS.allowedEmails.includes(trimmedEmail);
+    const isPasswordValid = String(password) === MASTER_ADMIN_CREDENTIALS.password;
 
-    if (trimmedEmail !== targetEmail || String(password) !== MASTER_ADMIN_CREDENTIALS.password) {
+    if (!isEmailAllowed || !isPasswordValid) {
       return NextResponse.json(
         { success: false, error: 'Invalid administrator credentials. Access denied.' },
         { status: 401 }
