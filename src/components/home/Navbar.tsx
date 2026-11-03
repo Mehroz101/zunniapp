@@ -24,12 +24,13 @@ const MobileDrawer = dynamic(
   { ssr: false }
 );
 
-// Minimal lightweight trigger definitions for desktop nav bar (0 Lucide icons needed here)
+// ── Category Triggers for Desktop Navbar ──
 const NAV_TRIGGERS = [
-  { key: 'converters', label: 'Code Converters', href: '/tools' },
-  { key: 'ai', label: 'AI Studio', href: '/ai-tools' },
-  { key: 'calculators', label: 'Calculators', href: '/calculators' },
-  { key: 'diagnostics', label: 'Diagnostics', href: '/tools' },
+  { key: 'code-converters', label: 'Code Converters', href: '/tools' },
+  { key: 'calculators', label: 'Calculators', href: '/calculators/scientific' },
+  { key: 'finance', label: 'Finance', href: '/calculators/finance' },
+  { key: 'dev-web', label: 'Dev & Web', href: '/tools?category=seo' },
+  { key: 'text-utilities', label: 'Text & Utilities', href: '/tools' },
   { key: 'resources', label: 'Resources', href: '/blog' },
 ];
 
@@ -191,7 +192,7 @@ export function Navbar() {
             <Link
               href="/toolkits"
               onClick={() => setActiveDropdown(null)}
-              className="inline-flex items-center gap-1.5 text-[13px] font-bold px-3 py-1.5 rounded-full text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100/90 dark:hover:bg-slate-800/80 transition-all duration-200 cursor-pointer"
+              className="hidden xl:inline-flex items-center gap-1.5 text-[13px] font-bold px-3 py-1.5 rounded-full text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100/90 dark:hover:bg-slate-800/80 transition-all duration-200 cursor-pointer"
             >
               <Boxes className="w-3.5 h-3.5 text-[#FF8A00]" />
               <span>AI Toolkits</span>
@@ -200,7 +201,7 @@ export function Navbar() {
             <Link
               href="/guides"
               onClick={() => setActiveDropdown(null)}
-              className="inline-flex items-center gap-1.5 text-[13px] font-bold px-3 py-1.5 rounded-full text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100/90 dark:hover:bg-slate-800/80 transition-all duration-200 cursor-pointer"
+              className="hidden xl:inline-flex items-center gap-1.5 text-[13px] font-bold px-3 py-1.5 rounded-full text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100/90 dark:hover:bg-slate-800/80 transition-all duration-200 cursor-pointer"
             >
               <BookOpen className="w-3.5 h-3.5 text-[#FF8A00]" />
               <span>AI Guides</span>

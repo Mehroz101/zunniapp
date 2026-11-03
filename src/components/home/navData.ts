@@ -437,64 +437,62 @@ export const MEGA_MENUS: MegaMenuConfig[] = [
     ],
   },
 
-  // 6. "AI Tools" Dropdown (/ai-tools) -> Machine Learning & AI Utilities
+  // 6. "Resources" Dropdown (/blog) -> Guides, News, Glossary & Toolkits
   {
-    key: 'ai-tools',
-    label: 'AI Tools',
-    href: '/ai-tools',
-    headline: 'Artificial Intelligence & Neural Generation Suite',
-    subheadline: 'Text summarizers, AST debuggers, prompt optimizers, and neural regex generators',
-    footerText: 'Explore All AI Tools & Intelligent Utilities',
-    footerHref: '/ai-tools',
+    key: 'resources',
+    label: 'Resources',
+    href: '/blog',
+    headline: 'Engineering Guides, AI News & Documentation',
+    subheadline: 'In-depth architectural masterclasses, weekly AI telemetry, and neural terminology',
+    footerText: 'Explore All Articles & Masterclasses',
+    footerHref: '/blog',
     categories: [
       {
-        title: 'Content & Semantic Intelligence',
+        title: 'Guides & Masterclasses',
         items: [
           {
-            name: 'AI Text Summarizer & Brief',
-            desc: 'Executive summaries with customizable density & compression.',
-            icon: Sparkles,
-            href: '/tools/ai-summarizer',
-          },
-          {
-            name: 'Readability Checker (Flesch-Kincaid)',
-            desc: 'Real-time grade-level and reading ease scoring.',
+            name: 'Engineering Masterclasses',
+            desc: 'Step-by-step architectural and systems engineering guides.',
             icon: BookOpen,
-            href: '/tools/readability-checker',
+            href: '/guides',
           },
           {
-            name: 'Prompt Optimizer Pro',
-            desc: 'Refine system prompts with few-shot examples & constraints.',
-            icon: Terminal,
-            href: '/tools/prompt-optimizer',
+            name: 'Curated AI Toolkits',
+            desc: 'Production-ready stacks and workflows for modern developers.',
+            icon: Boxes,
+            href: '/toolkits',
+          },
+          {
+            name: 'Neural Terms Glossary',
+            desc: 'Comprehensive reference of AI, LLM, and transformer concepts.',
+            icon: Layers,
+            href: '/glossary',
           },
         ],
       },
       {
-        title: 'Code & Pattern Generation',
+        title: 'News & Dispatches',
         items: [
           {
-            name: 'AI Syntax Debugger',
-            desc: 'Locate syntax errors, missing braces, and structural faults.',
-            icon: Code2,
-            href: '/tools/ai-syntax-debugger',
+            name: 'AI News & Dispatches',
+            desc: 'Weekly telemetry, model benchmarks, and industry releases.',
+            icon: Sparkles,
+            href: '/blog',
           },
           {
-            name: 'RegEx Neural Generator',
-            desc: 'Natural language specification to production regular expressions.',
-            icon: Binary,
-            href: '/tools/regex-neural-generator',
+            name: 'Universal Tools Directory',
+            desc: 'Explore 50+ free online developer utilities and engines.',
+            icon: Zap,
+            href: '/tools',
           },
           {
-            name: 'Unit Test Builder',
-            desc: 'Automated test suite generation for Jest, Vitest, and Mocha.',
-            icon: ShieldCheck,
-            href: '/tools/unit-test-builder',
+            name: 'System Health & API Status',
+            desc: 'Real-time telemetry and uptime status monitor.',
+            icon: Activity,
+            href: '/api/health',
           },
         ],
       },
     ],
   },
 ];
-
-;
