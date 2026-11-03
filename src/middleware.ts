@@ -38,7 +38,16 @@ export async function middleware(request: NextRequest) {
       loginUrl.searchParams.set('callbackUrl', pathname);
       return NextResponse.redirect(loginUrl);
     }
-    return NextResponse.next();
+    const res = NextResponse.next();
+    res.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
+    return res;
+  }
+
+  // If on /login page, enforce noindex
+  if (pathname === '/login') {
+    const res = NextResponse.next();
+    res.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
+    return res;
   }
 
   // Intercept mutating admin APIs

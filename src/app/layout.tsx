@@ -49,6 +49,11 @@ export const metadata: Metadata = {
   creator: 'TOOLty',
   publisher: 'TOOLty',
 
+  // ── Canonical & Alternates ────────────────────
+  alternates: {
+    canonical: './',
+  },
+
   // ── Open Graph ───────────────────────────────
   openGraph: {
     type: 'website',
