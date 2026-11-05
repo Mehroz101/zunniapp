@@ -26,16 +26,16 @@ async function generateUniqueSlug(baseTitle: string, customSlug?: string): Promi
 
 /**
  * GET /api/articles
- * Lists articles with pagination, category filter, tag filter, and text search.
+ * Lists articles with pagination, type, category, status filters, and search.
  */
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10));
     const limit = Math.min(50, Math.max(1, parseInt(searchParams.get('limit') || '10', 10)));
+    const type = searchParams.get('type')?.trim().toLowerCase();
     const category = searchParams.get('category')?.trim();
-    const status = searchParams.get('status')?.trim();
-    const tag = searchParams.get('tag')?.trim();
+    const status = searchParams.get('status')?.trim().toLowerCase();
     const q = searchParams.get('q')?.trim();
     const sortField = searchParams.get('sort') || '-createdAt';
 
@@ -43,7 +43,11 @@ export async function GET(req: NextRequest) {
 
     const filter: Record<string, unknown> = {};
 
-    if (status && status !== 'all' && ['draft', 'published', 'archived'].includes(status)) {
+    if (type && ['guide', 'news'].includes(type)) {
+      filter.type = type;
+    }
+
+    if (status && status !== 'all' && ['draft', 'published'].includes(status)) {
       filter.status = status;
     }
 
@@ -51,15 +55,10 @@ export async function GET(req: NextRequest) {
       filter.category = new RegExp(`^${category}$`, 'i');
     }
 
-    if (tag) {
-      filter.tags = tag;
-    }
-
     if (q) {
       filter.$or = [
         { title: { $regex: q, $options: 'i' } },
-        { excerpt: { $regex: q, $options: 'i' } },
-        { tags: { $regex: q, $options: 'i' } },
+        { category: { $regex: q, $options: 'i' } },
       ];
     }
 
@@ -106,7 +105,7 @@ export async function GET(req: NextRequest) {
 
 /**
  * POST /api/articles
- * Creates a new article with automatic slug generation, collision avoidance, and reading time estimation.
+ * Creates a new article matching the IArticle specification.
  */
 export async function POST(req: NextRequest) {
   try {
@@ -115,15 +114,13 @@ export async function POST(req: NextRequest) {
       title,
       slug: customSlug,
       content,
-      excerpt,
-      coverImage,
-      coverImageId,
-      category = 'General',
-      tags = [],
-      author = {},
+      type = 'guide',
+      category,
+      featuredImage,
+      coverImage, // alias for backwards compatibility
+      seo,
+      readingTime,
       status = 'draft',
-      metaTitle,
-      metaDescription,
     } = body;
 
     if (!title || typeof title !== 'string' || !title.trim()) {
@@ -140,42 +137,41 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    if (!category || typeof category !== 'string' || !category.trim()) {
+      return NextResponse.json(
+        { success: false, error: 'Article category is required' },
+        { status: 400 }
+      );
+    }
+
     await connectToDatabase();
 
     // Generate unique slug
     const uniqueSlug = await generateUniqueSlug(title, customSlug);
 
-    // Calculate reading time
-    const plainText = content.replace(/<[^>]*>/g, '').trim();
-    const wordCount = plainText ? plainText.split(/\s+/).length : 0;
-    const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+    // Calculate reading time if not provided
+    let calculatedReadingTime = readingTime;
+    if (!calculatedReadingTime || typeof calculatedReadingTime !== 'number') {
+      const plainText = content.replace(/<[^>]*>/g, '').trim();
+      const wordCount = plainText ? plainText.split(/\s+/).length : 0;
+      calculatedReadingTime = Math.max(1, Math.ceil(wordCount / 200));
+    }
 
-    // Normalize tags array
-    const normalizedTags: string[] = Array.isArray(tags)
-      ? tags.map((t: string) => String(t).trim()).filter(Boolean)
-      : typeof tags === 'string'
-      ? tags.split(',').map((t: string) => t.trim()).filter(Boolean)
-      : [];
+    const image = featuredImage?.trim() || coverImage?.trim() || '';
 
     const article = (await Article.create({
       title: title.trim(),
       slug: uniqueSlug,
       content,
-      excerpt: excerpt?.trim() || plainText.slice(0, 160) + '...',
-      coverImage: coverImage?.trim() || '',
-      coverImageId: coverImageId || undefined,
+      type: ['guide', 'news'].includes(type) ? type : 'guide',
       category: category.trim(),
-      tags: normalizedTags,
-      author: {
-        name: author.name?.trim() || 'TOOLty Editorial Team',
-        avatar: author.avatar?.trim() || '',
-        bio: author.bio?.trim() || '',
+      featuredImage: image,
+      seo: {
+        title: seo?.title?.trim() || title.trim(),
+        description: seo?.description?.trim() || '',
       },
-      status: ['draft', 'published', 'archived'].includes(status) ? status : 'draft',
-      publishedAt: status === 'published' ? new Date() : undefined,
-      readingTime,
-      metaTitle: metaTitle?.trim() || title.trim(),
-      metaDescription: metaDescription?.trim() || excerpt?.trim() || '',
+      readingTime: calculatedReadingTime,
+      status: ['draft', 'published'].includes(status) ? status : 'draft',
     })) as unknown as IArticle;
 
     return NextResponse.json(

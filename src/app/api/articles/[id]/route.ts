@@ -22,7 +22,7 @@ function buildIdentifierQuery(idOrSlug: string) {
  * GET /api/articles/[id]
  * Retrieves a single article by its MongoDB ObjectId or unique slug.
  */
-export async function GET(req: NextRequest, context: RouteContext) {
+export async function GET(_req: NextRequest, context: RouteContext) {
   try {
     const { id } = await context.params;
 
@@ -36,19 +36,7 @@ export async function GET(req: NextRequest, context: RouteContext) {
     await connectToDatabase();
 
     const query = buildIdentifierQuery(id);
-    const { searchParams } = new URL(req.url);
-    const shouldIncrementView = searchParams.get('trackView') === 'true';
-
-    let article;
-    if (shouldIncrementView) {
-      article = await Article.findOneAndUpdate(
-        query,
-        { $inc: { views: 1 } },
-        { new: true }
-      ).populate('coverImageId', 'filename contentType size url');
-    } else {
-      article = await Article.findOne(query).populate('coverImageId', 'filename contentType size url');
-    }
+    const article = await Article.findOne(query);
 
     if (!article) {
       return NextResponse.json(
@@ -77,8 +65,8 @@ export async function GET(req: NextRequest, context: RouteContext) {
 }
 
 /**
- * PUT / PATCH /api/articles/[id]
- * Updates an existing article with optional slug re-generation and reading time updates.
+ * PUT /api/articles/[id]
+ * Updates an existing article matching the IArticle specification.
  */
 export async function PUT(req: NextRequest, context: RouteContext) {
   try {
@@ -128,45 +116,34 @@ export async function PUT(req: NextRequest, context: RouteContext) {
     }
 
     if (body.title) existing.title = body.title.trim();
-    if (body.excerpt !== undefined) existing.excerpt = body.excerpt.trim();
 
-    // Handle content and reading time recalculation
+    // Handle content and reading time
     if (body.content !== undefined) {
       existing.content = body.content;
-      const plainText = body.content.replace(/<[^>]*>/g, '').trim();
-      const wordCount = plainText ? plainText.split(/\s+/).length : 0;
-      existing.readingTime = Math.max(1, Math.ceil(wordCount / 200));
+      if (body.readingTime === undefined) {
+        const plainText = body.content.replace(/<[^>]*>/g, '').trim();
+        const wordCount = plainText ? plainText.split(/\s+/).length : 0;
+        existing.readingTime = Math.max(1, Math.ceil(wordCount / 200));
+      }
     }
 
-    if (body.coverImage !== undefined) existing.coverImage = body.coverImage.trim();
-    if (body.coverImageId !== undefined) existing.coverImageId = body.coverImageId || null;
+    if (body.readingTime !== undefined) existing.readingTime = Number(body.readingTime);
+    if (body.type && ['guide', 'news'].includes(body.type)) existing.type = body.type;
     if (body.category !== undefined) existing.category = body.category.trim();
 
-    if (body.tags !== undefined) {
-      existing.tags = Array.isArray(body.tags)
-        ? body.tags.map((t: string) => String(t).trim()).filter(Boolean)
-        : typeof body.tags === 'string'
-        ? body.tags.split(',').map((t: string) => t.trim()).filter(Boolean)
-        : [];
-    }
+    const image = body.featuredImage !== undefined ? body.featuredImage : body.coverImage;
+    if (image !== undefined) existing.featuredImage = image.trim();
 
-    if (body.author) {
-      existing.author = {
-        name: body.author.name?.trim() || existing.author.name,
-        avatar: body.author.avatar?.trim() || existing.author.avatar,
-        bio: body.author.bio?.trim() || existing.author.bio,
+    if (body.seo) {
+      existing.seo = {
+        title: body.seo.title !== undefined ? body.seo.title.trim() : existing.seo?.title || '',
+        description: body.seo.description !== undefined ? body.seo.description.trim() : existing.seo?.description || '',
       };
     }
 
-    if (body.status && ['draft', 'published', 'archived'].includes(body.status)) {
-      if (body.status === 'published' && !existing.publishedAt) {
-        existing.publishedAt = new Date();
-      }
+    if (body.status && ['draft', 'published'].includes(body.status)) {
       existing.status = body.status;
     }
-
-    if (body.metaTitle !== undefined) existing.metaTitle = body.metaTitle.trim();
-    if (body.metaDescription !== undefined) existing.metaDescription = body.metaDescription.trim();
 
     await existing.save();
 
