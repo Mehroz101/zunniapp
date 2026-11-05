@@ -66,8 +66,6 @@ export async function POST(req: NextRequest) {
       contentType,
       size: file.size,
       data: dataBuffer,
-      altText,
-      caption,
     });
 
     const publicUrl = `/api/images/${media._id.toString()}`;
@@ -80,8 +78,6 @@ export async function POST(req: NextRequest) {
         filename: media.filename,
         contentType: media.contentType,
         size: media.size,
-        altText: media.altText,
-        caption: media.caption,
         createdAt: media.createdAt,
       },
       { status: 201 }
