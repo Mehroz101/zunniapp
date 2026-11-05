@@ -24,6 +24,13 @@
   "dependencies": {
     "@prisma/client": "^6.19.3",
     "@tailwindcss/postcss": "^4.3.3",
+    "@tiptap/extension-image": "^3.32.3",
+    "@tiptap/extension-link": "^3.32.3",
+    "@tiptap/extension-placeholder": "^3.32.3",
+    "@tiptap/extension-underline": "^3.32.3",
+    "@tiptap/pm": "^3.32.3",
+    "@tiptap/react": "^3.32.3",
+    "@tiptap/starter-kit": "^3.32.3",
     "@types/js-yaml": "^4.0.9",
     "@types/prismjs": "^1.26.6",
     "clsx": "^2.1.1",
