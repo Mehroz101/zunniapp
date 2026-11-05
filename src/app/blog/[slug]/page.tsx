@@ -32,8 +32,8 @@ interface PageProps {
   }>;
 }
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// ISR: Cache individual blog article statically for 60 seconds (eliminates cross-server DB latency)
+export const revalidate = 60;
 
 // Helper to fetch post by slug via Prisma with backend API fallback
 async function fetchPostBySlug(slug: string) {
@@ -509,6 +509,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <Link
                       key={rel.id}
                       href={`/blog/${rel.slug}`}
+                      prefetch={true}
                       className="group flex flex-col justify-between rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 p-5 shadow-xs transition hover:-translate-y-1 hover:border-slate-300 dark:hover:border-slate-700"
                     >
                       <div>

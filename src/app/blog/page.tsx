@@ -46,8 +46,8 @@ export const metadata: Metadata = {
   }),
 };
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// ISR: Cache statically for 60 seconds (eliminates cross-server DB latency)
+export const revalidate = 60;
 
 export default async function BlogArchivePage() {
   let rawPosts: Array<any> = [];

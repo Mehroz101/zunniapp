@@ -68,10 +68,10 @@ export function HeroSearchConsole() {
   };
 
   return (
-    <div className="mt-6 sm:mt-9 w-full max-w-2xl mx-auto relative z-30 min-h-[52px] sm:min-h-[58px]">
+    <div className="mt-6 sm:mt-9 w-full max-w-2xl mx-auto relative z-30 h-[54px] sm:h-[58px]">
       <form
         onSubmit={handleSearchSubmit}
-        className={`relative flex items-center rounded-2xl border transition-all duration-200 shadow-lg min-h-[52px] sm:min-h-[58px] ${
+        className={`relative flex items-center rounded-2xl border transition-all duration-200 shadow-lg h-[54px] sm:h-[58px] ${
           isFocused
             ? 'border-orange-500/80 dark:border-[#FF8A00]/80 ring-4 ring-orange-500/10 dark:ring-[#FF8A00]/10 bg-white dark:bg-slate-900 shadow-orange-500/10'
             : 'border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 shadow-slate-200/50 dark:shadow-black/40'

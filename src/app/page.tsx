@@ -1,34 +1,14 @@
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import { Terminal } from 'lucide-react';
 import { Navbar } from '@/components/home/Navbar';
 import { Hero } from '@/components/home/Hero';
+import { DeveloperToolsShowcase } from '@/components/home/DeveloperToolsShowcase';
 import { CategoryGrid } from '@/components/home/CategoryGrid';
 import { ValueSection } from '@/components/home/ValueSection';
+import { FaqSection } from '@/components/home/FaqSection';
+import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
 import { Footer } from '@/components/home/Footer';
 import { fetchLiveLandingData } from '@/lib/data';
-
-// ── Code-Splitting: Lazy load below-the-fold interactive components ──
-const DeveloperToolsShowcase = dynamic(
-  () => import('@/components/home/DeveloperToolsShowcase').then((mod) => mod.DeveloperToolsShowcase),
-  {
-    loading: () => <div className="min-h-[520px] bg-white dark:bg-[#05070c]" aria-hidden="true" />,
-  }
-);
-
-const FaqSection = dynamic(
-  () => import('@/components/home/FaqSection').then((mod) => mod.FaqSection),
-  {
-    loading: () => <div className="min-h-[400px] bg-white dark:bg-[#05070c]" aria-hidden="true" />,
-  }
-);
-
-const NewsletterForm = dynamic(
-  () => import('@/components/newsletter/NewsletterForm').then((mod) => mod.NewsletterForm),
-  {
-    loading: () => <div className="min-h-[50px]" aria-hidden="true" />,
-  }
-);
 
 export const metadata: Metadata = {
   title: 'TOOLty — Free Online Tools & Calculators Directory',
@@ -56,23 +36,23 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 selection:bg-[#FF8A00]/30 selection:text-slate-950 font-sans overflow-x-clip transition-colors duration-200">
-      {/* ── Fixed Floating Developer Pill Navbar ── */}
+      {/* 🚀 Fixed Floating Developer Pill Navbar 🚀 */}
       <Navbar />
 
       <main className="relative">
-        {/* ── 1. Enterprise Directory Hero Section with Global Search Bench ── */}
+        {/* 🚀 1. Enterprise Directory Hero Section with Global Search Bench 🚀 */}
         <Hero stats={stats} />
 
-        {/* ── 2. Massive Developer Tools Directory & Showcase (Clean Light Cards) ── */}
+        {/* 🚀 2. Massive Developer Tools Directory & Showcase (Full SSR, 0 CLS) 🚀 */}
         <DeveloperToolsShowcase />
 
-        {/* ── 4. Specialized Developer Hub Domains ── */}
+        {/* 🚀 3. Specialized Developer Hub Domains 🚀 */}
         <CategoryGrid categories={categories} />
 
-        {/* ── 5. Engineering Architecture Foundation ── */}
+        {/* 🚀 4. Engineering Architecture Foundation 🚀 */}
         <ValueSection />
 
-        {/* ── 6. Developer Newsletter Capture Section ── */}
+        {/* 🚀 5. Developer Newsletter Capture Section 🚀 */}
         <section className="relative overflow-hidden bg-slate-50/50 dark:bg-slate-950/50 border-t border-slate-200/80 dark:border-slate-800 px-4 sm:px-8 lg:px-12 py-16 sm:py-28">
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute left-1/2 top-1/2 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-500/[0.06] blur-[140px]" />
@@ -99,11 +79,11 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ── 7. Interactive Technical FAQs Accordion ── */}
+        {/* 🚀 6. Interactive Technical FAQs Accordion (Full SSR for Rich Snippets & 0 CLS) 🚀 */}
         <FaqSection />
       </main>
 
-      {/* ── 8. Semantic Clean White Developer Footer ── */}
+      {/* 🚀 7. Semantic Clean White Developer Footer 🚀 */}
       <Footer />
     </div>
   );

@@ -9,7 +9,6 @@ const sansFont = Plus_Jakarta_Sans({
   variable: '--font-sans',
   display: 'swap',
   preload: true,
-  fallback: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
   adjustFontFallback: true,
 });
 

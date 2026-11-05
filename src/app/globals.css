@@ -21,7 +21,6 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
     background-color: var(--background);
     color: var(--foreground);
     max-width: 100vw;
@@ -31,14 +30,13 @@
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-family: var(--font-sans), var(--font-inter), system-ui, -apple-system, sans-serif;
+    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
     max-width: 100vw;
     overflow-x: clip;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
   }
 
   /* Prevent iOS Safari automatic viewport zooming on form input focus */

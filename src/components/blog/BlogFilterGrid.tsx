@@ -233,6 +233,7 @@ export function BlogFilterGrid({
             <Link
               key={post.id}
               href={`/blog/${post.slug}`}
+              prefetch={true}
               className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl"
             >
               <div>
