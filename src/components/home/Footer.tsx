@@ -164,6 +164,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/news" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+                  AI News &amp; Dispatches
+                </Link>
+              </li>
+              <li>
                 <Link href="/glossary" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
                   Neural Terms Glossary
                 </Link>

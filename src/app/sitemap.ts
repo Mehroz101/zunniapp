@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { prisma } from '@/lib/prisma';
+import { connectToDatabase } from '@/lib/db/mongodb';
+import { Article } from '@/models/Article';
 import { CALCULATORS_REGISTRY } from '@/lib/config/calculators';
 import { getAllTools } from '@/lib/tools/registry';
 
@@ -42,6 +44,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: 'daily',
       priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/guides`,
+      lastModified: now,
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/news`,
+      lastModified: now,
+      changeFrequency: 'daily',
+      priority: 0.9,
     },
   ];
 
@@ -125,7 +139,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
       }));
 
-    return [...staticRoutes, ...registryToolRoutes, ...calculatorRoutes, ...toolRoutes, ...categoryRoutes, ...postRoutes];
+    // Dynamic Mongoose Technical Articles & News Dispatches: /guides/[slug] & /news/[slug]
+    let articleRoutes: MetadataRoute.Sitemap = [];
+    try {
+      await connectToDatabase();
+      const articles = await Article.find({ status: 'published' })
+        .select('slug type updatedAt')
+        .lean();
+
+      articleRoutes = articles
+        .filter((art: any) => Boolean(art.slug))
+        .map((art: any) => ({
+          url: `${baseUrl}/${art.type === 'news' ? 'news' : 'guides'}/${art.slug}`,
+          lastModified: art.updatedAt ? new Date(art.updatedAt) : now,
+          changeFrequency: 'weekly',
+          priority: 0.8,
+        }));
+    } catch (artErr) {
+      console.warn('[Sitemap] Mongoose articles fetch failed or offline:', artErr);
+    }
+
+    return [
+      ...staticRoutes,
+      ...registryToolRoutes,
+      ...calculatorRoutes,
+      ...toolRoutes,
+      ...categoryRoutes,
+      ...postRoutes,
+      ...articleRoutes,
+    ];
   } catch (error) {
     console.warn('[Sitemap] Database fetch failed or offline, returning fallback static routes:', error);
     return [...staticRoutes, ...registryToolRoutes, ...calculatorRoutes];

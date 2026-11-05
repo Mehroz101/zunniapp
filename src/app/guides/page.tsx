@@ -13,6 +13,8 @@ import {
 } from 'lucide-react';
 import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
+import { connectToDatabase } from '@/lib/db/mongodb';
+import { Article } from '@/models/Article';
 
 export const metadata: Metadata = {
   title: 'AI Engineering Guides & Production Architectures | TOOLty',
@@ -23,16 +25,35 @@ export const metadata: Metadata = {
     description: 'In-depth engineering masterclasses, tutorials, and benchmarks for modern builders.',
     url: 'https://toolty.online/guides',
     siteName: 'TOOLty',
+    images: [
+      {
+        url: 'https://toolty.online/og-default.png',
+        width: 1200,
+        height: 630,
+        alt: 'TOOLty Technical Guides',
+      },
+    ],
   },
   alternates: {
     canonical: 'https://toolty.online/guides',
   },
 };
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// 1-Hour Incremental Static Regeneration (ISR)
+export const revalidate = 3600;
 
-const GUIDES = [
+interface GuideItem {
+  slug: string;
+  title: string;
+  category: string;
+  readTime: string;
+  date: string;
+  description: string;
+  href: string;
+  tags: string[];
+}
+
+const STATIC_GUIDES: GuideItem[] = [
   {
     slug: 'ast-compilers-in-production',
     title: 'Building Browser-Native AST Compilers & Transpilers in Production',
@@ -101,7 +122,50 @@ const GUIDES = [
   },
 ];
 
-export default function GuidesHubPage() {
+export default async function GuidesHubPage() {
+  let dbGuides: GuideItem[] = [];
+
+  try {
+    await connectToDatabase();
+    const docs = await Article.find({ type: 'guide', status: 'published' })
+      .sort({ createdAt: -1 })
+      .limit(30)
+      .lean();
+
+    if (docs && docs.length > 0) {
+      dbGuides = docs.map((d: any) => {
+        const plainText = (d.content || '').replace(/<[^>]*>/g, '').trim();
+        return {
+          slug: d.slug,
+          title: d.title,
+          category: d.category || 'Architecture',
+          readTime: `${d.readingTime || 4} min read`,
+          date: d.createdAt
+            ? new Date(d.createdAt).toLocaleDateString('en-US', {
+                month: 'short',
+                year: 'numeric',
+              })
+            : 'Recent',
+          description:
+            d.seo?.description ||
+            (plainText.length > 150 ? `${plainText.slice(0, 150)}...` : plainText) ||
+            'Explore this technical guide on TOOLty.',
+          href: `/guides/${d.slug}`,
+          tags: [d.category || 'Guide', 'AI', 'Architecture'],
+        };
+      });
+    }
+  } catch (err) {
+    console.warn('⚠️ [GuidesHubPage] Could not query MongoDB guides, using fallbacks:', err);
+  }
+
+  // Combine MongoDB dynamic guides with curated catalog, preventing slug duplicates
+  const existingSlugs = new Set(dbGuides.map((g) => g.slug));
+  const mergedGuides = [
+    ...dbGuides,
+    ...STATIC_GUIDES.filter((g) => !existingSlugs.has(g.slug)),
+  ];
+
   return (
     <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 font-sans transition-colors duration-200">
       <Navbar />
@@ -128,10 +192,11 @@ export default function GuidesHubPage() {
 
         {/* Guides Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {GUIDES.map((guide) => (
+          {mergedGuides.map((guide) => (
             <Link
               key={guide.slug}
               href={guide.href}
+              prefetch={true}
               className="group rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c1220] p-6 shadow-xs hover:border-orange-500/40 dark:hover:border-orange-500/40 transition-all flex flex-col justify-between"
             >
               <div>
@@ -145,11 +210,11 @@ export default function GuidesHubPage() {
                   </div>
                 </div>
 
-                <h2 className="text-base sm:text-lg font-bold text-slate-950 dark:text-white group-hover:text-[#FF8A00] transition leading-snug mb-3">
+                <h2 className="text-base sm:text-lg font-bold text-slate-950 dark:text-white group-hover:text-[#FF8A00] transition leading-snug mb-3 line-clamp-2">
                   {guide.title}
                 </h2>
 
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4 line-clamp-3">
                   {guide.description}
                 </p>
               </div>

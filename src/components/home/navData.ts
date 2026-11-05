@@ -477,7 +477,7 @@ export const MEGA_MENUS: MegaMenuConfig[] = [
             name: 'AI News & Dispatches',
             desc: 'Weekly telemetry, model benchmarks, and industry releases.',
             icon: Sparkles,
-            href: '/blog',
+            href: '/news',
           },
           {
             name: 'Universal Tools Directory',
