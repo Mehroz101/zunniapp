@@ -1,0 +1,71 @@
+name: Deploy to Hostinger (toolty.online)
+
+on:
+  push:
+    branches:
+      - main   # Sirf main branch par push hone par trigger hoga
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy to Hostinger
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      # 1. Code checkout
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Node.js setup (Hostinger Node 18+)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 3. Dependencies install
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Next.js production build
+      - name: Build Next.js app
+        run: npm run build
+        env:
+          # Yahan apne zaroori env variables add karein (Secrets se)
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NODE_ENV: production
+
+      # 5. SSH ke zariye Hostinger server par deploy
+      - name: Deploy to Hostinger via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOSTINGER_SSH_HOST }}
+          username: ${{ secrets.HOSTINGER_SSH_USER }}
+          password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+          # Ya password ki bajaye SSH key use karein (recommended):
+          # key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          port: 22
+          script: |
+            # Project directory par jayein
+            cd ~/domains/toolty.online/public_html
+            
+            # Latest code pull karein
+            git pull origin main
+            
+            # Dependencies install karein
+            npm ci --production
+            
+            # Next.js build karein (server par)
+            npm run build
+            
+            # Node.js application restart karein
+            # (Hostinger Node.js Manager se process name confirm karein)
+            if command -v pm2 &> /dev/null; then
+              pm2 restart toolty-frontend || pm2 start server.js --name toolty-frontend
+            else
+              echo "PM2 not found, manual restart needed in Hostinger hPanel"
+            fi
+            
+            echo "✅ Deployment complete! toolty.online is live."
