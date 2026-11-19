@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
+import { SnowEffect } from '@/components/effects/SnowEffect';
 
 // ── Fonts Configuration ────────────────────────
 const sansFont = Plus_Jakarta_Sans({
@@ -136,6 +137,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen max-w-full overflow-x-hidden bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 font-sans antialiased text-rendering-optimizeLegibility selection:bg-[#FF8A00]/30 selection:text-slate-950 transition-colors duration-200">
+        <SnowEffect />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}
         </ThemeProvider>

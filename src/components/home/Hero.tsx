@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { HeroSearchConsole } from './HeroSearchConsole';
 import { AmbientHeroBackground } from './AmbientHeroBackground';
+import { SantaHat } from '@/components/effects/SantaHat';
 import type { LivePlatformStats } from '@/lib/data';
 
 interface HeroProps {
@@ -33,11 +34,11 @@ export function Hero({ stats: _stats }: HeroProps) {
 
       {/* 🚀 2. CENTERED ENTERPRISE HERO CONTENT (Locked geometry with 0.000 CLS) 🚀 */}
       <div className="relative z-10 mx-auto max-w-5xl w-full px-4 sm:px-8 lg:px-12 text-center flex flex-col items-center">
-        {/* Top Modern Kicker Badge with explicit mobile min-height to prevent shift */}
-        <div className="mb-4 sm:mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-3.5 sm:px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-xs transition-all hover:border-slate-300 dark:hover:border-slate-700 min-h-[32px] max-w-[94vw] sm:max-w-none">
-          <span className="flex h-2 w-2 rounded-full bg-[#FF8A00] shadow-[0_0_8px_#FF8A00] shrink-0" />
+        {/* Top Modern Kicker Festive Badge */}
+        <div className="mb-4 sm:mb-7 inline-flex items-center gap-2 rounded-full border border-red-200 dark:border-red-900/50 bg-red-50/90 dark:bg-red-950/40 px-3.5 sm:px-4 py-1.5 text-xs font-semibold text-red-700 dark:text-red-300 shadow-xs backdrop-blur-xs min-h-[32px] max-w-[94vw] sm:max-w-none">
+          <span className="flex h-2 w-2 rounded-full bg-red-500 animate-pulse shrink-0" />
           <span className="tracking-wide text-[11px] sm:text-xs truncate sm:whitespace-normal">
-            🔥 TOOLty — The Ultimate Directory for Modern Developers &amp; Builders
+            🎅 Christmas &amp; Holiday Edition — Free Developer Tools &amp; Utilities ❄️
           </span>
         </div>
 
@@ -45,8 +46,14 @@ export function Hero({ stats: _stats }: HeroProps) {
         <div className="w-full max-w-4xl text-center min-h-[116px] sm:min-h-[120px] lg:min-h-[144px]">
           <h1 className="text-[28px] xs:text-[30px] sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.2] sm:leading-[1.12] text-slate-950 dark:text-white">
             Best Way to Find the Right{' '}
-            <span className="block sm:inline bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
-              AI Tools &amp; Utilities
+            <span className="relative inline-block">
+              {/* Santa Hat perched on the headline */}
+              <span className="pointer-events-none absolute -left-3.5 -top-5 sm:-top-7 sm:-left-4 z-20 -rotate-12 transition-transform hover:scale-110">
+                <SantaHat className="h-8 w-8 sm:h-11 sm:w-11 drop-shadow-md" />
+              </span>
+              <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-[#FF8A00] bg-clip-text text-transparent">
+                AI Tools &amp; Utilities
+              </span>
             </span>
           </h1>
         </div>

@@ -1,5 +1,7 @@
 'use client';
 
+import { SantaHat } from '@/components/effects/SantaHat';
+
 interface BrandLogoProps {
   className?: string;
   markOnly?: boolean;
@@ -11,6 +13,10 @@ export function BrandLogo({ className = '', markOnly = false, size = 26 }: Brand
     <div className={`inline-flex items-center gap-2.5 select-none group cursor-pointer ${className}`}>
       {/* Precision Geometric Vector Mark (Scales 16px to 256px) */}
       <div className="relative flex items-center justify-center shrink-0">
+        {/* Playful Santa Hat perched on top of the brand icon */}
+        <span className="pointer-events-none absolute -left-2.5 -top-3.5 z-20 -rotate-12 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
+          <SantaHat className="h-6 w-6 drop-shadow-md" />
+        </span>
         <svg
           width={size}
           height={size}
@@ -58,6 +64,9 @@ export function BrandLogo({ className = '', markOnly = false, size = 26 }: Brand
             <span className="bg-gradient-to-tr from-[#FF8A00] via-[#FFA229] to-[#FF5500] bg-clip-text text-transparent font-black drop-shadow-[0_2px_8px_rgba(255,138,0,0.35)]">
               ty
             </span>
+          </span>
+          <span className="ml-1.5 inline-block text-[10px] font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 border border-red-200/80 dark:border-red-900/40 px-1.5 py-0.5 rounded-full leading-none shadow-2xs">
+            🎄 Holiday
           </span>
         </div>
       )}
