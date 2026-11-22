@@ -43,7 +43,7 @@ jobs:
           host: ${{ secrets.HOSTINGER_SSH_HOST }}
           username: ${{ secrets.HOSTINGER_SSH_USER }}
           password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
-          port: 22
+          port: ${{ secrets.HOSTINGER_SSH_PORT || 65002 }}
           script_stop: false
           script: |
             echo "==========================================="
