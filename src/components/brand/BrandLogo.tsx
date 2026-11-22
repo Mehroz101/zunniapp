@@ -66,7 +66,7 @@ export function BrandLogo({ className = '', markOnly = false, size = 26 }: Brand
             </span>
           </span>
           <span className="ml-1.5 inline-block text-[10px] font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 border border-red-200/80 dark:border-red-900/40 px-1.5 py-0.5 rounded-full leading-none shadow-2xs">
-            🎄 Holiday
+            🎅 2026 End
           </span>
         </div>
       )}

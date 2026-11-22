@@ -12,6 +12,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
+import { SantaHat } from '@/components/effects/SantaHat';
 
 // ── Code-Splitting: Lazy load heavy mega-menu and drawer to save 81 KiB on initial mobile load ──
 const DesktopMegaMenu = dynamic(
@@ -39,9 +40,13 @@ const NAV_TRIGGERS = [
    ============================================================================== */
 export function AiLogo({ className = '' }: { className?: string }) {
   return (
-    <div className={`inline-flex items-center gap-2.5 select-none group cursor-pointer ${className}`}>
+    <div className={`inline-flex items-center gap-2 select-none group cursor-pointer ${className}`}>
       {/* Precision Geometric Vector Mark (Scales 16px to 256px) */}
       <div className="relative flex items-center justify-center shrink-0">
+        {/* Santa Hat perched on top of the navbar brand icon */}
+        <span className="pointer-events-none absolute -left-2.5 -top-3.5 z-20 -rotate-12 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
+          <SantaHat className="h-6 w-6 drop-shadow-md" />
+        </span>
         <svg
           width="26"
           height="26"
@@ -82,12 +87,15 @@ export function AiLogo({ className = '' }: { className?: string }) {
         </svg>
       </div>
 
-      <div className="flex items-center gap-1 leading-none select-none">
+      <div className="flex items-center gap-1.5 leading-none select-none">
         <span className="font-sans text-[20px] sm:text-[22px] font-black tracking-[-0.03em] text-slate-900 dark:text-white transition-colors flex items-center">
           <span className="font-black text-slate-900 dark:text-white">TOOL</span>
           <span className="bg-gradient-to-tr from-[#FF8A00] via-[#FFA229] to-[#FF5500] bg-clip-text text-transparent font-black drop-shadow-[0_2px_8px_rgba(255,138,0,0.35)]">
             ty
           </span>
+        </span>
+        <span className="inline-block text-[10px] font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 border border-red-200/80 dark:border-red-900/40 px-1.5 py-0.5 rounded-full leading-none shadow-2xs">
+          🎅 2026 End
         </span>
       </div>
     </div>

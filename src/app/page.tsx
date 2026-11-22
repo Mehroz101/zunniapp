@@ -8,6 +8,7 @@ import { ValueSection } from '@/components/home/ValueSection';
 import { FaqSection } from '@/components/home/FaqSection';
 import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
 import { Footer } from '@/components/home/Footer';
+import { SnowEffect } from '@/components/effects/SnowEffect';
 import { fetchLiveLandingData } from '@/lib/data';
 
 export const metadata: Metadata = {
@@ -36,6 +37,9 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 selection:bg-[#FF8A00]/30 selection:text-slate-950 font-sans overflow-x-clip transition-colors duration-200">
+      {/* ❄️ Year-End 2026 Snowfall Effect (Home Page Exclusive) ❄️ */}
+      <SnowEffect />
+
       {/* 🚀 Fixed Floating Developer Pill Navbar 🚀 */}
       <Navbar />
 

@@ -38,7 +38,7 @@ export function Hero({ stats: _stats }: HeroProps) {
         <div className="mb-4 sm:mb-7 inline-flex items-center gap-2 rounded-full border border-red-200 dark:border-red-900/50 bg-red-50/90 dark:bg-red-950/40 px-3.5 sm:px-4 py-1.5 text-xs font-semibold text-red-700 dark:text-red-300 shadow-xs backdrop-blur-xs min-h-[32px] max-w-[94vw] sm:max-w-none">
           <span className="flex h-2 w-2 rounded-full bg-red-500 animate-pulse shrink-0" />
           <span className="tracking-wide text-[11px] sm:text-xs truncate sm:whitespace-normal">
-            🎅 Christmas &amp; Holiday Edition — Free Developer Tools &amp; Utilities ❄️
+            🎅 Year-End 2026 Celebration — Santa &amp; Holiday Edition ❄️
           </span>
         </div>
 
