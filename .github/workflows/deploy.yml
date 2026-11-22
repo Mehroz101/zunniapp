@@ -31,9 +31,9 @@ jobs:
       - name: Build Next.js app
         run: npm run build
         env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI || secrets.DATABASE_URL }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL || secrets.MONGODB_URI }}
           NODE_ENV: production
 
       # 5. SSH Remote Deployment to Hostinger
@@ -87,6 +87,8 @@ jobs:
 
             # 4. Generate Prisma Client & Build Next.js
             echo "🏗️ Generating Prisma Client & building Next.js..."
+            export DATABASE_URL="${{ secrets.DATABASE_URL || secrets.MONGODB_URI }}"
+            export MONGODB_URI="${{ secrets.MONGODB_URI || secrets.DATABASE_URL }}"
             npx prisma generate || true
             npm run build
 
