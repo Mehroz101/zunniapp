@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
@@ -135,6 +136,22 @@ export default function RootLayout({
       className={`${sansFont.variable} ${monoFont.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        {/* Google Tag Manager / Google Analytics (Global across 100% of pages, blog, tools & new routes) */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtm.js?id=G-ZF9QB5CZ7C"
+          strategy="afterInteractive"
+        />
+        <Script id="google-tag-manager-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-ZF9QB5CZ7C');
+          `}
+        </Script>
+      </head>
       <body className="min-h-screen max-w-full overflow-x-hidden bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 font-sans antialiased text-rendering-optimizeLegibility selection:bg-[#FF8A00]/30 selection:text-slate-950 transition-colors duration-200">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}

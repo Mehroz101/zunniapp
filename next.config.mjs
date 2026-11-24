@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const cspHeader = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://prod.spline.design https://*.spline.design;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.googletagmanager.com https://*.google-analytics.com https://prod.spline.design https://*.spline.design;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  img-src 'self' data: blob: https:;
+  img-src 'self' data: blob: https: https://www.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com;
   font-src 'self' data: https://fonts.gstatic.com;
-  connect-src 'self' https://toolty.online https://*.toolty.online https://prod.spline.design https://*.spline.design https://*.vercel.app https://aiiseverythingback.vercel.app http://localhost:4000 ws: wss: https:;
+  connect-src 'self' https://toolty.online https://*.toolty.online https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://prod.spline.design https://*.spline.design https://*.vercel.app https://aiiseverythingback.vercel.app http://localhost:4000 ws: wss: https:;
   frame-src 'self' https://*.spline.design https://my.spline.design;
   worker-src 'self' blob:;
   object-src 'none';
