@@ -52,6 +52,18 @@ jobs:
             echo "Current Dir:  $(pwd)"
             echo "==========================================="
 
+            # ── Load NVM so npm/npx/node are available in SSH shell ──
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+            # Fallback: try common Hostinger Node paths
+            export PATH="$HOME/.nvm/versions/node/$(ls $HOME/.nvm/versions/node 2>/dev/null | tail -1)/bin:$PATH"
+            export PATH="/usr/local/bin:/usr/bin:$PATH"
+
+            echo "✅ Node: $(node -v 2>/dev/null || echo 'NOT FOUND')"
+            echo "✅ npm:  $(npm -v 2>/dev/null || echo 'NOT FOUND')"
+
             # 1. Locate web directory
             TARGET_DIR=""
             if [ -d "$HOME/domains/toolty.online/public_html" ]; then
