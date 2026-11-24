@@ -12,110 +12,67 @@ jobs:
     timeout-minutes: 20
 
     steps:
-      # 1. Code checkout
+      # ── 1. Checkout ───────────────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Node.js setup
+      # ── 2. Node.js (GitHub Runner) ────────────────────────────────
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
 
-      # 3. Dependencies install (GitHub Runner)
+      # ── 3. Install deps (GitHub Runner) ──────────────────────────
       - name: Install dependencies
         run: npm ci
 
-      # 4. Next.js production build verification
+      # ── 4. Build Next.js (GitHub Runner — full Node.js available) ─
       - name: Build Next.js app
         run: npm run build
         env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI || secrets.DATABASE_URL }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          DATABASE_URL: ${{ secrets.MONGODB_URI }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL || secrets.MONGODB_URI }}
+          NEXT_PUBLIC_SITE_URL: https://toolty.online
+          REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
+          ADMIN_JWT_SECRET: ${{ secrets.ADMIN_JWT_SECRET }}
           NODE_ENV: production
 
-      # 5. SSH Remote Deployment to Hostinger
-      - name: Deploy to Hostinger via SSH
+      # ── 5. Prepare standalone output for upload ───────────────────
+      - name: Prepare standalone bundle
+        run: |
+          # Copy static assets into standalone (required for Next.js standalone)
+          cp -r .next/static .next/standalone/.next/static
+          cp -r public .next/standalone/public
+          # Copy root server.js into standalone if present
+          [ -f server.js ] && cp server.js .next/standalone/server.js || true
+
+      # ── 6. Upload built files to Hostinger via SCP ────────────────
+      #    We upload ONLY the compiled output — no npm/build on server needed
+      - name: Upload standalone build to Hostinger (SCP)
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOSTINGER_SSH_HOST }}
+          username: ${{ secrets.HOSTINGER_SSH_USER }}
+          password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
+          port: 65002
+          source: ".next/standalone/"
+          target: "~/domains/toolty.online/public_html"
+          strip_components: 2   # removes ".next/standalone/" prefix on target
+
+      # ── 7. Restart Node.js app on Hostinger via SSH ───────────────
+      #    No npm/build needed — just signal Hostinger to reload the process
+      - name: Restart Node.js app on Hostinger
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOSTINGER_SSH_HOST }}
           username: ${{ secrets.HOSTINGER_SSH_USER }}
           password: ${{ secrets.HOSTINGER_SSH_PASSWORD }}
-          port: ${{ secrets.HOSTINGER_SSH_PORT || 65002 }}
+          port: 65002
           script_stop: false
           script: |
-            echo "==========================================="
-            echo "🚀 Starting Hostinger Deployment..."
-            echo "Current User: $(whoami)"
-            echo "Current Dir:  $(pwd)"
-            echo "==========================================="
-
-            # ── Load NVM so npm/npx/node are available in SSH shell ──
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-            # Fallback: try common Hostinger Node paths
-            export PATH="$HOME/.nvm/versions/node/$(ls $HOME/.nvm/versions/node 2>/dev/null | tail -1)/bin:$PATH"
-            export PATH="/usr/local/bin:/usr/bin:$PATH"
-
-            echo "✅ Node: $(node -v 2>/dev/null || echo 'NOT FOUND')"
-            echo "✅ npm:  $(npm -v 2>/dev/null || echo 'NOT FOUND')"
-
-            # 1. Locate web directory
-            TARGET_DIR=""
-            if [ -d "$HOME/domains/toolty.online/public_html" ]; then
-              TARGET_DIR="$HOME/domains/toolty.online/public_html"
-            elif [ -d "$HOME/public_html" ]; then
-              TARGET_DIR="$HOME/public_html"
-            else
-              echo "⚠️ Default domain directory not found, checking current directory..."
-              TARGET_DIR="$(pwd)"
-            fi
-
-            echo "📁 Deploying to: $TARGET_DIR"
-            cd "$TARGET_DIR" || exit 1
-
-            # 2. Resilient Git Sync
-            echo "🔄 Synchronizing Git code from Mehroz101/zunniapp..."
-            if [ ! -d ".git" ]; then
-              echo "Initializing git repository..."
-              git init
-              git remote add origin https://github.com/Mehroz101/zunniapp.git
-            else
-              git remote set-url origin https://github.com/Mehroz101/zunniapp.git
-            fi
-
-            # Stash any local changes on server to prevent pull aborts
-            git stash || true
-            git fetch origin main --depth=1
-            git reset --hard origin/main
-
-            # 3. Install dependencies (including devDependencies needed for build)
-            echo "📦 Installing npm dependencies on Hostinger..."
-            npm install --no-audit --no-fund
-
-            # 4. Generate Prisma Client & Build Next.js
-            echo "🏗️ Generating Prisma Client & building Next.js..."
-            export DATABASE_URL="${{ secrets.DATABASE_URL || secrets.MONGODB_URI }}"
-            export MONGODB_URI="${{ secrets.MONGODB_URI || secrets.DATABASE_URL }}"
-            npx prisma generate || true
-            npm run build
-
-            # 5. Restart Node.js application on Hostinger
-            echo "♻️ Restarting Node.js application..."
-            # Hostinger Passenger restart mechanism (Standard for hPanel Node.js)
-            mkdir -p tmp
-            touch tmp/restart.txt
-
-            # PM2 restart (if used on Hostinger VPS / custom Node)
-            if command -v pm2 &> /dev/null; then
-              echo "Restarting via PM2..."
-              pm2 reload toolty-frontend || pm2 restart toolty-frontend || pm2 reload all || true
-            fi
-
-            echo "==========================================="
-            echo "✅ Deployment complete! toolty.online is live."
-            echo "==========================================="
+            TARGET="$HOME/domains/toolty.online/public_html"
+            mkdir -p "$TARGET/tmp"
+            touch "$TARGET/tmp/restart.txt"
+            echo "✅ Restart signal sent — toolty.online will reload in a few seconds."
