@@ -20,6 +20,8 @@ export interface DirectoryPost {
   id: string;
   title: string;
   slug: string;
+  href?: string;
+  contentType?: string;
   excerpt: string;
   readingTimeMins: number;
   publishedAt: string | null;
@@ -232,9 +234,9 @@ export function BlogFilterGrid({
           {paginatedPosts.map((post) => (
             <Link
               key={post.id}
-              href={`/blog/${post.slug}`}
+              href={post.href || `/blog/${post.slug}`}
               prefetch={true}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-[#0c1220] p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-xl"
             >
               <div>
                 {/* Top Badges */}

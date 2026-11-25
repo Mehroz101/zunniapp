@@ -10,22 +10,30 @@ import {
   Check,
   BookOpen,
   Newspaper,
-  Tag,
+  Bookmark,
+  Scale,
+  FileText,
   ChevronRight,
   Sparkles,
-  ExternalLink,
 } from 'lucide-react';
 import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
+import { ArticleContent } from '@/components/blog/ArticleContent';
+import { TableOfContents, type TocItem } from '@/components/blog/TableOfContents';
+
+export type ArticleFormatType = 'blog' | 'guide' | 'news' | 'glossary' | 'compare';
 
 export interface PublicArticleData {
   id: string;
   title: string;
   slug: string;
+  excerpt?: string;
   content: string;
-  type: 'guide' | 'news';
+  type: ArticleFormatType;
   category: string;
   featuredImage?: string;
+  tags?: string[];
+  authorName?: string;
   seo?: {
     title?: string;
     description?: string;
@@ -41,7 +49,7 @@ export interface RelatedArticleItem {
   slug: string;
   category: string;
   readingTime: number;
-  type: 'guide' | 'news';
+  type: ArticleFormatType;
   createdAt: string;
   featuredImage?: string;
 }
@@ -49,13 +57,36 @@ export interface RelatedArticleItem {
 interface PublicArticleViewProps {
   article: PublicArticleData;
   relatedArticles?: RelatedArticleItem[];
+  tocItems?: TocItem[];
 }
 
-export function PublicArticleView({ article, relatedArticles = [] }: PublicArticleViewProps) {
+const FORMAT_META: Record<
+  ArticleFormatType,
+  { path: string; shortLabel: string; sectionLabel: string }
+> = {
+  blog: { path: '/blog', shortLabel: 'Blog', sectionLabel: 'Editorial Blog' },
+  guide: { path: '/guides', shortLabel: 'Guides', sectionLabel: 'Technical Guides' },
+  news: { path: '/news', shortLabel: 'News', sectionLabel: 'News & Updates' },
+  glossary: { path: '/glossary', shortLabel: 'Glossary', sectionLabel: 'AI Glossary' },
+  compare: { path: '/compare', shortLabel: 'Compare', sectionLabel: 'Tool Comparisons' },
+};
+
+function FormatIcon({ type }: { type: ArticleFormatType }) {
+  if (type === 'news') return <Newspaper className="w-3.5 h-3.5" />;
+  if (type === 'guide') return <BookOpen className="w-3.5 h-3.5" />;
+  if (type === 'glossary') return <Bookmark className="w-3.5 h-3.5" />;
+  if (type === 'compare') return <Scale className="w-3.5 h-3.5" />;
+  return <FileText className="w-3.5 h-3.5" />;
+}
+
+export function PublicArticleView({
+  article,
+  relatedArticles = [],
+  tocItems = [],
+}: PublicArticleViewProps) {
   const [copied, setCopied] = useState(false);
 
-  const sectionPath = article.type === 'news' ? '/news' : '/guides';
-  const sectionLabel = article.type === 'news' ? 'News & Updates' : 'Technical Guides';
+  const meta = FORMAT_META[article.type] || FORMAT_META.blog;
 
   const formattedDate = new Date(article.createdAt).toLocaleDateString('en-US', {
     month: 'short',
@@ -73,19 +104,21 @@ export function PublicArticleView({ article, relatedArticles = [] }: PublicArtic
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 transition-colors duration-200 selection:bg-[#FF8A00]/30 selection:text-slate-950">
-      {/* Floating Pill Header Navbar */}
       <Navbar />
 
       <main className="pt-28 sm:pt-36 pb-20">
-        <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb Navigation */}
-          <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs font-mono text-slate-400 dark:text-slate-500 overflow-x-auto no-scrollbar whitespace-nowrap">
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-6 flex items-center gap-2 text-xs font-mono text-slate-400 dark:text-slate-500 overflow-x-auto no-scrollbar whitespace-nowrap"
+          >
             <Link href="/" className="hover:text-slate-900 dark:hover:text-white transition">
               Home
             </Link>
             <ChevronRight className="w-3.5 h-3.5 shrink-0 opacity-60" />
-            <Link href={sectionPath} className="hover:text-slate-900 dark:hover:text-white transition">
-              {article.type === 'news' ? 'News' : 'Guides'}
+            <Link href={meta.path} className="hover:text-slate-900 dark:hover:text-white transition">
+              {meta.shortLabel}
             </Link>
             <ChevronRight className="w-3.5 h-3.5 shrink-0 opacity-60" />
             <span className="text-[#FF8A00] truncate max-w-[200px] sm:max-w-xs">
@@ -97,11 +130,7 @@ export function PublicArticleView({ article, relatedArticles = [] }: PublicArtic
           <header className="mb-8 space-y-4">
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-orange-50 dark:bg-orange-950/40 text-orange-600 dark:text-[#FF8A00] border border-orange-200/80 dark:border-orange-800/60 shadow-xs">
-                {article.type === 'news' ? (
-                  <Newspaper className="w-3.5 h-3.5" />
-                ) : (
-                  <BookOpen className="w-3.5 h-3.5" />
-                )}
+                <FormatIcon type={article.type} />
                 <span>{article.category}</span>
               </span>
 
@@ -120,6 +149,12 @@ export function PublicArticleView({ article, relatedArticles = [] }: PublicArtic
               {article.title}
             </h1>
 
+            {article.excerpt && article.excerpt !== article.title && (
+              <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                {article.excerpt}
+              </p>
+            )}
+
             {/* Author Lockup & Actions */}
             <div className="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
@@ -128,7 +163,7 @@ export function PublicArticleView({ article, relatedArticles = [] }: PublicArtic
                 </div>
                 <div>
                   <div className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
-                    TOOLty Editorial Engineering
+                    {article.authorName || 'TOOLty Editorial Engineering'}
                   </div>
                   <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
                     Verified Publication
@@ -159,7 +194,7 @@ export function PublicArticleView({ article, relatedArticles = [] }: PublicArtic
             </div>
           </header>
 
-          {/* Featured Image Banner (if available) */}
+          {/* Featured Image Banner */}
           {article.featuredImage && (
             <div className="mb-10 rounded-2xl overflow-hidden border border-slate-200/90 dark:border-slate-800/90 shadow-xl shadow-slate-200/40 dark:shadow-black/50 bg-slate-100 dark:bg-slate-900 aspect-video relative">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -172,11 +207,35 @@ export function PublicArticleView({ article, relatedArticles = [] }: PublicArtic
             </div>
           )}
 
-          {/* Article Main Body (Rendered with Tailwind Prose & Tiptap Theme) */}
-          <div
-            className="tiptap prose dark:prose-invert max-w-none text-slate-800 dark:text-slate-200 leading-relaxed text-base sm:text-lg mb-16"
-            dangerouslySetInnerHTML={{ __html: article.content }}
-          />
+          {/* Body + Optional Table of Contents */}
+          <div className={tocItems.length > 0 ? 'grid gap-10 lg:grid-cols-12 mb-16' : 'mb-16'}>
+            <div className={tocItems.length > 0 ? 'lg:col-span-8 min-w-0' : 'min-w-0'}>
+              <div className="rounded-3xl border border-slate-200/90 dark:border-slate-800/90 bg-white dark:bg-[#070b14] p-6 sm:p-10 shadow-xs">
+                <ArticleContent contentMd={article.content} />
+              </div>
+
+              {Array.isArray(article.tags) && article.tags.length > 0 && (
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {article.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 px-3 py-1 text-xs text-slate-700 dark:text-slate-300 font-medium"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {tocItems.length > 0 && (
+              <aside className="lg:col-span-4">
+                <div className="sticky top-28 space-y-6">
+                  <TableOfContents items={tocItems} />
+                </div>
+              </aside>
+            )}
+          </div>
 
           {/* Post-Article Callout Banner */}
           <div className="rounded-3xl border border-slate-200/90 dark:border-slate-800/90 bg-gradient-to-r from-slate-50 via-orange-500/[0.03] to-slate-50 dark:from-slate-900/60 dark:via-orange-500/[0.05] dark:to-slate-900/60 p-6 sm:p-8 mb-16 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-6">
@@ -205,10 +264,10 @@ export function PublicArticleView({ article, relatedArticles = [] }: PublicArtic
             <div className="pt-10 border-t border-slate-200 dark:border-slate-800/80 space-y-6">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                  More in {sectionLabel}
+                  More in {meta.sectionLabel}
                 </h3>
                 <Link
-                  href={sectionPath}
+                  href={meta.path}
                   className="text-xs font-mono text-[#FF8A00] hover:underline flex items-center gap-1"
                 >
                   <span>View All</span>
@@ -217,29 +276,32 @@ export function PublicArticleView({ article, relatedArticles = [] }: PublicArtic
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {relatedArticles.map((rel) => (
-                  <Link
-                    key={rel.id}
-                    href={`${rel.type === 'news' ? '/news' : '/guides'}/${rel.slug}`}
-                    className="group rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900/40 p-4 shadow-2xs hover:border-[#FF8A00]/50 hover:shadow-md transition-all flex flex-col justify-between"
-                  >
-                    <div>
-                      <span className="text-[10.5px] font-mono font-bold text-[#FF8A00] block mb-1.5 uppercase">
-                        {rel.category}
-                      </span>
-                      <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100 group-hover:text-[#FF8A00] transition line-clamp-2 leading-snug">
-                        {rel.title}
-                      </h4>
-                    </div>
+                {relatedArticles.map((rel) => {
+                  const relMeta = FORMAT_META[rel.type] || FORMAT_META.blog;
+                  return (
+                    <Link
+                      key={rel.id}
+                      href={`${relMeta.path}/${rel.slug}`}
+                      className="group rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900/40 p-4 shadow-2xs hover:border-[#FF8A00]/50 hover:shadow-md transition-all flex flex-col justify-between"
+                    >
+                      <div>
+                        <span className="text-[10.5px] font-mono font-bold text-[#FF8A00] block mb-1.5 uppercase">
+                          {rel.category}
+                        </span>
+                        <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100 group-hover:text-[#FF8A00] transition line-clamp-2 leading-snug">
+                          {rel.title}
+                        </h4>
+                      </div>
 
-                    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between text-[11px] text-slate-400 font-mono">
-                      <span>{rel.readingTime || 3} min read</span>
-                      <span className="text-[#FF8A00] group-hover:translate-x-1 transition-transform">
-                        Read →
-                      </span>
-                    </div>
-                  </Link>
-                ))}
+                      <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                        <span>{rel.readingTime || 3} min read</span>
+                        <span className="text-[#FF8A00] group-hover:translate-x-1 transition-transform">
+                          Read →
+                        </span>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -247,17 +309,16 @@ export function PublicArticleView({ article, relatedArticles = [] }: PublicArtic
           {/* Back Button */}
           <div className="mt-12 text-center">
             <Link
-              href={sectionPath}
+              href={meta.path}
               className="inline-flex items-center gap-2 text-xs font-mono text-slate-500 hover:text-slate-900 dark:hover:text-white transition"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to {sectionLabel}</span>
+              <span>Back to {meta.sectionLabel}</span>
             </Link>
           </div>
         </article>
       </main>
 
-      {/* Global Enterprise Footer */}
       <Footer />
     </div>
   );

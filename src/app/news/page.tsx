@@ -12,8 +12,7 @@ import {
 } from 'lucide-react';
 import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
-import { connectToDatabase } from '@/lib/db/mongodb';
-import { Article } from '@/models/Article';
+import { getCmsArticles } from '@/lib/cms';
 
 export const metadata: Metadata = {
   title: 'AI News, Developer Updates & Industry Dispatches | TOOLty',
@@ -38,8 +37,8 @@ export const metadata: Metadata = {
   },
 };
 
-// 1-Hour Incremental Static Regeneration (ISR)
-export const revalidate = 3600;
+// 1-Minute ISR so newly published D1/Dashboard news dispatches show rapidly
+export const revalidate = 60;
 
 interface NewsItem {
   slug: string;
@@ -83,40 +82,22 @@ const FALLBACK_NEWS: NewsItem[] = [
 ];
 
 export default async function NewsHubPage() {
-  let dbNews: NewsItem[] = [];
+  const cmsNews = await getCmsArticles('NEWS', 50);
 
-  try {
-    await connectToDatabase();
-    const docs = await Article.find({ type: 'news', status: 'published' })
-      .sort({ createdAt: -1 })
-      .limit(30)
-      .lean();
-
-    if (docs && docs.length > 0) {
-      dbNews = docs.map((d: any) => {
-        const plainText = (d.content || '').replace(/<[^>]*>/g, '').trim();
-        return {
-          slug: d.slug,
-          title: d.title,
-          category: d.category || 'Industry News',
-          readingTime: d.readingTime || 3,
-          date: d.createdAt
-            ? new Date(d.createdAt).toLocaleDateString('en-US', {
-                month: 'short',
-                year: 'numeric',
-              })
-            : 'Recent',
-          description:
-            d.seo?.description ||
-            (plainText.length > 150 ? `${plainText.slice(0, 150)}...` : plainText) ||
-            'Explore this news dispatch on TOOLty.',
-          featuredImage: d.featuredImage || '',
-        };
-      });
-    }
-  } catch (err) {
-    console.warn('⚠️ [NewsHubPage] Could not query MongoDB news, using fallbacks:', err);
-  }
+  const dbNews: NewsItem[] = cmsNews.map((d) => ({
+    slug: d.slug,
+    title: d.title,
+    category: d.categoryName || 'Industry News',
+    readingTime: d.readingTimeMins || 3,
+    date: d.publishedAt
+      ? new Date(d.publishedAt).toLocaleDateString('en-US', {
+          month: 'short',
+          year: 'numeric',
+        })
+      : 'Recent',
+    description: d.excerpt || 'Explore this news dispatch on TOOLty.',
+    featuredImage: d.coverImage || '',
+  }));
 
   const allNews = dbNews.length > 0 ? dbNews : FALLBACK_NEWS;
 

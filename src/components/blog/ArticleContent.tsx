@@ -36,27 +36,30 @@ function highlightCode(code: string, language?: string): string {
 export function ArticleContent({ contentMd }: ArticleContentProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Configure marked instance with custom renderer
+  // Configure marked instance with custom renderer (supports both Markdown and Tiptap HTML)
   const htmlContent = useMemo(() => {
     const markedInstance = new Marked();
 
     markedInstance.use({
       renderer: {
-        heading(this: { parser: { parseInline: (t: Tokens.Heading['tokens']) => string } }, token: Tokens.Heading) {
+        heading(
+          this: { parser: { parseInline: (t: Tokens.Heading['tokens']) => string } },
+          token: Tokens.Heading
+        ) {
           const content = this.parser.parseInline(token.tokens);
           const plainText = content.replace(/<[^>]*>/g, '');
           const slug = slugify(plainText);
 
           if (token.depth === 2) {
-            return `<h2 id="${slug}" class="scroll-mt-28 mt-12 mb-4 text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 group flex items-center gap-2"><a href="#${slug}" class="text-inherit hover:text-orange-600 transition">${content}</a></h2>\n`;
+            return `<h2 id="${slug}" class="scroll-mt-28 mt-12 mb-4 text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white group flex items-center gap-2"><a href="#${slug}" class="text-inherit hover:text-orange-600 transition">${content}</a></h2>\n`;
           }
           if (token.depth === 3) {
-            return `<h3 id="${slug}" class="scroll-mt-28 mt-8 mb-3 text-xl font-bold tracking-tight text-slate-900 group flex items-center gap-2"><a href="#${slug}" class="text-inherit hover:text-orange-600 transition">${content}</a></h3>\n`;
+            return `<h3 id="${slug}" class="scroll-mt-28 mt-8 mb-3 text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100 group flex items-center gap-2"><a href="#${slug}" class="text-inherit hover:text-orange-600 transition">${content}</a></h3>\n`;
           }
           if (token.depth === 4) {
-            return `<h4 id="${slug}" class="scroll-mt-28 mt-6 mb-2 text-lg font-semibold text-slate-900">${content}</h4>\n`;
+            return `<h4 id="${slug}" class="scroll-mt-28 mt-6 mb-2 text-lg font-semibold text-slate-900 dark:text-slate-100">${content}</h4>\n`;
           }
-          return `<h${token.depth} class="mt-6 mb-2 text-base font-semibold text-slate-900">${content}</h${token.depth}>\n`;
+          return `<h${token.depth} class="mt-6 mb-2 text-base font-semibold text-slate-900 dark:text-slate-100">${content}</h${token.depth}>\n`;
         },
 
         code(token: Tokens.Code) {
@@ -77,22 +80,28 @@ export function ArticleContent({ contentMd }: ArticleContentProps) {
 `;
         },
 
-        blockquote(this: { parser: { parse: (t: Tokens.Blockquote['tokens']) => string } }, token: Tokens.Blockquote) {
+        blockquote(
+          this: { parser: { parse: (t: Tokens.Blockquote['tokens']) => string } },
+          token: Tokens.Blockquote
+        ) {
           const body = this.parser.parse(token.tokens);
-          return `<blockquote class="my-6 border-l-4 border-orange-500 bg-orange-50/70 px-6 py-4 rounded-r-2xl text-slate-700 italic text-sm sm:text-base leading-relaxed">${body}</blockquote>\n`;
+          return `<blockquote class="my-6 border-l-4 border-orange-500 bg-orange-50/70 dark:bg-orange-950/30 px-6 py-4 rounded-r-2xl text-slate-700 dark:text-slate-300 italic text-sm sm:text-base leading-relaxed">${body}</blockquote>\n`;
         },
 
-        link(this: { parser: { parseInline: (t: Tokens.Link['tokens']) => string } }, token: Tokens.Link) {
+        link(
+          this: { parser: { parseInline: (t: Tokens.Link['tokens']) => string } },
+          token: Tokens.Link
+        ) {
           const text = this.parser.parseInline(token.tokens);
           const isExternal = token.href.startsWith('http');
-          return `<a href="${token.href}" ${token.title ? `title="${token.title}"` : ''} class="text-orange-600 hover:text-orange-700 underline underline-offset-4 decoration-orange-300 hover:decoration-orange-600 font-semibold transition" ${isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`;
+          return `<a href="${token.href}" ${token.title ? `title="${token.title}"` : ''} class="text-orange-600 dark:text-[#FF8A00] hover:text-orange-700 underline underline-offset-4 decoration-orange-300 hover:decoration-orange-600 font-semibold transition" ${isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''}>${text}</a>`;
         },
 
         table(token: Tokens.Table) {
           const headerCells = token.header
             .map(
               (cell) =>
-                `<th class="border-b border-slate-200 bg-slate-100 px-4 py-3 text-left font-bold text-slate-900 text-xs sm:text-sm">${cell.text}</th>`
+                `<th class="border-b border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 px-4 py-3 text-left font-bold text-slate-900 dark:text-white text-xs sm:text-sm">${cell.text}</th>`
             )
             .join('');
 
@@ -101,15 +110,15 @@ export function ArticleContent({ contentMd }: ArticleContentProps) {
               const cells = row
                 .map(
                   (cell) =>
-                    `<td class="border-b border-slate-100 px-4 py-3 text-slate-700 text-xs sm:text-sm">${cell.text}</td>`
+                    `<td class="border-b border-slate-100 dark:border-slate-800/70 px-4 py-3 text-slate-700 dark:text-slate-300 text-xs sm:text-sm">${cell.text}</td>`
                 )
                 .join('');
-              return `<tr class="hover:bg-slate-50 transition">${cells}</tr>`;
+              return `<tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition">${cells}</tr>`;
             })
             .join('');
 
           return `
-<div class="my-8 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-xs">
+<div class="my-8 overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0b101b] shadow-xs">
   <table class="w-full border-collapse text-left">
     <thead><tr>${headerCells}</tr></thead>
     <tbody>${rows}</tbody>
@@ -118,30 +127,44 @@ export function ArticleContent({ contentMd }: ArticleContentProps) {
 `;
         },
 
-        list(this: { parser: { parse: (t: Tokens.List['items']) => string } }, token: Tokens.List) {
+        list(
+          this: { parser: { parse: (t: Tokens.List['items']) => string } },
+          token: Tokens.List
+        ) {
           const body = this.parser.parse(token.items);
           const tag = token.ordered ? 'ol' : 'ul';
           const listClass = token.ordered
-            ? 'list-decimal list-outside pl-6 space-y-2.5 my-4 text-slate-700 text-sm sm:text-base leading-relaxed'
-            : 'list-disc list-outside pl-6 space-y-2.5 my-4 text-slate-700 text-sm sm:text-base leading-relaxed';
+            ? 'list-decimal list-outside pl-6 space-y-2.5 my-4 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed'
+            : 'list-disc list-outside pl-6 space-y-2.5 my-4 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed';
           return `<${tag} class="${listClass}">${body}</${tag}>\n`;
         },
 
-        paragraph(this: { parser: { parseInline: (t: Tokens.Paragraph['tokens']) => string } }, token: Tokens.Paragraph) {
+        paragraph(
+          this: { parser: { parseInline: (t: Tokens.Paragraph['tokens']) => string } },
+          token: Tokens.Paragraph
+        ) {
           const body = this.parser.parseInline(token.tokens);
-          return `<p class="my-4 text-slate-700 text-sm sm:text-base leading-relaxed font-normal">${body}</p>\n`;
+          return `<p class="my-4 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed font-normal">${body}</p>\n`;
         },
 
         codespan(token: Tokens.Codespan) {
-          return `<code class="rounded-md border border-slate-200 bg-slate-100 px-1.5 py-0.5 font-mono text-xs sm:text-sm text-orange-700 font-semibold">${token.text}</code>`;
+          return `<code class="rounded-md border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 px-1.5 py-0.5 font-mono text-xs sm:text-sm text-orange-700 dark:text-orange-400 font-semibold">${token.text}</code>`;
         },
       },
     });
 
-    return markedInstance.parse(contentMd) as string;
+    const parsed = markedInstance.parse(contentMd || '') as string;
+
+    // Ensure raw HTML <h2>/<h3> tags (from Tiptap) also carry id anchors for TOC navigation
+    return parsed.replace(/<h([23])([^>]*)>(.*?)<\/h\1>/gi, (full, level, attrs, inner) => {
+      if (/\bid\s*=/.test(attrs)) return full;
+      const text = inner.replace(/<[^>]*>/g, '').trim();
+      const id = slugify(text);
+      if (!id) return full;
+      return `<h${level} id="${id}" class="scroll-mt-28"${attrs}>${inner}</h${level}>`;
+    });
   }, [contentMd]);
 
-  // Attach interactive click handler to copy buttons inside rendered markdown
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -186,7 +209,7 @@ export function ArticleContent({ contentMd }: ArticleContentProps) {
   return (
     <div
       ref={containerRef}
-      className="article-body font-sans text-slate-800 antialiased"
+      className="article-body tiptap prose dark:prose-invert max-w-none font-sans text-slate-800 dark:text-slate-200 antialiased"
       dangerouslySetInnerHTML={{ __html: htmlContent }}
     />
   );

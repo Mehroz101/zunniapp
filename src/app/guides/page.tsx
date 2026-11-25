@@ -13,8 +13,7 @@ import {
 } from 'lucide-react';
 import { Navbar } from '@/components/home/Navbar';
 import { Footer } from '@/components/home/Footer';
-import { connectToDatabase } from '@/lib/db/mongodb';
-import { Article } from '@/models/Article';
+import { getCmsArticles } from '@/lib/cms';
 
 export const metadata: Metadata = {
   title: 'AI Engineering Guides & Production Architectures | TOOLty',
@@ -39,8 +38,8 @@ export const metadata: Metadata = {
   },
 };
 
-// 1-Hour Incremental Static Regeneration (ISR)
-export const revalidate = 3600;
+// 1-Minute ISR so newly published D1/Dashboard guides show rapidly
+export const revalidate = 60;
 
 interface GuideItem {
   slug: string;
@@ -123,41 +122,23 @@ const STATIC_GUIDES: GuideItem[] = [
 ];
 
 export default async function GuidesHubPage() {
-  let dbGuides: GuideItem[] = [];
+  const cmsGuides = await getCmsArticles('GUIDE', 50);
 
-  try {
-    await connectToDatabase();
-    const docs = await Article.find({ type: 'guide', status: 'published' })
-      .sort({ createdAt: -1 })
-      .limit(30)
-      .lean();
-
-    if (docs && docs.length > 0) {
-      dbGuides = docs.map((d: any) => {
-        const plainText = (d.content || '').replace(/<[^>]*>/g, '').trim();
-        return {
-          slug: d.slug,
-          title: d.title,
-          category: d.category || 'Architecture',
-          readTime: `${d.readingTime || 4} min read`,
-          date: d.createdAt
-            ? new Date(d.createdAt).toLocaleDateString('en-US', {
-                month: 'short',
-                year: 'numeric',
-              })
-            : 'Recent',
-          description:
-            d.seo?.description ||
-            (plainText.length > 150 ? `${plainText.slice(0, 150)}...` : plainText) ||
-            'Explore this technical guide on TOOLty.',
-          href: `/guides/${d.slug}`,
-          tags: [d.category || 'Guide', 'AI', 'Architecture'],
-        };
-      });
-    }
-  } catch (err) {
-    console.warn('⚠️ [GuidesHubPage] Could not query MongoDB guides, using fallbacks:', err);
-  }
+  const dbGuides: GuideItem[] = cmsGuides.map((d) => ({
+    slug: d.slug,
+    title: d.title,
+    category: d.categoryName || 'Architecture',
+    readTime: `${d.readingTimeMins || 4} min read`,
+    date: d.publishedAt
+      ? new Date(d.publishedAt).toLocaleDateString('en-US', {
+          month: 'short',
+          year: 'numeric',
+        })
+      : 'Recent',
+    description: d.excerpt || 'Explore this technical guide on TOOLty.',
+    href: `/guides/${d.slug}`,
+    tags: d.tags.length > 0 ? d.tags : [d.categoryName || 'Guide', 'AI', 'Architecture'],
+  }));
 
   // Combine MongoDB dynamic guides with curated catalog, preventing slug duplicates
   const existingSlugs = new Set(dbGuides.map((g) => g.slug));

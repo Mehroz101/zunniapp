@@ -1,7 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { prisma } from '@/lib/prisma';
-import { connectToDatabase } from '@/lib/db/mongodb';
-import { Article } from '@/models/Article';
+import { getArticlePublicPath, getCmsArticles } from '@/lib/cms';
 import { CALCULATORS_REGISTRY } from '@/lib/config/calculators';
 import { getAllTools } from '@/lib/tools/registry';
 
@@ -13,53 +12,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
   const now = new Date();
 
-  // 1. Static Core Routes (Priority: 1.0, daily changeFreq)
   const staticRoutes: MetadataRoute.Sitemap = [
-    {
-      url: `${baseUrl}/`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/ai-tools`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/tools`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/calculators`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/guides`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/news`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.9,
-    },
+    { url: `${baseUrl}/`, lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+    { url: `${baseUrl}/ai-tools`, lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+    { url: `${baseUrl}/tools`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
+    { url: `${baseUrl}/calculators`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
+    { url: `${baseUrl}/blog`, lastModified: now, changeFrequency: 'daily', priority: 1.0 },
+    { url: `${baseUrl}/guides`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
+    { url: `${baseUrl}/news`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
+    { url: `${baseUrl}/glossary`, lastModified: now, changeFrequency: 'daily', priority: 0.8 },
+    { url: `${baseUrl}/compare`, lastModified: now, changeFrequency: 'daily', priority: 0.8 },
   ];
 
-  // Dynamic Calculators: /calculators/${calc.slug} (Priority: 0.8)
   const calculatorRoutes: MetadataRoute.Sitemap = Object.values(CALCULATORS_REGISTRY).map((calc) => ({
     url: `${baseUrl}/calculators/${calc.slug}`,
     lastModified: now,
@@ -67,7 +31,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  // Dynamic Developer & Compiler Tools: /tools/${tool.slug} (Priority: 0.8)
   const registryToolRoutes: MetadataRoute.Sitemap = getAllTools().map((tool) => ({
     url: `${baseUrl}/tools/${tool.slug}`,
     lastModified: now,
@@ -75,101 +38,57 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  try {
-    // 2. Fetch dynamic published tools, active categories, and published blog posts
-    const [publishedTools, activeCategories, publishedPosts] = await Promise.all([
-      prisma.tool.findMany({
+  const [publishedTools, activeCategories, cmsArticles] = await Promise.all([
+    prisma.tool
+      .findMany({
         where: { status: 'PUBLISHED' },
-        select: {
-          slug: true,
-          updatedAt: true,
-          category: {
-            select: {
-              slug: true,
-            },
-          },
-        },
+        select: { slug: true, updatedAt: true, category: { select: { slug: true } } },
         orderBy: { updatedAt: 'desc' },
-      }),
-      prisma.toolCategory.findMany({
+      })
+      .catch(() => []),
+    prisma.toolCategory
+      .findMany({
         where: { isActive: true },
-        select: {
-          slug: true,
-          updatedAt: true,
-        },
+        select: { slug: true, updatedAt: true },
         orderBy: { displayOrder: 'asc' },
-      }),
-      prisma.post.findMany({
-        where: { status: 'PUBLISHED' },
-        select: {
-          slug: true,
-          updatedAt: true,
-        },
-        orderBy: { updatedAt: 'desc' },
-      }),
-    ]);
+      })
+      .catch(() => []),
+    getCmsArticles('ALL', 200).catch(() => []),
+  ]);
 
-    // Dynamic Tools: /ai-tools/${tool.category.slug}/${tool.slug} (Priority: 0.8)
-    const toolRoutes: MetadataRoute.Sitemap = publishedTools
-      .filter((tool) => Boolean(tool.slug && tool.category?.slug))
-      .map((tool) => ({
-        url: `${baseUrl}/ai-tools/${tool.category.slug}/${tool.slug}`,
-        lastModified: tool.updatedAt ? new Date(tool.updatedAt) : now,
-        changeFrequency: 'weekly',
-        priority: 0.8,
-      }));
+  const toolRoutes: MetadataRoute.Sitemap = publishedTools
+    .filter((tool) => Boolean(tool.slug && tool.category?.slug))
+    .map((tool) => ({
+      url: `${baseUrl}/ai-tools/${tool.category.slug}/${tool.slug}`,
+      lastModified: tool.updatedAt ? new Date(tool.updatedAt) : now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    }));
 
-    // Dynamic Categories: /ai-tools/${category.slug} (Priority: 0.7)
-    const categoryRoutes: MetadataRoute.Sitemap = activeCategories
-      .filter((cat) => Boolean(cat.slug))
-      .map((cat) => ({
-        url: `${baseUrl}/ai-tools/${cat.slug}`,
-        lastModified: cat.updatedAt ? new Date(cat.updatedAt) : now,
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      }));
+  const categoryRoutes: MetadataRoute.Sitemap = activeCategories
+    .filter((cat) => Boolean(cat.slug))
+    .map((cat) => ({
+      url: `${baseUrl}/ai-tools/${cat.slug}`,
+      lastModified: cat.updatedAt ? new Date(cat.updatedAt) : now,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    }));
 
-    // Dynamic Blog Posts: /blog/${post.slug} (Priority: 0.7)
-    const postRoutes: MetadataRoute.Sitemap = publishedPosts
-      .filter((post) => Boolean(post.slug))
-      .map((post) => ({
-        url: `${baseUrl}/blog/${post.slug}`,
-        lastModified: post.updatedAt ? new Date(post.updatedAt) : now,
-        changeFrequency: 'weekly',
-        priority: 0.7,
-      }));
+  const cmsArticleRoutes: MetadataRoute.Sitemap = cmsArticles
+    .filter((art) => Boolean(art.slug))
+    .map((art) => ({
+      url: `${baseUrl}${getArticlePublicPath(art.slug, art.contentType)}`,
+      lastModified: art.updatedAt ? new Date(art.updatedAt) : now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    }));
 
-    // Dynamic Mongoose Technical Articles & News Dispatches: /guides/[slug] & /news/[slug]
-    let articleRoutes: MetadataRoute.Sitemap = [];
-    try {
-      await connectToDatabase();
-      const articles = await Article.find({ status: 'published' })
-        .select('slug type updatedAt')
-        .lean();
-
-      articleRoutes = articles
-        .filter((art: any) => Boolean(art.slug))
-        .map((art: any) => ({
-          url: `${baseUrl}/${art.type === 'news' ? 'news' : 'guides'}/${art.slug}`,
-          lastModified: art.updatedAt ? new Date(art.updatedAt) : now,
-          changeFrequency: 'weekly',
-          priority: 0.8,
-        }));
-    } catch (artErr) {
-      console.warn('[Sitemap] Mongoose articles fetch failed or offline:', artErr);
-    }
-
-    return [
-      ...staticRoutes,
-      ...registryToolRoutes,
-      ...calculatorRoutes,
-      ...toolRoutes,
-      ...categoryRoutes,
-      ...postRoutes,
-      ...articleRoutes,
-    ];
-  } catch (error) {
-    console.warn('[Sitemap] Database fetch failed or offline, returning fallback static routes:', error);
-    return [...staticRoutes, ...registryToolRoutes, ...calculatorRoutes];
-  }
+  return [
+    ...staticRoutes,
+    ...registryToolRoutes,
+    ...calculatorRoutes,
+    ...toolRoutes,
+    ...categoryRoutes,
+    ...cmsArticleRoutes,
+  ];
 }

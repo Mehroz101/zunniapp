@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ChevronRight, Sparkles, Newspaper } from 'lucide-react';
 import { prisma } from '@/lib/prisma';
+import { getArticlePublicPath, getCmsArticles } from '@/lib/cms';
 import { slugify } from '@/lib/utils';
 import {
   buildCollectionPageSchema,
@@ -50,21 +51,12 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function BlogArchivePage() {
-  let rawPosts: Array<any> = [];
   let rawCategories: Array<any> = [];
 
-  try {
-    // 1. Fetch published posts and active categories directly via Prisma
-    [rawPosts, rawCategories] = await Promise.all([
-      prisma.post.findMany({
-        where: { status: 'PUBLISHED' },
-        include: {
-          contentCategory: true,
-          author: true,
-        },
-        orderBy: [{ publishedAt: 'desc' }, { createdAt: 'desc' }],
-      }),
-      prisma.contentCategory.findMany({
+  const [cmsPosts, prismaCats] = await Promise.all([
+    getCmsArticles('ALL', 100),
+    prisma.contentCategory
+      .findMany({
         where: { isActive: true },
         include: {
           _count: {
@@ -76,79 +68,39 @@ export default async function BlogArchivePage() {
           },
         },
         orderBy: { displayOrder: 'asc' },
-      }),
-    ]);
-  } catch (error) {
-    console.warn('[BlogArchivePage] Prisma DB query fallback:', (error as Error).message);
-  }
+      })
+      .catch(() => []),
+  ]);
+  rawCategories = prismaCats;
 
-  // Fallback to backend API if Prisma was empty or offline
-  if (rawPosts.length === 0) {
-    try {
-      const apiUrl =
-        process.env.NEXT_PUBLIC_API_URL || 'https://aiiseverythingback.vercel.app/api';
-      const res = await fetch(`${apiUrl}/posts?status=PUBLISHED`, {
-        next: { revalidate: 60 },
-      });
-      if (res.ok) {
-        const json = await res.json();
-        if (json.success && Array.isArray(json.data)) {
-          rawPosts = json.data;
-        }
-      }
-    } catch (e) {
-      console.warn('[BlogArchivePage] Backend API fallback error:', (e as Error).message);
-    }
-  }
-
-  // 2. Serialize posts
-  const posts: DirectoryPost[] = rawPosts.map((p) => {
-    const catName =
-      p.category ||
-      p.contentCategory?.name ||
-      (Array.isArray(p.categories) && p.categories.length > 0 ? p.categories[0] : 'AI News');
-    const catSlug = slugify(catName);
-
-    const postTags = Array.isArray(p.tags)
-      ? p.tags.map((t: any) =>
-          typeof t === 'string'
-            ? { id: t, name: t, slug: slugify(t) }
-            : { id: t.id || t.name, name: t.name, slug: t.slug || slugify(t.name) }
-        )
-      : [];
+  // 2. Serialize posts across D1/Dashboard and MongoDB with canonical format URLs
+  const posts: DirectoryPost[] = cmsPosts.map((p) => {
+    const catSlug = slugify(p.categoryName || 'ai-news');
+    const postTags = (p.tags || []).map((t) => ({
+      id: t,
+      name: t,
+      slug: slugify(t),
+    }));
 
     return {
       id: p.id,
       title: p.title,
       slug: p.slug,
-      excerpt: p.excerpt || '',
-      coverImage: p.coverImage || p.ogImage || null,
-      contentMd: p.content || p.contentMd || '',
+      href: getArticlePublicPath(p.slug, p.contentType),
+      contentType: p.contentType,
+      excerpt: p.excerpt,
       readingTimeMins: p.readingTimeMins || 3,
-      publishedAt: p.publishedAt
-        ? typeof p.publishedAt === 'string'
-          ? p.publishedAt
-          : p.publishedAt.toISOString()
-        : p.createdAt
-        ? typeof p.createdAt === 'string'
-          ? p.createdAt
-          : p.createdAt.toISOString()
-        : null,
+      publishedAt: p.publishedAt || p.createdAt || null,
       viewCount: p.viewCount || 0,
       category: {
         id: p.categoryId || catSlug,
-        name: catName,
+        name: p.categoryName || 'AI News',
         slug: catSlug,
       },
-      author: p.author
-        ? {
-            id: p.author.id,
-            name: p.author.name,
-          }
-        : {
-            id: 'editorial',
-            name: 'TOOLty Editorial',
-          },
+      author: {
+        id: 'editorial',
+        name: p.authorName || 'TOOLty Editorial',
+      },
       tags: postTags,
     };
   });
@@ -195,7 +147,7 @@ export default async function BlogArchivePage() {
     url: 'https://toolty.online/blog',
     items: posts.slice(0, 15).map((p) => ({
       name: p.title,
-      url: `https://toolty.online/blog/${p.slug}`,
+      url: `https://toolty.online${p.href || `/blog/${p.slug}`}`,
       description: p.excerpt,
     })),
   });
