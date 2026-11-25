@@ -3,7 +3,7 @@ import { FormatHubPage } from '@/components/article/FormatHubPage';
 import { getCmsArticles } from '@/lib/cms';
 
 export const metadata: Metadata = {
-  title: 'AI Glossary & Engineering Encyclopedia | TOOLty',
+  title: 'AI Glossary & Engineering Encyclopedia',
   description:
     'Clear definitions, developer terminology, LLM concepts, and production engineering terms curated by TOOLty.',
   alternates: { canonical: 'https://toolty.online/glossary' },

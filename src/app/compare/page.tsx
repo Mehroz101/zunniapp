@@ -3,7 +3,7 @@ import { FormatHubPage } from '@/components/article/FormatHubPage';
 import { getCmsArticles } from '@/lib/cms';
 
 export const metadata: Metadata = {
-  title: 'AI Tool Comparisons & Benchmarks | TOOLty',
+  title: 'AI Tool Comparisons & Benchmarks',
   description:
     'Data-driven head-to-head AI tool comparisons, feature matrices, pricing breakdowns, and engineering benchmarks on TOOLty.',
   alternates: { canonical: 'https://toolty.online/compare' },
