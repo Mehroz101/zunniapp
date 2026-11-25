@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { BookOpen, ArrowRight, PlusCircle, Clock, FileText } from 'lucide-react';
 import type { LivePost } from '@/lib/data';
+import { getArticlePublicPath } from '@/lib/cms';
 
 interface LatestArticlesGridProps {
   posts: LivePost[];
@@ -39,7 +40,7 @@ export function LatestArticlesGrid({ posts }: LatestArticlesGridProps) {
             {posts.map((post) => (
               <Link
                 key={post.id}
-                href={`/blog/${post.slug}`}
+                href={getArticlePublicPath(post.slug, post.contentType)}
                 className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl"
               >
                 <div>
@@ -79,7 +80,7 @@ export function LatestArticlesGrid({ posts }: LatestArticlesGridProps) {
               Publish your first AI guide or breakdown using the admin markdown editor.
             </p>
             <a
-              href="http://localhost:3001/posts/new"
+              href="https://aiiseverythingdashboard.vercel.app/posts/new"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-950 px-4 py-2 text-xs font-semibold text-white shadow-md transition hover:bg-slate-800"

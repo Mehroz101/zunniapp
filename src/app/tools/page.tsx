@@ -38,7 +38,14 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-export default async function ToolsHubPage() {
+interface ToolsHubPageProps {
+  searchParams?: Promise<{ category?: string; q?: string }>;
+}
+
+export default async function ToolsHubPage({ searchParams }: ToolsHubPageProps) {
+  const resolvedParams = searchParams ? await searchParams : {};
+  const initialCategory = resolvedParams?.category || 'all';
+  const initialQuery = resolvedParams?.q || '';
   const registryTools = getAllTools();
   let dbTools: any[] = [];
   try {
@@ -114,7 +121,11 @@ export default async function ToolsHubPage() {
       <main className="flex-1 pt-28 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Interactive Tools Directory */}
-          <ToolsDirectoryView tools={tools} />
+          <ToolsDirectoryView
+            tools={tools}
+            initialCategory={initialCategory}
+            initialQuery={initialQuery}
+          />
 
           {/* Value Prop Banner */}
           <div className="mt-20 rounded-3xl border border-slate-200 dark:border-slate-800/80 bg-slate-50 dark:bg-[#07090f] p-8 sm:p-12">

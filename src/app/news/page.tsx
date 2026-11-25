@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
 };
 
-// 1-Minute ISR so newly published D1/Dashboard news dispatches show rapidly
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 interface NewsItem {
   slug: string;
@@ -50,36 +50,6 @@ interface NewsItem {
   featuredImage?: string;
   isExternal?: boolean;
 }
-
-const FALLBACK_NEWS: NewsItem[] = [
-  {
-    slug: 'gemini-flash-thinking-release',
-    title: 'Gemini 2.0 Flash Thinking: Sub-Second Reasoning Loops in Production',
-    category: 'Model Releases',
-    readingTime: 4,
-    date: 'Oct 2026',
-    description:
-      'Google introduces native dynamic reasoning chains inside lightweight Flash models, cutting agent decision latency by 64% while maintaining SOTA problem-solving accuracy.',
-  },
-  {
-    slug: 'nextjs-16-turbopack-stable',
-    title: 'Next.js 16 Drops: Turbopack by Default & Native Node.js Buffer Streaming',
-    category: 'Frameworks',
-    readingTime: 5,
-    date: 'Oct 2026',
-    description:
-      'Vercel announces Next.js 16 featuring complete Turbopack parity, asynchronous request parameters, and edge-native zero-copy response pipelines.',
-  },
-  {
-    slug: 'open-source-coder-models-parity',
-    title: 'Open Weights Reach Frontier Frontier Parity on SWE-bench Verified',
-    category: 'Open Source AI',
-    readingTime: 6,
-    date: 'Oct 2026',
-    description:
-      'Latest 70B MoE architectures achieve 58.2% on SWE-bench Verified, challenging proprietary closed-source models and redefining self-hosted developer toolchains.',
-  },
-];
 
 export default async function NewsHubPage() {
   const cmsNews = await getCmsArticles('NEWS', 50);
@@ -99,7 +69,7 @@ export default async function NewsHubPage() {
     featuredImage: d.coverImage || '',
   }));
 
-  const allNews = dbNews.length > 0 ? dbNews : FALLBACK_NEWS;
+  const allNews = dbNews;
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 font-sans transition-colors duration-200">
@@ -126,52 +96,61 @@ export default async function NewsHubPage() {
         </div>
 
         {/* News Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {allNews.map((news) => (
-            <Link
-              key={news.slug}
-              href={`/news/${news.slug}`}
-              prefetch={true}
-              className="group rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c1220] p-6 shadow-xs hover:border-orange-500/40 dark:hover:border-orange-500/40 transition-all flex flex-col justify-between"
-            >
-              <div>
-                {/* Meta Row */}
-                <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-3">
-                  <span className="font-mono font-bold text-[#FF8A00] text-[10px] uppercase tracking-wider">
-                    {news.category}
-                  </span>
-                  <div className="flex items-center gap-2 text-[11px]">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      <span>{news.date}</span>
-                    </div>
-                    <span>•</span>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-3 w-3" />
-                      <span>{news.readingTime} min</span>
+        {allNews.length > 0 ? (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {allNews.map((news) => (
+              <Link
+                key={news.slug}
+                href={`/news/${news.slug}`}
+                prefetch={true}
+                className="group rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c1220] p-6 shadow-xs hover:border-orange-500/40 dark:hover:border-orange-500/40 transition-all flex flex-col justify-between"
+              >
+                <div>
+                  {/* Meta Row */}
+                  <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-3">
+                    <span className="font-mono font-bold text-[#FF8A00] text-[10px] uppercase tracking-wider">
+                      {news.category}
+                    </span>
+                    <div className="flex items-center gap-2 text-[11px]">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-3 w-3" />
+                        <span>{news.date}</span>
+                      </div>
+                      <span>•</span>
+                      <div className="flex items-center gap-1">
+                        <Clock className="h-3 w-3" />
+                        <span>{news.readingTime} min</span>
+                      </div>
                     </div>
                   </div>
+
+                  {/* News Title */}
+                  <h2 className="text-base sm:text-lg font-bold text-slate-950 dark:text-white group-hover:text-[#FF8A00] transition leading-snug mb-3 line-clamp-2">
+                    {news.title}
+                  </h2>
+
+                  {/* Description */}
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4 line-clamp-3">
+                    {news.description}
+                  </p>
                 </div>
 
-                {/* News Title */}
-                <h2 className="text-base sm:text-lg font-bold text-slate-950 dark:text-white group-hover:text-[#FF8A00] transition leading-snug mb-3 line-clamp-2">
-                  {news.title}
-                </h2>
-
-                {/* Description */}
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4 line-clamp-3">
-                  {news.description}
-                </p>
-              </div>
-
-              {/* Read Action */}
-              <div className="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-semibold text-[#FF8A00]">
-                <span>Read Dispatch</span>
-                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition" />
-              </div>
-            </Link>
-          ))}
-        </div>
+                {/* Read Action */}
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-semibold text-[#FF8A00]">
+                  <span>Read Dispatch</span>
+                  <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/40 p-12 text-center max-w-2xl mx-auto space-y-3">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">News Dispatches Coming Soon</h2>
+            <p className="text-sm text-slate-600 dark:text-slate-400">
+              Publish a News article from your CMS dashboard to see it featured here immediately.
+            </p>
+          </div>
+        )}
       </main>
 
       <Footer />

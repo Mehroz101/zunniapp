@@ -174,13 +174,18 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/compare" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+                  Tool Comparisons
+                </Link>
+              </li>
+              <li>
                 <Link href="/sitemap.xml" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
                   XML Sitemap
                 </Link>
               </li>
               <li>
-                <Link href="/api/health" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
-                  API Status
+                <Link href="/rss.xml" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+                  RSS Feed
                 </Link>
               </li>
             </ul>

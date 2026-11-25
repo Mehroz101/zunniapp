@@ -66,10 +66,11 @@ export default function NotFound() {
             </p>
             <div className="flex flex-wrap items-center justify-center gap-2">
               {[
-                { name: 'AI News', href: '/blog?category=ai-news' },
-                { name: 'Tutorials', href: '/blog?category=tutorials' },
+                { name: 'AI News', href: '/news' },
+                { name: 'Technical Guides', href: '/guides' },
                 { name: 'Code Converters', href: '/ai-tools/coding' },
-                { name: 'LLM Benchmarks', href: '/blog?category=reviews' },
+                { name: 'AI Glossary', href: '/glossary' },
+                { name: 'Tool Comparisons', href: '/compare' },
               ].map((item) => (
                 <Link
                   key={item.name}

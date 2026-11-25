@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import mongoose from 'mongoose';
 import slugify from 'slugify';
 import { connectToDatabase } from '@/lib/db/mongodb';
+import { getArticlePublicPath } from '@/lib/cms';
+import { syncAndSubmitSeo } from '@/lib/seo/submit';
 import { Article } from '@/models/Article';
 
 interface RouteContext {
@@ -147,6 +149,15 @@ export async function PUT(req: NextRequest, context: RouteContext) {
 
     await existing.save();
 
+    let seoSync = null;
+    if (existing.status === 'published') {
+      const publicPath = getArticlePublicPath(existing.slug, existing.type);
+      seoSync = await syncAndSubmitSeo({
+        urls: [publicPath],
+        pathsToRevalidate: [publicPath],
+      }).catch(() => null);
+    }
+
     return NextResponse.json(
       {
         success: true,
@@ -154,6 +165,7 @@ export async function PUT(req: NextRequest, context: RouteContext) {
           ...existing.toObject(),
           id: existing._id.toString(),
         },
+        seoSync,
       },
       { status: 200 }
     );
@@ -192,6 +204,13 @@ export async function DELETE(_req: NextRequest, context: RouteContext) {
         { status: 404 }
       );
     }
+
+    const publicPath = getArticlePublicPath(deleted.slug, deleted.type);
+    await syncAndSubmitSeo({
+      pathsToRevalidate: [publicPath],
+      includeFullSitemap: false,
+      urls: [],
+    }).catch(() => null);
 
     return NextResponse.json(
       {

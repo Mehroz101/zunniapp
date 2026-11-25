@@ -46,9 +46,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const tool = getToolBySlug(slug);
-  const name = dbTool?.name || tool?.name;
-  const tagline = dbTool?.tagline || tool?.tagline;
-  const description = dbTool?.description || tool?.description;
+  const publishedDbTool = dbTool?.status === 'PUBLISHED' ? dbTool : null;
+  const name = publishedDbTool?.name || tool?.name;
+  const tagline = publishedDbTool?.tagline || tool?.tagline;
+  const description = publishedDbTool?.description || tool?.description;
 
   if (!name) {
     const formatted = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
@@ -58,9 +59,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const title = `${name} — Free Online Tool | TOOLty`;
+  const title = `${name} — Free Online Tool`;
   const desc = tagline || description || `Free ${name} online utility.`;
-  const canonicalUrl = `https://toolty.online/tools/${slug}`;
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://toolty.online').replace(/\/+$/, '');
+  const canonicalUrl = `${siteUrl}/tools/${slug}`;
 
   return {
     title,
@@ -69,18 +71,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       canonical: canonicalUrl,
     },
     openGraph: {
-      title,
+      title: `${title} | TOOLty`,
       description: desc,
       url: canonicalUrl,
       siteName: 'TOOLty',
-      images: [{ url: '/og-default.png', width: 1200, height: 630 }],
+      images: [{ url: `${siteUrl}/icon.svg`, width: 512, height: 512 }],
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: `${title} | TOOLty`,
       description: desc,
-      images: ['/og-default.png'],
+      images: [`${siteUrl}/icon.svg`],
     },
   };
 }

@@ -47,10 +47,16 @@ export const metadata: Metadata = {
   }),
 };
 
-// ISR: Cache statically for 60 seconds (eliminates cross-server DB latency)
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
-export default async function BlogArchivePage() {
+interface BlogArchivePageProps {
+  searchParams?: Promise<{ category?: string }>;
+}
+
+export default async function BlogArchivePage({ searchParams }: BlogArchivePageProps) {
+  const resolvedParams = searchParams ? await searchParams : {};
+  const defaultCategory = resolvedParams?.category || 'all';
   let rawCategories: Array<any> = [];
 
   const [cmsPosts, prismaCats] = await Promise.all([
@@ -208,7 +214,11 @@ export default async function BlogArchivePage() {
 
         {/* Filter and Article Grid */}
         <section className="pt-10">
-          <BlogFilterGrid initialPosts={posts} categories={categories} />
+          <BlogFilterGrid
+            initialPosts={posts}
+            categories={categories}
+            defaultCategory={defaultCategory}
+          />
         </section>
 
         {/* Newsletter CTA Section */}

@@ -1,4 +1,4 @@
-import { redirect, notFound } from 'next/navigation';
+import { permanentRedirect, notFound } from 'next/navigation';
 import { getArticlePublicPath, getCmsArticleBySlug } from '@/lib/cms';
 
 export const dynamic = 'force-dynamic';
@@ -15,5 +15,5 @@ export default async function GenericPostRedirectPage({ params }: PageProps) {
     notFound();
   }
 
-  redirect(getArticlePublicPath(article.slug, article.contentType));
+  permanentRedirect(getArticlePublicPath(article.slug, article.contentType));
 }

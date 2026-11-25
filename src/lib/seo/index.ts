@@ -28,14 +28,23 @@ export interface PageSeoProps {
 }
 
 // ── Default Site Config ───────────────────────
+export function getCanonicalSiteUrl(): string {
+  const raw = (process.env.NEXT_PUBLIC_SITE_URL || 'https://toolty.online').trim();
+  const clean = raw.replace(/^[\[\s]+|[\]\s]+$/g, '').replace(/\/+$/, '');
+  if (clean.startsWith('http://') || clean.startsWith('https://')) {
+    return clean;
+  }
+  return `https://${clean.replace(/^\/+/, '')}`;
+}
+
 export const defaultSeoConfig: SeoConfig = {
   siteName: 'TOOLty',
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://toolty.online',
+  siteUrl: getCanonicalSiteUrl(),
   defaultTitle: 'TOOLty — Free Online Tools & Calculators Directory',
   titleTemplate: '%s | TOOLty',
   defaultDescription:
     'TOOLty is the ultimate free online utility workbench. Explore 100% free developer utilities, financial calculators, unit converters, and online tools.',
-  defaultOgImage: '/og-default.png',
+  defaultOgImage: '/icon.svg',
   twitterHandle: '@toolty',
   locale: 'en_US',
 };
@@ -75,7 +84,7 @@ export function buildWebsiteSchema(config: SeoConfig): Record<string, unknown> {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: `${config.siteUrl}/search?q={search_term_string}`,
+        urlTemplate: `${config.siteUrl}/tools?q={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
     },

@@ -52,6 +52,9 @@ export const metadata: Metadata = {
   // ── Canonical & Alternates ────────────────────
   alternates: {
     canonical: './',
+    types: {
+      'application/rss+xml': '/rss.xml',
+    },
   },
 
   // ── Open Graph ───────────────────────────────

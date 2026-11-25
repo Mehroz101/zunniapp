@@ -1,23 +1,8 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import {
-  Sparkles,
-  ChevronRight,
-} from 'lucide-react';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
-import {
-  buildSoftwareApplicationSchema,
-  buildBreadcrumbSchema,
-  buildGeoMetaTags,
-} from '@/lib/seo';
-import { Navbar } from '@/components/home/Navbar';
-import { Footer } from '@/components/home/Footer';
-import { ToolView } from '@/components/tools/ToolView';
-import { NewsletterForm } from '@/components/newsletter/NewsletterForm';
-
-import { getToolBySlug, getAllTools } from '@/lib/tools/registry';
-import { ToolDefinition } from '@/lib/tools/types';
+import { getToolBySlug } from '@/lib/tools/registry';
+import { getCanonicalSiteUrl } from '@/lib/seo';
 
 interface PageProps {
   params: Promise<{
@@ -29,299 +14,67 @@ interface PageProps {
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-// ─────────────────────────────────────────────
-// Dynamic SEO, AEO & OpenGraph Generation
-// ─────────────────────────────────────────────
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { category, slug } = await params;
-  let tool: any = null;
+  const { slug } = await params;
+  const siteUrl = getCanonicalSiteUrl();
+  const reg = getToolBySlug(slug);
+  let dbTool: { name?: string; tagline?: string; description?: string; status?: string } | null = null;
 
-  try {
-    tool = await prisma.tool.findUnique({
-      where: { slug },
-      include: { category: true },
-    });
-  } catch (err) {
-    console.warn('[Tool Metadata] DB fallback:', (err as Error).message);
+  if (!reg) {
+    try {
+      dbTool = await prisma.tool.findUnique({
+        where: { slug },
+        select: { name: true, tagline: true, description: true, status: true },
+      });
+    } catch {
+      // Ignore DB fallback errors
+    }
   }
 
-  if (!tool || tool.status !== 'PUBLISHED' || tool.category?.slug !== category) {
-    const reg = getToolBySlug(slug);
-    if (reg) {
-      return {
-        title: `${reg.name} — Free Online Tool | TOOLty`,
-        description: reg.tagline || reg.description,
-        alternates: {
-          canonical: `https://toolty.online/ai-tools/${category}/${slug}`,
-        },
-      };
-    }
-    const fallbackTitle = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  const name = reg?.name || (dbTool?.status === 'PUBLISHED' ? dbTool.name : undefined);
+  const description =
+    reg?.tagline ||
+    reg?.description ||
+    dbTool?.tagline ||
+    dbTool?.description ||
+    'Run this free online browser tool on TOOLty.';
+
+  if (!name) {
     return {
-      title: `${fallbackTitle} — Free AI Tool | TOOLty`,
-      description: `Run the free ${fallbackTitle} browser tool with instant execution.`,
+      title: 'Tool Not Found | TOOLty',
+      description: 'The requested utility could not be located.',
     };
   }
 
-  const seoMeta = (tool.seoMeta as {
-    metaTitle?: string;
-    metaDescription?: string;
-    canonicalUrl?: string;
-    keywords?: string[];
-    ogImage?: string;
-  }) || {};
-
-  const pageTitle = seoMeta.metaTitle || `${tool.name} — Free AI Tool | TOOLty`;
-  const pageDescription = seoMeta.metaDescription || tool.tagline || tool.description;
-  const canonicalUrl =
-    seoMeta.canonicalUrl || `https://toolty.online/ai-tools/${category}/${slug}`;
-  const ogImageUrl = tool.ogImage || seoMeta.ogImage || '/og-default.png';
-
-  const geoTags = buildGeoMetaTags({
-    summary: `${tool.name} is a high-performance ${tool.isFree ? 'free ' : ''}AI tool in the ${tool.category.name} category. ${tool.description}`,
-    entities: [
-      tool.name,
-      tool.category.name,
-      'TOOLty',
-      'AI Tool',
-      'Artificial Intelligence',
-      ...(seoMeta.keywords || []),
-    ],
-  });
-
+  const canonicalUrl = `${siteUrl}/tools/${slug}`;
   return {
-    title: pageTitle,
-    description: pageDescription,
+    title: `${name} — Free Online Tool`,
+    description,
     alternates: {
       canonical: canonicalUrl,
     },
-    openGraph: {
-      title: pageTitle,
-      description: pageDescription,
-      url: canonicalUrl,
-      siteName: 'TOOLty',
-      images: [
-        {
-          url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: tool.name,
-        },
-      ],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: pageTitle,
-      description: pageDescription,
-      images: [ogImageUrl],
-    },
-    other: geoTags,
   };
 }
 
-// ─────────────────────────────────────────────
-// Dynamic Tool Route Page Component
-// ─────────────────────────────────────────────
-export default async function ToolExecutionPage({ params }: PageProps) {
-  const { category, slug } = await params;
+export default async function LegacyCategoryToolRedirectPage({ params }: PageProps) {
+  const { slug } = await params;
+  const reg = getToolBySlug(slug);
 
-  let tool: any = null;
-  let relatedTools: Array<any> = [];
+  if (reg) {
+    permanentRedirect(`/tools/${reg.slug}`);
+  }
 
   try {
-    // 1. Fetch tool from MongoDB via Prisma
-    tool = await prisma.tool.findUnique({
+    const dbTool = await prisma.tool.findUnique({
       where: { slug },
-      include: {
-        category: true,
-        tags: true,
-      },
+      select: { slug: true, status: true },
     });
-
-    if (tool && tool.status === 'PUBLISHED') {
-      // 3. Atomically increment viewCount (fire-and-forget)
-      prisma.tool
-        .update({
-          where: { id: tool.id },
-          data: { viewCount: { increment: 1 } },
-        })
-        .catch((err) => {
-          console.warn('[Tool View Increment Error]:', (err as Error).message);
-        });
-
-      // 4. Fetch related tools from the same category
-      relatedTools = await prisma.tool.findMany({
-        where: {
-          categoryId: tool.categoryId,
-          id: { not: tool.id },
-          status: 'PUBLISHED',
-        },
-        include: {
-          category: true,
-        },
-        orderBy: [{ isFeatured: 'desc' }, { viewCount: 'desc' }],
-        take: 3,
-      });
+    if (dbTool && dbTool.status === 'PUBLISHED') {
+      permanentRedirect(`/tools/${dbTool.slug}`);
     }
-  } catch (err) {
-    console.warn('[Tool Detail Page] DB fallback during build:', (err as Error).message);
+  } catch {
+    // DB offline fallback
   }
 
-  // 2. 404 Fallback
-  if (!tool || tool.status !== 'PUBLISHED' || tool.category?.slug !== category) {
-    const reg = getToolBySlug(slug);
-    if (reg) {
-      tool = {
-        id: reg.id,
-        name: reg.name,
-        slug: reg.slug,
-        tagline: reg.tagline,
-        description: reg.description,
-        isFeatured: true,
-        isFree: true,
-        viewCount: 1420,
-        renderType: 'CLIENT_SIDE',
-        status: 'PUBLISHED',
-        config: {
-          component: reg.slug,
-          features: reg.features,
-        },
-        category: {
-          id: `cat-${reg.category}`,
-          name: reg.categoryName,
-          slug: category || reg.categorySlug,
-        },
-        tags: reg.seoKeywords.map((k) => ({ id: k, name: k })),
-      };
-    } else {
-      notFound();
-    }
-  }
-
-  // 5. Schema.org JSON-LD Generation
-  const canonicalUrl = `https://toolty.online/ai-tools/${tool.category.slug}/${tool.slug}`;
-
-  const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://toolty.online' },
-    { name: 'AI Tools', item: 'https://toolty.online/ai-tools' },
-    {
-      name: tool.category.name,
-      item: `https://toolty.online/ai-tools/${tool.category.slug}`,
-    },
-    { name: tool.name, item: canonicalUrl },
-  ]);
-
-  const toolConfig = (tool.config as Record<string, unknown>) || {};
-  const featuresList = (toolConfig.features as string[]) || [
-    'Zero-latency browser-native processing',
-    'Real-time output rendering',
-    'Browser-based copy to clipboard',
-    'Responsive desktop and mobile support',
-  ];
-
-  const softwareAppSchema = buildSoftwareApplicationSchema({
-    name: tool.name,
-    description: tool.tagline || tool.description,
-    url: canonicalUrl,
-    applicationCategory: tool.category.name,
-    operatingSystem: 'Web Browser',
-    isFree: tool.isFree,
-    aggregateRating: {
-      ratingValue: 4.9,
-      ratingCount: Math.max(12, Math.floor(tool.viewCount / 10)),
-    },
-    featureList: featuresList,
-  });
-
-  const reg = getToolBySlug(slug);
-  const synthesizedToolDef: ToolDefinition = reg || {
-    id: tool.id,
-    slug: tool.slug,
-    name: tool.name,
-    tagline: tool.tagline || tool.description,
-    description: tool.description,
-    category: 'dev',
-    categoryName: tool.category?.name || 'Developer Compilers',
-    categorySlug: tool.category?.slug || 'coding',
-    icon: 'Terminal',
-    inputLabel: 'Source Input',
-    inputPlaceholder: 'Enter input...',
-    outputLabel: 'Output Result',
-    sampleInput: '',
-    features: featuresList,
-    howToSteps: [
-      { title: 'Provide Input Parameters', description: 'Enter code or document into the left pane.' },
-      { title: 'Execute Pipeline', description: 'Click execute to trigger browser-side processing.' },
-      { title: 'Copy Results', description: 'Review output and copy with one click.' },
-    ],
-    faqs: [],
-    seoKeywords: (tool.tags || []).map((t: any) => t.name || t),
-  };
-
-  const allTools = getAllTools();
-  const relatedToolsList = (
-    relatedTools.length > 0
-      ? relatedTools.map((rt) => getToolBySlug(rt.slug) || ({
-          id: rt.id,
-          slug: rt.slug,
-          name: rt.name,
-          tagline: rt.tagline,
-          description: rt.description,
-          category: 'dev',
-          categoryName: rt.category?.name || 'Tools',
-          categorySlug: rt.category?.slug || 'tools',
-          icon: 'Terminal',
-          inputLabel: 'Input',
-          inputPlaceholder: '',
-          outputLabel: 'Output',
-          sampleInput: '',
-          features: [],
-          howToSteps: [],
-          faqs: [],
-          seoKeywords: [],
-        }))
-      : allTools.filter((t) => t.slug !== tool.slug).slice(0, 3)
-  ) as ToolDefinition[];
-
-  return (
-    <div className="min-h-screen bg-white dark:bg-[#05070c] text-slate-900 dark:text-slate-100 flex flex-col justify-between selection:bg-[#FF8A00]/30 selection:text-slate-950">
-      {/* ── Schema.org JSON-LD Injection ── */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppSchema) }}
-      />
-
-      {/* ── Fixed Navigation ── */}
-      <Navbar />
-
-      <main className="flex-1 pt-28 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ToolView
-            tool={synthesizedToolDef}
-            seoContent={tool.seoContent}
-            relatedTools={relatedToolsList}
-          />
-
-          {/* ── Newsletter Capture ── */}
-          <div className="mt-20 text-center max-w-xl mx-auto">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white">Stay Updated</h3>
-            <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-              Subscribe to get notifications when new developer compilers and SEO diagnostic engines go live.
-            </p>
-            <div className="mt-6">
-              <NewsletterForm />
-            </div>
-          </div>
-        </div>
-      </main>
-
-      {/* ── Site Footer ── */}
-      <Footer />
-    </div>
-  );
+  notFound();
 }

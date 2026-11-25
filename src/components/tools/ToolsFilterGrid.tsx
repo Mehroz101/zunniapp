@@ -297,7 +297,7 @@ export function ToolsFilterGrid({
             return (
               <Link
                 key={tool.id}
-                href={`/ai-tools/${tool.category.slug}/${tool.slug}`}
+                href={`/tools/${tool.slug}`}
                 className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 dark:border-slate-800/90 bg-white dark:bg-[#0a0f1d] p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-xl"
               >
                 <div>

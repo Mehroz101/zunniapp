@@ -18,6 +18,8 @@ export async function middleware(request: NextRequest) {
     !pathname.startsWith('/api/newsletter') &&
     !pathname.startsWith('/api/health') &&
     !pathname.startsWith('/api/tools/execute') &&
+    !pathname.startsWith('/api/revalidate') &&
+    !pathname.startsWith('/api/seo/submit') &&
     ['POST', 'PUT', 'PATCH', 'DELETE'].includes(request.method);
 
   const token = request.cookies.get(ADMIN_COOKIE_NAME)?.value;

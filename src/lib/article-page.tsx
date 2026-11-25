@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import {
+  contentTypeToFormatKey,
   extractArticleHeadings,
   formatKeyToContentType,
+  getArticlePublicPath,
   getCmsArticleBySlug,
   getCmsArticles,
   type CmsFormatKey,
@@ -11,6 +13,7 @@ import {
   buildBreadcrumbSchema,
   buildGeoMetaTags,
   buildTechArticleSchema,
+  getCanonicalSiteUrl,
 } from '@/lib/seo';
 import {
   PublicArticleView,
@@ -76,15 +79,17 @@ function toViewType(contentType: string, fallback: ArticleFormatType): ArticleFo
 }
 
 function resolveAbsoluteImage(img?: string | null): string {
-  if (!img) return 'https://toolty.online/og-default.png';
+  const siteUrl = getCanonicalSiteUrl();
+  if (!img) return `${siteUrl}/icon.svg`;
   if (img.startsWith('http://') || img.startsWith('https://')) return img;
-  return `https://toolty.online${img.startsWith('/') ? '' : '/'}${img}`;
+  return `${siteUrl}${img.startsWith('/') ? '' : '/'}${img}`;
 }
 
 export async function buildArticlePageMetadata(
   slug: string,
   format: CmsFormatKey
 ): Promise<Metadata> {
+  const siteUrl = getCanonicalSiteUrl();
   const cfg = FORMAT_DETAILS[format];
   const article = await getCmsArticleBySlug(slug);
 
@@ -98,10 +103,16 @@ export async function buildArticlePageMetadata(
     };
   }
 
-  const pageTitle = article.seoMeta?.title || `${article.title} | ${cfg.titleSuffix}`;
-  const pageDescription = article.seoMeta?.description || article.excerpt || cfg.fallbackDescription;
-  const canonicalUrl =
-    article.seoMeta?.canonical || `https://toolty.online/${format}/${article.slug}`;
+  const canonicalFormat = contentTypeToFormatKey(article.contentType);
+  const canonicalCfg = FORMAT_DETAILS[canonicalFormat] || cfg;
+  const pageTitle = article.seoMeta?.title || `${article.title} | ${canonicalCfg.titleSuffix}`;
+  const pageDescription =
+    article.seoMeta?.description || article.excerpt || canonicalCfg.fallbackDescription;
+  const defaultCanonical = `${siteUrl}${getArticlePublicPath(article.slug, article.contentType)}`;
+  const rawCanonical = article.seoMeta?.canonical;
+  const isExternalCanonical =
+    Boolean(rawCanonical?.startsWith('http')) && !rawCanonical?.startsWith(siteUrl);
+  const canonicalUrl = isExternalCanonical && rawCanonical ? rawCanonical : defaultCanonical;
   const imageUrl = resolveAbsoluteImage(article.coverImage || article.seoMeta?.ogImage);
 
   return {
@@ -148,6 +159,13 @@ export async function UnifiedArticlePage({
     notFound();
   }
 
+  // Enforce a single canonical URL per contentType (prevents /blog/x vs /news/x duplicate URLs)
+  const canonicalFormat = contentTypeToFormatKey(article.contentType);
+  if (canonicalFormat !== format) {
+    permanentRedirect(getArticlePublicPath(article.slug, article.contentType));
+  }
+
+  const siteUrl = getCanonicalSiteUrl();
   const targetContentType = formatKeyToContentType(format);
   const relatedRaw = await getCmsArticles(targetContentType, 4);
   const filteredRelated = relatedRaw
@@ -155,7 +173,7 @@ export async function UnifiedArticlePage({
     .slice(0, 3);
 
   const viewType = toViewType(article.contentType, cfg.viewType);
-  const canonicalUrl = `https://toolty.online/${format}/${article.slug}`;
+  const canonicalUrl = `${siteUrl}/${format}/${article.slug}`;
   const imageUrl = resolveAbsoluteImage(article.coverImage || article.seoMeta?.ogImage);
   const tocItems = extractArticleHeadings(article.content);
 
@@ -191,8 +209,8 @@ export async function UnifiedArticlePage({
   }));
 
   const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'Home', item: 'https://toolty.online' },
-    { name: cfg.sectionLabel, item: `https://toolty.online/${format}` },
+    { name: 'Home', item: siteUrl },
+    { name: cfg.sectionLabel, item: `${siteUrl}/${format}` },
     { name: article.title, item: canonicalUrl },
   ]);
 
@@ -210,13 +228,13 @@ export async function UnifiedArticlePage({
           author: {
             '@type': 'Organization',
             name: article.authorName || 'TOOLty News Desk',
-            url: 'https://toolty.online',
+            url: siteUrl,
           },
           publisher: {
             '@type': 'Organization',
             name: 'TOOLty',
-            url: 'https://toolty.online',
-            logo: { '@type': 'ImageObject', url: 'https://toolty.online/icon.svg' },
+            url: siteUrl,
+            logo: { '@type': 'ImageObject', url: `${siteUrl}/icon.svg` },
           },
           mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
         }

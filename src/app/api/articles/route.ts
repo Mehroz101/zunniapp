@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import slugify from 'slugify';
 import { connectToDatabase } from '@/lib/db/mongodb';
+import { getArticlePublicPath } from '@/lib/cms';
+import { syncAndSubmitSeo } from '@/lib/seo/submit';
 import { Article, IArticle } from '@/models/Article';
 
 /**
@@ -174,6 +176,15 @@ export async function POST(req: NextRequest) {
       status: ['draft', 'published'].includes(status) ? status : 'draft',
     })) as unknown as IArticle;
 
+    let seoSync = null;
+    if (article.status === 'published') {
+      const publicPath = getArticlePublicPath(article.slug, article.type);
+      seoSync = await syncAndSubmitSeo({
+        urls: [publicPath],
+        pathsToRevalidate: [publicPath],
+      }).catch(() => null);
+    }
+
     return NextResponse.json(
       {
         success: true,
@@ -181,6 +192,7 @@ export async function POST(req: NextRequest) {
           ...article.toObject(),
           id: article._id.toString(),
         },
+        seoSync,
       },
       { status: 201 }
     );

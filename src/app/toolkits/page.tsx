@@ -63,10 +63,10 @@ const TOOLKITS = [
     description:
       'End-to-end diagnostic suite for webmasters and growth engineers auditing crawl budgets, robot directives, and schema integrity.',
     tools: [
-      { name: 'Robots.txt Syntax Validator', href: '/tools/robots-txt-validator', desc: 'Parse user-agents, disallow rules, and sitemap directives' },
-      { name: 'XML Sitemap Auditor', href: '/tools/sitemap-validator', desc: 'Validate URL structures, change frequencies, and index tags' },
-      { name: 'JSON-LD Schema Builder', href: '/tools/schema-generator', desc: 'Build rich Google snippets for articles, FAQs, and software' },
-      { name: 'SERP Meta Tag Inspector', href: '/tools/meta-tag-generator', desc: 'Simulate pixel widths across mobile and desktop search viewports' },
+      { name: 'Robots.txt Directives Validator', href: '/tools/robots-txt-generator', desc: 'Parse user-agents, disallow rules, and sitemap directives' },
+      { name: 'XML Sitemap Generator & Validator', href: '/tools/xml-sitemap-generator', desc: 'Validate URL structures, change frequencies, and index tags' },
+      { name: 'JSON-LD Schema Builder', href: '/tools/schema-markup-generator', desc: 'Build rich Google snippets for articles, FAQs, and software' },
+      { name: 'SERP Meta Tag Inspector', href: '/tools/meta-tag-analyzer', desc: 'Audit title tags, descriptions, canonicals, and viewports' },
     ],
   },
   {
@@ -79,7 +79,7 @@ const TOOLKITS = [
     description:
       'Token-efficient prompt compressors, role assignment templates, and context window optimization tools for frontier LLMs.',
     tools: [
-      { name: 'Prompt Context Compressor', href: '/tools?category=ai', desc: 'Strip token redundancies and maximize KV-cache reuse' },
+      { name: 'Prompt Context Optimizer', href: '/tools/prompt-optimizer', desc: 'Strip token redundancies and maximize KV-cache reuse' },
       { name: 'Regex Synthesis Studio', href: '/tools/regex-tester', desc: 'Synthesize PCRE patterns and capture groups deterministically' },
       { name: 'HTML to Python AST Scraper', href: '/tools/html-to-python-ast', desc: 'Extract DOM selectors into automated BeautifulSoup pipelines' },
       { name: 'JSON to YAML Transcoder', href: '/tools/json-to-yaml', desc: 'Zero-loss stream parsing for LLM agent function manifests' },
@@ -95,10 +95,10 @@ const TOOLKITS = [
     description:
       'Zero-log cryptographic engines executing 100% locally with zero-latency without transmitting sensitive payload hashes over the wire.',
     tools: [
-      { name: 'JWT Secret Inspector', href: '/tools/jwt-debugger', desc: 'Decode header, claims payload, and verify HS256 signatures locally' },
-      { name: 'Base64 WASM Studio', href: '/tools/base64-encoder-decoder', desc: 'Bi-directional text and image encoding with high throughput' },
-      { name: 'UUID v4 Batch Engine', href: '/tools/uuid-generator', desc: 'RFC4122 compliant collision-resistant identifier synthesis' },
-      { name: 'Cron Syntax Evaluator', href: '/tools/cron-job-parser', desc: 'Translate 5-field cron schedules into human-readable schedules' },
+      { name: 'JWT Decoder & Claims Inspector', href: '/tools/jwt-decoder', desc: 'Decode header, claims payload, and verify token expirations locally' },
+      { name: 'Base64 ↔ Plain Text Decoder', href: '/tools/base64-to-text', desc: 'Bi-directional RFC 4648 text encoding and decoding in browser' },
+      { name: 'Cryptographic Hash & Base64 Encoder', href: '/tools/hash-encoder', desc: 'Generate SHA-256, SHA-512, MD5, and Base64 data payloads' },
+      { name: 'Cron Syntax Evaluator', href: '/tools/cron-parser', desc: 'Translate 5-field cron schedules into human-readable schedules' },
     ],
   },
 ];

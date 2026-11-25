@@ -39,7 +39,7 @@ export function FeaturedToolsGrid({ tools }: FeaturedToolsGridProps) {
             {tools.map((tool) => (
               <Link
                 key={tool.id}
-                href={`/ai-tools/${tool.category.slug}/${tool.slug}`}
+                href={`/tools/${tool.slug}`}
                 className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl"
               >
                 <div>
@@ -91,7 +91,7 @@ export function FeaturedToolsGrid({ tools }: FeaturedToolsGridProps) {
               MongoDB is live and connected. Open your admin dashboard to publish your first interactive tool!
             </p>
             <a
-              href="http://localhost:3001/tools/new"
+              href="https://aiiseverythingdashboard.vercel.app/tools/new"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-950 px-4 py-2 text-xs font-semibold text-white shadow-md transition hover:bg-slate-800"

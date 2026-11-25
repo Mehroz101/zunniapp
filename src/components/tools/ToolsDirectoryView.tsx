@@ -22,6 +22,8 @@ import { ToolDefinition } from '@/lib/tools/types';
 
 interface ToolsDirectoryViewProps {
   tools: ToolDefinition[];
+  initialQuery?: string;
+  initialCategory?: string;
 }
 
 const CATEGORY_TABS: Array<{ id: string; label: string }> = [
@@ -30,6 +32,19 @@ const CATEGORY_TABS: Array<{ id: string; label: string }> = [
   { id: 'ai-utilities', label: 'AI Utilities' },
   { id: 'text-web', label: 'Text & Web' },
 ];
+
+export function normalizeToolsCategoryParam(raw?: string | null): string {
+  const clean = String(raw || '').trim().toLowerCase();
+  if (!clean || clean === 'all') return 'all';
+  if (['seo', 'web', 'text-web', 'diagnostics'].includes(clean)) return 'text-web';
+  if (['dev', 'coding', 'code', 'code-converters', 'converters', 'data'].includes(clean)) {
+    return 'code-converters';
+  }
+  if (['ai', 'ai-utilities', 'text', 'writing', 'prompt'].includes(clean)) {
+    return 'ai-utilities';
+  }
+  return 'all';
+}
 
 export const SUITE_TOOLS_ORDER = [
   'css-to-html',
@@ -180,9 +195,15 @@ function getToolIcon(slug: string) {
   return Code2;
 }
 
-export function ToolsDirectoryView({ tools }: ToolsDirectoryViewProps) {
-  const [query, setQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+export function ToolsDirectoryView({
+  tools,
+  initialQuery = '',
+  initialCategory = 'all',
+}: ToolsDirectoryViewProps) {
+  const [query, setQuery] = useState(initialQuery);
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    normalizeToolsCategoryParam(initialCategory)
+  );
 
   // Build sorted list: 13 primary suite tools in exact reference order, followed by other registered tools
   const allOrderedTools = useMemo(() => {
